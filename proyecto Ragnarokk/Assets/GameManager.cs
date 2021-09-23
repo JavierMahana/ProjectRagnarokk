@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 
 //aca el jugador elije sus peleadores y ahi el juego le deja:
@@ -12,20 +13,46 @@ using UnityEngine.UI;
 //elegir nuevos combatientes
 public class GameManager : MonoBehaviour
 {
+
+    //PROBLEMAS:
+    //AL RETORNAR A LA ESCENA INICIAL HAY VARIOS ERRORES:
+    //SE CREA UN NUEVO GAME MANAGER
+    //EL GAME MANAGER NO LLAMA A START.
+
+    //este es el combate actual
+    [HideInInspector]
+    public CombatEncounter currentEncounter;
+
+    public void LoadCombatScene(CombatEncounter encounter)
+    {
+        currentEncounter = encounter;
+        SceneManager.LoadScene("CombatScene");
+    }
+    public void LoadMenuScene()
+    {
+        currentEncounter = null;
+    }
+
+
+
+    private SceneChanger sceneChanger;
+
+
     //es donde se colocaqn las unidades ya creadas. 
     public float yPlayerCharacters;
 
-    Scene currentScene;
     public bool InFightingScene;
 
     public GameObject canvasPrefab;
     public GameObject buttonPrefab;
+    public GameObject selectEncounterCanvasPrefab;
+
 
     public GameObject fighterPrefab;
 
 
-    private GameObject canvasObj;
-
+    private GameObject selectFighterCanvasObj;
+    private GameObject selectEncounterCanvasObj;
 
 
 
@@ -38,23 +65,26 @@ public class GameManager : MonoBehaviour
 
     //DontDestroyOnLoad
     //objetos de los fighters del player.
-    [HideInInspector]
+    [ReadOnly]
     public List<PlayerFighter> PlayerFighters = new List<PlayerFighter>();
+
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
     }
-
     private void Start()
     {
+        Debug.Log("Starting game manager");
+
+        sceneChanger = FindObjectOfType<SceneChanger>();
+        if (sceneChanger == null)
+        {
+            Debug.LogError("You need a sceneChanger in the scene.");
+        }
+
         CreateListButtonsOfPlayerFighters();
-        //var canvasObj = Instantiate(canvasPrefab);
-        //for (int i = 0; i < 10; i++)
-        //{
-        //    Instantiate(buttonPrefab, canvasObj.transform);
-        //}
-        
+        selectEncounterCanvasObj = Instantiate(selectEncounterCanvasPrefab);
     }
     private void Update()
     {
@@ -70,24 +100,40 @@ public class GameManager : MonoBehaviour
         //Debug.Log($"{PlayerFighters.Count}");
         if (PlayerFighters.Count >= 3)
         {
-            canvasObj.SetActive(false);
+            if (selectFighterCanvasObj != null)
+            {
+                selectFighterCanvasObj.SetActive(false);
+            }
 
             //ACTIVA LA UI DE LOS ENFRENTAMIENTOS.
+            if (selectEncounterCanvasObj != null)
+            {
+                selectEncounterCanvasObj.SetActive(true);
+            }
         }
         else
         {
-            canvasObj.SetActive(true);
+            if (selectFighterCanvasObj != null)
+            {
+                selectFighterCanvasObj.SetActive(true);
+            }
+            
+
+            if (selectEncounterCanvasObj != null)
+            {
+                selectEncounterCanvasObj.SetActive(false);
+            }
         }
 
     }
 
-    public void CreateListButtonsOfPlayerFighters()
+    private void CreateListButtonsOfPlayerFighters()
     {
-        canvasObj = Instantiate(canvasPrefab);
+        selectFighterCanvasObj = Instantiate(canvasPrefab);
 
         foreach (var figtherData in AllFighterDatas)
         {
-            var buttonObj = Instantiate(buttonPrefab, canvasObj.transform);
+            var buttonObj = Instantiate(buttonPrefab, selectFighterCanvasObj.transform);
 
             var buttonCode = buttonObj.GetComponent<Button_AddPlayerFighter>();
             buttonCode.data = figtherData;
@@ -99,8 +145,7 @@ public class GameManager : MonoBehaviour
             var text = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
             text.text = figtherData.Name;
         }
-    }
-
+    }    
 
 
     public void SetDataToFighterGO(GameObject fighterGO, FighterData data, bool playerFighter = false)

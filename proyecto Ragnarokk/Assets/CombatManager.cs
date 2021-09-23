@@ -9,23 +9,22 @@ public class CombatManager : MonoBehaviour
 {
     private GameManager gameManager;
 
+    [Range(0.0f, 1.0f)]
+    public float playerFightersX;
 
-    [MinMaxSlider(minValue: 0, maxValue: 1)]
-    float playerFightersX;
-
-    [MinMaxSlider(minValue: 0, maxValue: 1)]
-    float playerFightersMinY;
-    [MinMaxSlider(minValue: 0, maxValue: 1)]
-    float playerFightersMaxY;
+    [Range(0.0f, 1.0f)]
+    public float playerFightersMinY;
+    [Range(0.0f, 1.0f)]
+    public float playerFightersMaxY;
 
 
-    [MinMaxSlider(minValue: 0, maxValue: 1)]
-    float enemyFightersX;
+    [Range(0.0f, 1.0f)]
+    public float enemyFightersX;
 
-    [MinMaxSlider(minValue: 0, maxValue: 1)]
-    float enemyFightersMinY;
-    [MinMaxSlider(minValue: 0, maxValue: 1)]
-    float enemyFightersMaxY;
+    [Range(0.0f, 1.0f)]
+    public float enemyFightersMinY;
+    [Range(0.0f, 1.0f)]
+    public float enemyFightersMaxY;
 
 
 
@@ -38,17 +37,16 @@ public class CombatManager : MonoBehaviour
 
 
 
-    public void InitCombatScene(GameManager gameManager, CombatEncounter encounter)
+    public void InitCombatScene(CombatEncounter encounter)
     {
-
-        this.gameManager = gameManager;
         //ACA ABRIA Q COLOCAR LOS PERSONAJES EN SUS POCICIONES.
 
 
         int enemyCount = encounter.ListOfEncounterEnemies.Count;
         for (int i = 0; i < enemyCount; i++)
         {
-            float t = ((enemyCount - 1) - i) / Mathf.Max(enemyCount - 1, 1);//t=1 cuando i = 0; t=0 cuando i = enemyCount-1
+            float t = (((float)enemyCount - 1) - i) / Mathf.Max(enemyCount - 1, 1);//t=1 cuando i = 0; t=0 cuando i = enemyCount-1
+            Debug.Log($"VALOR T: {t}");
             float viewPortY = Mathf.Lerp(enemyFightersMinY, enemyFightersMaxY, t);
             Vector3 viewPortPos = new Vector3(enemyFightersX, viewPortY, Camera.main.nearClipPlane);
 
@@ -77,8 +75,18 @@ public class CombatManager : MonoBehaviour
     private void Awake()
     {
         initilaized = false;
-        gameManager = GetComponent<GameManager>();
     }
+    private void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+        if (gameManager.currentEncounter == null)
+        {
+            Debug.LogError("No hay encuentro en el game manager.");
+            return;
+        }
+        InitCombatScene(gameManager.currentEncounter);
+    }
+
     private void Update()
     {
         if (initilaized != true)
