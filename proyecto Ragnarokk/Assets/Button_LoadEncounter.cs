@@ -29,6 +29,6 @@ public class Button_LoadEncounter : MonoBehaviour
     {
 
         Debug.Log("Loading scene");
-        gmManager.LoadCombatScene(encounterToLoad);
+        SceneChanger.Instance.LoadCombatScene(encounterToLoad);
     }
 }

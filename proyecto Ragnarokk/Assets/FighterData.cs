@@ -37,4 +37,7 @@ public class FighterData : ScriptableObject
     #region VISUAL DATA
     public Sprite Sprite;
     #endregion
+
+    //Tipo para determinar que ataques hacen poco daño y mucho daño.
+    public CombatType Type;
 }

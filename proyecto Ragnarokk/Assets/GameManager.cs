@@ -11,55 +11,30 @@ using Sirenix.OdinInspector;
 //empezar un encuentro
 //curar a sus personajes
 //elegir nuevos combatientes
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
+    public bool InFightingScene 
+    { 
+        get 
+        {
+            if (FindObjectOfType<CombatManager>())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } 
+    }
 
-    //PROBLEMAS:
-    //AL RETORNAR A LA ESCENA INICIAL HAY VARIOS ERRORES:
-    //SE CREA UN NUEVO GAME MANAGER
-    //EL GAME MANAGER NO LLAMA A START.
 
     //este es el combate actual
     [HideInInspector]
     public CombatEncounter currentEncounter;
 
-    public void LoadCombatScene(CombatEncounter encounter)
-    {
-        currentEncounter = encounter;
-        SceneManager.LoadScene("CombatScene");
-    }
-    public void LoadMenuScene()
-    {
-        currentEncounter = null;
-    }
 
-
-
-    private SceneChanger sceneChanger;
-
-
-    //es donde se colocaqn las unidades ya creadas. 
-    public float yPlayerCharacters;
-
-    public bool InFightingScene;
-
-    public GameObject canvasPrefab;
-    public GameObject buttonPrefab;
-    public GameObject selectEncounterCanvasPrefab;
-
-
-    public GameObject fighterPrefab;
-
-
-    private GameObject selectFighterCanvasObj;
-    private GameObject selectEncounterCanvasObj;
-
-
-
-
-
-    public List<FighterData> AllFighterDatas = new List<FighterData>();
-
+    public List<FighterData> AllPlayerFighterDatas = new List<FighterData>();
     public List<CombatEncounter> AllEncounters = new List<CombatEncounter>();
 
 
@@ -69,83 +44,18 @@ public class GameManager : MonoBehaviour
     public List<PlayerFighter> PlayerFighters = new List<PlayerFighter>();
 
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
-    private void Start()
-    {
-        Debug.Log("Starting game manager");
-
-        sceneChanger = FindObjectOfType<SceneChanger>();
-        if (sceneChanger == null)
-        {
-            Debug.LogError("You need a sceneChanger in the scene.");
-        }
-
-        CreateListButtonsOfPlayerFighters();
-        selectEncounterCanvasObj = Instantiate(selectEncounterCanvasPrefab);
-    }
+   
     private void Update()
     {
-        var playerFighters = FindObjectsOfType<PlayerFighter>(false);
-        
 
-        for (int i = 0; i < playerFighters.Length && i < 3; i++)
+        PlayerFighters.Clear();
+        var pFighter = FindObjectsOfType<PlayerFighter>(false);
+        foreach (var item in pFighter)
         {
-            var pos = Camera.main.ViewportToWorldPoint(new Vector3(Mathf.Min(0.9f, (float)i / 2 + 0.1f), yPlayerCharacters, Camera.main.nearClipPlane));
-            playerFighters[i].transform.position = pos;  
-        }
-
-        //Debug.Log($"{PlayerFighters.Count}");
-        if (PlayerFighters.Count >= 3)
-        {
-            if (selectFighterCanvasObj != null)
-            {
-                selectFighterCanvasObj.SetActive(false);
-            }
-
-            //ACTIVA LA UI DE LOS ENFRENTAMIENTOS.
-            if (selectEncounterCanvasObj != null)
-            {
-                selectEncounterCanvasObj.SetActive(true);
-            }
-        }
-        else
-        {
-            if (selectFighterCanvasObj != null)
-            {
-                selectFighterCanvasObj.SetActive(true);
-            }
-            
-
-            if (selectEncounterCanvasObj != null)
-            {
-                selectEncounterCanvasObj.SetActive(false);
-            }
+            PlayerFighters.Add(item);
         }
 
     }
-
-    private void CreateListButtonsOfPlayerFighters()
-    {
-        selectFighterCanvasObj = Instantiate(canvasPrefab);
-
-        foreach (var figtherData in AllFighterDatas)
-        {
-            var buttonObj = Instantiate(buttonPrefab, selectFighterCanvasObj.transform);
-
-            var buttonCode = buttonObj.GetComponent<Button_AddPlayerFighter>();
-            buttonCode.data = figtherData;
-            buttonCode.playerObjetcPrefab = fighterPrefab;
-            buttonCode.gmManager = this;
-
-            //var buttonUI = buttonObj.GetComponent<Button>();
-
-            var text = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-            text.text = figtherData.Name;
-        }
-    }    
 
 
     public void SetDataToFighterGO(GameObject fighterGO, FighterData data, bool playerFighter = false)

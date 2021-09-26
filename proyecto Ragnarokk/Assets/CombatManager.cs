@@ -45,6 +45,7 @@ public class CombatManager : MonoBehaviour
         int enemyCount = encounter.ListOfEncounterEnemies.Count;
         for (int i = 0; i < enemyCount; i++)
         {
+
             float t = (((float)enemyCount - 1) - i) / Mathf.Max(enemyCount - 1, 1);//t=1 cuando i = 0; t=0 cuando i = enemyCount-1
             Debug.Log($"VALOR T: {t}");
             float viewPortY = Mathf.Lerp(enemyFightersMinY, enemyFightersMaxY, t);
