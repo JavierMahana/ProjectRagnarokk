@@ -6,7 +6,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     //es donde se colocaqn las unidades ya creadas. 
-    public float yPlayerCharacters;
+    public float xPlayerCharacters;
 
 
     public GameObject canvasPrefab;
@@ -43,10 +43,10 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-
+  
         for (int i = 0; i < GameManager.Instance.PlayerFighters.Count && i < 3; i++)
         {
-            var pos = Camera.main.ViewportToWorldPoint(new Vector3(Mathf.Min(0.9f, (float)i / 2 + 0.1f), yPlayerCharacters, Camera.main.nearClipPlane));
+            var pos = Camera.main.ViewportToWorldPoint(new Vector3(xPlayerCharacters, (float)(0.25 * (1+i)) , Camera.main.nearClipPlane));
             GameManager.Instance.PlayerFighters[i].transform.position = pos;
         }
 
