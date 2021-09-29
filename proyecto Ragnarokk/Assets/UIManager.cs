@@ -2,24 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     //es donde se colocaqn las unidades ya creadas. 
-    public float xPlayerCharacters;
+    public float yPlayerCharacters;
+    public GameObject fighterPrefab;
+
 
 
     public GameObject canvasPrefab;
     public GameObject playerFighterButtonPrefab;
-    public GameObject selectEncounterCanvasPrefab;
+
+    
 
 
-    public GameObject fighterPrefab;
+
+    public GameObject healPlayerFightersButtonObj;
+    public GameObject deletePlayerFightersButtonObj;
 
 
+    public List<GameObject> weaponSlotButtons;
+
+    public GameObject weaponSlotsCanvas;
+    public GameObject weaponsListButtonCanvasObj;
+
+    public GameObject selectEncounterCanvasObj;
     private GameObject selectFighterCanvasObj;
-    private GameObject selectEncounterCanvasObj;
-
 
 
     private void Awake()
@@ -34,23 +44,22 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+
             //Se crea la UI de la escena de creacion
             CreateListButtonsOfPlayerFighters();
-            selectEncounterCanvasObj = Instantiate(selectEncounterCanvasPrefab);
         }
     }
-
-
+   
     private void Update()
     {
-  
+
         for (int i = 0; i < GameManager.Instance.PlayerFighters.Count && i < 3; i++)
         {
-            var pos = Camera.main.ViewportToWorldPoint(new Vector3(xPlayerCharacters, (float)(0.25 * (1+i)) , Camera.main.nearClipPlane));
+            var pos = Camera.main.ViewportToWorldPoint(new Vector3(Mathf.Min(0.9f, (float)i / 2 + 0.1f), yPlayerCharacters, Camera.main.nearClipPlane));
             GameManager.Instance.PlayerFighters[i].transform.position = pos;
         }
 
-        //Debug.Log($"{PlayerFighters.Count}");
+        
         if (GameManager.Instance.PlayerFighters.Count >= 3)
         {
             if (selectFighterCanvasObj != null)
@@ -62,6 +71,15 @@ public class UIManager : MonoBehaviour
             if (selectEncounterCanvasObj != null)
             {
                 selectEncounterCanvasObj.SetActive(true);
+            }
+
+            if (healPlayerFightersButtonObj != null)
+            {
+                healPlayerFightersButtonObj.SetActive(true);
+            }
+            if (deletePlayerFightersButtonObj != null)
+            {
+                deletePlayerFightersButtonObj.SetActive(true);
             }
         }
         else
@@ -76,14 +94,26 @@ public class UIManager : MonoBehaviour
             {
                 selectEncounterCanvasObj.SetActive(false);
             }
+
+            if (healPlayerFightersButtonObj != null)
+            {
+                healPlayerFightersButtonObj.SetActive(false);
+            }
+
+            if (deletePlayerFightersButtonObj != null)
+            {
+                deletePlayerFightersButtonObj.SetActive(false);
+            }
         }
-
     }
-
 
     private void CreateListButtonsOfPlayerFighters()
     {
         selectFighterCanvasObj = Instantiate(canvasPrefab);
+        var grid = selectFighterCanvasObj.AddComponent<GridLayoutGroup>();
+        grid.cellSize = new Vector2(120,100);
+        grid.childAlignment = TextAnchor.UpperCenter;
+
 
         foreach (var figtherData in GameManager.Instance.AllPlayerFighterDatas)
         {
@@ -100,6 +130,23 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void DeletePlayerFighters()
+    {
+        var pfs = FindObjectsOfType<PlayerFighter>();
+        foreach (var pf in pfs)
+        {
+            Destroy(pf.gameObject);
+        }
+    }
 
+    public void HealPlayerFighters()
+    {
+        var pfs = FindObjectsOfType<PlayerFighter>();
+        foreach (var pf in pfs)
+        {
+            var fighter = pf.GetComponent<Fighter>();
+            fighter.CurrentHP = fighter.MaxHP;
+        }
+    }
 
 }

@@ -34,6 +34,8 @@ public class GameManager : Singleton<GameManager>
     public CombatEncounter currentEncounter;
 
 
+    public List<Weapon> AllWeapons = new List<Weapon>();
+
     public List<FighterData> AllPlayerFighterDatas = new List<FighterData>();
     public List<CombatEncounter> AllEncounters = new List<CombatEncounter>();
 
@@ -73,6 +75,7 @@ public class GameManager : Singleton<GameManager>
             fighterComp.Defense = data.Defense;
             fighterComp.Speed = data.Speed;
             fighterComp.MaxHP = data.MaxHP;
+            fighterComp.CurrentHP = data.MaxHP;
 
             for (int i = 0; i < fighterComp.Weapons.Length; i++)
             {
