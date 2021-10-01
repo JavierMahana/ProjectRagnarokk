@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     public float xPlayerCharacters;
     public GameObject fighterPrefab;
 
-
+    private bool onWeaponSelect;
 
     public GameObject canvasPrefab;
     public GameObject playerFighterButtonPrefab;
@@ -23,13 +23,76 @@ public class UIManager : MonoBehaviour
     public GameObject deletePlayerFightersButtonObj;
 
 
-    public List<GameObject> weaponSlotButtons;
+    //public List<GameObject> weaponSlotButtons;
+
+    public GameObject selectWeaponView;
 
     public GameObject weaponSlotsCanvas;
-    public GameObject weaponsListButtonCanvasObj;
+    //public GameObject weaponsListButtonCanvasObj;
 
     public GameObject selectEncounterCanvasObj;
     private GameObject selectFighterCanvasObj;
+
+
+    public void ShowView_SelectEncounter()
+    {
+        HideView_SelectCharacter();
+        HideView_SelectWeapon();
+
+        if (selectEncounterCanvasObj != null)
+            selectEncounterCanvasObj.SetActive(true);
+
+        if (healPlayerFightersButtonObj != null)
+            healPlayerFightersButtonObj.SetActive(true);
+
+        if (deletePlayerFightersButtonObj != null)
+            deletePlayerFightersButtonObj.SetActive(true);
+
+        if (weaponSlotsCanvas != null)
+            weaponSlotsCanvas.SetActive(true);
+    }
+    private void HideView_SelectEncounter()
+    {
+        if (selectEncounterCanvasObj != null)
+            selectEncounterCanvasObj.SetActive(false);
+
+        if (healPlayerFightersButtonObj != null)
+            healPlayerFightersButtonObj.SetActive(false);
+
+        if (deletePlayerFightersButtonObj != null)
+            deletePlayerFightersButtonObj.SetActive(false);
+
+        if (weaponSlotsCanvas != null)
+            weaponSlotsCanvas.SetActive(false);
+    }
+
+    public void ShowView_SelectCharacter()
+    {
+        HideView_SelectEncounter();
+        HideView_SelectWeapon();
+
+        if (selectFighterCanvasObj != null)
+            selectFighterCanvasObj.SetActive(true);
+    }
+    private void HideView_SelectCharacter()
+    {
+        if (selectFighterCanvasObj != null)
+            selectFighterCanvasObj.SetActive(false);
+    }
+
+    public void ShowView_SelectWeapon()
+    {
+        HideView_SelectCharacter();
+        HideView_SelectEncounter();
+
+        if (selectWeaponView != null)
+            selectWeaponView.SetActive(true);
+    }
+    private void HideView_SelectWeapon()
+    {
+        if (selectWeaponView != null)
+            selectWeaponView.SetActive(false);
+    }
 
 
     private void Awake()
@@ -50,6 +113,8 @@ public class UIManager : MonoBehaviour
         }
     }
    
+
+
     private void Update()
     {
 
@@ -59,53 +124,23 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.PlayerFighters[i].transform.position = pos;
         }
 
-        
-        if (GameManager.Instance.PlayerFighters.Count >= 3)
+        if (onWeaponSelect)
         {
-            if (selectFighterCanvasObj != null)
-            {
-                selectFighterCanvasObj.SetActive(false);
-            }
-
-            //ACTIVA LA UI DE LOS ENFRENTAMIENTOS.
-            if (selectEncounterCanvasObj != null)
-            {
-                selectEncounterCanvasObj.SetActive(true);
-            }
-
-            if (healPlayerFightersButtonObj != null)
-            {
-                healPlayerFightersButtonObj.SetActive(true);
-            }
-            if (deletePlayerFightersButtonObj != null)
-            {
-                deletePlayerFightersButtonObj.SetActive(true);
-            }
+            ShowView_SelectWeapon();
+        }
+        else if (GameManager.Instance.PlayerFighters.Count >= 3)
+        {
+            //HAY 3 COMBATIENTES.
+            ShowView_SelectEncounter();
         }
         else
         {
-            if (selectFighterCanvasObj != null)
-            {
-                selectFighterCanvasObj.SetActive(true);
-            }
-
-
-            if (selectEncounterCanvasObj != null)
-            {
-                selectEncounterCanvasObj.SetActive(false);
-            }
-
-            if (healPlayerFightersButtonObj != null)
-            {
-                healPlayerFightersButtonObj.SetActive(false);
-            }
-
-            if (deletePlayerFightersButtonObj != null)
-            {
-                deletePlayerFightersButtonObj.SetActive(false);
-            }
+            //HAY MENOS DE 3 COMBATIENTES.
+            ShowView_SelectCharacter();
         }
     }
+
+    
 
     private void CreateListButtonsOfPlayerFighters()
     {
@@ -128,6 +163,16 @@ public class UIManager : MonoBehaviour
             var text = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
             text.text = figtherData.Name;
         }
+    }
+
+
+    public void StartWeaponSelect()
+    {
+        onWeaponSelect = true;
+    }
+    public void ReturnFromWeaponSelect()
+    {
+        onWeaponSelect = false;
     }
 
     public void DeletePlayerFighters()
