@@ -13,6 +13,7 @@ using Sirenix.OdinInspector;
 //elegir nuevos combatientes
 public class GameManager : Singleton<GameManager>
 {
+    
     public bool InFightingScene 
     { 
         get 
@@ -28,6 +29,7 @@ public class GameManager : Singleton<GameManager>
         } 
     }
 
+    //public GameObject UIManager;
 
     //este es el combate actual
     [HideInInspector]
@@ -39,11 +41,17 @@ public class GameManager : Singleton<GameManager>
     public List<FighterData> AllPlayerFighterDatas = new List<FighterData>();
     public List<CombatEncounter> AllEncounters = new List<CombatEncounter>();
 
+    public List<GameObject> Enemies = new List<GameObject>();
+    public List<GameObject> EnemyButtons = new List<GameObject>();
+
+    public List<GameObject> PlayerButtons = new List<GameObject>();
+
 
     //DontDestroyOnLoad
     //objetos de los fighters del player.
     [ReadOnly]
     public List<PlayerFighter> PlayerFighters = new List<PlayerFighter>();
+    public GameObject PlayerOnTurn;
 
 
    
@@ -56,6 +64,8 @@ public class GameManager : Singleton<GameManager>
         {
             PlayerFighters.Add(item);
         }
+
+       
 
     }
 
@@ -103,6 +113,8 @@ public class GameManager : Singleton<GameManager>
 
         }
     }
+
+   
 
     //public void CreateFighter(int i)
     //{

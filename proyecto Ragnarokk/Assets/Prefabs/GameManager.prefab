@@ -43,16 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2305551e031ac84a965160b952b0023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InFightingScene: 0
-  AllFighterDatas:
-  - {fileID: 11400000, guid: 34ea59b5cb9201449a6ba176fd49e596, type: 2}
-  - {fileID: 11400000, guid: 4e4cd9eef3e72144b812012a18107d33, type: 2}
-  - {fileID: 11400000, guid: 9274c4d4ca3895e4cb4341375c8ffe2e, type: 2}
-  - {fileID: 11400000, guid: babe8d5f7df7ad6408aeb93fdf92e7f8, type: 2}
-  - {fileID: 11400000, guid: 0307250e38b7a484aaff731ba1e72a17, type: 2}
-  - {fileID: 11400000, guid: 5c080c2a2b80718448f50127ad5feebe, type: 2}
-  - {fileID: 11400000, guid: a5b9a44664d6de24eab3aebd6018b444, type: 2}
-  - {fileID: 11400000, guid: f4017b15737dfe04eb2d769c09125658, type: 2}
+  _persistent: 1
+  currentEncounter: {fileID: 0}
+  AllWeapons: []
+  AllPlayerFighterDatas: []
+  AllEncounters: []
   PlayerFighters:
   - {fileID: 0}
   - {fileID: 0}

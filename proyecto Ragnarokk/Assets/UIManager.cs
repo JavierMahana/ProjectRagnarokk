@@ -15,7 +15,9 @@ public class UIManager : MonoBehaviour
     public GameObject canvasPrefab;
     public GameObject playerFighterButtonPrefab;
 
-    
+    public GameObject canvasCombatPanel;
+
+    private bool onFight = false;
 
 
 
@@ -94,7 +96,21 @@ public class UIManager : MonoBehaviour
             selectWeaponView.SetActive(false);
     }
 
+    public void ShowView_CombatSelection()
+    {
+        if(canvasCombatPanel != null)
+        {
+            canvasCombatPanel.SetActive(true);
+        }
+    }
 
+    public void HideView_CombatSelection()
+    {
+        if (canvasCombatPanel != null)
+        {
+            canvasCombatPanel.SetActive(false);
+        }
+    }
     private void Awake()
     {
         
@@ -137,6 +153,28 @@ public class UIManager : MonoBehaviour
         {
             //HAY MENOS DE 3 COMBATIENTES.
             ShowView_SelectCharacter();
+        }
+
+        if (Input.GetKeyDown("space") && onFight) { onFight = false; }
+        if (Input.GetKeyDown("space") && !onFight) { onFight = true; }
+        
+        if(onFight)
+        {
+            if(GameManager.Instance.PlayerFighters.Count == 3)
+            {
+                Debug.Log("Player Ready");
+                if (GameManager.Instance.currentEncounter != null)
+                {
+                    Debug.Log("Encounter Ready");
+                    ShowView_CombatSelection();
+                }
+
+            }
+           
+        }
+        else
+        {
+            HideView_CombatSelection();
         }
     }
 
