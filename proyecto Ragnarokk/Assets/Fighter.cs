@@ -16,6 +16,8 @@ public class Fighter : MonoBehaviour
     public int Defense;
     [ReadOnly]
     public int MaxHP;
+    [ReadOnly]
+    public int CurrentHP;
 
     [ReadOnly]
     public Weapon[] Weapons = new Weapon[4];

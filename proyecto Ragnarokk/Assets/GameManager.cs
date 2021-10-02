@@ -73,9 +73,11 @@ public class GameManager : Singleton<GameManager>
             fighterComp.Defense = data.Defense;
             fighterComp.Speed = data.Speed;
             fighterComp.MaxHP = data.MaxHP;
+            fighterComp.CurrentHP = fighterComp.MaxHP;
 
             for (int i = 0; i < fighterComp.Weapons.Length; i++)
             {
+                    //Debug.Log("Arma " + i);
                 fighterComp.Weapons[i] = data.DefaultWeapons[i];
             }
         }
