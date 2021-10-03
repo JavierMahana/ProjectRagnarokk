@@ -181,7 +181,7 @@ public class CombatManager : MonoBehaviour
             // si el jugador hace clic al botón accion en su turno
             if (currentButton.GetComponent<ActionButton>().ButtonPressed)
             {
-                foreach (GameObject button in gameManager.EnemyButtons)
+                foreach (GameObject button in GameManager.Instance.EnemyButtons)
                 {
                     button.GetComponent<FighterSelect>().selfBbutton.interactable = true;
                     button.GetComponent<FighterSelect>().selfBbutton.gameObject.SetActive(true);
