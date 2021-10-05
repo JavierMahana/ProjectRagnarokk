@@ -55,7 +55,14 @@ public class FighterSelect : MonoBehaviour
                 Debug.Log("Daño infligido: " + dañoFinal);
                 Debug.Log("Salud de enemigo despues del ataque: " + Fighter.GetComponent<Fighter>().CurrentHP);
             }
-            
+
+            if(Fighter.GetComponent<Fighter>().CurrentHP <= 0)
+            {
+                Fighter.transform.rotation = new Quaternion(0, 0, 90, 0);
+            }
+
+            CombatManager combatManager = GameObject.Find("CombatManager").GetComponent<CombatManager>();
+            combatManager.AttackDone = true;
         }
        
     }

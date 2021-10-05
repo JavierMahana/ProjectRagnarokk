@@ -22,15 +22,22 @@ public class ActionButton : MonoBehaviour
 
     public void PressedUpdate()
     {
+        CombatManager combatManager = GameObject.Find("CombatManager").GetComponent<CombatManager>();
 
         if (!ButtonPressed)
         {
+            combatManager.Action = initialActionText;
+            combatManager.AttackWeapon = combatManager.ActiveFighter.Weapons[0];
+
             GetComponent<Image>().color = Color.grey;
             actionText.text = "Cancel";
             ButtonPressed = true;
         }
         else
         {
+            combatManager.Action = null;
+            combatManager.AttackWeapon = null;
+
             GetComponent<Image>().color = initialColor;
             actionText.text = initialActionText;
             ButtonPressed = false;

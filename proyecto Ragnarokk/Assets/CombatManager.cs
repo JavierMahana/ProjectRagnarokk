@@ -46,8 +46,10 @@ public class CombatManager : MonoBehaviour
     List<Fighter> PlayerFighters = new List<Fighter>();
     List<Fighter> EnemyFighters = new List<Fighter>();
 
+    List<Fighter> AlivePlayerFighters = new List<Fighter>();
+
     List<Fighter> AllCombatFighters = new List<Fighter>(); //Lista que almacenará a los luchadores del combate actual
-    Fighter ActiveFighter;
+    public Fighter ActiveFighter;
     sbyte ActiveFighterIndex = -1;
 
     bool TurnInProcess;
@@ -60,13 +62,13 @@ public class CombatManager : MonoBehaviour
     /// Se pensaba hacerlas variables locales, pero el método que llama a la corrutina (Update) debe tener acceso a dichas variables para
     /// modificarlas, de otro modo, la corrutina no continuaría nunca.
     /// </summary>
-    string Action = null;
+    public string Action = null;
     //Variables de ataque
-    Weapon AttackWeapon = null;
-    Fighter Target = null;
-    
-    bool Confirm = false; //Cuando sea true, la acción se debe llevar a cabo
-    bool Annulment = false; //Se usa cada vez que se quiere retroceder en la selección de algo
+    public Weapon AttackWeapon = null;
+    public Fighter Target = null;
+
+    public bool Confirm = false; //Cuando sea true, la acción se debe llevar a cabo
+    public bool Annulment = false; //Se usa cada vez que se quiere retroceder en la selección de algo
 
 
     //Comparador de rapidez para ordenar la lista de luchadores
@@ -85,6 +87,7 @@ public class CombatManager : MonoBehaviour
         {
             PlayerFighters.Add(pf.gameObject.GetComponent<Fighter>());
         }
+        AlivePlayerFighters.AddRange(PlayerFighters);
 
         //ACA ABRIA Q COLOCAR LOS PERSONAJES EN SUS POCICIONES.
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -169,9 +172,12 @@ public class CombatManager : MonoBehaviour
 
     public void FighterAction(Button currentButton)
     {
-        
+            if(ActiveFighter == null)
+            {
+                //Debug.Log("NO HAY LUCHADOR ACTIVO");
+            }
         // Cambiar condicion a si es que es el turno del jugador
-        if (GameManager.Instance.PlayerFighters.Count == 3)
+        if (IsPlayerFighter(GameManager.Instance.PlayerOnTurn.GetComponent<Fighter>())) 
         {
             CombatCanvas.SetActive(true);
             CombatCanvas.GetComponent<Canvas>().enabled = true;
@@ -188,8 +194,9 @@ public class CombatManager : MonoBehaviour
                 }
 
                 //jugador de turno se escoge y luego se utiliza para calcular el daño en el Prefab Fighter Select
-                GameManager.Instance.PlayerOnTurn = GameManager.Instance.PlayerFighters[0].gameObject;
-                Debug.Log("Jugador en Turno: " + GameManager.Instance.PlayerOnTurn.GetComponent<Fighter>().Name);
+                
+                //GameManager.Instance.PlayerOnTurn = GameManager.Instance.PlayerFighters[0].gameObject;
+                //Debug.Log("Jugador en Turno: " + GameManager.Instance.PlayerOnTurn.GetComponent<Fighter>().Name);
             }
         }
         else
@@ -221,6 +228,13 @@ public class CombatManager : MonoBehaviour
             return;
             //Debug.Log("Actualizando");
 
+            /*
+            if(ActiveFighter != null)
+            {
+                Debug.Log(ActiveFighter.Name);
+            }
+            */
+
         //Si no hay un turno en curso, se comprobará el estado del combate, e iniciará un nuevo turno, dentro de una corrutina.
         if(!TurnInProcess  &&  CombatState == 0)
         {
@@ -247,6 +261,7 @@ public class CombatManager : MonoBehaviour
         //Se usa la tecla Z para "elegir" una opción, y la tecla A para cancelar la última opción y volverla a "elegir".
         //SE DEBE REEMPLAZAR ESTE SISTEMA POR UNA INTERFAZ DE COMBATE APROPIADA.
 
+        /*
         if(Action == null)
         {
             if(Input.GetKeyDown("z")) { Action = "fight"; }
@@ -279,10 +294,11 @@ public class CombatManager : MonoBehaviour
             }
         }
         Annulment = Input.GetKeyDown("a");
+        */
     }
 
-    
 
+    public bool AttackDone = false;
     private IEnumerator TurnAction()
     {
         //Se busca en la lista de luchadores al siguiente luchador vivo más rápido.
@@ -293,85 +309,96 @@ public class CombatManager : MonoBehaviour
             ActiveFighter = AllCombatFighters[ActiveFighterIndex];
         } while (ActiveFighter.CurrentHP <= 0); //Comprueba que esté vivo.
 
+        GameManager.Instance.PlayerOnTurn = ActiveFighter.gameObject;
+
             //Debug.Log(ActiveFighter.Name);
 
         //TURNO DE UN ALIADO
         if (IsPlayerFighter(ActiveFighter))
         {
-            //SELECCIÓN DE LA ACCIÓN
-            do
+            if (false) //Este código quedará obsoleto?
             {
-                Action = null;
-                //La corrutina se detendrá hasta que se defina una acción en Update.
-                    Debug.Log("Escogiendo Acción...");
-                yield return new WaitUntil(() => Action != null);
-
-                switch (Action)
+                //SELECCIÓN DE LA ACCIÓN
+                do
                 {
-                    case "fight":
-                        //SELECCIÓN DEL ARMA
-                        do
-                        {
-                                Debug.Log("ACCIÓN: " + Action);
-                            AttackWeapon = null;
-                            //Se esperará a definir un arma, o a cancelar la acción
-                                Debug.Log("Escogiendo Arma...");
-                            yield return new WaitUntil(() => AttackWeapon != null || Annulment);
+                    Action = null;
+                    //La corrutina se detendrá hasta que se defina una acción en Update.
+                    Debug.Log("Escogiendo Acción...");
+                    yield return new WaitUntil(() => Action != null);
 
-                            if(Annulment)
-                            {
-                                Action = null; //Se cancela la acción
-                                Annulment = false;
-                                continue; //NO se llevará a cabo la elección de un objetivo
-                            }
-
-                            //SELECCIÓN DEL OBJETIVO
+                    switch (Action)
+                    {
+                        case "Attack":
+                            //SELECCIÓN DEL ARMA
                             do
                             {
-                                    Debug.Log("ACCIÓN: " + Action + " | ARMA: " + AttackWeapon.Name);
-                                Annulment = false;
-                                Target = null;
-                                    Debug.Log("Escogiendo Objetivo...");
-                                yield return new WaitUntil(() => Target != null || Annulment);
-                                
-                                if(Annulment)
+                                Debug.Log("ACCIÓN: " + Action);
+                                AttackWeapon = null;
+                                //Se esperará a definir un arma, o a cancelar la acción
+                                Debug.Log("Escogiendo Arma...");
+                                yield return new WaitUntil(() => AttackWeapon != null || Annulment);
+
+                                if (Annulment)
                                 {
-                                    AttackWeapon = null; //Se anula la elección de arma
+                                    Action = null; //Se cancela la acción
                                     Annulment = false;
-                                    continue; //NO se pedirá la confirmación de una acción
+                                    continue; //NO se llevará a cabo la elección de un objetivo
                                 }
 
+                                //SELECCIÓN DEL OBJETIVO
+                                do
+                                {
+                                    Debug.Log("ACCIÓN: " + Action + " | ARMA: " + AttackWeapon.Name);
+                                    Annulment = false;
+                                    Target = null;
+                                    Debug.Log("Escogiendo Objetivo...");
+                                    yield return new WaitUntil(() => Target != null || Annulment);
+
+                                    if (Annulment)
+                                    {
+                                        AttackWeapon = null; //Se anula la elección de arma
+                                        Annulment = false;
+                                        continue; //NO se pedirá la confirmación de una acción
+                                    }
+
                                     Debug.Log("ACCIÓN: " + Action + " | ARMA: " + AttackWeapon.Name + " | OBJETIVO: " + Target.Name);
-                                //Se solicita confirmación de la acción.
+                                    //Se solicita confirmación de la acción.
                                     Debug.Log("Confirmando...");
-                                Confirm = false;
-                                yield return new WaitUntil(() => Confirm || Annulment);
-                            } while ((Target == null && AttackWeapon != null)  ||  Annulment); //Se da cuando el jugador quiere reseleccionar el objetivo (puede que sea suficiente consultar por Annulment)
-                        } while (AttackWeapon == null  &&  Action != null); //Se da cuando el jugador quiere cambiar de arma
+                                    Confirm = false;
+                                    yield return new WaitUntil(() => Confirm || Annulment);
+                                } while ((Target == null && AttackWeapon != null) || Annulment); //Se da cuando el jugador quiere reseleccionar el objetivo (puede que sea suficiente consultar por Annulment)
+                            } while (AttackWeapon == null && Action != null); //Se da cuando el jugador quiere cambiar de arma
 
-                        break;
-                }
-            } while (Action == null); //No acaba el turno sin una acción a ejecutar, lo que implica que no hay turnos saltables.
+                            break;
+                    }
+                } while (Action == null); //No acaba el turno sin una acción a ejecutar, lo que implica que no hay turnos saltables.
 
-            if(Action.Equals("fight")) { Fight(); }
+                if(Action.Equals("Attack")) { Fight(); }
+            }
+
+            yield return new WaitUntil(() => AttackDone);
+            AttackDone = false;
         }
         //TURNO DE UN ENEMIGO
         else
         {
             AttackWeapon = ActiveFighter.Weapons[0];
-            sbyte i = -1;
-            //Se busca al primer jugador vivo
-            do
+            Target = AlivePlayerFighters[Random.Range(0, AlivePlayerFighters.Count)];
+            //Fight();
+            Target.CurrentHP -= ActiveFighter.Atack - (int)(Target.Defense * 0.25);
+                Debug.Log("HP " + Target.Name + ": " + Target.CurrentHP);
+            if(Target.CurrentHP <= 0)
             {
-                i++;
-                Target = PlayerFighters[i];
-            } while (Target.CurrentHP <= 0);
-            Fight();
+                AlivePlayerFighters.Remove(Target);
+                Target.gameObject.transform.rotation = new Quaternion(0, 0, 90, 0);
+            }
             //Por seguridad se nulifican variables de ataque
             //(En el turno del jugador se anulan antes de la elección de cada una. ¿Sería preferible anularlas tras el ataque, igual que aquí?)
             AttackWeapon = null;
             Target = null;
         }
+
+        yield return new WaitForSeconds(0.8f);
         TurnInProcess = false;
     }
 
