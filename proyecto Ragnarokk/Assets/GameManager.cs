@@ -41,20 +41,20 @@ public class GameManager : Singleton<GameManager>
     public List<FighterData> AllPlayerFighterDatas = new List<FighterData>();
     public List<CombatEncounter> AllEncounters = new List<CombatEncounter>();
 
-    public List<GameObject> Enemies = new List<GameObject>();
-    public List<GameObject> EnemyButtons = new List<GameObject>();
-
-    public List<GameObject> PlayerButtons = new List<GameObject>();
-
+    public List<Fighter> Enemies = new List<Fighter>();
+    public List<FighterSelect> EnemyButtons = new List<FighterSelect>();
 
     //DontDestroyOnLoad
     //objetos de los fighters del player.
     [ReadOnly]
     public List<PlayerFighter> PlayerFighters = new List<PlayerFighter>();
+    public List<FighterSelect> PlayerButtons = new List<FighterSelect>();
+
     public GameObject PlayerOnTurn;
 
+    public bool ConfirmationClick;
 
-   
+
     private void Update()
     {
 

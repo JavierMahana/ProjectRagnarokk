@@ -7,18 +7,19 @@ public class FighterSelect : MonoBehaviour
 {
     public Button selfBbutton;
 
-    public GameObject Fighter;
+    public Fighter Fighter;
 
     public Text damage;
 
     public int showTimer;
 
     private string defaultText = "";
+
     //agregar despues una lista de imagenes (estados) dentro de un canvas (atributo) que se activa si hay efectos en Fighter
 
     void Start()
     {
-        selfBbutton.interactable = false;
+        selfBbutton.interactable = true;
         showTimer = 0;
         damage.text = defaultText;
     }
@@ -27,36 +28,32 @@ public class FighterSelect : MonoBehaviour
     void Update()
     {
         if(Fighter == null) { Destroy(this); }
-        if(showTimer !=0) { showTimer--; }
+        if(showTimer !=0) { showTimer--;}
         if(showTimer == 0 && damage.text != defaultText) { damage.text = defaultText; }
-        if (!selfBbutton.interactable) { selfBbutton.gameObject.SetActive(false); }
+        //if (!selfBbutton.interactable) { selfBbutton.gameObject.SetActive(false); }
     }
 
-    public void InflictDamage()
+    public void ShowDamage(int damage)
     {
-        if(selfBbutton.interactable)
-        {
-            GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-            var pcOnTurn = gameManager.PlayerOnTurn;
-
-            //Calculo de daño -- aqui--
-            int dañoPC = pcOnTurn.GetComponent<Fighter>().Atack;
-            int defensaEnemigo = Fighter.GetComponent<Fighter>().Defense;
-
-            int dañoFinal = dañoPC - (int)(defensaEnemigo * 0.25);
-
-            if(dañoFinal >= 0)
-            {
-                Debug.Log("Salud de enemigo antes del ataque: " + Fighter.GetComponent<Fighter>().CurrentHP);
-                Fighter.GetComponent<Fighter>().CurrentHP -= dañoFinal;
-                damage.text = dañoFinal.ToString();
-                showTimer = 200;
-
-                Debug.Log("Daño infligido: " + dañoFinal);
-                Debug.Log("Salud de enemigo despues del ataque: " + Fighter.GetComponent<Fighter>().CurrentHP);
-            }
-            
-        }
-       
+        this.damage.text = damage.ToString();
+        showTimer = 200;
     }
+
+    public void OnClick()
+    {
+        var combatManager = FindObjectOfType<CombatManager>();
+
+        if (GameManager.Instance.ConfirmationClick && combatManager.AttackWeapon != null)
+        {  
+            combatManager.Fight(this);
+            combatManager.AttackDone = true;
+            GameManager.Instance.ConfirmationClick = false;
+        }
+        else
+        {
+            Debug.Log("Falta escoger el ataque o el arma que se utilizará");
+        }
+
+    }
+
 }
