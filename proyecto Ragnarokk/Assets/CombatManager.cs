@@ -11,10 +11,15 @@ public class CombatManager : MonoBehaviour
    
     public GameObject CombatCanvas;
 
-    public GameObject PlayerButtons;
+    public GameObject PrefabActionButton;
+    public GameObject PrefabWeaponButton;
 
-    public GameObject CanvasForClickFighter;
+    public GameObject PanelForActions;
     public GameObject FighterClickButton;
+    List<GameObject> AllButtonsInPanel = new List<GameObject>();
+
+
+    public GameObject PermanentCanvas;
 
 
 
@@ -50,9 +55,10 @@ public class CombatManager : MonoBehaviour
 
     List<Fighter> AllCombatFighters = new List<Fighter>(); //Lista que almacenará a los luchadores del combate actual
     public Fighter ActiveFighter;
+
     sbyte ActiveFighterIndex = -1;
 
-    bool TurnInProcess;
+    public bool TurnInProcess;
 
     sbyte CombatState = 0;
 
@@ -70,6 +76,7 @@ public class CombatManager : MonoBehaviour
     public bool Confirm = false; //Cuando sea true, la acción se debe llevar a cabo
     public bool Annulment = false; //Se usa cada vez que se quiere retroceder en la selección de algo
 
+    public bool AttackDone = false;
 
     //Comparador de rapidez para ordenar la lista de luchadores
     public int SpeedComparer(Fighter f1, Fighter f2)
@@ -82,16 +89,37 @@ public class CombatManager : MonoBehaviour
 
     public void InitCombatScene(CombatEncounter encounter)
     {
+
         //Se obtienen los luchadores del jugador
         foreach(PlayerFighter pf in GameManager.Instance.PlayerFighters)
         {
             PlayerFighters.Add(pf.gameObject.GetComponent<Fighter>());
+
+            #region Player Buttons
+            var playerButton = Instantiate(FighterClickButton);
+
+            RectTransform rectTransform = playerButton.GetComponent<RectTransform>();
+
+            playerButton.GetComponent<FighterSelect>().Fighter = pf.GetComponent<Fighter>();
+            playerButton.transform.SetParent(PermanentCanvas.transform, true);
+            playerButton.GetComponent<Button>().interactable = false;
+
+            Vector2 viewportPoint = Camera.main.WorldToViewportPoint(pf.transform.position);
+
+            rectTransform.anchorMin = viewportPoint;
+            rectTransform.anchorMax = viewportPoint;
+
+            rectTransform.anchoredPosition = Vector2.zero;
+
+            GameManager.Instance.PlayerButtons.Add(playerButton.GetComponent<FighterSelect>());
+
+            #endregion
+
         }
         AlivePlayerFighters.AddRange(PlayerFighters);
 
+        
         //ACA ABRIA Q COLOCAR LOS PERSONAJES EN SUS POCICIONES.
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
         /*
         foreach (var pf in gameManager.PlayerFighters)
         {
@@ -103,8 +131,11 @@ public class CombatManager : MonoBehaviour
         }
         */
 
-        gameManager.Enemies.Clear();
-        gameManager.EnemyButtons.Clear();
+
+        // limpia la lista de enemigos y sus botones
+        // antes de instanciar los del nuevo encuentro
+        GameManager.Instance.Enemies.Clear();
+        GameManager.Instance.EnemyButtons.Clear();
 
 
         int enemyCount = encounter.ListOfEncounterEnemies.Count;
@@ -152,7 +183,7 @@ public class CombatManager : MonoBehaviour
 
         RectTransform rectTransform = enemyButton.GetComponent<RectTransform>();
 
-        enemyButton.GetComponent<FighterSelect>().Fighter = enemyGameObject;
+        enemyButton.GetComponent<FighterSelect>().Fighter = enemyGameObject.GetComponent<Fighter>();
         enemyButton.transform.SetParent(CombatCanvas.transform, true);
 
         Vector2 viewportPoint = Camera.main.WorldToViewportPoint(position);
@@ -162,64 +193,39 @@ public class CombatManager : MonoBehaviour
         
         rectTransform.anchoredPosition = Vector2.zero;
 
-        GameManager.Instance.Enemies.Add(enemyGameObject.GetComponent<Fighter>().gameObject);
-        GameManager.Instance.EnemyButtons.Add(enemyButton.GetComponent<FighterSelect>().gameObject);
+        GameManager.Instance.Enemies.Add(enemyGameObject.GetComponent<Fighter>());
+        GameManager.Instance.EnemyButtons.Add(enemyButton.GetComponent<FighterSelect>());
 
         //Se llena una lista con los enemigos recién creados
         EnemyFighters.Add(enemyGameObject.GetComponent<Fighter>());
     }
 
-
-    public void FighterAction(Button currentButton)
+    public void ShowFighterCanvas(bool show)
     {
-            if(ActiveFighter == null)
-            {
-                //Debug.Log("NO HAY LUCHADOR ACTIVO");
-            }
-        // Cambiar condicion a si es que es el turno del jugador
-        if (IsPlayerFighter(GameManager.Instance.PlayerOnTurn.GetComponent<Fighter>())) 
-        {
-            CombatCanvas.SetActive(true);
-            CombatCanvas.GetComponent<Canvas>().enabled = true;
-
-            foreach (GameObject button in GameManager.Instance.EnemyButtons) {button.GetComponent<FighterSelect>().selfBbutton.interactable = false;}
-            
-            // si el jugador hace clic al botón accion en su turno
-            if (currentButton.GetComponent<ActionButton>().ButtonPressed)
-            {
-                foreach (GameObject button in GameManager.Instance.EnemyButtons)
-                {
-                    button.GetComponent<FighterSelect>().selfBbutton.interactable = true;
-                    button.GetComponent<FighterSelect>().selfBbutton.gameObject.SetActive(true);
-                }
-
-                //jugador de turno se escoge y luego se utiliza para calcular el daño en el Prefab Fighter Select
-                
-                //GameManager.Instance.PlayerOnTurn = GameManager.Instance.PlayerFighters[0].gameObject;
-                //Debug.Log("Jugador en Turno: " + GameManager.Instance.PlayerOnTurn.GetComponent<Fighter>().Name);
-            }
-        }
-        else
-        {
-            CombatCanvas.SetActive(false);
-        }
-
-        
+        CombatCanvas.GetComponent<Canvas>().enabled = show;
+        CombatCanvas.SetActive(show);
     }
+
+    public void ShowEnemyInteractableButton(bool show)
+    {
+        foreach (FighterSelect button in GameManager.Instance.EnemyButtons)
+        {
+            button.selfBbutton.interactable = show;
+        }
+    }
+
 
 
     //call backs unity
     private void Awake()
     {
-        // no se muestra el canvas de acciones hasta el turno de un playable character (FighterAction)
-        CombatCanvas.GetComponent<Canvas>().enabled = true;
-
         initialized = false;
         TurnInProcess = false;
     }
     private void Start()
     {
         InitCombatScene(GameManager.Instance.currentEncounter);
+        ShowFighterCanvas(false);
     }
     
     private void Update()
@@ -242,8 +248,12 @@ public class CombatManager : MonoBehaviour
             //El combate aún no termina, inicia el siguiente turno.
             if(CombatState == 0)
             {
-                    Debug.Log("Ejecutar turno");
+                Debug.Log("Ejecutar turno");
                 TurnInProcess = true;
+
+                ShowFighterCanvas(false);
+                CleanWeaponSelecion();
+
                 StartCoroutine(TurnAction());
             }
             else if(CombatState > 0)
@@ -295,10 +305,25 @@ public class CombatManager : MonoBehaviour
         }
         Annulment = Input.GetKeyDown("a");
         */
+
+        // constantemente se revisa si es que se va activar el botón para seleccionar enemigos
+        ShowEnemyInteractableButton(GameManager.Instance.ConfirmationClick);
+
     }
 
+    public void MovePanel()
+    {
+        var position = (Vector2)ActiveFighter.transform.position;
+        RectTransform rectTransform = PanelForActions.GetComponent<RectTransform>();
+        Vector2 viewportPoint = Camera.main.WorldToViewportPoint(position);
 
-    public bool AttackDone = false;
+        rectTransform.anchorMin = viewportPoint;
+        rectTransform.anchorMax = viewportPoint;
+
+        rectTransform.anchoredPosition = Vector2.zero;
+
+        PanelForActions.GetComponent<RectTransform>().position = position;
+    }
     private IEnumerator TurnAction()
     {
         //Se busca en la lista de luchadores al siguiente luchador vivo más rápido.
@@ -311,11 +336,21 @@ public class CombatManager : MonoBehaviour
 
         GameManager.Instance.PlayerOnTurn = ActiveFighter.gameObject;
 
-            //Debug.Log(ActiveFighter.Name);
+        //Debug.Log(ActiveFighter.Name);
+
+
+        var iniPos = ActiveFighter.transform.position;
+
 
         //TURNO DE UN ALIADO
         if (IsPlayerFighter(ActiveFighter))
         {
+            Debug.Log("Turno Aliado");
+            ShowFighterCanvas(true);
+            WeaponSelection();
+            MovePanel();
+
+            ActiveFighter.transform.position += new Vector3((float)2.5, 0, 0);
             if (false) //Este código quedará obsoleto?
             {
                 //SELECCIÓN DE LA ACCIÓN
@@ -373,7 +408,9 @@ public class CombatManager : MonoBehaviour
                     }
                 } while (Action == null); //No acaba el turno sin una acción a ejecutar, lo que implica que no hay turnos saltables.
 
-                if(Action.Equals("Attack")) { Fight(); }
+                if(Action.Equals("Attack")) 
+                { //Fight();
+                  }
             }
 
             yield return new WaitUntil(() => AttackDone);
@@ -382,9 +419,32 @@ public class CombatManager : MonoBehaviour
         //TURNO DE UN ENEMIGO
         else
         {
+            Debug.Log("Turno Enemigo");
+            ShowFighterCanvas(false);
+
+            ActiveFighter.transform.position += new Vector3((float)-2.5, 0, 0);
+
             AttackWeapon = ActiveFighter.Weapons[0];
             Target = AlivePlayerFighters[Random.Range(0, AlivePlayerFighters.Count)];
-            //Fight();
+
+            // la variable button utiliza el boton de accion por default, sin embargo
+            // debe ser reemplazado por el botón del jugador que será el target antes de llamar la funcion Fight
+            // de no ser reemplazado en el siguiente while, es porque uno de los botones no fue asignado correctamente
+            // a alguno de los 3 jugadores aliados
+            FighterSelect targetButton = null;
+
+            foreach(FighterSelect button in GameManager.Instance.PlayerButtons)
+            {
+                if (button.Fighter == Target)
+                {
+                    targetButton = button;
+                    Debug.Log("Boton Aliado encontrado por el enemigo");
+                }
+            }          
+           
+            Fight(targetButton);
+            
+            /*
             Target.CurrentHP -= ActiveFighter.Atack - (int)(Target.Defense * 0.25);
                 Debug.Log("HP " + Target.Name + ": " + Target.CurrentHP);
             if(Target.CurrentHP <= 0)
@@ -392,6 +452,7 @@ public class CombatManager : MonoBehaviour
                 AlivePlayerFighters.Remove(Target);
                 Target.gameObject.transform.rotation = new Quaternion(0, 0, 90, 0);
             }
+            */
             //Por seguridad se nulifican variables de ataque
             //(En el turno del jugador se anulan antes de la elección de cada una. ¿Sería preferible anularlas tras el ataque, igual que aquí?)
             AttackWeapon = null;
@@ -399,6 +460,9 @@ public class CombatManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.8f);
+
+        ActiveFighter.transform.position = iniPos;
+        // indica que termina un turno
         TurnInProcess = false;
     }
 
@@ -410,16 +474,74 @@ public class CombatManager : MonoBehaviour
     }
     */
 
-    private void Fight()
+    // al hacerle clic se activa Fight y el argumento es el boton cliqueado que contiene al target
+    public void Fight(FighterSelect targetButton)
     {
+
+        if(targetButton == null || targetButton.Fighter == null || targetButton.selfBbutton == null) { Debug.Log("No se encuentra el botón del objetivo"); }
+        // se especifica el target con la fucion EnemySelected
+
+        Target = targetButton.Fighter;
+        Debug.Log("ATACANTE: " + ActiveFighter.Name);
+        Debug.Log("OBJETIVO: " + Target.Name);
         //FÓRMULA DE DAÑO (Prototipo en desuso. Debe ser bien definida más adelante)
         int damage = (AttackWeapon.BaseDamage / 25) + ActiveFighter.Atack - Target.Defense;
-            damage = 40;
-            string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
-            Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
+
+        damage = 40;
+        string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
+        Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
         Target.CurrentHP -= damage;
+
+        if (Target.CurrentHP <= 0)
+        {
+            Target.transform.rotation = new Quaternion(0, 0, 90, 0);
+        }
+        // el botón imprime el daño infligido
+        targetButton.ShowDamage(damage);
+        
     }
 
+    public void WeaponSelection()
+    {
+        if(!GameManager.Instance.ConfirmationClick)
+        {
+            CleanWeaponSelecion();
+
+            GameObject actionButton = Instantiate(PrefabActionButton);
+            
+            actionButton.GetComponent<ActionButton>().initialActionText = "Attack";
+            actionButton.transform.SetParent(PanelForActions.transform, false);
+            AllButtonsInPanel.Add(actionButton);
+        }
+
+        else
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                var W = ActiveFighter.Weapons[i];
+                if(W != null)
+                {
+                    GameObject actionButton = Instantiate(PrefabWeaponButton);
+
+                    actionButton.GetComponent<WeaponSpecs>().weaponDamage.text = "damage" + W.BaseDamage.ToString();
+                    actionButton.GetComponent<WeaponSpecs>().weaponName.text = W.Name;
+                    actionButton.GetComponent<WeaponSpecs>().thisWeapon = W;
+
+                    actionButton.transform.SetParent(PanelForActions.transform, false);
+
+                    AllButtonsInPanel.Add(actionButton);
+                }          
+            }
+        }
+    }
+
+    private void CleanWeaponSelecion()
+    {
+        foreach (GameObject button in AllButtonsInPanel)
+        {
+            Destroy(button);
+        }
+    }
     private bool IsPlayerFighter(Fighter f)
     {
         PlayerFighter pFighter;

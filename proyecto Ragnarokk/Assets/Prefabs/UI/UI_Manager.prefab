@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 8462961633960268787}
   - component: {fileID: 3497065219040812988}
   m_Layer: 5
-  m_Name: WeaponSlot group 2
+  m_Name: WeaponSlot pfMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -573,10 +573,10 @@ RectTransform:
   m_Father: {fileID: 1236596487311170123}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.35770905, y: 0.36712518}
-  m_AnchorMax: {x: 0.55512714, y: 0.5531321}
-  m_AnchoredPosition: {x: -4.401001, y: 0.49520874}
-  m_SizeDelta: {x: -8.8021, y: -0.9904}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -36.6}
+  m_SizeDelta: {x: 150, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3723916651349290835
 CanvasRenderer:
@@ -914,6 +914,7 @@ GameObject:
   - component: {fileID: 7691477758918502838}
   - component: {fileID: 1835853342467554373}
   - component: {fileID: 7472608237009856192}
+  - component: {fileID: 128109046486651526}
   m_Layer: 5
   m_Name: WeaponSlots_UI
   m_TagString: Untagged
@@ -976,7 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1004,6 +1005,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 55
+--- !u!114 &128109046486651526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3596670706985986092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 1
+  m_VerticalFit: 1
 --- !u!1 &3848612733221010844
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,7 +2427,7 @@ GameObject:
   - component: {fileID: 6829334192309955173}
   - component: {fileID: 5341654654565840346}
   m_Layer: 5
-  m_Name: WeaponSlot group 1
+  m_Name: WeaponSlot pfBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2436,10 +2451,10 @@ RectTransform:
   m_Father: {fileID: 1236596487311170123}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.35770905, y: 0.5874237}
-  m_AnchorMax: {x: 0.546, y: 0.8097085}
-  m_AnchoredPosition: {x: 1.0370026, y: -304}
-  m_SizeDelta: {x: -1.1518, y: -30.6177}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -136.6}
+  m_SizeDelta: {x: 150, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6976353892094646658
 CanvasRenderer:
@@ -2912,7 +2927,7 @@ GameObject:
   - component: {fileID: 93198528697481905}
   - component: {fileID: 5374090823808789907}
   m_Layer: 5
-  m_Name: WeaponSlot group 3
+  m_Name: WeaponSlot pfTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2936,10 +2951,10 @@ RectTransform:
   m_Father: {fileID: 1236596487311170123}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.35770905, y: 0.080569476}
-  m_AnchorMax: {x: 0.546, y: 0.26257637}
-  m_AnchoredPosition: {x: 1.0310059, y: 316.51}
-  m_SizeDelta: {x: -1.1699829, y: 13.269989}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 63.399998}
+  m_SizeDelta: {x: 150, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7442264388831295825
 CanvasRenderer:
@@ -4251,7 +4266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5967359179417203865, guid: 7872b08a4419ec94eb1793b0b6cb8bab, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -10.439789
+      value: -10.43988
       objectReference: {fileID: 0}
     - target: {fileID: 5967359179417203865, guid: 7872b08a4419ec94eb1793b0b6cb8bab, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4307,9 +4322,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5467560591023624974}
     m_Modifications:
+    - target: {fileID: 692739135867551684, guid: da67da01970b38a40b5e7fd26291fa3d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 692739135867551684, guid: da67da01970b38a40b5e7fd26291fa3d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 725046023982591642, guid: da67da01970b38a40b5e7fd26291fa3d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121117793677150255, guid: da67da01970b38a40b5e7fd26291fa3d, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1217430021150277723, guid: da67da01970b38a40b5e7fd26291fa3d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -4465,6 +4492,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da67da01970b38a40b5e7fd26291fa3d, type: 3}
+--- !u!1 &1197265710217077038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4718840656962547019, guid: da67da01970b38a40b5e7fd26291fa3d, type: 3}
+  m_PrefabInstance: {fileID: 5900061044571819109}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6624473749311218431 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 725046023982591642, guid: da67da01970b38a40b5e7fd26291fa3d, type: 3}
@@ -4473,11 +4505,6 @@ GameObject:
 --- !u!224 &7864908690012400621 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4378904606533527432, guid: da67da01970b38a40b5e7fd26291fa3d, type: 3}
-  m_PrefabInstance: {fileID: 5900061044571819109}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1197265710217077038 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4718840656962547019, guid: da67da01970b38a40b5e7fd26291fa3d, type: 3}
   m_PrefabInstance: {fileID: 5900061044571819109}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7665723266224143122
