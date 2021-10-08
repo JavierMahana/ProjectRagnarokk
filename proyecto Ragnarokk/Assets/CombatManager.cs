@@ -487,7 +487,6 @@ public class CombatManager : MonoBehaviour
         //FÓRMULA DE DAÑO (Prototipo en desuso. Debe ser bien definida más adelante)
         int damage = (AttackWeapon.BaseDamage / 25) + ActiveFighter.Atack - Target.Defense;
 
-        damage = 40;
         string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
         Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
         Target.CurrentHP -= damage;

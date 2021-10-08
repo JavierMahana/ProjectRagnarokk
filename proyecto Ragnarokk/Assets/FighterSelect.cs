@@ -43,7 +43,8 @@ public class FighterSelect : MonoBehaviour
     {
         var combatManager = FindObjectOfType<CombatManager>();
 
-        if (GameManager.Instance.ConfirmationClick && combatManager.AttackWeapon != null)
+        if (GameManager.Instance.ConfirmationClick && combatManager.AttackWeapon != null
+             && Fighter.CurrentHP > 0)
         {  
             combatManager.Fight(this);
             combatManager.AttackDone = true;
@@ -51,7 +52,7 @@ public class FighterSelect : MonoBehaviour
         }
         else
         {
-            Debug.Log("Falta escoger el ataque o el arma que se utilizará");
+            Debug.Log("Falta escoger el ataque o el arma que se utilizará o bien el enemigo está muerto");
         }
 
     }

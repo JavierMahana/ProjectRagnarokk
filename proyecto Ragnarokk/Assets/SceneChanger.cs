@@ -13,7 +13,9 @@ public class SceneChanger : Singleton<SceneChanger>
 	public void LoadMenuScene()
 	{
 		GameManager.Instance.currentEncounter = null;
-		ChangeScene(0);
+		GameManager.Instance.ConfirmationClick = false;
+
+		ChangeScene("intro scene");
 	}
 
 
