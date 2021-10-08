@@ -23,4 +23,16 @@ public class Fighter : MonoBehaviour
     public Weapon[] Weapons = new Weapon[4];
 
     public Weapon CurrentWeapon;
+
+
+
+    public VoidDelegate OnTakeDamage;
+    public VoidDelegate OnDie;
+
+
+
+    //definicion de tipo de delegate
+    public delegate void VoidDelegate();
+
+
 }
