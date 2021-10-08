@@ -309,6 +309,7 @@ public class CombatManager : MonoBehaviour
         if (IsPlayerFighter(ActiveFighter))
         {
             Debug.Log("Turno Aliado");
+            AttackWeapon = null;
             ShowFighterCanvas(true);
             WeaponSelection();
             MovePanel();
