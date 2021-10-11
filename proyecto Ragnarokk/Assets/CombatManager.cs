@@ -261,11 +261,15 @@ public class CombatManager : MonoBehaviour
             }
             else if(CombatState > 0)
             {
-                    Debug.Log("VICTORIA");
+                var sceneChanger = FindObjectOfType<SceneChanger>();
+                sceneChanger.ChangeScene("Victory");
+                Debug.Log("VICTORIA");
             }
             else
             {
-                    Debug.Log("DERROTA");
+                var sceneChanger = FindObjectOfType<SceneChanger>();
+                sceneChanger.ChangeScene("Defeat");
+                Debug.Log("DERROTA");
             }
         }
 
