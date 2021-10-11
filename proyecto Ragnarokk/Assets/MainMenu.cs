@@ -19,8 +19,6 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         ActivateButtons(true);
-        //ControlsText.gameObject.SetActive(false);
-        //CreditsText.gameObject.SetActive(false);
     }
 
     void Update()
@@ -49,12 +47,14 @@ public class MainMenu : MonoBehaviour
     {
         ActivateButtons(false);
         ControlsText.gameObject.SetActive(true);
+        CreditsText.gameObject.SetActive(false);
     }
 
     public void ClickCredits()
     {
         ActivateButtons(false);
         CreditsText.gameObject.SetActive(true);
+        ControlsText.gameObject.SetActive(false);
     }
 
     public void ClickQuit()

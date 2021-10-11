@@ -99,9 +99,15 @@ public class CombatManager : MonoBehaviour
 
     public void InitCombatScene(CombatEncounter encounter)
     {
+        // limpia la lista de enemigos y sus botones más los botones aliados
+
+        // antes de instanciar los del nuevo encuentro
+        GameManager.Instance.Enemies.Clear();
+        GameManager.Instance.EnemyButtons.Clear();
+        GameManager.Instance.PlayerButtons.Clear();
 
         //Se obtienen los luchadores del jugador
-        foreach(PlayerFighter pf in GameManager.Instance.PlayerFighters)
+        foreach (PlayerFighter pf in GameManager.Instance.PlayerFighters)
         {
             PlayerFighters.Add(pf.gameObject.GetComponent<Fighter>());
 
@@ -142,11 +148,6 @@ public class CombatManager : MonoBehaviour
         }
         */
 
-
-        // limpia la lista de enemigos y sus botones
-        // antes de instanciar los del nuevo encuentro
-        GameManager.Instance.Enemies.Clear();
-        GameManager.Instance.EnemyButtons.Clear();
 
 
         int enemyCount = encounter.ListOfEncounterEnemies.Count;
@@ -456,8 +457,9 @@ public class CombatManager : MonoBehaviour
         Target = targetButton.Fighter;
         Debug.Log("ATACANTE: " + ActiveFighter.Name);
         Debug.Log("OBJETIVO: " + Target.Name);
-        //FÓRMULA DE DAÑO (Prototipo en desuso. Debe ser bien definida más adelante)
+        //FÓRMULA DE DAÑO (Prototipo en uso. Debe ser bien definida más adelante)
         int damage = (AttackWeapon.BaseDamage / 25) + ActiveFighter.Atack - Target.Defense;
+        if(damage < 0) { damage = 0;}
 
         string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
         Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
