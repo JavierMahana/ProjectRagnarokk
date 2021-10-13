@@ -126,29 +126,11 @@ public class CombatManager : MonoBehaviour
             rectTransform.anchorMax = viewportPoint;
 
             rectTransform.anchoredPosition = Vector2.zero;
-
-
             #endregion
-
 
             GameManager.Instance.PlayerButtons.Add(playerButton.GetComponent<FighterSelect>());
         }
         AlivePlayerFighters.AddRange(PlayerFighters);
-
-        
-        //ACA ABRIA Q COLOCAR LOS PERSONAJES EN SUS POCICIONES.
-        /*
-        foreach (var pf in gameManager.PlayerFighters)
-        {
-            var playerButton = Instantiate(PlayerButtons, pf.transform.position, Quaternion.identity);
-            playerButton.transform.SetParent(CombatCanvas.transform, false);
-
-            playerButton.GetComponent<PlayerSelect>().PlayerAssigned = pf.GetComponent<Fighter>().gameObject;
-            gameManager.PlayerButtons.Add(playerButton);
-        }
-        */
-
-
 
         int enemyCount = encounter.ListOfEncounterEnemies.Count;
         for (int i = 0; i < enemyCount; i++)
@@ -173,7 +155,8 @@ public class CombatManager : MonoBehaviour
 
         //Los luchadores se ordenan por velocidad
         AllCombatFighters.Sort(SpeedComparer);
-        //ANALIZAR A FUTURO: No sé cómo funciona el método Sort por debajo, pero es posible que, al comparar dos valores iguales, no cambie el orden
+        #region ANALIZAR A FUTURO
+        //No sé cómo funciona el método Sort por debajo, pero es posible que, al comparar dos valores iguales, no cambie el orden
         //de los elementos, provocando que los luchadores de igual velocidad tengan siempre el mismo orden de turnos. De hecho, los aliados atacan
         //antes que los enemigos de igual velocidad, probablemente porque los luchadores del jugador son añadidos a la lista primero.
         //Si se quisiera aleatorizar el orden de turnos para luchadores igual de rápidos, una solución podría ser modificar el método SpeedComparer
@@ -181,6 +164,7 @@ public class CombatManager : MonoBehaviour
         //Sin embargo, esta lista no está siendo modificada, por lo que el orden definido al iniciar un combate será permanente en cada ciclo de
         //turnos. Si se quisiera ir un paso más allá, podría reordenarse la lista cada vez que acabe un ciclo de turnos, permitiendo a todos los
         //luchadores de igual velocidad tener la oportunidad de actuar primero. Aunque no sé si llamar al método Sort repetidas veces sea óptimo.
+        #endregion
 
         initialized = true;
     }
@@ -279,6 +263,7 @@ public class CombatManager : MonoBehaviour
 
     }
 
+
     public void MovePanel()
     {
         var position = (Vector2)ActiveFighter.transform.position;
@@ -292,6 +277,7 @@ public class CombatManager : MonoBehaviour
 
         PanelForActions.GetComponent<RectTransform>().position = position;
     }
+
     private IEnumerator TurnAction()
     {
         //Se busca en la lista de luchadores al siguiente luchador vivo más rápido.
@@ -468,11 +454,12 @@ public class CombatManager : MonoBehaviour
 
         if (Target.CurrentHP <= 0)
         {
+            Target.CurrentHP = 0;
+            if(IsPlayerFighter(Target)) { AlivePlayerFighters.Remove(Target); }
             Target.transform.rotation = new Quaternion(0, 0, 90, 0);
         }
         // el botón imprime el daño infligido
         targetButton.ShowDamage(damage);
-        
     }
 
     public void WeaponSelection()
@@ -516,6 +503,7 @@ public class CombatManager : MonoBehaviour
             Destroy(button);
         }
     }
+
     private bool IsPlayerFighter(Fighter f)
     {
         PlayerFighter pFighter;
