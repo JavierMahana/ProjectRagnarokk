@@ -12,5 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4367354a05a3842b8f3d598b801690, type: 3}
   m_Name: Psiquico
   m_EditorClassIdentifier: 
+  Name: Psiquico
+  Color: {r: 1, g: 0.48742133, b: 0.9200022, a: 0}
+  Sinergias:
+  - {fileID: 11400000, guid: 9307b971ac377f44d873d171454dc2ca, type: 2}
+  - {fileID: 11400000, guid: e660ff7f827cf0747a70c71e4bf99834, type: 2}
+  - {fileID: 11400000, guid: 331b9f01a69a0c3479eda067888a04c5, type: 2}
+  AntiSinergias: []
   Fortalezas: []
   Debilidades: []

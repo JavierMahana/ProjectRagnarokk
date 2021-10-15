@@ -12,5 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4367354a05a3842b8f3d598b801690, type: 3}
   m_Name: Electrico
   m_EditorClassIdentifier: 
+  Name: Electrico
+  Color: {r: 0.98619485, g: 1, b: 0, a: 0}
+  Sinergias:
+  - {fileID: 11400000, guid: f075e7e4326f99f4d9e7d5dae8eaa7d2, type: 2}
+  - {fileID: 11400000, guid: ab85d418c15675c45975672cfd8a1ce0, type: 2}
+  - {fileID: 11400000, guid: fadb458fdf939e7448558760e64563f3, type: 2}
+  AntiSinergias:
+  - {fileID: 11400000, guid: 755ed5c98ef09d643b0a99a06b0c11d4, type: 2}
+  - {fileID: 11400000, guid: e660ff7f827cf0747a70c71e4bf99834, type: 2}
   Fortalezas: []
   Debilidades: []

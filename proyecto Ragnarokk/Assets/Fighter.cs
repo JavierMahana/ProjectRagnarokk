@@ -24,6 +24,10 @@ public class Fighter : MonoBehaviour
 
     public Weapon CurrentWeapon;
 
+    public CombatType Type;
+
+    public List<CombatState> States = new List<CombatState>();
+
 
 
     public VoidDelegate OnTakeDamage;

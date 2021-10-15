@@ -9,14 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe4367354a05a3842b8f3d598b801690, type: 3}
-  m_Name: Alcoholico
+  m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
+  m_Name: Flamethrower
   m_EditorClassIdentifier: 
-  Name: Alcoholico
-  Color: {r: 1, g: 0.6662902, b: 0, a: 0}
-  Sinergias:
+  Name: Flamethrower
+  BaseDamage: 30
+  sprite: {fileID: 0}
+  ListaDeEstadosQueAplica:
   - {fileID: 11400000, guid: 0786287dc73faa94bb20a5c15739beb4, type: 2}
-  - {fileID: 11400000, guid: bd7fa0e3d52e6bd4fae72ad30d5bd1f1, type: 2}
-  AntiSinergias: []
-  Fortalezas: []
-  Debilidades: []
+  "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 7fda126cf52d4f9478689f1d6d5477a2, type: 2}

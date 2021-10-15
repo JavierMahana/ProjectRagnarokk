@@ -12,5 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4367354a05a3842b8f3d598b801690, type: 3}
   m_Name: Agua
   m_EditorClassIdentifier: 
+  Name: Agua
+  Color: {r: 0, g: 0.14799094, b: 1, a: 0}
+  Sinergias:
+  - {fileID: 11400000, guid: 0160189efd22f6f4e969d4e722d96c26, type: 2}
+  - {fileID: 11400000, guid: 8c308d1056e0bd043931bce23c8b896e, type: 2}
+  - {fileID: 11400000, guid: fadb458fdf939e7448558760e64563f3, type: 2}
+  AntiSinergias:
+  - {fileID: 11400000, guid: 0786287dc73faa94bb20a5c15739beb4, type: 2}
+  - {fileID: 11400000, guid: ab85d418c15675c45975672cfd8a1ce0, type: 2}
+  - {fileID: 11400000, guid: bd7fa0e3d52e6bd4fae72ad30d5bd1f1, type: 2}
+  - {fileID: 11400000, guid: 9307b971ac377f44d873d171454dc2ca, type: 2}
+  - {fileID: 11400000, guid: a1ede23dfff83a841a32a07ebab67a03, type: 2}
+  - {fileID: 11400000, guid: 303a681001e42f4499d52b48c405313f, type: 2}
+  - {fileID: 11400000, guid: e660ff7f827cf0747a70c71e4bf99834, type: 2}
   Fortalezas: []
   Debilidades: []

@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4367354a05a3842b8f3d598b801690, type: 3}
   m_Name: Viento
   m_EditorClassIdentifier: 
+  Name: Viento
+  Color: {r: 0, g: 0.972549, b: 0.4413346, a: 0}
+  Sinergias:
+  - {fileID: 11400000, guid: bd7fa0e3d52e6bd4fae72ad30d5bd1f1, type: 2}
+  AntiSinergias:
+  - {fileID: 11400000, guid: 273b580507b04234db9e93df41b6bbd0, type: 2}
   Fortalezas: []
   Debilidades: []

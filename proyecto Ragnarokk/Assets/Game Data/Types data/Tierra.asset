@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4367354a05a3842b8f3d598b801690, type: 3}
   m_Name: Tierra
   m_EditorClassIdentifier: 
+  Name: Tierra
+  Color: {r: 0.7169812, g: 0.20485175, b: 0, a: 0}
+  Sinergias:
+  - {fileID: 11400000, guid: 303a681001e42f4499d52b48c405313f, type: 2}
+  AntiSinergias:
+  - {fileID: 11400000, guid: 0160189efd22f6f4e969d4e722d96c26, type: 2}
+  - {fileID: 11400000, guid: a1ede23dfff83a841a32a07ebab67a03, type: 2}
+  - {fileID: 11400000, guid: 331b9f01a69a0c3479eda067888a04c5, type: 2}
   Fortalezas: []
   Debilidades: []

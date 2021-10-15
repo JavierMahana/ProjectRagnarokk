@@ -27,7 +27,7 @@ public class HealthBar : MonoBehaviour
     {
         if (fillImage != null && target != null)
         {
-            fillImage.fillAmount = target.CurrentHP <= 0 ? 0 : Mathf.Abs((float)target.CurrentHP / target.MaxHP);
+            fillImage.fillAmount = (target.CurrentHP <= 0  ||  target.MaxHP == 0) ? 0 : Mathf.Abs((float)target.CurrentHP / target.MaxHP);
         }
     }
 }

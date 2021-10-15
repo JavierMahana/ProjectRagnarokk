@@ -87,6 +87,8 @@ public class GameManager : Singleton<GameManager>
             fighterComp.MaxHP = data.MaxHP;
             fighterComp.CurrentHP = fighterComp.MaxHP;
 
+            fighterComp.Type = data.Type;
+
             for (int i = 0; i < fighterComp.Weapons.Length; i++)
             {
                     //Debug.Log("Arma " + i);

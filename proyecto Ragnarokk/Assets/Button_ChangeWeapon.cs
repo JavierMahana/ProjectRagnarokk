@@ -22,5 +22,12 @@ public class Button_ChangeWeapon : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>(true);
         weaponSelect = FindObjectOfType<UI_WeaponSelect>();
         GetComponentInChildren<TextMeshProUGUI>().text = weapon.Name;
+
+        ColorBlock buttonCB = gameObject.GetComponent<Button>().colors;
+        buttonCB.normalColor = weapon.TipoDeDañoQueAplica.Color;
+        //buttonCB.highlightedColor = weapon.TipoDeDañoQueAplica.Color;
+        gameObject.GetComponent<Button>().colors = buttonCB;
     }
+
+
 }

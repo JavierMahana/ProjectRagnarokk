@@ -12,5 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4367354a05a3842b8f3d598b801690, type: 3}
   m_Name: Fuego
   m_EditorClassIdentifier: 
+  Name: Fuego
+  Color: {r: 1, g: 0, b: 0, a: 0}
+  Sinergias:
+  - {fileID: 11400000, guid: a1ede23dfff83a841a32a07ebab67a03, type: 2}
+  - {fileID: 11400000, guid: 273b580507b04234db9e93df41b6bbd0, type: 2}
+  AntiSinergias:
+  - {fileID: 11400000, guid: f075e7e4326f99f4d9e7d5dae8eaa7d2, type: 2}
+  - {fileID: 11400000, guid: 8c308d1056e0bd043931bce23c8b896e, type: 2}
+  - {fileID: 11400000, guid: fadb458fdf939e7448558760e64563f3, type: 2}
   Fortalezas: []
   Debilidades: []

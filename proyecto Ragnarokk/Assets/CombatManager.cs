@@ -110,6 +110,13 @@ public class CombatManager : MonoBehaviour
         foreach (PlayerFighter pf in GameManager.Instance.PlayerFighters)
         {
             PlayerFighters.Add(pf.gameObject.GetComponent<Fighter>());
+            Fighter fighter = PlayerFighters[PlayerFighters.Count - 1];
+            string m = fighter.Name;
+            foreach(CombatState state in fighter.States)
+            {
+                m += (" " + state.Name);
+            }
+            Debug.Log(m);
 
             #region Player Buttons
             var playerButton = Instantiate(FighterClickButton);
@@ -246,6 +253,8 @@ public class CombatManager : MonoBehaviour
             }
             else if(CombatState > 0)
             {
+                RemoveAllCombatStates();
+
                 var sceneChanger = FindObjectOfType<SceneChanger>();
                 sceneChanger.ChangeScene("Victory");
                 Debug.Log("VICTORIA");
@@ -284,11 +293,15 @@ public class CombatManager : MonoBehaviour
         do
         {
             ActiveFighterIndex++;
-            if (ActiveFighterIndex >= AllCombatFighters.Count) { ActiveFighterIndex = 0; } //No se sale de la lista
+            if (ActiveFighterIndex >= AllCombatFighters.Count) 
+            { 
+                ActiveFighterIndex = 0; //No se sale de la lista
+                RemoveAllCombatStates(); //Elimina los estados al finalizar un ciclo de turnos
+            }
             ActiveFighter = AllCombatFighters[ActiveFighterIndex];
         } while (ActiveFighter.CurrentHP <= 0); //Comprueba que esté vivo.
 
-        GameManager.Instance.PlayerOnTurn = ActiveFighter.gameObject;
+        GameManager.Instance.PlayerOnTurn = ActiveFighter.gameObject; //¿PlayerOnTurn está en desuso?
 
         //Debug.Log(ActiveFighter.Name);
 
@@ -299,7 +312,7 @@ public class CombatManager : MonoBehaviour
         //TURNO DE UN ALIADO
         if (IsPlayerFighter(ActiveFighter))
         {
-            Debug.Log("Turno Aliado");
+            //Debug.Log("Turno Aliado");
             AttackWeapon = null;
             ShowFighterCanvas(true);
             WeaponSelection();
@@ -378,7 +391,7 @@ public class CombatManager : MonoBehaviour
         //TURNO DE UN ENEMIGO
         else
         {
-            Debug.Log("Turno Enemigo");
+            //Debug.Log("Turno Enemigo");
             ShowFighterCanvas(false);
 
             ActiveFighter.transform.position += new Vector3((float)-2.5, 0, 0);
@@ -397,21 +410,12 @@ public class CombatManager : MonoBehaviour
                 if (button.Fighter == Target)
                 {
                     targetButton = button;
-                    Debug.Log("Boton Aliado encontrado por el enemigo");
+                    //Debug.Log("Boton Aliado encontrado por el enemigo");
                 }
             }          
            
             Fight(targetButton);
             
-            /*
-            Target.CurrentHP -= ActiveFighter.Atack - (int)(Target.Defense * 0.25);
-                Debug.Log("HP " + Target.Name + ": " + Target.CurrentHP);
-            if(Target.CurrentHP <= 0)
-            {
-                AlivePlayerFighters.Remove(Target);
-                Target.gameObject.transform.rotation = new Quaternion(0, 0, 90, 0);
-            }
-            */
             //Por seguridad se nulifican variables de ataque
             //(En el turno del jugador se anulan antes de la elección de cada una. ¿Sería preferible anularlas tras el ataque, igual que aquí?)
             AttackWeapon = null;
@@ -441,25 +445,113 @@ public class CombatManager : MonoBehaviour
         // se especifica el target con la fucion EnemySelected
 
         Target = targetButton.Fighter;
-        Debug.Log("ATACANTE: " + ActiveFighter.Name);
-        Debug.Log("OBJETIVO: " + Target.Name);
+        //Debug.Log("ATACANTE: " + ActiveFighter.Name);
+        //Debug.Log("OBJETIVO: " + Target.Name);
+
+        Debug.Log("-------------------------------------------------------------------------------------");
+
+        //Debug.Log(Target.Name + " es tipo " + Target.Type);
+        string stateList = Target.Name;
+        if (Target.States.Count != 0)
+        {
+            stateList += " tiene estados:";
+            foreach (CombatState state in Target.States)
+            {
+                stateList += (" | " + state.Name);
+            }
+        }
+        Debug.Log(stateList);
+
+        float synergyFact = CalculateSynergyFactor();
+
+        Debug.Log("Factor sinergia: " + synergyFact);
+
         //FÓRMULA DE DAÑO (Prototipo en uso. Debe ser bien definida más adelante)
         int damage = (AttackWeapon.BaseDamage / 25) + ActiveFighter.Atack - Target.Defense;
         if(damage < 0) { damage = 0;}
+        Debug.Log("Daño inicial: " + damage);
+        damage = (int)(damage * synergyFact);
+        Debug.Log("Daño final: " + damage);
 
-        string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
-        Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
+        //string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
+        //Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
         Target.CurrentHP -= damage;
         Target.OnTakeDamage?.Invoke();
 
         if (Target.CurrentHP <= 0)
         {
             Target.CurrentHP = 0;
+            RemoveCombatStates(Target);
             if(IsPlayerFighter(Target)) { AlivePlayerFighters.Remove(Target); }
             Target.transform.rotation = new Quaternion(0, 0, 90, 0);
         }
+        else
+        {
+            //Aplicar estados
+            foreach(CombatState weaponState in AttackWeapon.ListaDeEstadosQueAplica)
+            {
+                if(!Target.States.Contains(weaponState))
+                {
+                    Target.States.Add(weaponState);
+                    Debug.Log("Aplicado: " + weaponState.Name);
+                }
+            }
+        }
+
         // el botón imprime el daño infligido
         targetButton.ShowDamage(damage);
+    }
+
+    public float CalculateSynergyFactor()
+    {
+        //Aplicar sinergias y antisinergias
+        sbyte synergyCounter = 0;
+        CombatType weaponType = AttackWeapon.TipoDeDañoQueAplica;
+        List<CombatState> statesToErase = new List<CombatState>();
+        foreach (CombatState targetState in Target.States)
+        {
+            if (weaponType.Sinergias.Contains(targetState))
+            {
+                synergyCounter++;
+                statesToErase.Add(targetState);
+            }
+            else if (weaponType.AntiSinergias.Contains(targetState))
+            {
+                synergyCounter--;
+                statesToErase.Add(targetState);
+            }
+        }
+        float synergyFact = Mathf.Pow(2, synergyCounter);
+        /*
+        switch(synergyCounter)
+        {
+            case 1:     synergyFact = 2;        break;
+            case >= 2:  synergyFact = 4;        break;
+            case -1:    synergyFact = 0.5f;     break;
+            case <= -2: synergyFact = 0.25f;    break;
+            default:    synergyFact = 1;        break;
+        }
+        */
+
+        foreach (CombatState state in statesToErase)
+        {
+            Target.States.Remove(state);
+        }
+
+        return synergyFact;
+    }
+
+    public void RemoveAllCombatStates()
+    {
+        foreach(Fighter f in AllCombatFighters)
+        {
+            RemoveCombatStates(f);
+        }
+    }
+
+    public void RemoveCombatStates(Fighter fighter)
+    {
+        fighter.States.Clear();
     }
 
     public void WeaponSelection()
