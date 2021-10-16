@@ -60,6 +60,10 @@ public class CombatManager : MonoBehaviour
     [HideInInspector]
     public Fighter ActiveFighter;
 
+    [HideInInspector]
+    public FighterSelect CurrentPlayerButton;
+    Vector2 OriginalButtonPos;
+
     sbyte ActiveFighterIndex = -1;
 
     [HideInInspector]
@@ -272,7 +276,27 @@ public class CombatManager : MonoBehaviour
 
     }
 
+    public void MoveActivePlayerButton(bool moveFoward)
+    {
+        if (moveFoward)
+        {
+            var position = (Vector2)ActiveFighter.transform.position;
+            RectTransform rectTransform = CurrentPlayerButton.GetComponent<RectTransform>();
+            Vector2 viewportPoint = Camera.main.WorldToViewportPoint(position);
 
+            rectTransform.anchorMin = viewportPoint;
+            rectTransform.anchorMax = viewportPoint;
+
+            rectTransform.anchoredPosition = Vector2.zero;
+
+        }
+        else
+        {
+            CurrentPlayerButton.transform.position = OriginalButtonPos;
+        }
+
+
+    }
     public void MovePanel()
     {
         var position = (Vector2)ActiveFighter.transform.position;
@@ -283,8 +307,6 @@ public class CombatManager : MonoBehaviour
         rectTransform.anchorMax = viewportPoint;
 
         rectTransform.anchoredPosition = Vector2.zero;
-
-        PanelForActions.GetComponent<RectTransform>().position = position;
     }
 
     private IEnumerator TurnAction()
@@ -314,11 +336,26 @@ public class CombatManager : MonoBehaviour
         {
             //Debug.Log("Turno Aliado");
             AttackWeapon = null;
+
+            // activa canvas de acciones y la seleccion de armas
+            // MovePanel();
             ShowFighterCanvas(true);
             WeaponSelection();
-            MovePanel();
+            
 
+            // setea el boton del aliado actual 
+            foreach (FighterSelect button in GameManager.Instance.PlayerButtons)
+            {
+                if (button.Fighter == ActiveFighter)
+                {
+                    CurrentPlayerButton = button;
+                    OriginalButtonPos = CurrentPlayerButton.transform.position;
+                }
+            }
+
+            // mueve al mujador y su botón
             ActiveFighter.transform.position += new Vector3((float)2.5, 0, 0);
+            MoveActivePlayerButton(true);
 
             #region obsoleto
             /*
@@ -387,6 +424,7 @@ public class CombatManager : MonoBehaviour
             #endregion
             yield return new WaitUntil(() => AttackDone);
             AttackDone = false;
+            MoveActivePlayerButton(false);
         }
         //TURNO DE UN ENEMIGO
         else
