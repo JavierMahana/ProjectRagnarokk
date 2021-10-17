@@ -440,8 +440,15 @@ public class CombatManager : MonoBehaviour
     // al hacerle clic se activa Fight y el argumento es el boton cliqueado que contiene al target
     public void Fight(FighterSelect targetButton)
     {
+        #region SECUENCIA LÓGICA
+        // 1- Cálculo de sinergia
+        // 2- Cálculo de efectividad
+        // 3- Cálculo de daño
+        // 4- Aplicación de daño
+        // 5- Aplicación de estados (cuando el target sobrevive)
+        #endregion
 
-        if(targetButton == null || targetButton.Fighter == null || targetButton.selfBbutton == null) { Debug.Log("No se encuentra el botón del objetivo"); }
+        if (targetButton == null || targetButton.Fighter == null || targetButton.selfBbutton == null) { Debug.Log("No se encuentra el botón del objetivo"); }
         // se especifica el target con la fucion EnemySelected
 
         Target = targetButton.Fighter;
@@ -451,6 +458,7 @@ public class CombatManager : MonoBehaviour
         Debug.Log("-------------------------------------------------------------------------------------");
 
         //Debug.Log(Target.Name + " es tipo " + Target.Type);
+        /*
         string stateList = Target.Name;
         if (Target.States.Count != 0)
         {
@@ -461,16 +469,20 @@ public class CombatManager : MonoBehaviour
             }
         }
         Debug.Log(stateList);
+        */
 
         float synergyFact = CalculateSynergyFactor();
 
+        float effectivenessFact = CalculateEffectivenessFactor();
+
         Debug.Log("Factor sinergia: " + synergyFact);
+        Debug.Log("Factor efectividad: " + effectivenessFact);
 
         //FÓRMULA DE DAÑO (Prototipo en uso. Debe ser bien definida más adelante)
         int damage = (AttackWeapon.BaseDamage / 25) + ActiveFighter.Atack - Target.Defense;
         if(damage < 0) { damage = 0;}
         Debug.Log("Daño inicial: " + damage);
-        damage = (int)(damage * synergyFact);
+        damage = (int)(damage * synergyFact * effectivenessFact);
         Debug.Log("Daño final: " + damage);
 
         //string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
@@ -485,7 +497,7 @@ public class CombatManager : MonoBehaviour
             if(IsPlayerFighter(Target)) { AlivePlayerFighters.Remove(Target); }
             Target.transform.rotation = new Quaternion(0, 0, 90, 0);
         }
-        else
+        else //if(false)
         {
             //Aplicar estados
             foreach(CombatState weaponState in AttackWeapon.ListaDeEstadosQueAplica)
@@ -539,6 +551,19 @@ public class CombatManager : MonoBehaviour
         }
 
         return synergyFact;
+    }
+
+    public float CalculateEffectivenessFactor()
+    {
+        const float resistanceFactor    = 0.75f;
+        const float weaknessFactor      = 1.5f;
+
+        CombatType weaponType = AttackWeapon.TipoDeDañoQueAplica;
+        CombatType targetType = Target.Type;
+        if(targetType.Resistencias.Contains(weaponType)) { return resistanceFactor; }
+        if(targetType.Debilidades.Contains(weaponType)) { return weaknessFactor; }
+
+        return 1;
     }
 
     public void RemoveAllCombatStates()
