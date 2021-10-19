@@ -29,7 +29,9 @@ public class GameManager : Singleton<GameManager>
         } 
     }
 
-    //public GameObject UIManager;
+
+    
+
 
     //este es el combate actual
     [HideInInspector]
@@ -43,6 +45,8 @@ public class GameManager : Singleton<GameManager>
 
     public List<Fighter> Enemies = new List<Fighter>();
     public List<FighterSelect> EnemyButtons = new List<FighterSelect>();
+    
+    public List<Consumible> AllConsumibles = new List<Consumible>();
 
     //DontDestroyOnLoad
     //objetos de los fighters del player.
@@ -52,7 +56,16 @@ public class GameManager : Singleton<GameManager>
 
     public GameObject PlayerOnTurn;
 
+
+    // estos bool son para el tipo de acción que el jugador escogió en su turno
+    [HideInInspector]
     public bool ConfirmationClick;
+    [HideInInspector]
+    public bool OnAttack;
+    [HideInInspector]
+    public bool OnConsumible;
+    [HideInInspector]
+    public bool OnDefense;
 
 
     private void Update()
@@ -64,9 +77,6 @@ public class GameManager : Singleton<GameManager>
         {
             PlayerFighters.Add(item);
         }
-
-       
-
     }
 
 

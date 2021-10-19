@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class WeaponSpecs : MonoBehaviour
+public class Button_Consumible : MonoBehaviour
 {
-    public Text weaponName;
-    public Text weaponDamage;
-    public Weapon thisWeapon;
+    public Text itemName;
+    public Text itemDescription;
+    public Consumible thisItem;
 
-    private Color selectColor = Color.blue;
-    private Color initialColor = Color.white;
-
-    [HideInInspector]
     public bool ButtonPressed;
 
     private void Start()
@@ -21,12 +16,6 @@ public class WeaponSpecs : MonoBehaviour
         ButtonPressed = false;
     }
 
-    public WeaponSpecs(string name, string damage, Weapon weapon)
-    {
-        weaponName.text = name;
-        weaponDamage.text = damage + "dmg";
-        thisWeapon = weapon;
-    }
     public void OnClick()
     {
         CombatManager combatManager = GameObject.Find("CombatManager").GetComponent<CombatManager>();
@@ -35,13 +24,14 @@ public class WeaponSpecs : MonoBehaviour
         if (!ButtonPressed)
         {
             GameManager.Instance.ConfirmationClick = true;
-            combatManager.AttackWeapon = thisWeapon;
+            combatManager.SelectedConsumible = thisItem;
             ButtonPressed = true;
         }
         else
         {
-            combatManager.AttackWeapon = null;
+            combatManager.SelectedConsumible = null;
             ButtonPressed = false;
         }
     }
+
 }

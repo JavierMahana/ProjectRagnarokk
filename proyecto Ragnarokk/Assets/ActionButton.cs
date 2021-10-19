@@ -9,6 +9,9 @@ public class ActionButton : MonoBehaviour
     public string initialActionText = "";
     public Color initialColor = Color.white;
 
+    //indica que funcion cumple /defensa, ataque, consumible, etc
+    public string thisCase;
+
     [HideInInspector]
     public bool ButtonPressed;
 
@@ -18,6 +21,7 @@ public class ActionButton : MonoBehaviour
         ButtonPressed = false;
         GetComponent<Image>().color = initialColor;
         actionText.text = initialActionText;
+        thisCase = actionText.text;
     }
 
     public void PressedUpdate()
@@ -27,29 +31,79 @@ public class ActionButton : MonoBehaviour
         if (!ButtonPressed)
         {
             combatManager.Action = initialActionText;
-            // cambiar por CurrentWeapon, cuando la seleccion de armas esté lista
-            // combatManager.AttackWeapon = combatManager.ActiveFighter.Weapons[0];
-
             GetComponent<Image>().color = Color.grey;
             actionText.text = "Cancel";
             ButtonPressed = true;
 
-            // activa el modo para escoger a los enemigos
+            // activa el ConfirmationClick que usa el else de ActionSelection
             GameManager.Instance.ConfirmationClick = true;
-            // instancia los botones de armas
-            combatManager.WeaponSelection();
+
+            switch (thisCase)
+            {
+                case "Attack":
+                    Attack();
+                    break;
+                case "Consumable":
+                    Consumible();
+                    break;
+                case "Defense":
+                    Defense();
+                    break;
+                case "Cancel":
+                    Cancel();
+                    break;
+                default:
+                    Debug.Log("la accion actual no existe");
+                    break;
+            }
+
+            // el else de ActionSelection da opciones dependiendo del thisCase del boton instanciado
+            combatManager.ActionSelection();
         }
         else
         {
-            combatManager.Action = null;
-            combatManager.AttackWeapon = null;
-
+           
             GetComponent<Image>().color = initialColor;
             actionText.text = initialActionText;
             ButtonPressed = false;
 
             GameManager.Instance.ConfirmationClick = false;
-            combatManager.WeaponSelection();
+
+            // al estar desactuvado el actionSelecion utiliza su if
+            // mostrando todas las opciones del jugador
+            combatManager.ActionSelection();
         }
+    }
+
+    public void Attack()
+    {
+        GameManager.Instance.OnAttack = true;
+        GameManager.Instance.OnConsumible = false;
+        GameManager.Instance.OnDefense = false;
+    }
+    public void Consumible()
+    {
+        GameManager.Instance.OnAttack = false;
+        GameManager.Instance.OnConsumible = true;
+        GameManager.Instance.OnDefense = false;
+    }
+    public void Defense()
+    {
+        GameManager.Instance.OnAttack = false;
+        GameManager.Instance.OnConsumible = false;
+        GameManager.Instance.OnDefense = true;
+    }
+
+    public void Cancel()
+    {
+        GameManager.Instance.OnAttack = false;
+        GameManager.Instance.OnConsumible = false;
+        GameManager.Instance.OnDefense = false;
+
+        GameManager.Instance.ConfirmationClick = false;
+        CombatManager combatManager = GameObject.Find("CombatManager").GetComponent<CombatManager>();
+        combatManager.AttackWeapon = null;
+        combatManager.SelectedConsumible = null;
+
     }
 }

@@ -1021,6 +1021,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
+      propertyPath: item1
+      value: 
+      objectReference: {fileID: 11400000, guid: 62ba6096927bbcb4aa7088d830c761ac, type: 2}
+    - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
+      propertyPath: item2
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d3cf0227f3251449b3f99056be9509c, type: 2}
+    - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
       propertyPath: CombatCanvas
       value: 
       objectReference: {fileID: 321164681}
@@ -1052,6 +1060,10 @@ PrefabInstance:
       propertyPath: CanvasForClickFighter
       value: 
       objectReference: {fileID: 8091166855456819100, guid: 9278466a23c1dc54d84625b07ac989bb, type: 3}
+    - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
+      propertyPath: PrefabConsumibleButton
+      value: 
+      objectReference: {fileID: 361122598491665038, guid: 0e22e3774ecb2b1419e0bba575c17e6b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
 --- !u!1001 &7803828620799363935

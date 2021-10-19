@@ -8,11 +8,15 @@ using Sirenix.OdinInspector;
 //ahora elementos de display pueden estar aca pero en el futuro moverlos.
 public class CombatManager : MonoBehaviour
 {
-   
+    //eliminar las 2 lineas siguientes luego de testear los consumibles
+    public Consumible item1;
+    public Consumible item2;
+
     public GameObject CombatCanvas;
 
     public GameObject PrefabActionButton;
     public GameObject PrefabWeaponButton;
+    public GameObject PrefabConsumibleButton;
 
     public GameObject PanelForActions;
     public GameObject FighterClickButton;
@@ -83,6 +87,8 @@ public class CombatManager : MonoBehaviour
     [HideInInspector]
     public Weapon AttackWeapon = null;
     [HideInInspector]
+    public Consumible SelectedConsumible = null;
+    [HideInInspector]
     public Fighter Target = null;
     [HideInInspector]
     public bool Confirm = false; //Cuando sea true, la acción se debe llevar a cabo
@@ -90,6 +96,7 @@ public class CombatManager : MonoBehaviour
     public bool Annulment = false; //Se usa cada vez que se quiere retroceder en la selección de algo
 
     [HideInInspector]
+    //attack done podría cambiarse a ActionDone
     public bool AttackDone = false;
 
     //Comparador de rapidez para ordenar la lista de luchadores
@@ -103,12 +110,23 @@ public class CombatManager : MonoBehaviour
 
     public void InitCombatScene(CombatEncounter encounter)
     {
-        // limpia la lista de enemigos y sus botones más los botones aliados
+        // Añade consumibles para testear, eliminar esto ya que luego los consumibles deben ser entregados
+        // como recompensa de combate, exploración o comprados en la tienda.
+        Consumible i1 = Instantiate(item1);
+        Consumible i3 = Instantiate(item1);
+        Consumible i2 = Instantiate(item2);
+        GameManager.Instance.AllConsumibles.Add(i1);
+        GameManager.Instance.AllConsumibles.Add(i2);
+        GameManager.Instance.AllConsumibles.Add(i3);
 
+        // limpia la lista de enemigos y sus botones más los botones aliados
         // antes de instanciar los del nuevo encuentro
         GameManager.Instance.Enemies.Clear();
         GameManager.Instance.EnemyButtons.Clear();
         GameManager.Instance.PlayerButtons.Clear();
+
+        GameManager.Instance.ConfirmationClick = false;
+
 
         //Se obtienen los luchadores del jugador
         foreach (PlayerFighter pf in GameManager.Instance.PlayerFighters)
@@ -251,7 +269,7 @@ public class CombatManager : MonoBehaviour
                 TurnInProcess = true;
 
                 ShowFighterCanvas(false);
-                CleanWeaponSelecion();
+                CleanPanelSelecion();
 
                 StartCoroutine(TurnAction());
             }
@@ -336,11 +354,11 @@ public class CombatManager : MonoBehaviour
         {
             //Debug.Log("Turno Aliado");
             AttackWeapon = null;
+            SelectedConsumible = null;
 
-            // activa canvas de acciones y la seleccion de armas
-            // MovePanel();
+            // activa canvas de acciones 
             ShowFighterCanvas(true);
-            WeaponSelection();
+            ActionSelection();
             
 
             // setea el boton del aliado actual 
@@ -592,41 +610,107 @@ public class CombatManager : MonoBehaviour
         fighter.States.Clear();
     }
 
-    public void WeaponSelection()
+    public void ActionSelection()
     {
-        if(!GameManager.Instance.ConfirmationClick)
-        {
-            CleanWeaponSelecion();
+        // se vacía el panel completamente
+        CleanPanelSelecion();
 
+        // cuando no se ha seleccionado una accion
+        // se crea un botón por cada una de las acciones disponibles
+        if (!GameManager.Instance.ConfirmationClick)
+        {
             GameObject actionButton = Instantiate(PrefabActionButton);
-            
+
             actionButton.GetComponent<ActionButton>().initialActionText = "Attack";
             actionButton.transform.SetParent(PanelForActions.transform, false);
             AllButtonsInPanel.Add(actionButton);
+
+            GameObject consumibles = Instantiate(PrefabActionButton);
+
+            consumibles.GetComponent<ActionButton>().initialActionText = "Consumable";
+            consumibles.transform.SetParent(PanelForActions.transform, false);
+            AllButtonsInPanel.Add(consumibles);
+
+            GameObject defensa = Instantiate(PrefabActionButton);
+
+            defensa.GetComponent<ActionButton>().initialActionText = "Defense";
+            defensa.transform.SetParent(PanelForActions.transform, false);
+            AllButtonsInPanel.Add(defensa);
         }
 
+        // si una accion ya fue seleccionada
+        // se crea un botón cancelar, que permite cancelar la accion actual
         else
         {
-            for(int i = 0; i < 4; i++)
+            GameObject cancel = Instantiate(PrefabActionButton);
+            cancel.GetComponent<ActionButton>().initialActionText = "Cancel";
+            cancel.transform.SetParent(PanelForActions.transform, false);
+            AllButtonsInPanel.Add(cancel);
+
+        // luego, dependiendo de la acción escogida se crean sus respectivos botones
+            #region Ataque -> Weapon Selection
+            if (GameManager.Instance.OnAttack)
             {
-                var W = ActiveFighter.Weapons[i];
-                if(W != null)
+                Action = null;
+                AttackWeapon = null;
+
+                for (int i = 0; i < 4; i++)
                 {
-                    GameObject actionButton = Instantiate(PrefabWeaponButton);
+                    var W = ActiveFighter.Weapons[i];
+                    if (W != null)
+                    {
+                        GameObject weaponButton = Instantiate(PrefabWeaponButton);
 
-                    actionButton.GetComponent<WeaponSpecs>().weaponDamage.text = "damage" + W.BaseDamage.ToString();
-                    actionButton.GetComponent<WeaponSpecs>().weaponName.text = W.Name;
-                    actionButton.GetComponent<WeaponSpecs>().thisWeapon = W;
+                        weaponButton.GetComponent<WeaponSpecs>().weaponDamage.text = "damage: " + W.BaseDamage.ToString() + " - type:" + W.TipoDeDañoQueAplica.Name.ToString();
+                        weaponButton.GetComponent<WeaponSpecs>().weaponName.text = W.Name;
+                        weaponButton.GetComponent<WeaponSpecs>().thisWeapon = W;
 
-                    actionButton.transform.SetParent(PanelForActions.transform, false);
+                        weaponButton.transform.SetParent(PanelForActions.transform, false);
 
-                    AllButtonsInPanel.Add(actionButton);
-                }          
+                        AllButtonsInPanel.Add(weaponButton);
+                    }
+                }
             }
+            #endregion
+
+            #region Consumibles
+            if (GameManager.Instance.OnConsumible)
+            {
+               
+                foreach (var item in GameManager.Instance.AllConsumibles)
+                {
+                    
+                    GameObject itemButton = Instantiate(PrefabConsumibleButton);
+
+                    itemButton.GetComponent<Button_Consumible>().itemName.text = item.name;
+                    itemButton.GetComponent<Button_Consumible>().itemDescription.text = item.description;
+                    itemButton.GetComponent<Button_Consumible>().thisItem = item;
+
+                    itemButton.transform.SetParent(PanelForActions.transform, false);
+
+                    AllButtonsInPanel.Add(itemButton);
+                }
+            }
+            #endregion
+
+            #region Defense
+            if (GameManager.Instance.OnDefense)
+            {
+                // aumentar temporalmente la defensa del jugador activo
+                // podría usarse un array de bonuses, útil también para consumibles
+                // ActiveFighter.Defense += 10;
+
+
+                // terminar turno
+                GameManager.Instance.ConfirmationClick = false;
+                CleanPanelSelecion();
+                AttackDone = true;
+            }
+            #endregion
         }
     }
 
-    private void CleanWeaponSelecion()
+    private void CleanPanelSelecion()
     {
         foreach (GameObject button in AllButtonsInPanel)
         {
