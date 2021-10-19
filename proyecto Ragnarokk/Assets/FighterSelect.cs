@@ -68,8 +68,9 @@ public class FighterSelect : MonoBehaviour
                 Debug.Log("SaludAntes: " + Fighter.CurrentHP);
                 combatManager.SelectedConsumible.OnUse(Fighter);
                 Debug.Log("SaludDespues: " + Fighter.CurrentHP);
-                
+
                 // AQUI ACTUALIZAR BARRA
+                Fighter.OnTakeDamage();
 
             }
         }
