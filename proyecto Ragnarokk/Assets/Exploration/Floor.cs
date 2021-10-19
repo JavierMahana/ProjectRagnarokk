@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class Floor : SerializedMonoBehaviour
+[CreateAssetMenu(menuName = "Exploration/Floor")]
+public class Floor : SerializedScriptableObject
 {
-    [BoxGroup("Sos")]
-    public int[,] areglo = new int[10,10];
+    public Sprite NotVisibleSprite;
+    public RoomData[,] RoomLayout = new RoomData[10,10];
+
 }
