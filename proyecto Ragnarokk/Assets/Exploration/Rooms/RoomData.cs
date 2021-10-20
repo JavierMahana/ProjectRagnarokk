@@ -10,5 +10,5 @@ public abstract class RoomData : ScriptableObject
     public Sprite VisibleSprite;
     
 
-    public abstract void LoadRoom(SceneChanger sceneChanger);
+    public abstract void LoadRoom(GameManager gameManager, SceneChanger sceneChanger, Room room);
 }

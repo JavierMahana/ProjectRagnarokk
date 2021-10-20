@@ -9,6 +9,10 @@ public class ExplorationManager : Singleton<ExplorationManager>
 
     public Room RoomPrefab;
 
+    private Vector2Int currentRoomCoords = new Vector2Int();
+    private Room currentRoom;
+
+
     private Vector2 roomOffset = new Vector2(-5,-5);
     private Vector2 roomSize = new Vector2(1, 1);
 
@@ -17,6 +21,11 @@ public class ExplorationManager : Singleton<ExplorationManager>
 
     private List<Room> LoadedRooms = new List<Room>();
 
+
+    public void SetCurrentRoom(Room room)
+    {
+        currentRoom = room;
+    }
 
     private void UnloadFloor()
     {
@@ -32,7 +41,10 @@ public class ExplorationManager : Singleton<ExplorationManager>
 
     private void InitFloor(Floor floorToLoad)
     {
+
         UnloadFloor();
+        Debug.Log("Loading floor");
+
 
         int lenghtWidth = floorToLoad.RoomLayout.GetLength(0);
         int lenghtHeight = floorToLoad.RoomLayout.GetLength(1);
@@ -98,7 +110,7 @@ public class ExplorationManager : Singleton<ExplorationManager>
 
 
                     //Ahora inicializo la room.
-                    currRoom.Init(floorToLoad.RoomLayout[x, y], neightbours);
+                    currRoom.Init(floorToLoad.RoomLayout[x, y], neightbours, new Vector2Int(x,y));
                     currRoom.transform.position = new Vector3(roomOffset.x + x * roomSize.x, roomOffset.y + y * roomSize.y);
                     LoadedRooms.Add(currRoom);
                 }
@@ -109,27 +121,51 @@ public class ExplorationManager : Singleton<ExplorationManager>
         
 
         CurrentFloorData = floorToLoad;
-
+        FloorIsLoaded = true;
         //cada espacio es de 1 unidsad de mundo.
-        
+
     }
 
     
 
-    private void Awake()
-    {
-        
-    }
+    //private void Awake()
+    //{
+    //    base.OnAwake();
+    //}
 
     // Start is called before the first frame update
     void Start()
     {
-        InitFloor(testFloor);
+        //InitFloor(testFloor);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (GameManager.Instance.GameState == GAME_STATE.EXPLORATION)
+        {
+            int childCount = transform.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            int childCount = transform.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+
+        if (GameManager.Instance.CurrentFloor != null && !FloorIsLoaded)
+        {
+            
+            InitFloor(GameManager.Instance.CurrentFloor);
+            //GameManager.Instance.FloorNeedToBeLoaded = false;
+        }
     }
 }

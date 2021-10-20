@@ -7,9 +7,12 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
 
+
+
     public bool IsInitialized => data != null;
 
     private List<Room> adyacentRooms = new List<Room>();
+    public Vector2Int Coordenates { get; private set; }
 
     public bool Visitable = false;
     public bool Cleared = false;
@@ -25,20 +28,33 @@ public class Room : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool onMouseHover;
 
-    public void Init(RoomData data, List<Room> adyacentRooms)
+    public void Init(RoomData data, List<Room> adyacentRooms, Vector2Int coordenates)
     {
         this.data = data;
         this.adyacentRooms = adyacentRooms;
+        Coordenates = coordenates;
 
         if (data.FloorStart)
         {
-            Cleared = true;
-            foreach (var neightbor in adyacentRooms)
+            MarkAsCleared();
+        }
+    }
+    public void MarkAsCurrent()
+    {
+        ExplorationManager.Instance.SetCurrentRoom(this);
+    }
+    public void MarkAsCleared()
+    {
+        Cleared = true;
+        foreach (var neightbor in adyacentRooms)
+        {
+            if (!neightbor.Cleared)
             {
                 neightbor.Visitable = true;
             }
         }
     }
+
 
     private void OnMouseEnter()
     {
@@ -51,6 +67,10 @@ public class Room : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (Visitable)
+        {
+            data.LoadRoom(GameManager.Instance, SceneChanger.Instance, this);
+        }
         Debug.Log("Click!");
     }
 

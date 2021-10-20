@@ -7,8 +7,9 @@ public class TreasureRoom : RoomData
 {
     List<Weapon> AllPosibleTreasures = new List<Weapon>();
 
-    public override void LoadRoom(SceneChanger sceneChanger)
+    public override void LoadRoom(GameManager gameManager, SceneChanger sceneChanger, Room room)
     {
-        throw new System.NotImplementedException();
+        room.MarkAsCurrent();
+        room.MarkAsCleared();
     }
 }

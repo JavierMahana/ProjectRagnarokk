@@ -11,9 +11,41 @@ using Sirenix.OdinInspector;
 //empezar un encuentro
 //curar a sus personajes
 //elegir nuevos combatientes
+
+public enum GAME_STATE
+{
+    PREGAME,
+    COMBAT,
+    EXPLORATION
+}
+
 public class GameManager : Singleton<GameManager>
 {
-    
+    //por ahora se almacenan todas las floors. Si es que se implementan mas pisos es necesario crear una lista de floors por piso.
+    public List<Floor> AllFloors = new List<Floor>();
+    public Floor CurrentFloor { get; set; }
+    //[HideInInspector]
+    //public bool FloorNeedToBeLoaded { get; set; }
+
+    public GAME_STATE GameState
+    {
+        get
+        {
+            if (FindObjectOfType<CombatManager>())
+            {
+                return GAME_STATE.COMBAT;
+            }
+            else if (FindObjectOfType<ExplorationState>())
+            {
+                return GAME_STATE.EXPLORATION;
+            }
+            else
+            {
+                return GAME_STATE.PREGAME;
+            }
+        }
+    }
+
     public bool InFightingScene 
     { 
         get 
@@ -67,6 +99,34 @@ public class GameManager : Singleton<GameManager>
 
        
 
+    }
+
+    public void StartFloor()
+    {
+        int count = AllFloors.Count;
+        if (count > 0)
+        {
+            int selected = Random.Range(0, count);
+            CurrentFloor = AllFloors[selected];
+            //FloorNeedToBeLoaded = true;
+            //Debug.Log(FloorNeedToBeLoaded);
+
+            SceneChanger.Instance.ChangeScene("Exploration");
+        }
+        else
+        {
+            Debug.LogError("You need to put floors in the game manager!");
+            return;
+        }
+    }
+
+    public void DeletePlayerFighters()
+    {
+        var pfs = FindObjectsOfType<PlayerFighter>();
+        foreach (var pf in pfs)
+        {
+            Destroy(pf.gameObject);
+        }
     }
 
 
