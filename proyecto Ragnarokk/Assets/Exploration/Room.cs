@@ -55,6 +55,19 @@ public class Room : MonoBehaviour
         }
     }
 
+    public void TryActivateLorePanel(Sprite sprite, string text)
+    {
+        var lorePanel = FindObjectOfType<LorePanel>(true);
+        if (lorePanel != null)
+        {
+            lorePanel.UpdateContent(sprite, text);
+            lorePanel.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("No hay ningun lore panel en la escena! no se puede activar.");
+        }
+    }
 
     private void OnMouseEnter()
     {

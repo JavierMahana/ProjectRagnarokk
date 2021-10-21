@@ -129,6 +129,17 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    //esto debe revivr los fighter si es q estan muertos.
+    public void HealPlayerFighters()
+    {
+        var pfs = FindObjectsOfType<PlayerFighter>();
+        foreach (var pf in pfs)
+        {
+            var fighter = pf.GetComponent<Fighter>();
+            fighter.CurrentHP = fighter.MaxHP;
+        }
+    }
+
 
     public void SetDataToFighterGO(GameObject fighterGO, FighterData data, bool playerFighter = false)
     {
