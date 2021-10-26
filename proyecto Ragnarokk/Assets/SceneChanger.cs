@@ -15,7 +15,13 @@ public class SceneChanger : Singleton<SceneChanger>
 		GameManager.Instance.currentEncounter = null;
 		GameManager.Instance.ConfirmationClick = false;
 
-		ChangeScene("intro scene");
+		ChangeScene("SelectFightersScene");
+	}
+
+	public void LoadExplorationScene()
+	{
+
+		ChangeScene("Exploration");
 	}
 
 

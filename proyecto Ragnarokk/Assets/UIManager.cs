@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+
     //es donde se colocaqn las unidades ya creadas. 
     public float xPlayerCharacters;
     public GameObject fighterPrefab;

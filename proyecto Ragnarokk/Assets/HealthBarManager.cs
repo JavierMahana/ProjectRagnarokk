@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HealthBarManager : MonoBehaviour
 {
+    
+
     public GameObject HealthBarPrevab;
 
     private List<HealthBar> activeHealthBars = new List<HealthBar>();

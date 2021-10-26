@@ -128,9 +128,19 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.ConfirmationClick = false;
 
 
+        int j = 0;
         //Se obtienen los luchadores del jugador
         foreach (PlayerFighter pf in GameManager.Instance.PlayerFighters)
         {
+            float t = (((float)3 - 1) - j) / Mathf.Max(3 - 1, 1);
+
+            float viewPortY = Mathf.Lerp(playerFightersMinY, playerFightersMaxY, t);
+            Vector3 viewPortPos = new Vector3(playerFightersX, viewPortY, Camera.main.nearClipPlane);
+
+            var worldPos = Camera.main.ViewportToWorldPoint(viewPortPos);
+            pf.transform.position = worldPos;
+
+
             PlayerFighters.Add(pf.gameObject.GetComponent<Fighter>());
             Fighter fighter = PlayerFighters[PlayerFighters.Count - 1];
             string m = fighter.Name;
@@ -158,6 +168,8 @@ public class CombatManager : MonoBehaviour
             #endregion
 
             GameManager.Instance.PlayerButtons.Add(playerButton.GetComponent<FighterSelect>());
+
+            j++;
         }
         AlivePlayerFighters.AddRange(PlayerFighters);
 
@@ -278,8 +290,9 @@ public class CombatManager : MonoBehaviour
                 RemoveAllCombatStates();
 
                 var sceneChanger = FindObjectOfType<SceneChanger>();
-                sceneChanger.ChangeScene("Victory");
-                Debug.Log("VICTORIA");
+                //sceneChanger.ChangeScene("Victory");
+                //Debug.Log("VICTORIA");
+                sceneChanger.ChangeScene("Exploration");
             }
             else
             {

@@ -213,7 +213,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 292628533685472501, guid: b48976dd85a8889449e9d08255918e6c, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: LoadMenuScene
+        m_MethodName: LoadExplorationScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1045,6 +1045,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 55221290}
     - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
+      propertyPath: playerFightersX
+      value: 0.119
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
       propertyPath: FighterClickButton
       value: 
       objectReference: {fileID: 8091166855456819100, guid: 9278466a23c1dc54d84625b07ac989bb, type: 3}
@@ -1056,6 +1060,14 @@ PrefabInstance:
       propertyPath: PrefabWeaponButton
       value: 
       objectReference: {fileID: 318361232773227983, guid: 604dd6d5ad5f21f40a09a64cf23de45e, type: 3}
+    - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
+      propertyPath: playerFightersMaxY
+      value: 0.726
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
+      propertyPath: playerFightersMinY
+      value: 0.165
+      objectReference: {fileID: 0}
     - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
       propertyPath: CanvasForClickFighter
       value: 
