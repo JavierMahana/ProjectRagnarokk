@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: sample4
   Speed: 10
-  Atack: 2
-  Defense: 5
+  Atack: 20
+  Defense: 7
   MaxHP: 60
+  PowerRating: 2
   DefaultWeapons:
   - {fileID: 11400000, guid: f92fc6a6fdca1e541accdf3a8b79d601, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 9148166774021978461, guid: b9d96aacf9e65c842a2528f12e5268d8, type: 3}
+  Type: {fileID: 11400000, guid: e108f6fb37683784283e9b7209a9c32d, type: 2}

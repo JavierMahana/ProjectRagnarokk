@@ -50,6 +50,7 @@ public class GameManager : Singleton<GameManager>
     public List<PlayerFighter> PlayerFighters = new List<PlayerFighter>();
     public List<FighterSelect> PlayerButtons = new List<FighterSelect>();
 
+
     public GameObject PlayerOnTurn;
 
     public bool ConfirmationClick;
@@ -65,7 +66,14 @@ public class GameManager : Singleton<GameManager>
             PlayerFighters.Add(item);
         }
 
-       
+        if(!PartyIsComplete())
+        {
+            HopeManager.Instance.ResetHope();
+        }
+        else if(!HopeManager.Instance.Initialized)
+        {
+            HopeManager.Instance.InitializeHope();
+        }
 
     }
 
@@ -86,6 +94,8 @@ public class GameManager : Singleton<GameManager>
             fighterComp.Speed = data.Speed;
             fighterComp.MaxHP = data.MaxHP;
             fighterComp.CurrentHP = fighterComp.MaxHP;
+
+            fighterComp.PowerRating = data.PowerRating;
 
             fighterComp.Type = data.Type;
 
@@ -117,5 +127,8 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-   
+    public bool PartyIsComplete()
+    {
+        return PlayerFighters.Count == 3;
+    }
 }
