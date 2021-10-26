@@ -32,6 +32,9 @@ public class FighterData : ScriptableObject
     public int MaxHP = 100;
     //public int CurrentHP = 100;
     #endregion
+
+    [Range(0, 4)]
+    public byte PowerRating = 1;
     
     public Weapon[] DefaultWeapons = new Weapon[4];
 

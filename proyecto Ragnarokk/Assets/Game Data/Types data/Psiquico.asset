@@ -19,5 +19,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e660ff7f827cf0747a70c71e4bf99834, type: 2}
   - {fileID: 11400000, guid: 331b9f01a69a0c3479eda067888a04c5, type: 2}
   AntiSinergias: []
-  Fortalezas: []
-  Debilidades: []
+  Resistencias:
+  - {fileID: 11400000}
+  Debilidades:
+  - {fileID: 11400000, guid: 9a61c964186081747ac8b0a27a5d7972, type: 2}
+  - {fileID: 11400000, guid: c8332d004a10a164486b93f259a6df2b, type: 2}

@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
-  m_Name: Reptiliano
+  m_Name: SampleEnemy8
   m_EditorClassIdentifier: 
-  Name: Reptiliano
-  Speed: 15
-  Atack: 14
-  Defense: 4
-  MaxHP: 90
+  Name: unnamed fighter type
+  Speed: 10
+  Atack: 10
+  Defense: 5
+  MaxHP: 100
   DefaultWeapons:
-  - {fileID: 11400000, guid: c3612c52e49b6024d8d628796893e2a8, type: 2}
   - {fileID: 11400000, guid: 73fa385ea20f86541aa28d5d3418df3b, type: 2}
   - {fileID: 0}
   - {fileID: 0}
-  Sprite: {fileID: 4724577761581569347, guid: b9d96aacf9e65c842a2528f12e5268d8, type: 3}
-  Type: {fileID: 11400000, guid: 88f66a0be81a6404d914802b5ed0d83f, type: 2}
+  - {fileID: 0}
+  Sprite: {fileID: 9148166774021978461, guid: b9d96aacf9e65c842a2528f12e5268d8, type: 3}
+  Type: {fileID: 11400000, guid: 9a61c964186081747ac8b0a27a5d7972, type: 2}

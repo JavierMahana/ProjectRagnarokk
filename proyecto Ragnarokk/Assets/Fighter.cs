@@ -19,6 +19,8 @@ public class Fighter : MonoBehaviour
     [ReadOnly]
     public int CurrentHP;
 
+    public byte PowerRating;
+
     [ReadOnly]
     public Weapon[] Weapons = new Weapon[4];
 
