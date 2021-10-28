@@ -7,8 +7,10 @@ using UnityEngine;
 public class Weapon : ScriptableObject
 {
     public string Name = "unnamed weapon";
+    public string Description = "";
     public int BaseDamage = 50;
     public Sprite sprite;
+
 
     //deberia tener la info de:
 
