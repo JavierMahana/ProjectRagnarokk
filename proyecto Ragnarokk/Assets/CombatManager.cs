@@ -8,11 +8,15 @@ using Sirenix.OdinInspector;
 //ahora elementos de display pueden estar aca pero en el futuro moverlos.
 public class CombatManager : MonoBehaviour
 {
-   
+    //eliminar las 2 lineas siguientes luego de testear los consumibles
+    public Consumible item1;
+    public Consumible item2;
+
     public GameObject CombatCanvas;
 
     public GameObject PrefabActionButton;
     public GameObject PrefabWeaponButton;
+    public GameObject PrefabConsumibleButton;
 
     public GameObject PanelForActions;
     public GameObject FighterClickButton;
@@ -47,14 +51,25 @@ public class CombatManager : MonoBehaviour
     [HideInInspector]
     public GameObject FighterBasePrefab;
 
-    //la idea es que aca este o posible combate en el juegouna lista de tod.   
-    List<Fighter> PlayerFighters = new List<Fighter>();
-    List<Fighter> EnemyFighters = new List<Fighter>();
-
-    List<Fighter> AlivePlayerFighters = new List<Fighter>();
-
+    //LUCHADORES
     [HideInInspector]
     public List<Fighter> AllCombatFighters = new List<Fighter>(); //Lista que almacenará a los luchadores del combate actual
+
+    //Luchadores aliados  
+    List<Fighter> PlayerFighters = new List<Fighter>();
+    List<Fighter> AlivePlayerFighters = new List<Fighter>();
+
+    int PartyMaxHP;
+    int PartyCurrentHP;
+    bool PartyIsFine; //Se inicializa en true si el combate empieza con el HP general sobre el 75%.
+
+    //Luchadores enemigos
+    List<Fighter> EnemyFighters = new List<Fighter>();
+    List<Fighter> AliveEnemyFighters = new List<Fighter>();
+
+    int HordeMaxHP;
+    int HordeCurrentHP;
+    bool HordeIsFine;
 
     //public List<Fighter> AllAliveFighters = new List<Fighter>(); 
     [HideInInspector]
@@ -83,6 +98,8 @@ public class CombatManager : MonoBehaviour
     [HideInInspector]
     public Weapon AttackWeapon = null;
     [HideInInspector]
+    public Consumible SelectedConsumible = null;
+    [HideInInspector]
     public Fighter Target = null;
     [HideInInspector]
     public bool Confirm = false; //Cuando sea true, la acción se debe llevar a cabo
@@ -90,6 +107,7 @@ public class CombatManager : MonoBehaviour
     public bool Annulment = false; //Se usa cada vez que se quiere retroceder en la selección de algo
 
     [HideInInspector]
+    //attack done podría cambiarse a ActionDone
     public bool AttackDone = false;
 
     //Comparador de rapidez para ordenar la lista de luchadores
@@ -103,12 +121,23 @@ public class CombatManager : MonoBehaviour
 
     public void InitCombatScene(CombatEncounter encounter)
     {
-        // limpia la lista de enemigos y sus botones más los botones aliados
+        // Añade consumibles para testear, eliminar esto ya que luego los consumibles deben ser entregados
+        // como recompensa de combate, exploración o comprados en la tienda.
+        Consumible i1 = Instantiate(item1);
+        Consumible i3 = Instantiate(item1);
+        Consumible i2 = Instantiate(item2);
+        GameManager.Instance.AllConsumibles.Add(i1);
+        GameManager.Instance.AllConsumibles.Add(i2);
+        GameManager.Instance.AllConsumibles.Add(i3);
 
+        // limpia la lista de enemigos y sus botones más los botones aliados
         // antes de instanciar los del nuevo encuentro
         GameManager.Instance.Enemies.Clear();
         GameManager.Instance.EnemyButtons.Clear();
         GameManager.Instance.PlayerButtons.Clear();
+
+        GameManager.Instance.ConfirmationClick = false;
+
 
         int j = 0;
         //Se obtienen los luchadores del jugador
@@ -123,14 +152,19 @@ public class CombatManager : MonoBehaviour
             pf.transform.position = worldPos;
 
 
-            PlayerFighters.Add(pf.gameObject.GetComponent<Fighter>());
-            Fighter fighter = PlayerFighters[PlayerFighters.Count - 1];
-            string m = fighter.Name;
-            foreach(CombatState state in fighter.States)
+            Fighter ally = pf.gameObject.GetComponent<Fighter>();
+            PlayerFighters.Add(ally);
+            PartyMaxHP += ally.MaxHP;
+            PartyCurrentHP += ally.CurrentHP;
+
+            /*
+            string m = ally.Name;
+            foreach(CombatState state in ally.States)
             {
                 m += (" " + state.Name);
             }
             Debug.Log(m);
+            */
 
             #region Player Buttons
             var playerButton = Instantiate(FighterClickButton);
@@ -153,6 +187,7 @@ public class CombatManager : MonoBehaviour
 
             j++;
         }
+        PartyIsFine = (PartyCurrentHP >= PartyMaxHP * 0.75);
         AlivePlayerFighters.AddRange(PlayerFighters);
 
         int enemyCount = encounter.ListOfEncounterEnemies.Count;
@@ -169,8 +204,10 @@ public class CombatManager : MonoBehaviour
             var enemyData = encounter.ListOfEncounterEnemies[i];
 
             CreateEnemy(enemyData, worldPos);
-
         }
+        HordeCurrentHP = HordeMaxHP;
+        HordeIsFine = true;
+        AliveEnemyFighters.AddRange(EnemyFighters);
 
         //Se unen los luchadores en una lista
         AllCombatFighters.AddRange(PlayerFighters);
@@ -216,7 +253,9 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.EnemyButtons.Add(enemyButton.GetComponent<FighterSelect>());
 
         //Se llena una lista con los enemigos recién creados
-        EnemyFighters.Add(enemyGameObject.GetComponent<Fighter>());
+        Fighter enemy = enemyGameObject.GetComponent<Fighter>();
+        EnemyFighters.Add(enemy);
+        HordeMaxHP += enemy.MaxHP;
     }
 
     public void ShowFighterCanvas(bool show)
@@ -239,7 +278,16 @@ public class CombatManager : MonoBehaviour
     private void Awake()
     {
         initialized = false;
+
         TurnInProcess = false;
+
+        PartyMaxHP = 0;
+        PartyCurrentHP = 0;
+        PartyIsFine = false;
+
+        HordeMaxHP = 0;
+        HordeCurrentHP = 0;
+        HordeIsFine = false;
     }
     private void Start()
     {
@@ -263,13 +311,14 @@ public class CombatManager : MonoBehaviour
                 TurnInProcess = true;
 
                 ShowFighterCanvas(false);
-                CleanWeaponSelecion();
+                CleanPanelSelecion();
 
                 StartCoroutine(TurnAction());
             }
             else if(CombatState > 0)
             {
                 RemoveAllCombatStates();
+                HopeManager.Instance.ChangeHope(3, "Cambio por victoria");
 
                 var sceneChanger = FindObjectOfType<SceneChanger>();
                 //sceneChanger.ChangeScene("Victory");
@@ -349,11 +398,11 @@ public class CombatManager : MonoBehaviour
         {
             //Debug.Log("Turno Aliado");
             AttackWeapon = null;
+            SelectedConsumible = null;
 
-            // activa canvas de acciones y la seleccion de armas
-            // MovePanel();
+            // activa canvas de acciones 
             ShowFighterCanvas(true);
-            WeaponSelection();
+            ActionSelection();
             
 
             // setea el boton del aliado actual 
@@ -491,17 +540,29 @@ public class CombatManager : MonoBehaviour
     // al hacerle clic se activa Fight y el argumento es el boton cliqueado que contiene al target
     public void Fight(FighterSelect targetButton)
     {
+        #region SECUENCIA LÓGICA
+        //(sin considerar cambios en la esperanza)
 
-        if(targetButton == null || targetButton.Fighter == null || targetButton.selfBbutton == null) { Debug.Log("No se encuentra el botón del objetivo"); }
+        // 1- Cálculo de sinergia
+        // 2- Cálculo de efectividad
+        // 3- Cálculo de daño
+        // 4- Aplicación de daño
+        // 5- Aplicación de estados (cuando el target sobrevive)
+        #endregion
+
+        if (targetButton == null || targetButton.Fighter == null || targetButton.selfBbutton == null) { Debug.Log("No se encuentra el botón del objetivo"); }
         // se especifica el target con la fucion EnemySelected
 
         Target = targetButton.Fighter;
         //Debug.Log("ATACANTE: " + ActiveFighter.Name);
         //Debug.Log("OBJETIVO: " + Target.Name);
 
-        Debug.Log("-------------------------------------------------------------------------------------");
+        bool targetIsAlly = IsPlayerFighter(Target);
+
+        //Debug.Log("-------------------------------------------------------------------------------------");
 
         //Debug.Log(Target.Name + " es tipo " + Target.Type);
+        /*
         string stateList = Target.Name;
         if (Target.States.Count != 0)
         {
@@ -512,31 +573,55 @@ public class CombatManager : MonoBehaviour
             }
         }
         Debug.Log(stateList);
+        */
 
-        float synergyFact = CalculateSynergyFactor();
+        //float synergyFact = 
+        ApplySynergy();
 
-        Debug.Log("Factor sinergia: " + synergyFact);
+        float effectivenessFact = CalculateEffectivenessFactor();
+
+        float hopeFact = targetIsAlly? 1 : HopeManager.Instance.GetHopeFactor();
+
+        //Debug.Log("Factor sinergia: " + synergyFact);
+        //Debug.Log("Factor efectividad: " + effectivenessFact);
+        Debug.Log("Factor esperanza: " + hopeFact);
+        effectivenessFact = 1;
+
+        const int minDamage = 1;
 
         //FÓRMULA DE DAÑO (Prototipo en uso. Debe ser bien definida más adelante)
         int damage = (AttackWeapon.BaseDamage / 25) + ActiveFighter.Atack - Target.Defense;
-        if(damage < 0) { damage = 0;}
-        Debug.Log("Daño inicial: " + damage);
-        damage = (int)(damage * synergyFact);
-        Debug.Log("Daño final: " + damage);
+        if(damage < minDamage) { damage = minDamage; }
+
+        //Debug.Log("Daño inicial: " + damage);
+        damage = (int)(damage * hopeFact * effectivenessFact);
+        if (damage < minDamage) { damage = minDamage; }
+        //Debug.Log("Daño final: " + damage);
+        if(!targetIsAlly && damage == minDamage) { HopeManager.Instance.ChangeHope(-2, "Cambio por daño mínimo"); }
 
         //string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
         //Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
-        Target.CurrentHP -= damage;
+        Target.CurrentHP -= damage; //APLICACIÓN DEL DAÑO
+
         Target.OnTakeDamage?.Invoke();
 
         if (Target.CurrentHP <= 0)
         {
             Target.CurrentHP = 0;
             RemoveCombatStates(Target);
-            if(IsPlayerFighter(Target)) { AlivePlayerFighters.Remove(Target); }
+            if(targetIsAlly) 
+            { 
+                AlivePlayerFighters.Remove(Target);
+                HopeManager.Instance.ChangeHope((sbyte)(AlivePlayerFighters.Count - 5), "Cambio por aliado muerto");
+            }
+            else
+            {
+                AliveEnemyFighters.Remove(Target);
+                HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
+            }
             Target.transform.rotation = new Quaternion(0, 0, 90, 0);
         }
-        else
+        else //if(false)
         {
             //Aplicar estados
             foreach(CombatState weaponState in AttackWeapon.ListaDeEstadosQueAplica)
@@ -544,17 +629,26 @@ public class CombatManager : MonoBehaviour
                 if(!Target.States.Contains(weaponState))
                 {
                     Target.States.Add(weaponState);
-                    Debug.Log("Aplicado: " + weaponState.Name);
+                    //Debug.Log("Aplicado: " + weaponState.Name);
                 }
             }
         }
+
+        CheckPartyHP();
+        CheckHordeHP();
 
         // el botón imprime el daño infligido
         targetButton.ShowDamage(damage);
     }
 
-    public float CalculateSynergyFactor()
+    public void ApplySynergy()
     {
+        #region SECUENCIA LÓGICA
+        // 1- Conteo de sinergias menos antisinergias
+        // 2- Remoción de los estados del objetivo involucrados
+        // 3- Para atacante aliado, cambio en la esperanza basado en el conteo de sinergias
+        #endregion
+
         //Aplicar sinergias y antisinergias
         sbyte synergyCounter = 0;
         CombatType weaponType = AttackWeapon.TipoDeDañoQueAplica;
@@ -572,24 +666,94 @@ public class CombatManager : MonoBehaviour
                 statesToErase.Add(targetState);
             }
         }
-        float synergyFact = Mathf.Pow(2, synergyCounter);
-        /*
-        switch(synergyCounter)
-        {
-            case 1:     synergyFact = 2;        break;
-            case >= 2:  synergyFact = 4;        break;
-            case -1:    synergyFact = 0.5f;     break;
-            case <= -2: synergyFact = 0.25f;    break;
-            default:    synergyFact = 1;        break;
-        }
-        */
+        //float synergyFact = Mathf.Pow(2, synergyCounter);
 
         foreach (CombatState state in statesToErase)
         {
             Target.States.Remove(state);
         }
 
-        return synergyFact;
+        if(IsPlayerFighter(ActiveFighter))
+        {
+            sbyte hopeChangeMagnitude = 0;
+            switch (synergyCounter)
+            {
+                case 1: hopeChangeMagnitude = 3; break;
+                case 2: hopeChangeMagnitude = 4; break;
+                case -1: hopeChangeMagnitude = -3; break;
+                case -2: hopeChangeMagnitude = -4; break;
+            }
+            if (hopeChangeMagnitude != 0)
+            {
+                HopeManager.Instance.ChangeHope(hopeChangeMagnitude, "Cambio por sinergia");
+            }
+        }
+
+        //return synergyFact;
+    }
+
+    public float CalculateEffectivenessFactor()
+    {
+        const float resistanceFactor    = 0.75f;
+        const float weaknessFactor      = 1.5f;
+
+        CombatType weaponType = AttackWeapon.TipoDeDañoQueAplica;
+        CombatType targetType = Target.Type;
+        if(targetType.Resistencias.Contains(weaponType)) 
+        {
+            HopeManager.Instance.ChangeHope(-2, "Cambio por inefectividad");
+            return resistanceFactor; 
+        }
+        if(targetType.Debilidades.Contains(weaponType)) 
+        {
+            HopeManager.Instance.ChangeHope(2, "Cambio por efectividad");
+            return weaknessFactor; 
+        }
+
+        return 1;
+    }
+
+    //Al finalizar un ataque, se comprueba el porcentaje de HP de ambos grupos respecto a su correspondiente HP máximo de grupo.
+    //Cuando el HP general de los aliados baja de la mitad, disminuye la esperanza en término medio. Luego, para volver a aplicar el debuff, el grupo debe
+    //haberse recuperado al menos hasta el 75% del HP general.
+    public void CheckPartyHP()
+    {
+        PartyCurrentHP = 0;
+        foreach(Fighter ally in AlivePlayerFighters)
+        {
+            PartyCurrentHP += ally.CurrentHP;
+        }
+        Debug.Log("HP de grupo: " + PartyCurrentHP + "/" + PartyMaxHP);
+
+        if(PartyIsFine  &&  PartyCurrentHP < PartyMaxHP * 0.5)
+        {
+            HopeManager.Instance.ChangeHope(-3, "Cambio por mal estado del grupo");
+            PartyIsFine = false;
+        }
+        else if(!PartyIsFine  &&  PartyCurrentHP >= PartyMaxHP * 0.75)
+        {
+            PartyIsFine = true;
+        }
+    }
+    //Cuando el HP general de la horda enemiga baja de la mitad, aumenta la esperanza en término bajo. No está contemplado que los enemigos
+    //recuperen vida, con lo que el buff se aplicaría como máximo una vez por combate.
+    //El buff es menor que el debuff pensando, desde el lado jugable, que los combates ganados serán más que los combates que pondrán en aprietos al
+    //jugador, y desde el lado realista, que el miedo a perderlo todo para siempre es más grande que el gozo de superar un obstáculo pequeño
+    //repetitivamente.
+    public void CheckHordeHP()
+    {
+        HordeCurrentHP = 0;
+        foreach(Fighter enemy in AliveEnemyFighters)
+        {
+            HordeCurrentHP += enemy.CurrentHP;
+        }
+        Debug.Log("HP de horda: " + HordeCurrentHP + "/" + HordeMaxHP);
+
+        if(HordeIsFine  &&  HordeCurrentHP < HordeMaxHP * 0.5)
+        {
+            HopeManager.Instance.ChangeHope(2, "Cambio por mal estado de la horda enemiga");
+            HordeIsFine = false;
+        }
     }
 
     public void RemoveAllCombatStates()
@@ -605,41 +769,107 @@ public class CombatManager : MonoBehaviour
         fighter.States.Clear();
     }
 
-    public void WeaponSelection()
+    public void ActionSelection()
     {
-        if(!GameManager.Instance.ConfirmationClick)
-        {
-            CleanWeaponSelecion();
+        // se vacía el panel completamente
+        CleanPanelSelecion();
 
+        // cuando no se ha seleccionado una accion
+        // se crea un botón por cada una de las acciones disponibles
+        if (!GameManager.Instance.ConfirmationClick)
+        {
             GameObject actionButton = Instantiate(PrefabActionButton);
-            
+
             actionButton.GetComponent<ActionButton>().initialActionText = "Attack";
             actionButton.transform.SetParent(PanelForActions.transform, false);
             AllButtonsInPanel.Add(actionButton);
+
+            GameObject consumibles = Instantiate(PrefabActionButton);
+
+            consumibles.GetComponent<ActionButton>().initialActionText = "Consumable";
+            consumibles.transform.SetParent(PanelForActions.transform, false);
+            AllButtonsInPanel.Add(consumibles);
+
+            GameObject defensa = Instantiate(PrefabActionButton);
+
+            defensa.GetComponent<ActionButton>().initialActionText = "Defense";
+            defensa.transform.SetParent(PanelForActions.transform, false);
+            AllButtonsInPanel.Add(defensa);
         }
 
+        // si una accion ya fue seleccionada
+        // se crea un botón cancelar, que permite cancelar la accion actual
         else
         {
-            for(int i = 0; i < 4; i++)
+            GameObject cancel = Instantiate(PrefabActionButton);
+            cancel.GetComponent<ActionButton>().initialActionText = "Cancel";
+            cancel.transform.SetParent(PanelForActions.transform, false);
+            AllButtonsInPanel.Add(cancel);
+
+        // luego, dependiendo de la acción escogida se crean sus respectivos botones
+            #region Ataque -> Weapon Selection
+            if (GameManager.Instance.OnAttack)
             {
-                var W = ActiveFighter.Weapons[i];
-                if(W != null)
+                Action = null;
+                AttackWeapon = null;
+
+                for (int i = 0; i < 4; i++)
                 {
-                    GameObject actionButton = Instantiate(PrefabWeaponButton);
+                    var W = ActiveFighter.Weapons[i];
+                    if (W != null)
+                    {
+                        GameObject weaponButton = Instantiate(PrefabWeaponButton);
 
-                    actionButton.GetComponent<WeaponSpecs>().weaponDamage.text = "damage" + W.BaseDamage.ToString();
-                    actionButton.GetComponent<WeaponSpecs>().weaponName.text = W.Name;
-                    actionButton.GetComponent<WeaponSpecs>().thisWeapon = W;
+                        weaponButton.GetComponent<WeaponSpecs>().weaponDamage.text = "damage: " + W.BaseDamage.ToString() + " - type:" + W.TipoDeDañoQueAplica.Name.ToString();
+                        weaponButton.GetComponent<WeaponSpecs>().weaponName.text = W.Name;
+                        weaponButton.GetComponent<WeaponSpecs>().thisWeapon = W;
 
-                    actionButton.transform.SetParent(PanelForActions.transform, false);
+                        weaponButton.transform.SetParent(PanelForActions.transform, false);
 
-                    AllButtonsInPanel.Add(actionButton);
-                }          
+                        AllButtonsInPanel.Add(weaponButton);
+                    }
+                }
             }
+            #endregion
+
+            #region Consumibles
+            if (GameManager.Instance.OnConsumible)
+            {
+               
+                foreach (var item in GameManager.Instance.AllConsumibles)
+                {
+                    
+                    GameObject itemButton = Instantiate(PrefabConsumibleButton);
+
+                    itemButton.GetComponent<Button_Consumible>().itemName.text = item.name;
+                    itemButton.GetComponent<Button_Consumible>().itemDescription.text = item.description;
+                    itemButton.GetComponent<Button_Consumible>().thisItem = item;
+
+                    itemButton.transform.SetParent(PanelForActions.transform, false);
+
+                    AllButtonsInPanel.Add(itemButton);
+                }
+            }
+            #endregion
+
+            #region Defense
+            if (GameManager.Instance.OnDefense)
+            {
+                // aumentar temporalmente la defensa del jugador activo
+                // podría usarse un array de bonuses, útil también para consumibles
+                // ActiveFighter.Defense += 10;
+
+
+                // terminar turno
+                GameManager.Instance.ConfirmationClick = false;
+                CleanPanelSelecion();
+                AttackDone = true;
+            }
+            #endregion
         }
     }
 
-    private void CleanWeaponSelecion()
+    private void CleanPanelSelecion()
     {
         foreach (GameObject button in AllButtonsInPanel)
         {

@@ -43,17 +43,39 @@ public class FighterSelect : MonoBehaviour
     {
         var combatManager = FindObjectOfType<CombatManager>();
 
-        if (GameManager.Instance.ConfirmationClick && combatManager.AttackWeapon != null
-             && Fighter.CurrentHP > 0)
-        {  
-            combatManager.Fight(this);
-            combatManager.AttackDone = true;
-            GameManager.Instance.ConfirmationClick = false;
-        }
-        else
+        if (GameManager.Instance.ConfirmationClick)
         {
-            Debug.Log("Falta escoger el ataque o el arma que se utilizará o bien el enemigo está muerto");
+            if (combatManager.AttackWeapon != null && Fighter.CurrentHP > 0)
+            {
+                // se utiliza la función fight sobre el fighter al que corresponde el botón
+                combatManager.Fight(this);
+                // se termina el turno
+                combatManager.AttackDone = true;
+
+            }
+
+            else
+            {
+                Debug.Log("Falta escoger el ataque o el arma que se utilizará o bien el enemigo está muerto");
+            }
+
+
+            if (combatManager.SelectedConsumible != null)
+            {
+                Debug.Log("Objeto usado -> " + combatManager.SelectedConsumible.name);
+                // se activa la funcion en useo del consumible seleccionado, sobre el fighter
+                // al que corresponde el botón
+                Debug.Log("SaludAntes: " + Fighter.CurrentHP);
+                combatManager.SelectedConsumible.OnUse(Fighter);
+                Debug.Log("SaludDespues: " + Fighter.CurrentHP);
+
+                // AQUI ACTUALIZAR BARRA
+                Fighter.OnTakeDamage();
+
+            }
         }
+           
+        GameManager.Instance.ConfirmationClick = false;
 
     }
 

@@ -30,18 +30,17 @@ public class WeaponSpecs : MonoBehaviour
     public void OnClick()
     {
         CombatManager combatManager = GameObject.Find("CombatManager").GetComponent<CombatManager>();
-        combatManager.AttackWeapon = thisWeapon;
+        
 
         if (!ButtonPressed)
         {
+            GameManager.Instance.ConfirmationClick = true;
             combatManager.AttackWeapon = thisWeapon;
-            //GetComponent<Image>().color = selectColor;
             ButtonPressed = true;
         }
         else
         {
             combatManager.AttackWeapon = null;
-            //GetComponent<Image>().color = initialColor;
             ButtonPressed = false;
         }
     }

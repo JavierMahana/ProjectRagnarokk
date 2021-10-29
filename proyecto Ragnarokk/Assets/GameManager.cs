@@ -61,7 +61,9 @@ public class GameManager : Singleton<GameManager>
         } 
     }
 
-    //public GameObject UIManager;
+
+    
+
 
     //este es el combate actual
     [HideInInspector]
@@ -75,6 +77,8 @@ public class GameManager : Singleton<GameManager>
 
     public List<Fighter> Enemies = new List<Fighter>();
     public List<FighterSelect> EnemyButtons = new List<FighterSelect>();
+    
+    public List<Consumible> AllConsumibles = new List<Consumible>();
 
     //DontDestroyOnLoad
     //objetos de los fighters del player.
@@ -82,9 +86,19 @@ public class GameManager : Singleton<GameManager>
     public List<PlayerFighter> PlayerFighters = new List<PlayerFighter>();
     public List<FighterSelect> PlayerButtons = new List<FighterSelect>();
 
+
     public GameObject PlayerOnTurn;
 
+
+    // estos bool son para el tipo de acción que el jugador escogió en su turno
+    [HideInInspector]
     public bool ConfirmationClick;
+    [HideInInspector]
+    public bool OnAttack;
+    [HideInInspector]
+    public bool OnConsumible;
+    [HideInInspector]
+    public bool OnDefense;
 
 
     private void Update()
@@ -97,8 +111,14 @@ public class GameManager : Singleton<GameManager>
             PlayerFighters.Add(item);
         }
 
-       
-
+        if (!PartyIsComplete())
+        {
+            HopeManager.Instance.ResetHope();
+        }
+        else if (!HopeManager.Instance.Initialized)
+        {
+            HopeManager.Instance.InitializeHope();
+        }
     }
 
     public void StartFloor()
@@ -158,6 +178,8 @@ public class GameManager : Singleton<GameManager>
             fighterComp.MaxHP = data.MaxHP;
             fighterComp.CurrentHP = fighterComp.MaxHP;
 
+            fighterComp.PowerRating = data.PowerRating;
+
             fighterComp.Type = data.Type;
 
             for (int i = 0; i < fighterComp.Weapons.Length; i++)
@@ -188,5 +210,8 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-   
+    public bool PartyIsComplete()
+    {
+        return PlayerFighters.Count == 3;
+    }
 }
