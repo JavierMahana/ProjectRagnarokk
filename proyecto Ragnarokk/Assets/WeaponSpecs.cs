@@ -32,14 +32,23 @@ public class WeaponSpecs : MonoBehaviour
         CombatManager combatManager = GameObject.Find("CombatManager").GetComponent<CombatManager>();
         
 
-        if (!ButtonPressed)
+        if (!ButtonPressed && combatManager.AttackWeapon != thisWeapon)
         {
             GameManager.Instance.ConfirmationClick = true;
             combatManager.AttackWeapon = thisWeapon;
+            
+            foreach(GameObject button in combatManager.AllButtonsInPanel)
+            {
+                if(button.TryGetComponent(out WeaponSpecs ws))
+                {
+                    ws.ButtonPressed = false;
+                }
+            }
             ButtonPressed = true;
         }
         else
         {
+            GameManager.Instance.ConfirmationClick = false;
             combatManager.AttackWeapon = null;
             ButtonPressed = false;
         }

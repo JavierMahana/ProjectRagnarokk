@@ -20,7 +20,7 @@ public class CombatManager : MonoBehaviour
 
     public GameObject PanelForActions;
     public GameObject FighterClickButton;
-    List<GameObject> AllButtonsInPanel = new List<GameObject>();
+    public List<GameObject> AllButtonsInPanel = new List<GameObject>();
 
 
     public GameObject PermanentCanvas;
@@ -527,7 +527,7 @@ public class CombatManager : MonoBehaviour
         if(damage < 0) { damage = 0;}
         Debug.Log("Daño inicial: " + damage);
         damage = (int)(damage * synergyFact);
-        Debug.Log("Daño final: " + damage);
+        Debug.Log("Daño final: " + damage + " | Tipo: " + AttackWeapon.Name);
 
         //string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
         //Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
@@ -716,6 +716,7 @@ public class CombatManager : MonoBehaviour
         {
             Destroy(button);
         }
+        AllButtonsInPanel.Clear();
     }
 
     private bool IsPlayerFighter(Fighter f)
