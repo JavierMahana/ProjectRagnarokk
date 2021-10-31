@@ -617,6 +617,7 @@ public class CombatManager : MonoBehaviour
         //string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
         //Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
         Target.CurrentHP -= damage; //APLICACIÓN DEL DAÑO
+        Debug.Log("Arma atacante: " + AttackWeapon.Name);
 
         Target.OnTakeDamage?.Invoke();
 
