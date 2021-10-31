@@ -25,6 +25,13 @@ public class Button_Consumible : MonoBehaviour
         {
             GameManager.Instance.ConfirmationClick = true;
             combatManager.SelectedConsumible = thisItem;
+            foreach (GameObject button in combatManager.AllButtonsInPanel)
+            {
+                if (button.TryGetComponent(out Button_Consumible bc))
+                {
+                    bc.ButtonPressed = false;
+                }
+            }
             ButtonPressed = true;
         }
         else

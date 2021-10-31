@@ -42,15 +42,23 @@ public class WeaponSpecs : MonoBehaviour
         Debug.Log("Cooldown del arma: " + weaponCooldown);
         if(weaponCooldown <= 0)
         {
-            if (!ButtonPressed)
+            if (!ButtonPressed && combatManager.AttackWeapon != thisWeapon)
             {
                 GameManager.Instance.ConfirmationClick = true;
                 combatManager.AttackWeapon = thisWeapon;
-                combatManager.AttackWeaponIndex = IndexOfFighterWeapon;
+                combatManager.AttackWeaponIndex = IndexOfFighterWeapon; //Se usará para asignar el cooldown al arma correcta
+                foreach (GameObject button in combatManager.AllButtonsInPanel)
+                {
+                    if (button.TryGetComponent(out WeaponSpecs ws))
+                    {
+                        ws.ButtonPressed = false;
+                    }
+                }
                 ButtonPressed = true;
             }
             else
             {
+                GameManager.Instance.ConfirmationClick = false;
                 combatManager.AttackWeapon = null;
                 ButtonPressed = false;
             }

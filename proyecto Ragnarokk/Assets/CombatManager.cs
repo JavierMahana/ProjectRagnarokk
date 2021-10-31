@@ -20,7 +20,7 @@ public class CombatManager : MonoBehaviour
 
     public GameObject PanelForActions;
     public GameObject FighterClickButton;
-    List<GameObject> AllButtonsInPanel = new List<GameObject>();
+    public List<GameObject> AllButtonsInPanel = new List<GameObject>();
 
 
     public GameObject PermanentCanvas;
@@ -605,6 +605,7 @@ public class CombatManager : MonoBehaviour
 
         //FÓRMULA DE DAÑO (Prototipo en uso. Debe ser bien definida más adelante)
         int damage = (AttackWeapon.BaseDamage / 25) + ActiveFighter.Atack - Target.Defense;
+
         if(damage < minDamage) { damage = minDamage; }
 
         //Debug.Log("Daño inicial: " + damage);
@@ -939,6 +940,7 @@ public class CombatManager : MonoBehaviour
         {
             Destroy(button);
         }
+        AllButtonsInPanel.Clear();
     }
 
     private bool IsPlayerFighter(Fighter f)
