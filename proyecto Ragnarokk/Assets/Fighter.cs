@@ -23,6 +23,7 @@ public class Fighter : MonoBehaviour
 
     [ReadOnly]
     public Weapon[] Weapons = new Weapon[4];
+    public int[] WeaponCooldowns = new int[4];
 
     public Weapon CurrentWeapon;
 

@@ -6,12 +6,18 @@ using UnityEngine.UI;
 
 public class WeaponSpecs : MonoBehaviour
 {
+
+
     public Text weaponName;
     public Text weaponDamage;
     public Weapon thisWeapon;
 
+    [HideInInspector]
+    public int IndexOfFighterWeapon;
+
     private Color selectColor = Color.blue;
-    private Color initialColor = Color.white;
+    [HideInInspector]
+    public Color initialColor = Color.white;
 
     [HideInInspector]
     public bool ButtonPressed;
@@ -21,27 +27,33 @@ public class WeaponSpecs : MonoBehaviour
         ButtonPressed = false;
     }
 
-    public WeaponSpecs(string name, string damage, Weapon weapon)
+    public WeaponSpecs(string name, string damage, Weapon weapon, int weaponIndex)
     {
         weaponName.text = name;
         weaponDamage.text = damage + "dmg";
         thisWeapon = weapon;
+        IndexOfFighterWeapon = weaponIndex;
     }
     public void OnClick()
     {
         CombatManager combatManager = GameObject.Find("CombatManager").GetComponent<CombatManager>();
-        
 
-        if (!ButtonPressed)
+        int weaponCooldown = combatManager.ActiveFighter.WeaponCooldowns[IndexOfFighterWeapon];
+        Debug.Log("Cooldown del arma: " + weaponCooldown);
+        if(weaponCooldown <= 0)
         {
-            GameManager.Instance.ConfirmationClick = true;
-            combatManager.AttackWeapon = thisWeapon;
-            ButtonPressed = true;
-        }
-        else
-        {
-            combatManager.AttackWeapon = null;
-            ButtonPressed = false;
+            if (!ButtonPressed)
+            {
+                GameManager.Instance.ConfirmationClick = true;
+                combatManager.AttackWeapon = thisWeapon;
+                combatManager.AttackWeaponIndex = IndexOfFighterWeapon;
+                ButtonPressed = true;
+            }
+            else
+            {
+                combatManager.AttackWeapon = null;
+                ButtonPressed = false;
+            }
         }
     }
 }

@@ -98,6 +98,8 @@ public class CombatManager : MonoBehaviour
     [HideInInspector]
     public Weapon AttackWeapon = null;
     [HideInInspector]
+    public int AttackWeaponIndex;
+    [HideInInspector]
     public Consumible SelectedConsumible = null;
     [HideInInspector]
     public Fighter Target = null;
@@ -292,6 +294,7 @@ public class CombatManager : MonoBehaviour
     private void Start()
     {
         InitCombatScene(GameManager.Instance.currentEncounter);
+        ResetWeaponCooldowns();
         ShowFighterCanvas(false);
     }
     
@@ -313,11 +316,13 @@ public class CombatManager : MonoBehaviour
                 ShowFighterCanvas(false);
                 CleanPanelSelecion();
 
+                FindNextActiveFighter();
                 StartCoroutine(TurnAction());
             }
             else if(CombatState > 0)
             {
                 RemoveAllCombatStates();
+                ResetWeaponCooldowns();
                 HopeManager.Instance.ChangeHope(3, "Cambio por victoria");
 
                 var sceneChanger = FindObjectOfType<SceneChanger>();
@@ -371,16 +376,16 @@ public class CombatManager : MonoBehaviour
         rectTransform.anchoredPosition = Vector2.zero;
     }
 
-    private IEnumerator TurnAction()
+    public void FindNextActiveFighter()
     {
         //Se busca en la lista de luchadores al siguiente luchador vivo más rápido.
         do
         {
             ActiveFighterIndex++;
-            if (ActiveFighterIndex >= AllCombatFighters.Count) 
-            { 
+            if (ActiveFighterIndex >= AllCombatFighters.Count)
+            {
                 ActiveFighterIndex = 0; //No se sale de la lista
-                RemoveAllCombatStates(); //Elimina los estados al finalizar un ciclo de turnos
+                StartNewTurnCycle();
             }
             ActiveFighter = AllCombatFighters[ActiveFighterIndex];
         } while (ActiveFighter.CurrentHP <= 0); //Comprueba que esté vivo.
@@ -388,7 +393,16 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.PlayerOnTurn = ActiveFighter.gameObject; //¿PlayerOnTurn está en desuso?
 
         //Debug.Log(ActiveFighter.Name);
+    }
 
+    public void StartNewTurnCycle()
+    {
+        RemoveAllCombatStates();
+        DiminishWeaponCooldowns();
+    }
+
+    private IEnumerator TurnAction()
+    {
 
         var iniPos = ActiveFighter.transform.position;
 
@@ -605,6 +619,7 @@ public class CombatManager : MonoBehaviour
 
         Target.OnTakeDamage?.Invoke();
 
+        //El objetivo es DERROTADO
         if (Target.CurrentHP <= 0)
         {
             Target.CurrentHP = 0;
@@ -621,6 +636,7 @@ public class CombatManager : MonoBehaviour
             }
             Target.transform.rotation = new Quaternion(0, 0, 90, 0);
         }
+        //El objetivo SOBREVIVE
         else //if(false)
         {
             //Aplicar estados
@@ -636,6 +652,9 @@ public class CombatManager : MonoBehaviour
 
         CheckPartyHP();
         CheckHordeHP();
+
+        //AttackWeapon.CurrentCooldown = AttackWeapon.BaseCooldown + 1;
+        ActiveFighter.WeaponCooldowns[AttackWeaponIndex] = AttackWeapon.BaseCooldown + 1;
 
         // el botón imprime el daño infligido
         targetButton.ShowDamage(damage);
@@ -769,6 +788,49 @@ public class CombatManager : MonoBehaviour
         fighter.States.Clear();
     }
 
+    public void ResetWeaponCooldowns()
+    {
+        foreach(Fighter fighter in PlayerFighters)
+        {
+            for(byte i = 0; i<4;i++)
+            {
+                fighter.WeaponCooldowns[i] = 0;
+            }
+            /*
+            foreach(Weapon weapon in fighter.Weapons)
+            {
+                if(weapon != null)
+                {
+                    weapon.CurrentCooldown = 0;
+                }
+            }
+            */
+        }
+    }
+
+    public void DiminishWeaponCooldowns()
+    {
+        foreach (Fighter fighter in AllCombatFighters)
+        {
+            for(byte i = 0; i<4;i++)
+            {
+                if(fighter.WeaponCooldowns[i] > 0)
+                {
+                    fighter.WeaponCooldowns[i]--;
+                }
+            }
+            /*
+            foreach (Weapon weapon in fighter.Weapons)
+            {
+                if (weapon != null  &&  weapon.CurrentCooldown > 0)
+                {
+                    weapon.CurrentCooldown--;
+                }
+            }
+            */
+        }
+    }
+
     public void ActionSelection()
     {
         // se vacía el panel completamente
@@ -823,6 +885,8 @@ public class CombatManager : MonoBehaviour
                         weaponButton.GetComponent<WeaponSpecs>().weaponDamage.text = "damage: " + W.BaseDamage.ToString() + " - type:" + W.TipoDeDañoQueAplica.Name.ToString();
                         weaponButton.GetComponent<WeaponSpecs>().weaponName.text = W.Name;
                         weaponButton.GetComponent<WeaponSpecs>().thisWeapon = W;
+                        weaponButton.GetComponent<WeaponSpecs>().IndexOfFighterWeapon = i;
+                        weaponButton.GetComponent<WeaponSpecs>().initialColor = (ActiveFighter.WeaponCooldowns[i] > 0) ? Color.gray : Color.white;
 
                         weaponButton.transform.SetParent(PanelForActions.transform, false);
 

@@ -186,6 +186,7 @@ public class GameManager : Singleton<GameManager>
             {
                     //Debug.Log("Arma " + i);
                 fighterComp.Weapons[i] = data.DefaultWeapons[i];
+                fighterComp.WeaponCooldowns[i] = 0;
             }
         }
         else
