@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f44d98b366a2245aed0af7a4de5581, type: 3}
   m_Name: HealthPill
   m_EditorClassIdentifier: 
-  name: HealthPill
-  description: Heals the objective with 15 HP
-  item: 1
+  Name: HealthPill
+  Description: Heals the objective for 15 HP
+  BaseCost: 100
+  sprite: {fileID: 21300000, guid: f27342250be652c439b3719eb518771c, type: 3}
+  type: 0

@@ -841,8 +841,8 @@ public class CombatManager : MonoBehaviour
                     
                     GameObject itemButton = Instantiate(PrefabConsumibleButton);
 
-                    itemButton.GetComponent<Button_Consumible>().itemName.text = item.name;
-                    itemButton.GetComponent<Button_Consumible>().itemDescription.text = item.description;
+                    itemButton.GetComponent<Button_Consumible>().itemName.text = item.Name;
+                    itemButton.GetComponent<Button_Consumible>().itemDescription.text = item.Description;
                     itemButton.GetComponent<Button_Consumible>().thisItem = item;
 
                     itemButton.transform.SetParent(PanelForActions.transform, false);

@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: GoldenHammer
   m_EditorClassIdentifier: 
   Name: Golden Hammer
+  Description: arma de cerca
+  BaseCost: 100
+  sprite: {fileID: 21300000, guid: d993722be3be32040907aba648cede8e, type: 3}
   BaseDamage: 50
-  sprite: {fileID: 0}
   ListaDeEstadosQueAplica:
   - {fileID: 11400000, guid: fadb458fdf939e7448558760e64563f3, type: 2}
   "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 7a85a4f3edc5b8d48a6c9671218529d7, type: 2}

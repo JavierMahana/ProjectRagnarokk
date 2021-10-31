@@ -4,13 +4,9 @@ using UnityEngine;
 
 //luego las armas deben tener mas caracteristicas.
 [CreateAssetMenu(menuName = "Combat/Weapon")]
-public class Weapon : ScriptableObject
+public class Weapon : Item
 {
-    public string Name = "unnamed weapon";
-    public string Description = "";
     public int BaseDamage = 50;
-    public Sprite sprite;
-
 
     //deberia tener la info de:
 
