@@ -554,16 +554,6 @@ public class CombatManager : MonoBehaviour
     // al hacerle clic se activa Fight y el argumento es el boton cliqueado que contiene al target
     public void Fight(FighterSelect targetButton)
     {
-        #region SECUENCIA LÓGICA
-        //(sin considerar cambios en la esperanza)
-
-        // 1- Cálculo de sinergia
-        // 2- Cálculo de efectividad
-        // 3- Cálculo de daño
-        // 4- Aplicación de daño
-        // 5- Aplicación de estados (cuando el target sobrevive)
-        #endregion
-
         if (targetButton == null || targetButton.Fighter == null || targetButton.selfBbutton == null) { Debug.Log("No se encuentra el botón del objetivo"); }
         // se especifica el target con la fucion EnemySelected
 
@@ -571,95 +561,117 @@ public class CombatManager : MonoBehaviour
         //Debug.Log("ATACANTE: " + ActiveFighter.Name);
         //Debug.Log("OBJETIVO: " + Target.Name);
 
+        int damageToShow = -1;
+
         bool targetIsAlly = IsPlayerFighter(Target);
 
-        //Debug.Log("-------------------------------------------------------------------------------------");
-
-        //Debug.Log(Target.Name + " es tipo " + Target.Type);
-        /*
-        string stateList = Target.Name;
-        if (Target.States.Count != 0)
+        int missValue = Random.Range(0, 100); //La precisión del arma debe ser mayor que este valor para acertar el ataque.
+        
+        //ACIERTO
+        if (AttackWeapon.BaseAccuracy > missValue)
         {
-            stateList += " tiene estados:";
-            foreach (CombatState state in Target.States)
+            #region SECUENCIA LÓGICA (9 pasos)
+            // 1- Cambio de esperanza por sinergias
+            // 2- Cálculo de efectividad (altera esperanza)
+            // 3- Obtención factor esperanza
+            // 4- Cálculo de daño base
+            // 5- Cálculo de daño final (considera factores efectividad y esperanza) (incluye posterior disminución de esperanza por daño mínimo)
+            // 6- Aplicación de daño
+            // 7- Alteración de esperanza por target derrotado, o aplicación de estados cuando el target sobrevive
+            // 8- Alteración de esperanza por grupo en mal estado
+            // 9- Activación de cooldown de arma atacante
+            #endregion
+
+            Debug.Log("Precision " + AttackWeapon.BaseAccuracy + " > " + missValue);
+            //PASO 1
+            ApplySynergy();
+
+            //PASO 2
+            float effectivenessFact = CalculateEffectivenessFactor();
+
+            //PASO 3
+            float hopeFact = targetIsAlly ? 1 : HopeManager.Instance.GetHopeFactor();
+
+            //Debug.Log("Factor efectividad: " + effectivenessFact);
+            Debug.Log("Factor esperanza: " + hopeFact);
+
+            const int minDamage = 1;
+
+            //PASO 4
+            //FÓRMULA DE DAÑO (Prototipo en uso. Debe ser bien definida más adelante)
+            int damage = (AttackWeapon.BaseDamage / 25) + ActiveFighter.Atack - Target.Defense;
+
+            if (damage < minDamage) { damage = minDamage; }
+
+            //PASO 5
+            //Debug.Log("Daño inicial: " + damage);
+            damage = (int)(damage * hopeFact * effectivenessFact);
+            if (damage < minDamage) { damage = minDamage; }
+            damageToShow = damage;
+            //Debug.Log("Daño final: " + damage);
+            if (!targetIsAlly && damage == minDamage) { HopeManager.Instance.ChangeHope(-2, "Cambio por daño mínimo"); }
+
+            //PASO 6
+            //APLICACIÓN DEL DAÑO
+            Target.CurrentHP -= damage;
+
+            //string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
+            //Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
+            Debug.Log("Arma atacante: " + AttackWeapon.Name);
+
+            Target.OnTakeDamage?.Invoke();
+
+            //PASO 7
+            //El objetivo es DERROTADO
+            if (Target.CurrentHP <= 0)
             {
-                stateList += (" | " + state.Name);
+                Target.CurrentHP = 0;
+                RemoveCombatStates(Target);
+                if (targetIsAlly)
+                {
+                    AlivePlayerFighters.Remove(Target);
+                    HopeManager.Instance.ChangeHope((sbyte)(AlivePlayerFighters.Count - 5), "Cambio por aliado muerto");
+                }
+                else
+                {
+                    AliveEnemyFighters.Remove(Target);
+                    HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
+                }
+                Target.transform.rotation = new Quaternion(0, 0, 90, 0);
             }
-        }
-        Debug.Log(stateList);
-        */
-
-        //float synergyFact = 
-        ApplySynergy();
-
-        float effectivenessFact = CalculateEffectivenessFactor();
-
-        float hopeFact = targetIsAlly? 1 : HopeManager.Instance.GetHopeFactor();
-
-        //Debug.Log("Factor sinergia: " + synergyFact);
-        //Debug.Log("Factor efectividad: " + effectivenessFact);
-        Debug.Log("Factor esperanza: " + hopeFact);
-        effectivenessFact = 1;
-
-        const int minDamage = 1;
-
-        //FÓRMULA DE DAÑO (Prototipo en uso. Debe ser bien definida más adelante)
-        int damage = (AttackWeapon.BaseDamage / 25) + ActiveFighter.Atack - Target.Defense;
-
-        if(damage < minDamage) { damage = minDamage; }
-
-        //Debug.Log("Daño inicial: " + damage);
-        damage = (int)(damage * hopeFact * effectivenessFact);
-        if (damage < minDamage) { damage = minDamage; }
-        //Debug.Log("Daño final: " + damage);
-        if(!targetIsAlly && damage == minDamage) { HopeManager.Instance.ChangeHope(-2, "Cambio por daño mínimo"); }
-
-        //string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
-        //Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
-        Target.CurrentHP -= damage; //APLICACIÓN DEL DAÑO
-        Debug.Log("Arma atacante: " + AttackWeapon.Name);
-
-        Target.OnTakeDamage?.Invoke();
-
-        //El objetivo es DERROTADO
-        if (Target.CurrentHP <= 0)
-        {
-            Target.CurrentHP = 0;
-            RemoveCombatStates(Target);
-            if(targetIsAlly) 
-            { 
-                AlivePlayerFighters.Remove(Target);
-                HopeManager.Instance.ChangeHope((sbyte)(AlivePlayerFighters.Count - 5), "Cambio por aliado muerto");
-            }
+            //El objetivo SOBREVIVE
             else
             {
-                AliveEnemyFighters.Remove(Target);
-                HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
-            }
-            Target.transform.rotation = new Quaternion(0, 0, 90, 0);
-        }
-        //El objetivo SOBREVIVE
-        else //if(false)
-        {
-            //Aplicar estados
-            foreach(CombatState weaponState in AttackWeapon.ListaDeEstadosQueAplica)
-            {
-                if(!Target.States.Contains(weaponState))
+                //Aplicar estados
+                foreach (CombatState weaponState in AttackWeapon.ListaDeEstadosQueAplica)
                 {
-                    Target.States.Add(weaponState);
-                    //Debug.Log("Aplicado: " + weaponState.Name);
+                    if (!Target.States.Contains(weaponState))
+                    {
+                        Target.States.Add(weaponState);
+                        //Debug.Log("Aplicado: " + weaponState.Name);
+                    }
                 }
             }
+
+            //PASO 8
+            //EL fin de estos métodos no es otro que cambiar la esperanza.
+            CheckPartyHP();
+            CheckHordeHP();
+
+            //PASO 9
+            ActiveFighter.WeaponCooldowns[AttackWeaponIndex] = AttackWeapon.BaseCooldown + 1;
+        }
+        //FALLO
+        else
+        {
+            if(!targetIsAlly) { HopeManager.Instance.ChangeHope(-2, "Cambio por ataque fallido"); }
+            Debug.Log("Precision " + AttackWeapon.BaseAccuracy + " <= " + missValue);
         }
 
-        CheckPartyHP();
-        CheckHordeHP();
-
-        //AttackWeapon.CurrentCooldown = AttackWeapon.BaseCooldown + 1;
-        ActiveFighter.WeaponCooldowns[AttackWeaponIndex] = AttackWeapon.BaseCooldown + 1;
+        //Debug.Log("Precision: " + AttackWeapon.BaseAccuracy + " | damageToShow: " + damageToShow);
 
         // el botón imprime el daño infligido
-        targetButton.ShowDamage(damage);
+        targetButton.ShowDamage(damageToShow);
     }
 
     public void ApplySynergy()

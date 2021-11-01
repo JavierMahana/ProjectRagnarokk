@@ -8,6 +8,8 @@ public class Weapon : ScriptableObject
 {
     public string Name = "unnamed weapon";
     public int BaseDamage = 50;
+    [Range(0, 100)]
+    public int BaseAccuracy;
     public int BaseCooldown;
     //[HideInInspector] public int CurrentCooldown;
     public Sprite sprite;

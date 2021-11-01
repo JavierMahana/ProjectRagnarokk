@@ -72,7 +72,7 @@ public class HopeManager : Singleton<HopeManager>
             }
             else
             {
-                Debug.Log("CanvasHope desactivado");
+                //Debug.Log("CanvasHope desactivado");
             }
         }
     }

@@ -35,7 +35,7 @@ public class FighterSelect : MonoBehaviour
 
     public void ShowDamage(int damage)
     {
-        this.damage.text = damage.ToString();
+        this.damage.text = (damage > 0)? damage.ToString() : "MISS";
         showTimer = 200;
     }
 
