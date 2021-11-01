@@ -65,7 +65,8 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector]
     public List<Item> currentTreasureItems = new List<Item>();
-
+    [HideInInspector]
+    public int treasureRoomMoney;
 
     //este es el combate actual
     [HideInInspector]

@@ -6,6 +6,7 @@ public class TreasureRoomManager : MonoBehaviour
 {
     //la idea es colocar los slots y la infobox manualmente desde el editor.
     public TreasureSlot[] treasureSlots = new TreasureSlot[3];
+    public MoneySlot moneySlot;
     public InfoBox InfoBox;
 
     public string defaultInfoBoxTitle = "Treasure Room";
@@ -19,6 +20,8 @@ public class TreasureRoomManager : MonoBehaviour
             if (InfoBox == null)
                 Debug.LogError("You need a info box!");
         }
+
+        moneySlot.Init(GameManager.Instance.treasureRoomMoney, this);
 
         for (int i = 0; i < treasureSlots.Length; i++)
         {

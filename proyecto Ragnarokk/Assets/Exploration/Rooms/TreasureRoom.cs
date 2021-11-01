@@ -6,6 +6,7 @@ using UnityEngine;
 public class TreasureRoom : RoomData
 {
     public List<Item> AllPosibleTreasures = new List<Item>();
+    public int MoneyAmmount = 50;
     //public int moneyAmount
     public override void LoadRoom(GameManager gameManager, SceneChanger sceneChanger, Room room)
     {
@@ -36,7 +37,7 @@ public class TreasureRoom : RoomData
             gameManager.currentTreasureItems.Add(AllPosibleTreasures[selection]);
             numbersAlreadyUsed.Add(selection);
         }// se termina la seleccion de tesoros.
-
+        gameManager.treasureRoomMoney = MoneyAmmount;
 
         room.MarkAsCurrent();
         room.MarkAsCleared();

@@ -5,6 +5,9 @@ using UnityEngine;
 public class ConfirmScreen : MonoBehaviour
 {
     public List<GameObject> ObjectsToHideWhenShow = new List<GameObject>();
+    public GameObject WeaponsSwapObj;
+    private bool showWeaponsSwapObjWhenClose = false;
+
     public GameObject Panel;
     
     private bool isShop;
@@ -15,6 +18,7 @@ public class ConfirmScreen : MonoBehaviour
     private int currSlot;
 
     private int currMoneyAmmount;
+
 
     public void Confirm()
     {
@@ -69,6 +73,8 @@ public class ConfirmScreen : MonoBehaviour
 
     public void Show(int moneyAmmount)
     {
+        showWeaponsSwapObjWhenClose = false;
+
         currMoneyAmmount = moneyAmmount;
 
         Panel.SetActive(true);
@@ -79,7 +85,10 @@ public class ConfirmScreen : MonoBehaviour
     }
     public void Show(Consumible consumible)
     {
+        showWeaponsSwapObjWhenClose = false;
+
         currItem = consumible;
+
 
         Panel.SetActive(true);
         foreach (var obj in ObjectsToHideWhenShow)
@@ -89,11 +98,16 @@ public class ConfirmScreen : MonoBehaviour
     }
     public void Show(Weapon weapon, Fighter fighter, int slot)
     {
+        showWeaponsSwapObjWhenClose = true;
+
         currItem = weapon;
         currFighter = fighter;
         currSlot = slot;
 
         Panel.SetActive(true);
+
+        if (WeaponsSwapObj != null)
+            WeaponsSwapObj.SetActive(false);
         foreach (var obj in ObjectsToHideWhenShow)
         {
             obj.SetActive(false);
@@ -103,6 +117,12 @@ public class ConfirmScreen : MonoBehaviour
     public void Hide()
     {
         Panel.SetActive(false);
+
+        if (showWeaponsSwapObjWhenClose)
+        {
+            if (WeaponsSwapObj != null)
+                WeaponsSwapObj.SetActive(true);
+        }
         foreach (var obj in ObjectsToHideWhenShow)
         {
             obj.SetActive(true);
