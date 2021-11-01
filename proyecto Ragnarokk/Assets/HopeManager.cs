@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HopeManager : Singleton<HopeManager>
 {
     [HideInInspector]
     public bool Initialized;
+
+    public GameObject CanvasHope;
+    public GameObject HopeBar;
+    public Image HopeBarFill;
 
     [Range(0, 100)]
     public float PartyHope; //La esperanza del grupo
@@ -60,8 +65,18 @@ public class HopeManager : Singleton<HopeManager>
         {
             UpdateHopePhase();
             UpdateCombatFactor();
+            CanvasHope.SetActive(GameManager.Instance.GameState == GAME_STATE.COMBAT);
+            if (CanvasHope.activeSelf)
+            {
+                HopeBarFill.fillAmount = PartyHope / 100;
+            }
+            else
+            {
+                Debug.Log("CanvasHope desactivado");
+            }
         }
     }
+    
 
     //Método que modifica la esperanza en base a la magnitud especificada
     public void ChangeHope(sbyte magnitude, string changeReason = "")
@@ -126,6 +141,24 @@ public class HopeManager : Singleton<HopeManager>
     public void InitializeHope()
     {
         PartyHope = 50;
+
+        var hopeBar = Instantiate(HopeBar, CanvasHope.transform);
+
+        RectTransform rectTransform = hopeBar.GetComponent<RectTransform>();
+        //hopeBar.transform.SetParent(CanvasHope.transform);
+
+        var images = GetComponentsInChildren<Image>();
+        foreach(Image image in images)
+        {
+            if(image.type == Image.Type.Filled)
+            {
+                HopeBarFill = image;
+                break;
+            }
+        }
+
+        CanvasHope.SetActive(false);
+
         Initialized = true;
     }
 
