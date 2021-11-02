@@ -27,6 +27,8 @@ public class GameManager : Singleton<GameManager>
     //[HideInInspector]
     //public bool FloorNeedToBeLoaded { get; set; }
 
+    public int CurrentMoney;
+
     public GAME_STATE GameState
     {
         get
@@ -61,9 +63,10 @@ public class GameManager : Singleton<GameManager>
         } 
     }
 
-
-    
-
+    [HideInInspector]
+    public List<Item> currentTreasureItems = new List<Item>();
+    [HideInInspector]
+    public int treasureRoomMoney;
 
     //este es el combate actual
     [HideInInspector]

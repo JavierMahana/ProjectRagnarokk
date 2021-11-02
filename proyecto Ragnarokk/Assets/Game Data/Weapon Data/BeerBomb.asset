@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: BeerBomb
   m_EditorClassIdentifier: 
   Name: Beer Bomb
+  Description: arma de amor
+  BaseCost: 100
+  sprite: {fileID: 21300000, guid: 00418cabfcc44504686dc5675db92d2f, type: 3}
   BaseDamage: 20
-  BaseAccuracy: 83
-  BaseCooldown: 1
-  sprite: {fileID: 0}
   ListaDeEstadosQueAplica:
   - {fileID: 11400000, guid: 9307b971ac377f44d873d171454dc2ca, type: 2}
   "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 9a61c964186081747ac8b0a27a5d7972, type: 2}

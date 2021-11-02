@@ -2,22 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Consumible", menuName = "Consumibles")]
-public class Consumible : ScriptableObject
+
+public enum ConsumibleType
 {
-    public new string name;
-    public string description;
-    public int item;
+    HEALTH_REGEN_1,
+    REVIVE_1
+}
+
+[CreateAssetMenu(fileName = "New Consumible", menuName = "Consumibles")]
+public class Consumible : Item
+{
+    public ConsumibleType type;
 
     // Aqui se añade especifica la funcion del consumible, al terminar de usarse debería destruirse
     // su destruiccion y eliminación de la lista de consumibles debería estar en el gameManager.
     public void OnUse(Fighter user)
     {        
 
-        switch (item)
+        switch (type)
         {
             #region objeto 1
-            case 1: if (user.CurrentHP != user.MaxHP)
+            case ConsumibleType.HEALTH_REGEN_1: if (user.CurrentHP != user.MaxHP)
                     {
                         user.CurrentHP += 15;
                         if (user.CurrentHP > user.MaxHP)
@@ -35,7 +40,7 @@ public class Consumible : ScriptableObject
             #endregion
 
             #region objeto 2
-            case 2:
+            case ConsumibleType.REVIVE_1:
                 
                 if (user.CurrentHP <= 0)
                 {

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f44d98b366a2245aed0af7a4de5581, type: 3}
   m_Name: Resurrector2000
   m_EditorClassIdentifier: 
-  name: Resurrector2k
-  description: When used on a dead ally it will bring them back to life with their
+  Name: Resurrector2k
+  Description: When used on a dead ally it will bring them back to life with their
     max HP
-  item: 2
+  BaseCost: 100
+  sprite: {fileID: 21300000, guid: f27342250be652c439b3719eb518771c, type: 3}
+  type: 1

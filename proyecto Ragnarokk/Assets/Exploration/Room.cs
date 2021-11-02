@@ -84,7 +84,7 @@ public class Room : MonoBehaviour
         {
             data.LoadRoom(GameManager.Instance, SceneChanger.Instance, this);
         }
-        Debug.Log("Click!");
+        //Debug.Log("Click!");
     }
 
     private void Awake()
