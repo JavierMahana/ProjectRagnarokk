@@ -12,6 +12,7 @@ public class HealthBar : MonoBehaviour
     {
         this.target = target;
         target.OnTakeDamage += HealthChanged;
+        HealthChanged();
     }
     public void ResetValues()
     {

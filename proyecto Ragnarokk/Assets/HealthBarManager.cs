@@ -33,9 +33,16 @@ public class HealthBarManager : MonoBehaviour
 
     public void InitHealthBars()
     {
+        var allBars = FindObjectsOfType<HealthBar>(true);
+        foreach (var bar in allBars)
+        {
+            Destroy(bar.gameObject);
+        }
+
         foreach (var fighter in combatManager.AllCombatFighters)
         {
             var healthBarObj = Instantiate(HealthBarPrevab, fighter.transform);
+            
 
             var rectTransform = (RectTransform)healthBarObj.transform;
             rectTransform.localPosition = new Vector3(healthBarOffset.x, healthBarOffset.y, 1);
@@ -45,6 +52,7 @@ public class HealthBarManager : MonoBehaviour
             {
                 activeHealthBars.Add(healthBarComp);
                 healthBarComp.Init(fighter);
+                
             }
             else
             {

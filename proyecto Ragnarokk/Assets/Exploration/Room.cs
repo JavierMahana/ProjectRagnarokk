@@ -68,6 +68,11 @@ public class Room : MonoBehaviour
             Debug.LogWarning("No hay ningun lore panel en la escena! no se puede activar.");
         }
     }
+    private void OnEnable()
+    {
+        onMouseHover = false;
+    }
+
 
     private void OnMouseEnter()
     {
@@ -80,10 +85,14 @@ public class Room : MonoBehaviour
 
     private void OnMouseDown()
     {
+        //onMouseHover = false;
+        //spriteRenderer.color = visitableColor;
+
         if (Visitable)
         {
             data.LoadRoom(GameManager.Instance, SceneChanger.Instance, this);
         }
+
         //Debug.Log("Click!");
     }
 

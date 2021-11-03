@@ -73,6 +73,9 @@ public class GameManager : Singleton<GameManager>
     public CombatEncounter currentEncounter;
 
 
+    public Dictionary<Room, ShopData> InitializedShopsInFloor = new Dictionary<Room, ShopData>();
+    public ShopData CurrShopData;
+
     public List<Weapon> AllWeapons = new List<Weapon>();
 
     public List<FighterData> AllPlayerFighterDatas = new List<FighterData>();
@@ -126,6 +129,8 @@ public class GameManager : Singleton<GameManager>
 
     public void StartFloor()
     {
+        InitializedShopsInFloor.Clear();
+
         int count = AllFloors.Count;
         if (count > 0)
         {

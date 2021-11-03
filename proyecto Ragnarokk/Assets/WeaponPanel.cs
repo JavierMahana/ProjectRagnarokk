@@ -19,8 +19,13 @@ public class WeaponPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private WeaponSwapManager swapManager;
     private bool onlyShowInfo = false;
-    public void Init(Weapon weapon, WeaponSwapManager manager, Fighter fighter, int slot, bool onlyShowInfo = false)
+
+    private bool isShop = false;
+
+    public void Init(Weapon weapon, WeaponSwapManager manager, Fighter fighter, int slot, bool onlyShowInfo = false, bool isShop = false)
     {
+        this.isShop = isShop;
+
         this.fighter = fighter;
         this.slot = slot;
         curWeapon = weapon;
@@ -51,19 +56,29 @@ public class WeaponPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             Debug.LogError("You need a info box!");
     }
 
-    private void OnMouseDown()
+
+
+    private bool mouse_over = false;
+    void Update()
     {
-        if (!onlyShowInfo)
+        if (mouse_over && Input.GetMouseButtonDown(0))
         {
-            //confirm UI
-            confirmScreen.Show(swapManager.NewWeaponPanel.curWeapon, fighter, slot);
+            if (!onlyShowInfo)
+            {
+                //confirm UI
+                confirmScreen.Show(swapManager.NewWeaponPanel.curWeapon, fighter, slot, isShop);
+            }
         }
     }
 
-    private void OnMouseEnter()
+    private void OnDisable()
     {
+        mouse_over = false;
+    }
 
-
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        mouse_over = true;
         if (curWeapon != null)
         {
             infoBox.ShowInfo(curWeapon);
@@ -73,8 +88,10 @@ public class WeaponPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             infoBox.ShowInfo("Empty slot", "This slot doesn't have a weapon so it's safe to select!");
         }
     }
-    private void OnMouseExit()
+
+    public void OnPointerExit(PointerEventData eventData)
     {
+        mouse_over = false;
         if (swapManager != null)
         {
             infoBox.ShowInfo(swapManager.defaultInfoBoxTitle, swapManager.defaultInfoBoxDescription);
@@ -83,29 +100,5 @@ public class WeaponPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             infoBox.Clear();
         }
-        
-    }
-
-    private bool mouse_over = false;
-    void Update()
-    {
-        if (mouse_over && Input.GetMouseButtonDown(0))
-        {
-            OnMouseDown();
-        }
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        mouse_over = true;
-        //Debug.Log("Mouse enter");
-        OnMouseEnter();
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        mouse_over = false;
-        OnMouseExit();
-        //Debug.Log("Mouse exit");
     }
 }
