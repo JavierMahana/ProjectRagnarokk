@@ -564,25 +564,29 @@ public class CombatManager : MonoBehaviour
         int damageToShow = -1;
 
         bool targetIsAlly = IsPlayerFighter(Target);
+        bool attackerIsAlly = IsPlayerFighter(ActiveFighter);
 
         int missValue = Random.Range(0, 100); //La precisión del arma debe ser mayor que este valor para acertar el ataque.
         
         //ACIERTO
         if (AttackWeapon.BaseAccuracy > missValue)
         {
-            #region SECUENCIA LÓGICA (9 pasos)
+            #region SECUENCIA LÓGICA (12 pasos)
             // 1- Cambio de esperanza por sinergias
             // 2- Cálculo de efectividad (altera esperanza)
             // 3- Obtención factor esperanza
-            // 4- Cálculo de daño base
-            // 5- Cálculo de daño final (considera factores efectividad y esperanza) (incluye posterior disminución de esperanza por daño mínimo)
-            // 6- Aplicación de daño
-            // 7- Alteración de esperanza por target derrotado, o aplicación de estados cuando el target sobrevive
-            // 8- Alteración de esperanza por grupo en mal estado
-            // 9- Activación de cooldown de arma atacante
+            // 4- Cálculo de factor crítico
+            // 5- Obtención factor variabilidad
+            // 6- Cálculo de daño base
+            // 7- Cálculo de daño final (considera factores efectividad y esperanza) (incluye posterior disminución de esperanza por daño mínimo)
+            // 8- Ajuste de daño para que un aliado no muera únicamente porque el ataque es crítico
+            // 9- Aplicación de daño
+            // 10- Alteración de esperanza por target derrotado, o aplicación de estados cuando el target sobrevive
+            // 11- Alteración de esperanza por grupo en mal estado
+            // 12- Activación de cooldown de arma atacante
             #endregion
 
-            Debug.Log("Precision " + AttackWeapon.BaseAccuracy + " > " + missValue);
+            //Debug.Log("Precision " + AttackWeapon.BaseAccuracy + " > " + missValue);
             //PASO 1
             ApplySynergy();
 
@@ -590,38 +594,67 @@ public class CombatManager : MonoBehaviour
             float effectivenessFact = CalculateEffectivenessFactor();
 
             //PASO 3
-            float hopeFact = targetIsAlly ? 1 : HopeManager.Instance.GetHopeFactor();
+            float hopeFact = attackerIsAlly ? HopeManager.Instance.GetHopeFactor() : 1;
+
+            //PASO 4
+            bool criticalAttack = false;
+            float criticalFact = 1;
+            int criticalRate = AttackWeapon.BaseCriticalRate + ActiveFighter.Luck; //Valor que se calcula como la suma de el índice de crítico del arma, y la suerte del atacante
+            int criticalValue = Random.Range(0, 100);
+            Debug.Log(criticalRate + " > " + criticalValue + "?");
+            //El índice calculado debe superar el valor aleatorio para asestar crítico
+            if (criticalRate > criticalValue)
+            {
+                criticalAttack = true;
+                criticalFact = 2;
+                if (attackerIsAlly) { HopeManager.Instance.ChangeHope(2, "Cambio por ataque crítico"); }
+            }
+
+            //PASO 5
+            const float variabilityRatio = 0.15f;
+            float variabilityFact = Random.Range(1 - variabilityRatio, 1 + variabilityRatio);
 
             //Debug.Log("Factor efectividad: " + effectivenessFact);
-            Debug.Log("Factor esperanza: " + hopeFact);
+            //Debug.Log("Factor esperanza: " + hopeFact);
 
             const int minDamage = 1;
 
-            //PASO 4
-            //FÓRMULA DE DAÑO (Prototipo en uso. Debe ser bien definida más adelante)
-            int damage = (AttackWeapon.BaseDamage / 25) + ActiveFighter.Atack - Target.Defense;
-
-            if (damage < minDamage) { damage = minDamage; }
-
-            //PASO 5
-            //Debug.Log("Daño inicial: " + damage);
-            damage = (int)(damage * hopeFact * effectivenessFact);
-            if (damage < minDamage) { damage = minDamage; }
-            damageToShow = damage;
-            //Debug.Log("Daño final: " + damage);
-            if (!targetIsAlly && damage == minDamage) { HopeManager.Instance.ChangeHope(-2, "Cambio por daño mínimo"); }
-
             //PASO 6
+            //FÓRMULA DE DAÑO (Prototipo en uso. Debe ser bien definida más adelante)
+            int baseDamage = (AttackWeapon.BaseDamage / 25) + ActiveFighter.Atack - Target.Defense;
+            if (baseDamage < minDamage) { baseDamage = minDamage; }
+
+            //PASO 7
+            //Debug.Log("Daño inicial: " + baseDamage);
+            int finalDamage = (int)(baseDamage * hopeFact * effectivenessFact * criticalFact * variabilityFact);
+            Debug.Log("Daño: " + baseDamage + " * " + hopeFact + " * " + effectivenessFact + " * " + criticalFact + " * " + variabilityFact);
+            if (finalDamage < minDamage) { finalDamage = minDamage; }
+
+            //PASO 8
+            //Se impide que un ataque crítico mate a un aliado si este hubiera sobrevivido al ataque normal. El aliado quedará con 1 HP.
+            if(targetIsAlly  &&  criticalAttack)
+            {
+                if (Target.CurrentHP - finalDamage <= 0 && Target.CurrentHP - finalDamage / criticalFact > 0)
+                {
+                    finalDamage = Target.CurrentHP - 1;
+                }
+            }
+
+            damageToShow = finalDamage;
+            //Debug.Log("Daño final: " + finalDamage);
+            if (attackerIsAlly && finalDamage == minDamage) { HopeManager.Instance.ChangeHope(-2, "Cambio por daño mínimo"); }
+
+            //PASO 9
             //APLICACIÓN DEL DAÑO
-            Target.CurrentHP -= damage;
+            Target.CurrentHP -= finalDamage;
 
             //string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
             //Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
-            Debug.Log("Arma atacante: " + AttackWeapon.Name);
+            //Debug.Log("Arma atacante: " + AttackWeapon.Name);
 
             Target.OnTakeDamage?.Invoke();
 
-            //PASO 7
+            //PASO 10
             //El objetivo es DERROTADO
             if (Target.CurrentHP <= 0)
             {
@@ -653,19 +686,19 @@ public class CombatManager : MonoBehaviour
                 }
             }
 
-            //PASO 8
+            //PASO 11
             //EL fin de estos métodos no es otro que cambiar la esperanza.
             CheckPartyHP();
             CheckHordeHP();
 
-            //PASO 9
+            //PASO 12
             ActiveFighter.WeaponCooldowns[AttackWeaponIndex] = AttackWeapon.BaseCooldown + 1;
         }
         //FALLO
         else
         {
-            if(!targetIsAlly) { HopeManager.Instance.ChangeHope(-2, "Cambio por ataque fallido"); }
-            Debug.Log("Precision " + AttackWeapon.BaseAccuracy + " <= " + missValue);
+            if(attackerIsAlly) { HopeManager.Instance.ChangeHope(-2, "Cambio por ataque fallido"); }
+            //Debug.Log("Precision " + AttackWeapon.BaseAccuracy + " <= " + missValue);
         }
 
         //Debug.Log("Precision: " + AttackWeapon.BaseAccuracy + " | damageToShow: " + damageToShow);

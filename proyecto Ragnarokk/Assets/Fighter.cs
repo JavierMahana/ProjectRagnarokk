@@ -15,6 +15,8 @@ public class Fighter : MonoBehaviour
     [ReadOnly]
     public int Defense;
     [ReadOnly]
+    public int Luck;
+    [ReadOnly]
     public int MaxHP;
     [ReadOnly]
     public int CurrentHP;
