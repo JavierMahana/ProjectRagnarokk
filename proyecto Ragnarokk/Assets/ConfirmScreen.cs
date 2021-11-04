@@ -59,7 +59,11 @@ public class ConfirmScreen : MonoBehaviour
             Debug.LogError("Can't confirm. The item selected is not a weapon nor a consumible.");
         }
 
-        if (!isShop)
+        if (isShop)
+        {
+            Cancel();
+        }
+        else
         {
             SceneChanger.Instance.LoadExplorationScene();
         }

@@ -25,6 +25,8 @@ public class FighterData : ScriptableObject
     
     public string Name = "unnamed fighter type";
 
+    public string Description = "Description";
+
     #region BASE STATS
     public int Speed = 10;
     public int Atack = 10;

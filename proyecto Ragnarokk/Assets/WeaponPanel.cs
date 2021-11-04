@@ -57,11 +57,11 @@ public class WeaponPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
 
-
+    private bool frameShown = false;
     private bool mouse_over = false;
     void Update()
     {
-        if (mouse_over && Input.GetMouseButtonDown(0))
+        if (mouse_over && Input.GetMouseButtonDown(0) && !frameShown)
         {
             if (!onlyShowInfo)
             {
@@ -69,8 +69,13 @@ public class WeaponPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 confirmScreen.Show(swapManager.NewWeaponPanel.curWeapon, fighter, slot, isShop);
             }
         }
+        frameShown = false ;
     }
 
+    private void OnEnable()
+    {
+        frameShown = true;
+    }
     private void OnDisable()
     {
         mouse_over = false;

@@ -13,8 +13,18 @@ public class WeaponSwapManager : MonoBehaviour
     public string defaultInfoBoxTitle = "Pick a weapon to interchange";
     public string defaultInfoBoxDescription = "The weapon you choose will be droped forever!\nPick carefully...";
 
+    public List<GameObject> ObjectsToHideWhenShow = new List<GameObject>();
 
     private bool isShop = false;
+
+    public void Hide()
+    {
+        content.gameObject.SetActive(false);
+        foreach (var obj in ObjectsToHideWhenShow)
+        {
+            obj.SetActive(true);
+        }
+    }
 
     public void Show(Weapon newWeapon, bool isShop = false)
     {
@@ -24,6 +34,11 @@ public class WeaponSwapManager : MonoBehaviour
         NewWeaponPanel.Init(newWeapon, this, null, -1, true, isShop);
         UpdateContent();
         content.SetActive(true);
+
+        foreach (var obj in ObjectsToHideWhenShow)
+        {
+            obj.SetActive(false);
+        }
     }
 
 
