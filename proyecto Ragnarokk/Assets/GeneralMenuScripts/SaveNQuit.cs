@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplorationState : MonoBehaviour
+public class SaveNQuit : MonoBehaviour
 {
+    public string Panelname = "Save & Quit";
     // Start is called before the first frame update
     void Start()
     {
@@ -16,4 +17,8 @@ public class ExplorationState : MonoBehaviour
         
     }
 
+    public void OnClick()
+    {
+        GameManager.Instance.SaveNQuit();
+    }
 }

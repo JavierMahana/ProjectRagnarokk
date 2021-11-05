@@ -24,6 +24,11 @@ public class SceneChanger : Singleton<SceneChanger>
 		ChangeScene("Exploration");
 	}
 
+	public void LoadGeneralMenuScene()
+	{
+
+		ChangeScene("GeneralMenu");
+	}
 
 	public void ChangeScene(int sceneBuildNumber)
 	{
