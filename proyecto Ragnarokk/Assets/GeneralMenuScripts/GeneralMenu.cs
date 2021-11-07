@@ -11,6 +11,8 @@ public class GeneralMenu : MonoBehaviour
 
     public Dropdown MenuDropdown;
 
+    public GameObject Background;
+
     //fighters
     public List<Fighter> TeamFighters = new List<Fighter>();
 
@@ -39,6 +41,7 @@ public class GeneralMenu : MonoBehaviour
     private void Awake()
     {
         //DontDestroyOnLoad(this);
+        
     }
     void Start()
     {
@@ -56,17 +59,18 @@ public class GeneralMenu : MonoBehaviour
 
     public void OnClick()
     {
-
         //revisa el dropdown actual al explorar
         if (MenuDropdown.value == 0) 
         { 
             HideAllPanels();
             explorationManager.gameObject.SetActive(true);
+            Background.SetActive(false);
             this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
 
         }
         else 
         {
+            Background.SetActive(true);
             explorationManager.gameObject.SetActive(false);
             this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.9f);
         }
@@ -75,16 +79,18 @@ public class GeneralMenu : MonoBehaviour
         // resto de opciones cuando no se está explorando
         if (MenuDropdown.value == 1) 
         { 
-            ActivatePanel(TeamCanvas, "Team"); 
+            ActivatePanel(TeamCanvas, "Team");
+            TeamCanvas.GetComponent<TeamCanvas>().SetUpPanel();
         }
         if (MenuDropdown.value == 2)
         { 
             ActivatePanel(Weapons, "Weapons"); 
-            Weapons.GetComponent<WeaponsPanel>().FillWeaponsPanel(); 
+            Weapons.GetComponent<WeaponsPanel>().SetUpPanel(); 
         }
         if (MenuDropdown.value == 3) 
         { 
-            ActivatePanel(Consumibles, "Consumables"); 
+            ActivatePanel(Consumibles, "Consumables");
+            Consumibles.GetComponent<ConsumiblePanel>().SetUpPanel();
         }
         if (MenuDropdown.value == 4) 
         {

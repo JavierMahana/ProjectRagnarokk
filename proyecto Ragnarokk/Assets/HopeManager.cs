@@ -65,7 +65,13 @@ public class HopeManager : Singleton<HopeManager>
         {
             UpdateHopePhase();
             UpdateCombatFactor();
-            CanvasHope.SetActive(GameManager.Instance.GameState == GAME_STATE.COMBAT);
+
+            var gm = GameManager.Instance.GameState;
+            if (gm == GAME_STATE.MENU || gm == GAME_STATE.EXPLORATION || gm == GAME_STATE.COMBAT)
+            {
+                CanvasHope.SetActive(true);
+            }
+               
             if (CanvasHope.activeSelf)
             {
                 HopeBarFill.fillAmount = PartyHope / 100;

@@ -7,23 +7,18 @@ public class WeaponMenuButton : MonoBehaviour
 {
     public Weapon thisWeapon;
     public Text thisWeaponName;
-    public GameObject selfButton;
-
     public Image thisImage;
 
-    private Image defaultImage;
     private Color defaultColor;
 
-    public void Start()
+    private void Start()
     {
-        defaultColor = Color.clear;
+        defaultColor = GetComponent<Button>().colors.normalColor;
     }
 
     public void FillWeaponButton(Fighter f, int index)
-    {
+    {       
         thisWeapon = f.Weapons[index];
-        UpdateButton();
-       
     }
 
     public void UpdateButton()
@@ -31,14 +26,15 @@ public class WeaponMenuButton : MonoBehaviour
         if(thisWeapon == null)
         {
             thisWeaponName.text = "Empty";
-            thisImage.color = defaultColor;
-
+            thisImage.color = Color.clear;
+            thisImage.sprite = null;
         }
         else
         {
-            thisImage.sprite = thisWeapon.sprite;
-            thisImage.color = Color.white;
             thisWeaponName.text = "";
+            thisImage.sprite = thisWeapon.sprite;
+            thisImage.color = defaultColor;
+            GetComponent<Image>().color = defaultColor;
         }
     }
 }

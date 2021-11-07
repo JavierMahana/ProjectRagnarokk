@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+
 public class WeaponsPanel : MonoBehaviour
 {
     public Image thisImage;
@@ -18,11 +20,11 @@ public class WeaponsPanel : MonoBehaviour
     public Text name2;
     public Text name3;
 
-    public WeaponMenuButton[] Fighter1Weapons;
-    public WeaponMenuButton[] Fighter2Weapons;
-    public WeaponMenuButton[] Fighter3Weapons;
+    public WeaponMenuButton[] TeamWeapons;
+    // slot [12] guarda una copia de la última arma escogida
+    private WeaponMenuButton Recall;
+    private WeaponMenuButton currentWeaponButton;
 
-    public WeaponMenuButton currentWeaponButton;
     public bool OnChange;
 
     public Button exchange;
@@ -30,46 +32,102 @@ public class WeaponsPanel : MonoBehaviour
     public Button cancel;
 
     public GameObject OptionPanel;
-    void Start()
+    public void SetUpPanel()
     {
+        //fills the weapons
+        OnChange = false;
         FillWeaponsPanel();
     }
     public void Update()
     {
-        if(currentWeaponButton == null)
+        var GM = FindObjectOfType<GeneralMenu>();
+        if(GM.MenuDropdown.value == 2)
         {
-            exchange.interactable = false;
-            drop.interactable = false;
-            cancel.interactable = false;
+            //Updates Icon and color of all buttons
+            UpdateAllbuttons();
+
+            //updates the display menu with all the info of weapons
+            UpdateWeaponPanel();
+
+            if (currentWeaponButton == null)
+            {
+                exchange.interactable = false;
+                drop.interactable = false;
+                cancel.interactable = false;
+            }
+            else
+            {
+                exchange.interactable = true;
+                drop.interactable = true;
+                cancel.interactable = OnChange ? true : false;
+            }
         }
-        else
-        {
-            exchange.interactable = true;
-            drop.interactable = true;
-            cancel.interactable = OnChange ? true : false;
-        }
-        
+
     }
 
     public void FillWeaponsPanel()
     {
-        OnChange = false;
-
-        var f1 = GameManager.Instance.PlayerFighters[0].GetComponent<Fighter>();
-        var f2 = GameManager.Instance.PlayerFighters[1].GetComponent<Fighter>();
-        var f3 = GameManager.Instance.PlayerFighters[2].GetComponent<Fighter>();
-
-        name1.text = f1.Name;
-        name2.text = f2.Name;
-        name3.text = f3.Name;
+        EmptyArray();
+        name1.text = GameManager.Instance.PlayerFighters[0].GetComponent<Fighter>().Name;
+        name2.text = GameManager.Instance.PlayerFighters[1].GetComponent<Fighter>().Name;
+        name3.text = GameManager.Instance.PlayerFighters[2].GetComponent<Fighter>().Name;
 
         for (int i = 0; i < 4; i++)
         {
-            Fighter1Weapons[i].FillWeaponButton(f1, i);
-            Fighter2Weapons[i].FillWeaponButton(f2, i);
-            Fighter3Weapons[i].FillWeaponButton(f3, i);
+            
+            TeamWeapons[i].FillWeaponButton(GameManager.Instance.PlayerFighters[0].GetComponent<Fighter>(), i);
+            TeamWeapons[i+4].FillWeaponButton(GameManager.Instance.PlayerFighters[1].GetComponent<Fighter>(), i);
+            TeamWeapons[i+8].FillWeaponButton(GameManager.Instance.PlayerFighters[2].GetComponent<Fighter>(), i);
         }
-        UpdateWeaponPanel();
+    }
+
+    public void EmptyArray()
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            TeamWeapons[i].thisWeapon = null;
+            TeamWeapons[i].thisWeaponName.text = "";
+            TeamWeapons[i].thisImage.sprite = null;
+        }
+    }
+
+    public void TeamWeaponsUpdate()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            GameManager.Instance.PlayerFighters[0].GetComponent<Fighter>().Weapons[i] = TeamWeapons[i].thisWeapon;
+            GameManager.Instance.PlayerFighters[1].GetComponent<Fighter>().Weapons[i] = TeamWeapons[i+4].thisWeapon;
+            GameManager.Instance.PlayerFighters[2].GetComponent<Fighter>().Weapons[i] = TeamWeapons[i+8].thisWeapon;
+        }
+    }
+
+    public void UpdateAllbuttons()
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            TeamWeapons[i].UpdateButton();
+            //updates currentWeapon the picked color
+            if (currentWeaponButton == TeamWeapons[i])
+            {
+                if(currentWeaponButton.thisWeapon != null)
+                {
+                    TeamWeapons[i].thisImage.color = currentWeaponButton.GetComponent<Button>().colors.pressedColor;
+                    if (OnChange)
+                    {
+                        currentWeaponButton.GetComponent<Image>().color = exchange.GetComponent<Button>().colors.selectedColor;
+                    }
+                    else
+                    {
+                        currentWeaponButton.GetComponent<Image>().color = Color.white;
+                    }
+                }
+                else
+                {
+                    TeamWeapons[i].thisImage.color = Color.clear;
+                }
+                
+            } 
+        }
     }
 
     public void UpdateWeaponPanel()
@@ -99,105 +157,89 @@ public class WeaponsPanel : MonoBehaviour
         }
     }
 
+    public void PrintArray()
+    {
+        
+         Debug.Log("//////////// ARMAS DEL ARRAY ///////////");
+         for (int i = 0; i < 12; i++)
+         {
+             if(TeamWeapons[i].thisWeapon != null)
+             Debug.Log($"(arma[{i}] = {TeamWeapons[i].thisWeapon.Name}");
+         }
+         Debug.Log("////////////////////////////");
+        /*
+       Debug.Log("//////////// ARMAS DE LOS FIGHTERS ///////////");
+        Debug.Log("Fighter1");
+        for (int i = 0; i < 4; i++)
+        {
+            if(GameManager.Instance.PlayerFighters[0].GetComponent<Fighter>().Weapons[i] != null)
+            {
+                Debug.Log(GameManager.Instance.PlayerFighters[0].GetComponent<Fighter>().Weapons[i].Name);
+            }
+
+            else
+            {
+                Debug.Log("Empty");
+            }
+        }
+        Debug.Log("Fighter2");
+        for (int i = 0; i < 4; i++)
+        {
+            if(GameManager.Instance.PlayerFighters[1].GetComponent<Fighter>().Weapons[i] != null)
+            {
+                Debug.Log(GameManager.Instance.PlayerFighters[1].GetComponent<Fighter>().Weapons[i].Name);
+            }
+            else
+            {
+                Debug.Log("Empty");
+            }
+
+        }
+        Debug.Log("Fighter3");
+        for (int i = 0; i < 4; i++)
+        {
+            if(GameManager.Instance.PlayerFighters[2].GetComponent<Fighter>().Weapons[i] != null)
+            {
+                Debug.Log(GameManager.Instance.PlayerFighters[2].GetComponent<Fighter>().Weapons[i].Name);
+            }
+
+            else
+            {
+                Debug.Log("Empty");
+            }
+        }
+        Debug.Log("////////////////////////////");
+      */
+    }
     // se activa al hacer clic al boton de un arma
+
     public void OnWeaponClick(WeaponMenuButton button)
     {
+        
+        if (currentWeaponButton != null)
+        {
+            Recall = button; 
+        }
+
         if (OnChange)
         {
-            SetChange();
+            var d = button.thisWeapon;
+            button.thisWeapon = currentWeaponButton.thisWeapon;
+            currentWeaponButton.thisWeapon = d;
 
-            WeaponMenuButton place2 = button;
-            WeaponMenuButton place1 = currentWeaponButton;
+            TeamWeaponsUpdate();
 
-            #region Exchange
-            
-            for (int i = 0; i < 4; i++)
-            {
-                if (place2 == Fighter1Weapons[i]) 
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        if (place1 == Fighter1Weapons[j])
-                        {
-                            Fighter1Weapons[j] = place2;
-                            Fighter1Weapons[i] = place1;
-                        }
-                        if (place1 == Fighter2Weapons[j])
-                        {
-                            Fighter1Weapons[j] = place2;
-                            Fighter2Weapons[i] = place1;   
-                        }
-                        if (place1 == Fighter3Weapons[j])
-                        {
-                            Fighter1Weapons[j] = place2;
-                            Fighter3Weapons[i] = place1;
-                        }
-                    }
-                }
-                 if (place2 == Fighter2Weapons[i]) 
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        if (place1 == Fighter1Weapons[j])
-                        {
-                            Fighter2Weapons[j] = place2;
-                            Fighter1Weapons[i] = place1;
-                        }
-                        if(place1 == Fighter2Weapons[j])
-                        {
-                            Fighter2Weapons[j] = place2;
-                            Fighter2Weapons[i] = place1;
-                        }
-                        if(place1 == Fighter3Weapons[j])
-                        {
-                            Fighter2Weapons[j] = place2;
-                            Fighter3Weapons[i] = place1;
-                        }
-                    }
-                }
-               if (place2 == Fighter3Weapons[i]) 
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        if (place1 == Fighter1Weapons[j])
-                        {
-                            Fighter3Weapons[j] = place2;
-                            Fighter1Weapons[i] = place1;
-                        }
-                        if(place1 == Fighter2Weapons[j])
-                        {
-                            Fighter3Weapons[j] = place2;
-                            Fighter2Weapons[i] = place1;
-                        }
-                        if(place1 == Fighter3Weapons[j])
-                        {
-                            Fighter3Weapons[j] = place2;
-                            Fighter3Weapons[i] = place1; 
-                        }
-                    }
-                }
-            }
-            
-            #endregion
-   
-            currentWeaponButton = null;
             FillWeaponsPanel();
+            SetChange();
+            currentWeaponButton = null;
         }
         else
         {
-            if(button.thisWeapon != null)
-            {
-                if(currentWeaponButton != null)
-                {
-                    currentWeaponButton.UpdateButton();
-                }
-                currentWeaponButton = button;
-                button.thisImage.color = Color.red;
-            }
-            
+            currentWeaponButton = button;
         }
 
-        UpdateWeaponPanel();
+       
+
     }
 
     // se activa al hacer clic al boton drop del OptionPanel
@@ -205,25 +247,21 @@ public class WeaponsPanel : MonoBehaviour
     {
         if(currentWeaponButton != null)
         {
-            foreach (PlayerFighter pf in GameManager.Instance.PlayerFighters)
+            for(int i = 0; i < 12; i++)
             {
-                var f = pf.GetComponent<Fighter>();
-                for (int i = 0; i < 4; i++)
+                if(currentWeaponButton == TeamWeapons[i])
                 {
-                    if (f.Weapons[i] == currentWeaponButton.thisWeapon)
-                    {
-                        currentWeaponButton.thisWeapon = null;
-                        f.Weapons[i] = null;
-                    }
+                    currentWeaponButton.thisWeapon = null;
                 }
-            }            
+            }
+            TeamWeaponsUpdate();
+                        
         }
         else
         {
             Debug.Log("no valid weapon selected");
         }
 
-        currentWeaponButton.UpdateButton();
         currentWeaponButton = null;
         FillWeaponsPanel();
     }
@@ -233,22 +271,19 @@ public class WeaponsPanel : MonoBehaviour
         if (!OnChange)
         {
             OnChange = true;
-            exchange.GetComponent<Image>().color = Color.red;
+            exchange.GetComponent<Image>().color = exchange.GetComponent<Button>().colors.selectedColor;
         }
         else 
         { 
-            OnChange = false;
+            OnChange = false;         
             exchange.GetComponent<Image>().color = Color.white;
         }
     }
 
     public void Cancel()
     {
-        currentWeaponButton.thisImage.color = Color.white;
         currentWeaponButton = null;
         SetChange();
-        UpdateWeaponPanel();
-
     }
 
 }

@@ -8,8 +8,7 @@ public class TeamCanvas : MonoBehaviour
     public TeamFighterPanel TeamFighterPanel2;
     public TeamFighterPanel TeamFighterPanel3;
 
-    // Start is called before the first frame update
-    void Start()
+    public void SetUpPanel()
     {
         Fighter f1 = GameManager.Instance.PlayerFighters[0].GetComponent<Fighter>();
         Fighter f2 = GameManager.Instance.PlayerFighters[1].GetComponent<Fighter>();
@@ -17,11 +16,5 @@ public class TeamCanvas : MonoBehaviour
         TeamFighterPanel1.fillPanel(f1);
         TeamFighterPanel2.fillPanel(f2);
         TeamFighterPanel3.fillPanel(f3);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -26,7 +26,6 @@ public class CombatManager : MonoBehaviour
     public GameObject PermanentCanvas;
 
 
-
     [Range(0.0f, 1.0f)]
     public float playerFightersX;
 
@@ -900,8 +899,8 @@ public class CombatManager : MonoBehaviour
                         weaponButton.GetComponent<WeaponSpecs>().weaponName.text = W.Name;
                         weaponButton.GetComponent<WeaponSpecs>().thisWeapon = W;
                         weaponButton.GetComponent<WeaponSpecs>().IndexOfFighterWeapon = i;
-                        weaponButton.GetComponent<WeaponSpecs>().initialColor = (ActiveFighter.WeaponCooldowns[i] > 0) ? Color.gray : Color.white;
 
+                        if (ActiveFighter.WeaponCooldowns[i] > 0) weaponButton.GetComponent<WeaponSpecs>().GetComponent<Button>().interactable = false;
                         weaponButton.transform.SetParent(PanelForActions.transform, false);
 
                         AllButtonsInPanel.Add(weaponButton);
@@ -912,15 +911,12 @@ public class CombatManager : MonoBehaviour
 
             #region Consumibles
             if (GameManager.Instance.OnConsumible)
-            {
-               
+            {   
                 foreach (var item in GameManager.Instance.AllConsumibles)
                 {
-                    
                     GameObject itemButton = Instantiate(PrefabConsumibleButton);
 
                     itemButton.GetComponent<Button_Consumible>().itemName.text = item.Name;
-                    itemButton.GetComponent<Button_Consumible>().itemDescription.text = item.Description;
                     itemButton.GetComponent<Button_Consumible>().thisItem = item;
 
                     itemButton.transform.SetParent(PanelForActions.transform, false);

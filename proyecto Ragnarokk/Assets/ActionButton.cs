@@ -7,7 +7,7 @@ public class ActionButton : MonoBehaviour
 {
     public Text actionText;
     public string initialActionText = "";
-    public Color initialColor = Color.white;
+    public Color defaultColor;
 
     //indica que funcion cumple /defensa, ataque, consumible, etc
     public string thisCase;
@@ -19,7 +19,7 @@ public class ActionButton : MonoBehaviour
     void Start()
     {
         ButtonPressed = false;
-        GetComponent<Image>().color = initialColor;
+        defaultColor = ColorBlock.defaultColorBlock.normalColor;
         actionText.text = initialActionText;
         thisCase = actionText.text;
     }
@@ -31,7 +31,6 @@ public class ActionButton : MonoBehaviour
         if (!ButtonPressed)
         {
             combatManager.Action = initialActionText;
-            GetComponent<Image>().color = Color.grey;
             actionText.text = "Cancel";
             ButtonPressed = true;
 
@@ -62,9 +61,9 @@ public class ActionButton : MonoBehaviour
         }
         else
         {
-           
-            GetComponent<Image>().color = initialColor;
             actionText.text = initialActionText;
+
+            GetComponent<Image>().color = defaultColor;
             ButtonPressed = false;
 
             GameManager.Instance.ConfirmationClick = false;

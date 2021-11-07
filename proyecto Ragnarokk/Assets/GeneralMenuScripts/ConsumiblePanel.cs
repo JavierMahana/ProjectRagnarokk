@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class ConsumiblePanel : MonoBehaviour
 {
-    public Text Description;
     public Consumible SelectedConsumible;
     public List<GameObject> AllButtonsInPanel = new List<GameObject>();
+
     public GameObject PrefabConsumibleButton;
+    public GameObject ConsumablesPanel;
+    public Button OnUseButton;
 
     public Fighter currentFighter;
 
@@ -18,49 +20,51 @@ public class ConsumiblePanel : MonoBehaviour
     public Text Health;
     public Image Image;
 
-    public string Panelname = "Consumables";
-
-    private void Start()
+    public void SetUpPanel()
     {
-        ClearPanel();
         FillPanel();
     }
 
     void Update()
     {
-        // actualmente el texto de las opciones es 1,2,3
-        // al implementar el nombre de cada personaje, su nombre ocupara sus lugares.
-
-        // aqui cambiar el texto 1,2,3 por los respectivos nobmre de cada fighter
-        //////////////////////////////////////////////////////////////////////////
-
-        // revisa la opcion actual del dropdown
-        int menuIndex = CurrentFighterConsume.value;
-        string currentText = CurrentFighterConsume.options[menuIndex].text;
-
-
-        // o bien if(CurrentFighterConsume.value == x)
-        if ("1" == currentText)
+        var GM = FindObjectOfType<GeneralMenu>();
+        if (GM.MenuDropdown.value == 3)
         {
-            currentFighter = GameManager.Instance.PlayerFighters[0].GetComponent<Fighter>();
-        }
+            if (CurrentFighterConsume.value == 0)
+            {
+                currentFighter = GameManager.Instance.PlayerFighters[0].GetComponent<Fighter>();
+            }
 
-        if ("2" == currentText)
-        {
-            currentFighter = GameManager.Instance.PlayerFighters[1].GetComponent<Fighter>();
-        }
+            if (CurrentFighterConsume.value == 1)
+            {
+                currentFighter = GameManager.Instance.PlayerFighters[1].GetComponent<Fighter>();
+            }
 
-        if ("3" == currentText)
-        {
-            currentFighter = GameManager.Instance.PlayerFighters[2].GetComponent<Fighter>();
+            if (CurrentFighterConsume.value == 2)
+            {
+                currentFighter = GameManager.Instance.PlayerFighters[2].GetComponent<Fighter>();
+            }
+                
+            OnUseButton.interactable = SelectedConsumible != null ? true : false;
+                
+            UpdatePanel();
         }
     }
 
     public void OnUse()
     {
         //apply current item into the player.
-        SelectedConsumible.OnUse(currentFighter);
-        UpdatePanel();
+        if (SelectedConsumible != null)
+        {
+            Debug.Log(SelectedConsumible.Name);
+            Debug.Log(currentFighter.Name);
+            SelectedConsumible.OnUse(currentFighter);
+        }
+        else
+        {
+            Debug.Log("You must select an item from the Consumable's List");
+        }
+        
     }
 
     public void UpdatePanel()
@@ -68,22 +72,20 @@ public class ConsumiblePanel : MonoBehaviour
         Name.text = currentFighter.Name;
         Health.text = currentFighter.CurrentHP.ToString() + " / " + currentFighter.MaxHP.ToString();
         Image.sprite = currentFighter.GetComponent<SpriteRenderer>().sprite;
-        ClearPanel();
-        FillPanel();
     }
 
     public void FillPanel()
     {
+        ClearPanel();
         //Llena con consumibles el panel
         foreach (var item in GameManager.Instance.AllConsumibles)
         {
             GameObject itemButton = Instantiate(PrefabConsumibleButton);
 
             itemButton.GetComponent<Button_Consumible>().itemName.text = item.Name;
-            itemButton.GetComponent<Button_Consumible>().itemDescription.text = item.Description;
             itemButton.GetComponent<Button_Consumible>().thisItem = item;
 
-            itemButton.transform.SetParent(transform, false);
+            itemButton.transform.SetParent(ConsumablesPanel.transform, false);
 
             AllButtonsInPanel.Add(itemButton);
         }
@@ -91,6 +93,10 @@ public class ConsumiblePanel : MonoBehaviour
 
     public void ClearPanel()
     {
+        foreach (GameObject button in AllButtonsInPanel)
+        {
+            Destroy(button);
+        }
         AllButtonsInPanel.Clear();
     }
 }

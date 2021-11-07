@@ -61,16 +61,29 @@ public class Consumible : Item
 
     private void ItemUsedCorrectly()
     {
-        var combatManager = FindObjectOfType<CombatManager>();
-
-        // se termina el turno
-        combatManager.AttackDone = true;
-
         // se elimina el consumible recien utilizado de la lista de consumibles
         GameManager.Instance.AllConsumibles.Remove(this);
 
         // destruye la instancia porque el objeto fue usado
         Destroy(this);
+
+        var combatManager = FindObjectOfType<CombatManager>();
+        var consumiblePanel = FindObjectOfType<ConsumiblePanel>();
+
+        // se termina el turno
+        if (GameManager.Instance.GameState == GAME_STATE.COMBAT)
+        {
+            combatManager.AttackDone = true;
+        }
+
+        // elimina el objeto del panel en el menu
+        else if (GameManager.Instance.GameState == GAME_STATE.MENU)
+        {
+            consumiblePanel.SelectedConsumible = null;
+            consumiblePanel.SetUpPanel();
+        }
+
+        
 
     }
 
@@ -80,6 +93,10 @@ public class Consumible : Item
 
         // si no se cumplio la condicion para utilizar el consumible, el consumible se deselecciona
         var combatManager = FindObjectOfType<CombatManager>();
-        combatManager.SelectedConsumible = null;
+        if(combatManager != null)
+        {
+            combatManager.SelectedConsumible = null;
+        }
+        
     }
 }
