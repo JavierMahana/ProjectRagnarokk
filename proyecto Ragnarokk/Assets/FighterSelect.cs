@@ -66,7 +66,7 @@ public class FighterSelect : MonoBehaviour
                 // se activa la funcion en useo del consumible seleccionado, sobre el fighter
                 // al que corresponde el botón
                 Debug.Log("SaludAntes: " + Fighter.CurrentHP);
-                combatManager.SelectedConsumible.OnUse(Fighter);
+                combatManager.SelectedConsumible.OnUse(Fighter, combatManager.ActiveFighter);
                 Debug.Log("SaludDespues: " + Fighter.CurrentHP);
 
                 // AQUI ACTUALIZAR BARRA

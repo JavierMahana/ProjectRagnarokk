@@ -79,7 +79,7 @@ public class HopeManager : Singleton<HopeManager>
     
 
     //Método que modifica la esperanza en base a la magnitud especificada
-    public void ChangeHope(sbyte magnitude, string changeReason = "")
+    public string ChangeHope(sbyte magnitude, string changeReason = "")
     {
         if(!HopeModifiers.ContainsKey(magnitude))
         {
@@ -91,7 +91,7 @@ public class HopeManager : Singleton<HopeManager>
             {
                 Debug.Log("La magnitud especificada está fuera de rango.");
             }
-            return;
+            return "";
         }
 
         float value = HopeModifiers[magnitude];
@@ -101,7 +101,12 @@ public class HopeManager : Singleton<HopeManager>
         if(PartyHope > MaxHope) { PartyHope = MaxHope; }
         if(PartyHope < MinHope) { PartyHope = MinHope; }
 
-        Debug.Log(changeReason + " (" + value + ") | Esperanza del grupo: " + PartyHope);
+        //Debug.Log(changeReason + " (" + value + ") | Esperanza del grupo: " + PartyHope);
+
+        string hopeChange = "(" + value + "% Hope)";
+        if(value > 0) { hopeChange.Insert(1, "+"); }
+        
+        return hopeChange;
     }
 
     //Este método permite cambiar la esperanza especificando el valor exacto a adicionar
