@@ -188,6 +188,7 @@ public class GameManager : Singleton<GameManager>
             fighterComp.Atack = data.Atack;
             fighterComp.Defense = data.Defense;
             fighterComp.Speed = data.Speed;
+            fighterComp.Luck = data.Luck;
             fighterComp.MaxHP = data.MaxHP;
             fighterComp.CurrentHP = fighterComp.MaxHP;
 

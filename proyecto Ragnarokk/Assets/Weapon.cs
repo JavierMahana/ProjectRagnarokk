@@ -7,8 +7,13 @@ using UnityEngine;
 public class Weapon : Item
 {
     public int BaseDamage = 50;
+
     [Range(0, 100)]
     public int BaseAccuracy;
+
+    [Range(5, 20)]
+    public int BaseCriticalRate;
+
     public int BaseCooldown;
     //[HideInInspector] public int CurrentCooldown;
 

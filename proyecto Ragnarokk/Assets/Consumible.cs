@@ -16,21 +16,32 @@ public class Consumible : Item
 
     // Aqui se añade especifica la funcion del consumible, al terminar de usarse debería destruirse
     // su destruiccion y eliminación de la lista de consumibles debería estar en el gameManager.
-    public void OnUse(Fighter user)
-    {        
+    public void OnUse(Fighter user, Fighter fighterInTurn)
+    {
+        var combatDescriptor = FindObjectOfType<CombatDescriptor>();
+        var combatManager = FindObjectOfType<CombatManager>();
 
         switch (type)
         {
             #region objeto 1
             case ConsumibleType.HEALTH_REGEN_1: if (user.CurrentHP != user.MaxHP)
                     {
-                        user.CurrentHP += 15;
+                        const int recoveryValue = 15;
+                        user.CurrentHP += recoveryValue;
                         if (user.CurrentHP > user.MaxHP)
                         {
                             user.CurrentHP = user.MaxHP;
                         }
+
+                        combatDescriptor.Clear();
+
+                        string useLine = "";
+                        if(user.Equals(fighterInTurn)) { useLine = fighterInTurn.Name + " uses " + Name; }
+                        else { useLine = fighterInTurn.Name + " uses " + Name + " on " + user.Name; }
+                        combatDescriptor.AddTextLine(useLine);
+                        combatDescriptor.AddTextLine(user.Name + " recovers " + recoveryValue + " HP");
+
                         ItemUsedCorrectly();
-                        
                     }
                     else
                     {
@@ -45,6 +56,13 @@ public class Consumible : Item
                 if (user.CurrentHP <= 0)
                 {
                     user.CurrentHP = user.MaxHP;
+
+                    combatManager.LiftPlayerFighter(user);
+
+                    combatDescriptor.Clear();
+                    combatDescriptor.AddTextLine(fighterInTurn.Name + " uses " + Name + " on " + user.Name);
+                    combatDescriptor.AddTextLine(user.Name + " has risen!");
+
                     ItemUsedCorrectly();
                 }
                 else
