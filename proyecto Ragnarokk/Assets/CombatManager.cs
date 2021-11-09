@@ -111,7 +111,7 @@ public class CombatManager : MonoBehaviour
 
     [HideInInspector]
     //attack done podría cambiarse a ActionDone
-    public bool AttackDone = false;
+    public bool ActionDone = false;
 
     //Comparador de rapidez para ordenar la lista de luchadores
     public int SpeedComparer(Fighter f1, Fighter f2)
@@ -504,9 +504,10 @@ public class CombatManager : MonoBehaviour
                }
                */
             #endregion
+
             //No continúa hasta que la acción ha sido descrita por completo
-            yield return new WaitUntil(() => (AttackDone && CombatDescriptor.TextIsEmpty));
-            AttackDone = false;
+            yield return new WaitUntil(() => (ActionDone && CombatDescriptor.TextIsEmpty));
+            ActionDone = false;
             MoveActivePlayerButton(false);
         }
         //TURNO DE UN ENEMIGO
@@ -976,6 +977,12 @@ public class CombatManager : MonoBehaviour
             defensa.GetComponent<ActionButton>().initialActionText = "Defense";
             defensa.transform.SetParent(PanelForActions.transform, false);
             AllButtonsInPanel.Add(defensa);
+
+            GameObject huida = Instantiate(PrefabActionButton);
+
+            huida.GetComponent<ActionButton>().initialActionText = "Flee Combat";
+            huida.transform.SetParent(PanelForActions.transform, false);
+            AllButtonsInPanel.Add(huida);
         }
 
         // si una accion ya fue seleccionada
@@ -1045,7 +1052,19 @@ public class CombatManager : MonoBehaviour
                 // terminar turno
                 GameManager.Instance.ConfirmationClick = false;
                 CleanPanelSelecion();
-                AttackDone = true;
+                ActionDone = true;
+            }
+            #endregion
+
+            #region FleeCombat
+            if (GameManager.Instance.OnFleeCombat)
+            {
+                // se escapa del combate
+
+                // terminar turno
+                GameManager.Instance.ConfirmationClick = false;
+                CleanPanelSelecion();
+                ActionDone = true;
             }
             #endregion
         }

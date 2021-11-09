@@ -92,7 +92,7 @@ public class Consumible : Item
         // se termina el turno
         if (GameManager.Instance.GameState == GAME_STATE.COMBAT)
         {
-            combatManager.AttackDone = true;
+            combatManager.ActionDone = true;
         }
 
         // elimina el objeto del panel en el menu

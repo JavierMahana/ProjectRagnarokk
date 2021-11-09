@@ -50,7 +50,7 @@ public class FighterSelect : MonoBehaviour
                 // se utiliza la función fight sobre el fighter al que corresponde el botón
                 combatManager.Fight(this);
                 // se termina el turno
-                combatManager.AttackDone = true;
+                combatManager.ActionDone = true;
 
             }
 
