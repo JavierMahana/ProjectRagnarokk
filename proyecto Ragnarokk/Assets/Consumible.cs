@@ -16,10 +16,11 @@ public class Consumible : Item
 
     // Aqui se añade especifica la funcion del consumible, al terminar de usarse debería destruirse
     // su destruiccion y eliminación de la lista de consumibles debería estar en el gameManager.
-    public void OnUse(Fighter user, Fighter fighterInTurn)
+    public void OnUse(Fighter user)
     {
         var combatDescriptor = FindObjectOfType<CombatDescriptor>();
         var combatManager = FindObjectOfType<CombatManager>();
+        Fighter fighterInTurn = combatManager.ActiveFighter;
 
         switch (type)
         {

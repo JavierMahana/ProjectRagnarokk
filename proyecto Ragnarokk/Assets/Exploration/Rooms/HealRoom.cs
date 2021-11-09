@@ -12,6 +12,7 @@ public class HealRoom : RoomData
     {
         gameManager.HealPlayerFighters();
         room.TryActivateLorePanel(sprite, text);
+        FindObjectOfType<GeneralMenu>().gameObject.SetActive(false);
 
         room.MarkAsCurrent();
         room.MarkAsCleared();

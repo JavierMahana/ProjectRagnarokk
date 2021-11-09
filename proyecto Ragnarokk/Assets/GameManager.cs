@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager>
             }
             else if (FindObjectOfType<ExplorationState>())
             {
-                if (FindObjectOfType<GeneralMenu>().MenuDropdown.value != 0)
+                if (FindObjectOfType<GeneralMenu>(true).MenuDropdown.value != 0)
                 {
                     return GAME_STATE.MENU;
                 }
