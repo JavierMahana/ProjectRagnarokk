@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class HealthBarManager : MonoBehaviour
 {
-    
 
     public GameObject HealthBarPrevab;
 
     private List<HealthBar> activeHealthBars = new List<HealthBar>();
 
     private CombatManager combatManager;
+
     private bool initialized;
 
     Vector2 healthBarOffset = new Vector2(0, 1);
@@ -24,7 +24,7 @@ public class HealthBarManager : MonoBehaviour
     {
         if (!initialized)
         {
-            if (combatManager.initialized)
+            if (combatManager != null && combatManager.initialized)
             {
                 InitHealthBars();
             }

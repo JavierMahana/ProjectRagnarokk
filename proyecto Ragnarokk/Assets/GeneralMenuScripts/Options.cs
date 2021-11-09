@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplorationState : MonoBehaviour
+public class Options : MonoBehaviour
 {
+    public string Panelname = "Options";
     // Start is called before the first frame update
     void Start()
     {
@@ -15,5 +16,4 @@ public class ExplorationState : MonoBehaviour
     {
         
     }
-
 }

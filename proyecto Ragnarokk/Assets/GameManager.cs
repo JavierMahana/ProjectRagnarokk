@@ -16,7 +16,8 @@ public enum GAME_STATE
 {
     PREGAME,
     COMBAT,
-    EXPLORATION
+    EXPLORATION,
+    MENU
 }
 
 public class GameManager : Singleton<GameManager>
@@ -39,8 +40,13 @@ public class GameManager : Singleton<GameManager>
             }
             else if (FindObjectOfType<ExplorationState>())
             {
+                if (FindObjectOfType<GeneralMenu>().MenuDropdown.value != 0)
+                {
+                    return GAME_STATE.MENU;
+                }
                 return GAME_STATE.EXPLORATION;
             }
+            
             else
             {
                 return GAME_STATE.PREGAME;
@@ -91,7 +97,6 @@ public class GameManager : Singleton<GameManager>
     [ReadOnly]
     public List<PlayerFighter> PlayerFighters = new List<PlayerFighter>();
     public List<FighterSelect> PlayerButtons = new List<FighterSelect>();
-
 
     public GameObject PlayerOnTurn;
 
@@ -222,5 +227,10 @@ public class GameManager : Singleton<GameManager>
     public bool PartyIsComplete()
     {
         return PlayerFighters.Count == 3;
+    }
+
+    public void SaveNQuit() 
+    {
+        //save data and exit game
     }
 }

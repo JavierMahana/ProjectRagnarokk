@@ -15,9 +15,7 @@ public class WeaponSpecs : MonoBehaviour
     [HideInInspector]
     public int IndexOfFighterWeapon;
 
-    private Color selectColor = Color.blue;
-    [HideInInspector]
-    public Color initialColor = Color.white;
+    public Color defaultColor;
 
     [HideInInspector]
     public bool ButtonPressed;
@@ -25,6 +23,7 @@ public class WeaponSpecs : MonoBehaviour
     private void Start()
     {
         ButtonPressed = false;
+        defaultColor = ColorBlock.defaultColorBlock.normalColor;
     }
 
     public WeaponSpecs(string name, string damage, Weapon weapon, int weaponIndex)
@@ -58,6 +57,7 @@ public class WeaponSpecs : MonoBehaviour
         {
             GameManager.Instance.ConfirmationClick = false;
             combatManager.AttackWeapon = null;
+            GetComponent<Image>().color = defaultColor;
             ButtonPressed = false;
         }
     }
