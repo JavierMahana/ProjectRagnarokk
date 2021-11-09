@@ -51,6 +51,9 @@ public class ActionButton : MonoBehaviour
                 case "Cancel":
                     Cancel();
                     break;
+                case "Flee Combat":
+                    FleeCombat();
+                    break;
                 default:
                     Debug.Log("la accion actual no existe");
                     break;
@@ -79,18 +82,29 @@ public class ActionButton : MonoBehaviour
         GameManager.Instance.OnAttack = true;
         GameManager.Instance.OnConsumible = false;
         GameManager.Instance.OnDefense = false;
+        GameManager.Instance.OnFleeCombat = false;
     }
     public void Consumible()
     {
         GameManager.Instance.OnAttack = false;
         GameManager.Instance.OnConsumible = true;
         GameManager.Instance.OnDefense = false;
+        GameManager.Instance.OnFleeCombat = false;
     }
     public void Defense()
     {
         GameManager.Instance.OnAttack = false;
         GameManager.Instance.OnConsumible = false;
         GameManager.Instance.OnDefense = true;
+        GameManager.Instance.OnFleeCombat = false;
+    }
+
+    public void FleeCombat() 
+    {
+        GameManager.Instance.OnAttack = false;
+        GameManager.Instance.OnConsumible = false;
+        GameManager.Instance.OnDefense = false;
+        GameManager.Instance.OnFleeCombat = true;
     }
 
     public void Cancel()
@@ -98,6 +112,7 @@ public class ActionButton : MonoBehaviour
         GameManager.Instance.OnAttack = false;
         GameManager.Instance.OnConsumible = false;
         GameManager.Instance.OnDefense = false;
+        GameManager.Instance.OnFleeCombat = false;
 
         GameManager.Instance.ConfirmationClick = false;
         CombatManager combatManager = GameObject.Find("CombatManager").GetComponent<CombatManager>();

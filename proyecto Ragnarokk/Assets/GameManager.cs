@@ -107,6 +107,8 @@ public class GameManager : Singleton<GameManager>
     public bool OnConsumible;
     [HideInInspector]
     public bool OnDefense;
+    [HideInInspector]
+    public bool OnFleeCombat;
 
 
     private void Update()
