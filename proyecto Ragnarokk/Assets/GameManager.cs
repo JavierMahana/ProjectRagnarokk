@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager>
             }
             else if (FindObjectOfType<ExplorationState>())
             {
-                if (FindObjectOfType<GeneralMenu>().MenuDropdown.value != 0)
+                if (FindObjectOfType<GeneralMenu>(true).MenuDropdown.value != 0)
                 {
                     return GAME_STATE.MENU;
                 }
@@ -78,6 +78,9 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector]
     public CombatEncounter currentEncounter;
 
+
+    public Dictionary<Room, ShopData> InitializedShopsInFloor = new Dictionary<Room, ShopData>();
+    public ShopData CurrShopData;
 
     public List<Weapon> AllWeapons = new List<Weapon>();
 
@@ -133,6 +136,8 @@ public class GameManager : Singleton<GameManager>
 
     public void StartFloor()
     {
+        InitializedShopsInFloor.Clear();
+
         int count = AllFloors.Count;
         if (count > 0)
         {
@@ -185,6 +190,7 @@ public class GameManager : Singleton<GameManager>
             fighterComp.Atack = data.Atack;
             fighterComp.Defense = data.Defense;
             fighterComp.Speed = data.Speed;
+            fighterComp.Luck = data.Luck;
             fighterComp.MaxHP = data.MaxHP;
             fighterComp.CurrentHP = fighterComp.MaxHP;
 

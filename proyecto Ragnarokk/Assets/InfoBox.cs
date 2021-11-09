@@ -16,13 +16,22 @@ public class InfoBox : MonoBehaviour
     public TextMeshProUGUI WeaponStatusEffectsText;
     public TextMeshProUGUI WeaponDescriptionText;
 
+    public GameObject FighterFormatObj;
+
+    public TextMeshProUGUI AtackText;
+    public TextMeshProUGUI DefenceText;
+    public TextMeshProUGUI SpeedText;
+    public TextMeshProUGUI HPText;
+    public TextMeshProUGUI TypeText;
+    public TextMeshProUGUI FighterDescriptionText;
+
     public GameObject GenericFormatObj;
 
     public TextMeshProUGUI GenericDescriptionText;
 
     void Start()
     {
-        //Hide();
+        Clear();
     }
 
     public void Clear()
@@ -30,10 +39,12 @@ public class InfoBox : MonoBehaviour
         Title.text = "";
         WeaponFormatObj.SetActive(false);
         GenericFormatObj.SetActive(false);
+        FighterFormatObj.SetActive(false);
     }
 
     public void ShowInfo(string title, string description)
     {
+        FighterFormatObj.SetActive(false);
         GenericFormatObj.SetActive(true);
         WeaponFormatObj.SetActive(false);
 
@@ -51,6 +62,7 @@ public class InfoBox : MonoBehaviour
         }
         else
         {
+            FighterFormatObj.SetActive(false);
             GenericFormatObj.SetActive(true);
             WeaponFormatObj.SetActive(false);
 
@@ -61,6 +73,7 @@ public class InfoBox : MonoBehaviour
 
     public void ShowInfo(Weapon weapon)
     {
+        FighterFormatObj.SetActive(false);
         GenericFormatObj.SetActive(false);
         WeaponFormatObj.SetActive(true);
 
@@ -76,6 +89,22 @@ public class InfoBox : MonoBehaviour
         WeaponStatusEffectsText.text = stringAplidedStates;
 
         WeaponDescriptionText.text = weapon.Description;
+    }
+
+    public void ShowInfo(FighterData fighterData)
+    {
+        FighterFormatObj.SetActive(true);
+        GenericFormatObj.SetActive(false);
+        WeaponFormatObj.SetActive(false);
+
+        Title.text = fighterData.Name;
+        FighterDescriptionText.text = fighterData.Description;
+        AtackText.text = fighterData.Atack.ToString();
+        DefenceText.text = fighterData.Defense.ToString();
+        SpeedText.text = fighterData.Speed.ToString();
+        HPText.text = fighterData.MaxHP.ToString();
+        TypeText.text = fighterData.Type.Name;
+
     }
 
 }

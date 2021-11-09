@@ -25,16 +25,19 @@ public class FighterData : ScriptableObject
     
     public string Name = "unnamed fighter type";
 
+    public string Description = "Description";
+
     #region BASE STATS
     public int Speed = 10;
     public int Atack = 10;
     public int Defense = 5;
+    public int Luck;
     public int MaxHP = 100;
     //public int CurrentHP = 100;
     #endregion
 
     [Range(0, 4)]
-    public byte PowerRating = 1;
+    public byte PowerRating = 1; //Valoración subjetiva de qué tan poderoso es un luchador (pensado para enemigos)
     
     public Weapon[] DefaultWeapons = new Weapon[4];
 

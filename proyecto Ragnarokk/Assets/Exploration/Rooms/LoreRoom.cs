@@ -11,6 +11,7 @@ public class LoreRoom : RoomData
     public override void LoadRoom(GameManager gameManager, SceneChanger sceneChanger, Room room)
     {
         room.TryActivateLorePanel(sprite, text);
+        FindObjectOfType<GeneralMenu>().gameObject.SetActive(false);
 
         room.MarkAsCurrent();
         room.MarkAsCleared();

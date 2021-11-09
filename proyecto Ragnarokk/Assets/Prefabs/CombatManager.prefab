@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3473768594395077197}
   - component: {fileID: 8547385059972138565}
+  - component: {fileID: 6729127176104873090}
   m_Layer: 0
   m_Name: CombatManager
   m_TagString: Untagged
@@ -43,11 +44,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5222553dafb0b0e4b9bf0ca604e4f306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item1: {fileID: 0}
+  item2: {fileID: 0}
   CombatCanvas: {fileID: 253975490868383963, guid: 62b4487792b51d9448192a664df18928, type: 3}
+  CombatDescriptor: {fileID: 0}
+  PrefabActionButton: {fileID: 0}
+  PrefabWeaponButton: {fileID: 0}
+  PrefabConsumibleButton: {fileID: 0}
+  PanelForActions: {fileID: 0}
+  FighterClickButton: {fileID: 0}
+  AllButtonsInPanel: []
+  PermanentCanvas: {fileID: 0}
   playerFightersX: 0
   playerFightersMinY: 0
   playerFightersMaxY: 0
   enemyFightersX: 0.731
   enemyFightersMinY: 0.184
   enemyFightersMaxY: 0.819
+  initialized: 0
   FighterBasePrefab: {fileID: 4375212014534626024, guid: ee9478e7f28706048b4a3bf1312faf01, type: 3}
+  AllCombatFighters: []
+  ActiveFighter: {fileID: 0}
+  CurrentPlayerButton: {fileID: 0}
+  TurnInProcess: 0
+  Action: 
+  AttackWeapon: {fileID: 0}
+  AttackWeaponIndex: 0
+  SelectedConsumible: {fileID: 0}
+  Target: {fileID: 0}
+  Confirm: 0
+  Annulment: 0
+  AttackDone: 0
+--- !u!114 &6729127176104873090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565672177400657342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 404ceabc3beccae439fe4cf5a824bc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanvasCombatDescriptor: {fileID: 3327920975114394875, guid: 263587f15ab3e744bb47482aeba508c1, type: 3}
+  Text: {fileID: 0}

@@ -47,8 +47,7 @@ public class ConfirmScreen : MonoBehaviour
         }
         else if (itemAsConsumible != null)
         {
-
-            Debug.Log("Se agrega el consumible al inventario. Eso aun no se implementa :o");
+            GameManager.Instance.AllConsumibles.Add(itemAsConsumible);
 
         }
         else if (currMoneyAmmount != -1) 
@@ -60,10 +59,19 @@ public class ConfirmScreen : MonoBehaviour
             Debug.LogError("Can't confirm. The item selected is not a weapon nor a consumible.");
         }
 
-        SceneChanger.Instance.LoadExplorationScene();
+        if (isShop)
+        {
+            Cancel();
+        }
+        else
+        {
+            SceneChanger.Instance.LoadExplorationScene();
+        }
+        
     }
     public void Cancel()
     {
+        isShop = false;
         currItem = null;
         currFighter = null;
         currSlot = -1;
@@ -71,8 +79,9 @@ public class ConfirmScreen : MonoBehaviour
         Hide();
     }
 
-    public void Show(int moneyAmmount)
+    public void Show(int moneyAmmount, bool isShop = false)
     {
+        this.isShop = isShop;
         showWeaponsSwapObjWhenClose = false;
 
         currMoneyAmmount = moneyAmmount;
@@ -83,8 +92,9 @@ public class ConfirmScreen : MonoBehaviour
             obj.SetActive(false);
         }
     }
-    public void Show(Consumible consumible)
+    public void Show(Consumible consumible, bool isShop = false)
     {
+        this.isShop = isShop;
         showWeaponsSwapObjWhenClose = false;
 
         currItem = consumible;
@@ -96,8 +106,10 @@ public class ConfirmScreen : MonoBehaviour
             obj.SetActive(false);
         }
     }
-    public void Show(Weapon weapon, Fighter fighter, int slot)
+    public void Show(Weapon weapon, Fighter fighter, int slot, bool isShop = false)
     {
+        this.isShop = isShop;
+
         showWeaponsSwapObjWhenClose = true;
 
         currItem = weapon;
