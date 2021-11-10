@@ -33,6 +33,8 @@ public class Fighter : MonoBehaviour
 
     public List<CombatState> States = new List<CombatState>();
 
+    public bool IsDefending = false;
+
 
 
     public VoidDelegate OnTakeDamage;

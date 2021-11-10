@@ -76,6 +76,8 @@ public class CombatManager : MonoBehaviour
     [HideInInspector]
     public Fighter ActiveFighter;
 
+    const int DefenseValue = 10; //Tal vez sea mejor definir un multiplicador en vez de una suma?
+
     [HideInInspector]
     public FighterSelect CurrentPlayerButton;
     Vector2 OriginalButtonPos;
@@ -193,7 +195,10 @@ public class CombatManager : MonoBehaviour
             j++;
         }
         PartyIsFine = (PartyCurrentHP >= PartyMaxHP * 0.75);
-        AlivePlayerFighters.AddRange(PlayerFighters);
+        foreach(Fighter pf in PlayerFighters)
+        {
+            if(pf.CurrentHP > 0) { AlivePlayerFighters.Add(pf); }
+        }
 
         int enemyCount = encounter.ListOfEncounterEnemies.Count;
         for (int i = 0; i < enemyCount; i++)
@@ -217,6 +222,11 @@ public class CombatManager : MonoBehaviour
         //Se unen los luchadores en una lista
         AllCombatFighters.AddRange(PlayerFighters);
         AllCombatFighters.AddRange(EnemyFighters);
+
+        foreach(Fighter fighter in AllCombatFighters)
+        {
+            fighter.IsDefending = false;
+        }
 
         //Los luchadores se ordenan por velocidad
         AllCombatFighters.Sort(SpeedComparer);
@@ -324,14 +334,7 @@ public class CombatManager : MonoBehaviour
             }
             else if(CombatState > 0)
             {
-                RemoveAllCombatStates();
-                ResetWeaponCooldowns();
-                HopeManager.Instance.ChangeHope(3, "Cambio por victoria");
-
-                var sceneChanger = FindObjectOfType<SceneChanger>();
-                //sceneChanger.ChangeScene("Victory");
-                //Debug.Log("VICTORIA");
-                sceneChanger.ChangeScene("Exploration");
+                StartCoroutine(Victory());
             }
             else
             {
@@ -344,6 +347,31 @@ public class CombatManager : MonoBehaviour
         // constantemente se revisa si es que se va activar el botón para seleccionar enemigos
         ShowEnemyInteractableButton(GameManager.Instance.ConfirmationClick);
 
+    }
+
+    private IEnumerator Victory()
+    {
+        RemoveAllCombatStates();
+        ResetWeaponCooldowns();
+
+        foreach (Fighter pf in PlayerFighters)
+        {
+            pf.IsDefending = false;
+        }
+
+        string victoryHopeChange = HopeManager.Instance.ChangeHope(3, "Cambio por victoria");
+        string victoryDesc = "YOU WIN! ";
+        victoryDesc += victoryHopeChange;
+        CombatDescriptor.Clear();
+        CombatDescriptor.AddTextLine(victoryDesc, 1.5f);
+
+        yield return null;
+        yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
+
+        var sceneChanger = FindObjectOfType<SceneChanger>();
+        //sceneChanger.ChangeScene("Victory");
+        //Debug.Log("VICTORIA");
+        sceneChanger.ChangeScene("Exploration");
     }
 
     public void MoveActivePlayerButton(bool moveFoward)
@@ -406,10 +434,22 @@ public class CombatManager : MonoBehaviour
 
     private IEnumerator TurnAction()
     {
+        if(ActiveFighter.IsDefending)
+        {
+            ActiveFighter.Defense -= DefenseValue;
+            ActiveFighter.IsDefending = false;
+        }
+        Debug.Log("En defensa:");
+        foreach (Fighter f in AllCombatFighters)
+        {
+            if (f.IsDefending) { Debug.Log(f.Name + " (" + f.Defense + ")"); }
+        }
+
         var iniPos = ActiveFighter.transform.position;
 
         const float pauseTime = 0.8f; //Tiempo estándar usado para pausas breves
 
+        yield return null;
         yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty); //No está esperando, y no sé por qué
         CombatDescriptor.ShowFighterInTurn(ActiveFighter);
 
@@ -522,6 +562,7 @@ public class CombatManager : MonoBehaviour
 
             AttackWeapon = ActiveFighter.Weapons[0];
             Target = AlivePlayerFighters[Random.Range(0, AlivePlayerFighters.Count)];
+            //Debug.Log("PRE-TARGET: " + Target.Name);
 
             // la variable button utiliza el boton de accion por default, sin embargo
             // debe ser reemplazado por el botón del jugador que será el target antes de llamar la funcion Fight
@@ -564,7 +605,7 @@ public class CombatManager : MonoBehaviour
 
         Target = targetButton.Fighter;
         //Debug.Log("ATACANTE: " + ActiveFighter.Name);
-        //Debug.Log("OBJETIVO: " + Target.Name);
+        //Debug.Log("TARGET: " + Target.Name);
 
         CombatDescriptor.Clear();
         CombatDescriptor.AddTextLine(ActiveFighter.Name + " uses " + AttackWeapon.Name); //Muestra atacante y arma
@@ -612,7 +653,8 @@ public class CombatManager : MonoBehaviour
             float criticalFact = 1;
             int criticalRate = AttackWeapon.BaseCriticalRate + ActiveFighter.Luck; //Valor que se calcula como la suma de el índice de crítico del arma, y la suerte del atacante
             int criticalValue = Random.Range(0, 100);
-            Debug.Log(criticalRate + " > " + criticalValue + "?");
+            //Debug.Log(criticalRate + " > " + criticalValue + "?");
+
             //El índice calculado debe superar el valor aleatorio para asestar crítico
             if (criticalRate > criticalValue)
             {
@@ -688,6 +730,7 @@ public class CombatManager : MonoBehaviour
             {
                 Target.CurrentHP = 0;
                 RemoveCombatStates(Target);
+                Target.IsDefending = false;
 
                 string defeatDesc = Target.Name + " has been defeated! ";
                 string defHopeChange = "";
@@ -1044,7 +1087,8 @@ public class CombatManager : MonoBehaviour
             {
                 // aumentar temporalmente la defensa del jugador activo
                 // podría usarse un array de bonuses, útil también para consumibles
-                // ActiveFighter.Defense += 10;
+                ActiveFighter.Defense += DefenseValue; //Se aumentará la defensa del luchador hasta que vuelva a ser su turno
+                ActiveFighter.IsDefending = true;
 
                 CombatDescriptor.Clear(); //Si se llega a crear un método para aplicar la defensa, esta línea debe ir ahí
                 CombatDescriptor.AddTextLine(ActiveFighter.Name + " is defending");

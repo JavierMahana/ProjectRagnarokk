@@ -172,6 +172,7 @@ public class GameManager : Singleton<GameManager>
         {
             var fighter = pf.GetComponent<Fighter>();
             fighter.CurrentHP = fighter.MaxHP;
+            fighter.transform.rotation = new Quaternion(0, 0, 0, 0);
         }
     }
 
