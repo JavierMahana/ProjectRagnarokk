@@ -89,6 +89,9 @@ public class CombatManager : MonoBehaviour
 
     sbyte CombatState = 0;
 
+    bool FleeActionSelected = false;
+    bool OnFlee = false;
+
     //VARIABLES DE ACCIÓN DE UN TURNO
     /// <summary>
     /// Se utilizan para las condiciones de continuación de la corrutina TurnAction, y para el cálculo de daño en el método Fight.
@@ -344,6 +347,21 @@ public class CombatManager : MonoBehaviour
             }
         }
 
+        //Finaliza el combate por huida
+        if(OnFlee)
+        {
+            RemoveAllCombatStates();
+            ResetWeaponCooldowns();
+
+            foreach (Fighter pf in PlayerFighters)
+            {
+                pf.IsDefending = false;
+            }
+
+            var sceneChanger = FindObjectOfType<SceneChanger>();
+            sceneChanger.ChangeScene("Exploration");
+        }
+
         // constantemente se revisa si es que se va activar el botón para seleccionar enemigos
         ShowEnemyInteractableButton(GameManager.Instance.ConfirmationClick);
 
@@ -434,6 +452,7 @@ public class CombatManager : MonoBehaviour
 
     private IEnumerator TurnAction()
     {
+        //Si el luchador estaba defendiéndose, sale de ese estado
         if(ActiveFighter.IsDefending)
         {
             ActiveFighter.Defense -= DefenseValue;
@@ -449,8 +468,8 @@ public class CombatManager : MonoBehaviour
 
         const float pauseTime = 0.8f; //Tiempo estándar usado para pausas breves
 
-        yield return null;
-        yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty); //No está esperando, y no sé por qué
+        yield return null; //Es posible que la necesidad de esta línea se deba a que se consulta por la variable TextIsEmpty, la cual se actualiza en Update, en vez de consultar directamente el tamaño de la lista de TextLines.
+        yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
         CombatDescriptor.ShowFighterInTurn(ActiveFighter);
 
         //TURNO DE UN ALIADO
@@ -546,7 +565,13 @@ public class CombatManager : MonoBehaviour
             #endregion
 
             //No continúa hasta que la acción ha sido descrita por completo
-            yield return new WaitUntil(() => (ActionDone && CombatDescriptor.TextIsEmpty));
+            yield return new WaitUntil(() => ActionDone && CombatDescriptor.TextIsEmpty);
+            Debug.Log("Descriptor vacío");
+            if(FleeActionSelected)
+            {
+                OnFlee = true;
+                yield break; //Se interrumpe la corrutina. El turno NO se declara como terminado. Esto es para prevenir que se inicie un nuevo turno.
+            }
             ActionDone = false;
             MoveActivePlayerButton(false);
         }
@@ -1103,7 +1128,14 @@ public class CombatManager : MonoBehaviour
             #region FleeCombat
             if (GameManager.Instance.OnFleeCombat)
             {
-                // se escapa del combate
+                //Se declara intención de huida
+                FleeActionSelected = true;
+
+                string fleeDesc = "Party flees... ";
+                string fleeHopeChange = HopeManager.Instance.ChangeHope(-4, "Cambio por huida");
+                fleeDesc += fleeHopeChange;
+                CombatDescriptor.Clear();
+                CombatDescriptor.AddTextLine(fleeDesc, 1.5f); //El descriptor indica que el grupo huye, y cómo esto perjudica la esperanza
 
                 // terminar turno
                 GameManager.Instance.ConfirmationClick = false;
