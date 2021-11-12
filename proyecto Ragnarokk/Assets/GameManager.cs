@@ -92,6 +92,9 @@ public class GameManager : Singleton<GameManager>
     
     public List<Consumible> AllConsumibles = new List<Consumible>();
 
+
+    //public List<CombatState> AllCombatStates = new List<CombatState>();
+
     //DontDestroyOnLoad
     //objetos de los fighters del player.
     [ReadOnly]
@@ -112,6 +115,7 @@ public class GameManager : Singleton<GameManager>
     public bool OnDefense;
     [HideInInspector]
     public bool OnFleeCombat;
+
 
 
     private void Update()

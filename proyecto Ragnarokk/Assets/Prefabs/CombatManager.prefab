@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3473768594395077197}
   - component: {fileID: 8547385059972138565}
   - component: {fileID: 6729127176104873090}
+  - component: {fileID: 4530541192104762451}
   m_Layer: 0
   m_Name: CombatManager
   m_TagString: Untagged
@@ -74,7 +75,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   Confirm: 0
   Annulment: 0
-  AttackDone: 0
+  ActionDone: 0
 --- !u!114 &6729127176104873090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,3 +90,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanvasCombatDescriptor: {fileID: 3327920975114394875, guid: 263587f15ab3e744bb47482aeba508c1, type: 3}
   Text: {fileID: 0}
+--- !u!114 &4530541192104762451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565672177400657342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 283a9dd29f0b4894384e7a7c40525bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateIconPrefab: {fileID: 7897272965075307944, guid: 6025d8c4736d1294e939a06a6d120278, type: 3}

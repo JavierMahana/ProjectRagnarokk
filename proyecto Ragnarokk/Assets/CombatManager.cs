@@ -15,6 +15,7 @@ public class CombatManager : MonoBehaviour
     public GameObject CombatCanvas;
 
     public CombatDescriptor CombatDescriptor;
+    public CombatIconManager IconManager;
 
     public GameObject PrefabActionButton;
     public GameObject PrefabWeaponButton;
@@ -130,6 +131,7 @@ public class CombatManager : MonoBehaviour
     public void InitCombatScene(CombatEncounter encounter)
     {
         CombatDescriptor = gameObject.GetComponent<CombatDescriptor>();
+        IconManager = gameObject.GetComponent<CombatIconManager>();
 
         // Añade consumibles para testear, eliminar esto ya que luego los consumibles deben ser entregados
         // como recompensa de combate, exploración o comprados en la tienda.
@@ -755,6 +757,7 @@ public class CombatManager : MonoBehaviour
             {
                 Target.CurrentHP = 0;
                 RemoveCombatStates(Target);
+                IconManager.UpdateStateIcons(AllCombatFighters);
                 Target.IsDefending = false;
 
                 string defeatDesc = Target.Name + " has been defeated! ";
@@ -791,6 +794,7 @@ public class CombatManager : MonoBehaviour
                         CombatDescriptor.AddTextLine(Target.Name + " is " + weaponState.Name);
                     }
                 }
+                IconManager.UpdateStateIcons(AllCombatFighters);
             }
 
             //PASO 11: COMPROBACIÓN DE HP GRUPAL
@@ -960,20 +964,23 @@ public class CombatManager : MonoBehaviour
         bool thereAreStates = false;
         foreach(Fighter f in AllCombatFighters)
         {
-            thereAreStates = true;
-            RemoveCombatStates(f);
+            bool fighterHasStates = RemoveCombatStates(f);
+            if(!thereAreStates) { thereAreStates = fighterHasStates; }
         }
 
         if(thereAreStates) 
         {
             CombatDescriptor.AddTextLine("Everyone's states are gone", 1.5f);
-            //Debug.Log("HAY ESTADOS");
+            IconManager.UpdateStateIcons(AllCombatFighters);
+            Debug.Log("HAY ESTADOS");
         }
     }
 
-    public void RemoveCombatStates(Fighter fighter)
+    public bool RemoveCombatStates(Fighter fighter)
     {
+        if(fighter.States.Count == 0) { return false; }
         fighter.States.Clear();
+        return true;
     }
 
     public void ResetWeaponCooldowns()
