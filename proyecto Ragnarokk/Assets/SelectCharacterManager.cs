@@ -16,6 +16,7 @@ public class SelectCharacterManager : MonoBehaviour
     public GameObject SexCanvas;
     public GameObject NameCanvas;
 
+    public TMP_InputField Inputfield;
     public TextMeshProUGUI FighterName;
 
     private bool isMale;
@@ -45,16 +46,16 @@ public class SelectCharacterManager : MonoBehaviour
             }
         }
         
-        if (GameManager.Instance.PlayerFighters.Count >= 3)
-        {
-            SelectFighterButtons.SetActive(false);
-            StartButton.SetActive(true);
-        }
-        
         if(!onNameChange && !SexCanvas.activeSelf)
         {
             SelectFighterButtons.SetActive(true);
             StartButton.SetActive(false);
+
+            if (GameManager.Instance.PlayerFighters.Count >= 3)
+            {
+                SelectFighterButtons.SetActive(false);
+                StartButton.SetActive(true);
+            }
         }
 
         if (GameManager.Instance.PlayerFighters.Count >= 1)
@@ -71,21 +72,32 @@ public class SelectCharacterManager : MonoBehaviour
     {
         foreach( PlayerFighter pf in GameManager.Instance.PlayerFighters)
         {
-            if (pf == currentFighter)
+            if (pf == currentFighter.GetComponent<PlayerFighter>())
             {
                 pf.GetComponent<Fighter>().isMale = isMale;
                 pf.GetComponent<Fighter>().RealName = FighterName.text;
+
+                var pfs = FindObjectsOfType<PlayerFighter>();
+                int pfsCount = pfs.Length;
+
+                pf.transform.position = new Vector2((-1 + pfsCount), 1);
+                // aqui se podría actualizar el sprite dependiendo del sexo
             }
         }
 
-        currentFighter = null;
-        NameCanvas.SetActive(false);
+        Inputfield.text = "";
         onNameChange = false;
+
+        currentFighter = null;
+        
+        NameCanvas.SetActive(false);
+
     }
 
     public void SetSex(bool istrue)
     {
         isMale = istrue;
+
         SexCanvas.SetActive(false);
         onNameChange = true;
 
@@ -99,6 +111,7 @@ public class SelectCharacterManager : MonoBehaviour
     public void EmptyCurrentFighter()
     {
         currentFighter = null;
+
         var infoBox = FindObjectOfType<InfoBox>();
         if (infoBox != null)
         {

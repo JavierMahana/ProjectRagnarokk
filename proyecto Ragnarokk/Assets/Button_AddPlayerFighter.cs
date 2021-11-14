@@ -36,12 +36,12 @@ public class Button_AddPlayerFighter : MonoBehaviour, IPointerEnterHandler, IPoi
     public void CreatePlayerFighter()
     {
         var pfs = FindObjectsOfType<PlayerFighter>();
-        int pfsCount = pfs.Length;
+        //int pfsCount = pfs.Length;
 
         var obj = Instantiate(playerObjetcPrefab);
         GameManager.Instance.SetDataToFighterGO(obj, data, true);
 
-        obj.transform.position = new Vector2( (-1 + pfsCount),1);
+        obj.transform.position = new Vector2(-100,-100);
 
         var scm = FindObjectOfType<SelectCharacterManager>();
         scm.currentFighter = obj;

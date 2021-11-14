@@ -10,6 +10,7 @@ public class ForAllButtons : MonoBehaviour, IPointerClickHandler
     private Color Pressed;
     private Color Normal;
 
+    public bool staysPressed = true;
     public void Start()
     {
         float r= 0;
@@ -56,7 +57,7 @@ public class ForAllButtons : MonoBehaviour, IPointerClickHandler
                         fa.UnPressButton(ob);
                 }
 
-                if (!IsButtonPressed)
+                if (!IsButtonPressed && staysPressed)
                 {
                     PressButton(b);
                     //suar Buttonsound actual aqui
@@ -85,12 +86,11 @@ public class ForAllButtons : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            Debug.Log("ForAllButtons no encuentra un componente necesario");
+            //Debug.Log("ForAllButtons no encuentra un componente necesario");
         }
 
-        Debug.Log(gameObject.name);
+        //Debug.Log(gameObject.name);
 
-       
     }
 
     public void PressButton(Button b)
