@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 using TMPro;
 using System.Text;
 
@@ -29,6 +29,9 @@ public class InfoBox : MonoBehaviour
 
     public TextMeshProUGUI GenericDescriptionText;
 
+    public Image Male;
+    public Image Female;
+
     void Start()
     {
         Clear();
@@ -36,10 +39,10 @@ public class InfoBox : MonoBehaviour
 
     public void Clear()
     {
-        Title.text = "";
-        WeaponFormatObj.SetActive(false);
-        GenericFormatObj.SetActive(false);
-        FighterFormatObj.SetActive(false);
+        if (Title != null && Title.gameObject.activeSelf) { Title.text = ""; }
+        if (WeaponFormatObj != null && WeaponFormatObj.activeSelf) { WeaponFormatObj.SetActive(false); }
+        if (GenericFormatObj != null && GenericFormatObj.activeSelf) { GenericFormatObj.SetActive(false); }
+        if (FighterFormatObj != null && FighterFormatObj.activeSelf) { FighterFormatObj.SetActive(false); }        
     }
 
     public void ShowInfo(string title, string description)
@@ -103,7 +106,7 @@ public class InfoBox : MonoBehaviour
         DefenceText.text = fighterData.Defense.ToString();
         SpeedText.text = fighterData.Speed.ToString();
         HPText.text = fighterData.MaxHP.ToString();
-        TypeText.text = fighterData.Type.Name;
+        TypeText.text = fighterData.Luck.ToString();
 
     }
 

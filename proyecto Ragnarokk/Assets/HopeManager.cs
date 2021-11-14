@@ -67,9 +67,13 @@ public class HopeManager : Singleton<HopeManager>
             UpdateCombatFactor();
 
             var gm = GameManager.Instance.GameState;
-            if (gm == GAME_STATE.MENU || gm == GAME_STATE.EXPLORATION || gm == GAME_STATE.COMBAT)
+            if (gm == GAME_STATE.EXPLORATION || gm == GAME_STATE.COMBAT || gm == GAME_STATE.MENU)
             {
                 CanvasHope.SetActive(true);
+            }
+            else
+            {
+                CanvasHope.SetActive(false);
             }
                
             if (CanvasHope.activeSelf)
@@ -184,4 +188,5 @@ public class HopeManager : Singleton<HopeManager>
     public void StoreHopeChanges() { }
     public void ApplyHopeChanges() { }
     public void DiscardStoredHopeChanges() { }
+
 }

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : Singleton<SceneChanger>
 {
+
 	public void LoadCombatScene(CombatEncounter encounter)
 	{
 		GameManager.Instance.currentEncounter = encounter;
@@ -20,15 +21,19 @@ public class SceneChanger : Singleton<SceneChanger>
 
 	public void LoadExplorationScene()
 	{
-
 		ChangeScene("Exploration");
 	}
 
 	public void LoadGeneralMenuScene()
 	{
-
 		ChangeScene("GeneralMenu");
 	}
+
+	public void End()
+    {
+		ChangeScene("MainMenu");
+		GameManager.Instance.RestartGame();
+    }
 
 	public void ChangeScene(int sceneBuildNumber)
 	{
@@ -42,4 +47,6 @@ public class SceneChanger : Singleton<SceneChanger>
 	{
 		Application.Quit();
 	}
+
+
 }

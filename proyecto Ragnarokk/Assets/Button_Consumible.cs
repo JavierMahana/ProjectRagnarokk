@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Button_Consumible : MonoBehaviour
+public class Button_Consumible : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Text itemName;
     public Text itemDescription;
     public Consumible thisItem;
 
     public bool ButtonPressed;
-    private Color defaultColor;
+    //private Color defaultColor;
 
 
     private void Start()
     {
         ButtonPressed = false;
-        defaultColor = ColorBlock.defaultColorBlock.normalColor;
+        //defaultColor = ColorBlock.defaultColorBlock.normalColor;
     }
 
     public void OnClick()
@@ -87,13 +88,34 @@ public class Button_Consumible : MonoBehaviour
             else
             {
                 panel.SelectedConsumible = null;
-                GetComponent<Image>().color = defaultColor;
+                //GetComponent<Image>().color = defaultColor;
                 ButtonPressed = false;
             }
             
         }
        
     }
-        
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        var cm = FindObjectOfType<CombatManager>();
+        if(cm != null)
+        {
+            string descripcion = thisItem.Description;
+            cm.SetlDescriptorText(descripcion);
+        }
+       
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        var cm = FindObjectOfType<CombatManager>();
+        // aún no se escogio el arma no se limpia el panel de informacion 
+        if (!GameManager.Instance.ConfirmationClick && cm != null)
+        {
+            cm.ClearPanelDescriptor(); 
+        }
+    }
+
 
 }

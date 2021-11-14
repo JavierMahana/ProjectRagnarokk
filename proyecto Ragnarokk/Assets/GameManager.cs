@@ -17,7 +17,10 @@ public enum GAME_STATE
     PREGAME,
     COMBAT,
     EXPLORATION,
-    MENU
+    MENU,
+    SHOP,
+    TREASURE,
+    CREDITS
 }
 
 public class GameManager : Singleton<GameManager>
@@ -34,19 +37,40 @@ public class GameManager : Singleton<GameManager>
     {
         get
         {
-            if (FindObjectOfType<CombatManager>())
+            if (FindObjectOfType<VictoryManager>())
+            {
+                return GAME_STATE.CREDITS;
+            }
+
+            if (FindObjectOfType<ShopManager>())
+            {
+                return GAME_STATE.SHOP;
+            }
+
+            else if (FindObjectOfType<TreasureState>())
+            {
+                return GAME_STATE.TREASURE;
+            }
+
+            else if (FindObjectOfType<ShopState>())
+            {
+                return GAME_STATE.SHOP;
+            }
+
+            else if (FindObjectOfType<CombatManager>())
             {
                 return GAME_STATE.COMBAT;
             }
+
             else if (FindObjectOfType<ExplorationState>())
             {
-                if (FindObjectOfType<GeneralMenu>(true).MenuDropdown.value != 0)
+                if (FindObjectOfType<GeneralMenu>(true).MenuDropdown.value > 0)
                 {
                     return GAME_STATE.MENU;
                 }
                 return GAME_STATE.EXPLORATION;
             }
-            
+           
             else
             {
                 return GAME_STATE.PREGAME;
@@ -114,8 +138,52 @@ public class GameManager : Singleton<GameManager>
     public bool OnFleeCombat;
 
 
+    // en el start se setea la configuracion del jugador.
+    public void Start()
+    {
+        // comentar la linea de abajo para que que se guarden los cambios que el jugador realice
+        // El valor de un PlayerPref cuando no se encuentra, es 0, es el valor incial default
+        PlayerPrefs.SetInt("firstTime", 0);
+        // si es la primera vez que se inicia el juego, la data cargada es ésta, de lo contrario
+        // se carga la data de Options.
+        if (PlayerPrefs.GetInt("firstTime") == 0)
+        {
+            PlayerPrefs.SetFloat("audioGeneral", 90);
+            PlayerPrefs.SetFloat("audioSFX", 80);
+            PlayerPrefs.SetFloat("audioMusic", 70);
+            PlayerPrefs.SetFloat("audioAmbient", 60);
+
+            PlayerPrefs.SetFloat("combatDescriptorSpeed", 1);
+
+            PlayerPrefs.SetInt("Fullscreen", 0);
+            PlayerPrefs.SetInt("width", Screen.currentResolution.width);
+            PlayerPrefs.SetInt("height", Screen.currentResolution.height);
+
+            //PlayerPrefs.SetInt("firstTime", 1);
+        }
+        
+        // se aplica la configuración del jugador
+        SetPlayerConfiguration();
+        FindObjectOfType<AudioManager>().CheckMusic();
+
+    }
+
+    public void SetPlayerConfiguration()
+    {
+        var fullscreen = PlayerPrefs.GetInt("Fullscreen") == 0 ? true : false;
+        var width = PlayerPrefs.GetInt("width");
+        var height = PlayerPrefs.GetInt("height");
+
+        Screen.SetResolution(width, height, fullscreen);
+
+        FindObjectOfType<AudioManager>().UpdateAudioParameters();
+
+
+    }
+
     private void Update()
     {
+        //Debug.Log($"{GameState}");
 
         PlayerFighters.Clear();
         var pFighter = FindObjectsOfType<PlayerFighter>(false);
@@ -132,6 +200,8 @@ public class GameManager : Singleton<GameManager>
         {
             HopeManager.Instance.InitializeHope();
         }
+
+
     }
 
     public void StartFloor()
@@ -235,5 +305,31 @@ public class GameManager : Singleton<GameManager>
     public void SaveNQuit() 
     {
         //save data and exit game
+    }
+
+    public bool CheckTutorialComplete()
+    {
+        // si es primera vez que se abre el juego
+        if (PlayerPrefs.GetInt("tutorialComplete") == 0) { return true; }
+        return false;
+    }
+
+    public void TutorialComplete()
+    {
+        if (CheckTutorialComplete())
+        {
+            PlayerPrefs.SetInt("tutorialComplete", 1);
+        }
+    }
+
+    public void CheckOnLoadScene()
+    {
+        FindObjectOfType<AudioManager>().CheckMusic();
+    }
+
+    public void RestartGame()
+    {
+        CurrentMoney = 0;
+        PlayerFighters.Clear();
     }
 }

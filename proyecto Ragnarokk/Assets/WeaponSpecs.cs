@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-public class WeaponSpecs : MonoBehaviour
+public class WeaponSpecs : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
-
     public Text weaponName;
-    public Text weaponDamage;
+    //public Text weaponDamage;
     public Weapon thisWeapon;
 
     [HideInInspector]
@@ -29,7 +28,7 @@ public class WeaponSpecs : MonoBehaviour
     public WeaponSpecs(string name, string damage, Weapon weapon, int weaponIndex)
     {
         weaponName.text = name;
-        weaponDamage.text = damage + "dmg";
+        //weaponDamage.text = damage + "dmg";
         thisWeapon = weapon;
         IndexOfFighterWeapon = weaponIndex;
     }
@@ -60,5 +59,42 @@ public class WeaponSpecs : MonoBehaviour
             GetComponent<Image>().color = defaultColor;
             ButtonPressed = false;
         }
+
+        
+    }
+
+    public void FillDescriptorPanel()
+    {
+        var cm = FindObjectOfType<CombatManager>();
+
+        if (cm.AttackWeapon == null)
+        {
+            cm.AddDamageTypeButton(thisWeapon);
+            string description = $" Acc: {thisWeapon.BaseAccuracy} \n Dmg: {thisWeapon.BaseDamage} \n Crit: {thisWeapon.BaseCriticalRate} \n Cooldown: {thisWeapon.BaseCooldown}";
+            cm.SetlDescriptorText(description);
+        }
+
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        FillDescriptorPanel();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        var cm = FindObjectOfType<CombatManager>();
+        // aún no se escogio el arma no se limpia el panel de informacion 
+        if(cm.AttackWeapon == null)
+            cm.ClearPanelDescriptor();
+
+        if(cm.AttackWeapon != thisWeapon && cm.AttackWeapon != null)
+        {
+            cm.ClearPanelDescriptor();
+            cm.AddDamageTypeButton(cm.AttackWeapon);
+            string description = $" Acc: {thisWeapon.BaseAccuracy} \n Dmg: {thisWeapon.BaseDamage} \n Crit: {thisWeapon.BaseCriticalRate} \n Cooldown: {thisWeapon.BaseCooldown}";
+            cm.SetlDescriptorText(description);
+        }
+        
     }
 }

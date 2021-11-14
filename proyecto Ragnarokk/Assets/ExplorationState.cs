@@ -7,7 +7,7 @@ public class ExplorationState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameManager.Instance.CheckOnLoadScene();
     }
 
     // Update is called once per frame

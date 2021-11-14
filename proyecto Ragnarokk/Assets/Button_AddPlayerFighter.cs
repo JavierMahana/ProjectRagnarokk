@@ -15,6 +15,7 @@ public class Button_AddPlayerFighter : MonoBehaviour, IPointerEnterHandler, IPoi
 
     private void Start()
     {
+        
         if (data != null)
         {
             Text text = GetComponentInChildren<Text>();
@@ -27,7 +28,10 @@ public class Button_AddPlayerFighter : MonoBehaviour, IPointerEnterHandler, IPoi
         infoBox = FindObjectOfType<InfoBox>(true);
         if (infoBox == null)
             Debug.LogError("You need a info box!");
+        else
+            infoBox.ShowInfo("Choose your team", "");
     }
+
 
     public void CreatePlayerFighter()
     {
@@ -38,6 +42,10 @@ public class Button_AddPlayerFighter : MonoBehaviour, IPointerEnterHandler, IPoi
         GameManager.Instance.SetDataToFighterGO(obj, data, true);
 
         obj.transform.position = new Vector2( (-1 + pfsCount),1);
+
+        var scm = FindObjectOfType<SelectCharacterManager>();
+        scm.currentFighter = obj;
+
     }
 
 
@@ -49,6 +57,7 @@ public class Button_AddPlayerFighter : MonoBehaviour, IPointerEnterHandler, IPoi
     public void OnPointerEnter(PointerEventData eventData)
     {
         mouse_over = true;
+        infoBox.gameObject.SetActive(true);
         if (data != null)
         {
             infoBox.ShowInfo(data);
@@ -58,6 +67,7 @@ public class Button_AddPlayerFighter : MonoBehaviour, IPointerEnterHandler, IPoi
     public void OnPointerExit(PointerEventData eventData)
     {
         mouse_over = false;
-        infoBox.ShowInfo("Choose your team","");
+        //infoBox.gameObject.SetActive(false);
+        infoBox.ShowInfo("Choose your team", "");
     }
 }

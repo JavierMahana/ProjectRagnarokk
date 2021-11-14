@@ -67,6 +67,8 @@ public class ConfirmScreen : MonoBehaviour
         {
             SceneChanger.Instance.LoadExplorationScene();
         }
+
+        FindObjectOfType<AudioManager>().Play("WeaponExchange");
         
     }
     public void Cancel()
