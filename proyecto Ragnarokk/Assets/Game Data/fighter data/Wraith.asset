@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
+  m_Name: Wraith
+  m_EditorClassIdentifier: 
+  Name: Wraith
+  Description: Ente Psiquico
+  Speed: 1
+  Atack: 13
+  Defense: 0
+  Luck: 0
+  MaxHP: 36
+  PowerRating: 1
+  DefaultWeapons:
+  - {fileID: 11400000, guid: 56374e844d8f1494bbcd45d6e003fd4f, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Sprite: {fileID: 1577795329009410038, guid: 5e00a28322ad6494e89c1ae0f31097fe, type: 3}
+  reversedSprite: 0
+  size: {x: 1, y: 1.5}
+  Type: {fileID: 11400000, guid: d9c98abbe4ca19c44b5bee3a65c524c5, type: 2}

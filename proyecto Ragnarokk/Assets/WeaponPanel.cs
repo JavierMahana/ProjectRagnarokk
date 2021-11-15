@@ -22,8 +22,11 @@ public class WeaponPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private bool isShop = false;
 
-    public void Init(Weapon weapon, WeaponSwapManager manager, Fighter fighter, int slot, bool onlyShowInfo = false, bool isShop = false)
+    private int shopItemSlot;
+
+    public void Init(Weapon weapon, WeaponSwapManager manager, Fighter fighter, int slot, bool onlyShowInfo = false, int shopItemSlot = -1, bool isShop = false)
     {
+        this.shopItemSlot = shopItemSlot;
         this.isShop = isShop;
 
         this.fighter = fighter;
@@ -66,7 +69,9 @@ public class WeaponPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             if (!onlyShowInfo)
             {
                 //confirm UI
-                confirmScreen.Show(swapManager.NewWeaponPanel.curWeapon, fighter, slot, isShop);
+                Debug.Log($"mopstrando la confirm screen desde el weapon swap panel! es tienda? {isShop}");
+
+                confirmScreen.Show(swapManager.NewWeaponPanel.curWeapon, fighter, slot, shopItemSlot, isShop);
             }
         }
         frameShown = false ;

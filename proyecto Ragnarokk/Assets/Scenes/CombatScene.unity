@@ -1482,6 +1482,14 @@ PrefabInstance:
       value: 0.119
       objectReference: {fileID: 0}
     - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
+      propertyPath: enemyFightersMaxY
+      value: 0.671
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
+      propertyPath: enemyFightersMinY
+      value: 0.054
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
       propertyPath: FighterClickButton
       value: 
       objectReference: {fileID: 8091166855456819100, guid: 9278466a23c1dc54d84625b07ac989bb, type: 3}
@@ -1495,11 +1503,11 @@ PrefabInstance:
       objectReference: {fileID: 318361232773227983, guid: 604dd6d5ad5f21f40a09a64cf23de45e, type: 3}
     - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
       propertyPath: playerFightersMaxY
-      value: 0.726
+      value: 0.575
       objectReference: {fileID: 0}
     - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
       propertyPath: playerFightersMinY
-      value: 0.165
+      value: 0.118
       objectReference: {fileID: 0}
     - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
       propertyPath: CanvasForClickFighter

@@ -157,7 +157,10 @@ public class CombatManager : MonoBehaviour
             pf.transform.position = worldPos;
 
 
+
             Fighter ally = pf.gameObject.GetComponent<Fighter>();
+
+
             PlayerFighters.Add(ally);
             PartyMaxHP += ally.MaxHP;
             PartyCurrentHP += ally.CurrentHP;
@@ -176,14 +179,19 @@ public class CombatManager : MonoBehaviour
 
             RectTransform rectTransform = playerButton.GetComponent<RectTransform>();
 
-            playerButton.GetComponent<FighterSelect>().Fighter = pf.GetComponent<Fighter>();
+            var pFighterComp = pf.GetComponent<Fighter>();
+
+            playerButton.GetComponent<FighterSelect>().Fighter = pFighterComp;
             playerButton.transform.SetParent(PermanentCanvas.transform, true);
             playerButton.GetComponent<Button>().interactable = false;
 
-            Vector2 viewportPoint = Camera.main.WorldToViewportPoint(pf.transform.position);
+            var minAnchorPoint = pf.transform.position + (pFighterComp.Size.x / 2) * Vector3.left;
+            var maxAnchorPoint = pf.transform.position + (pFighterComp.Size.x / 2) * Vector3.right + pFighterComp.Size.y * 0.75f * Vector3.up;
+            Vector2 viewportPointMin = Camera.main.WorldToViewportPoint(minAnchorPoint);
+            Vector2 viewportPointMax = Camera.main.WorldToViewportPoint(maxAnchorPoint);
 
-            rectTransform.anchorMin = viewportPoint;
-            rectTransform.anchorMax = viewportPoint;
+            rectTransform.anchorMin = viewportPointMin;
+            rectTransform.anchorMax = viewportPointMax;
 
             rectTransform.anchoredPosition = Vector2.zero;
             #endregion
@@ -238,19 +246,32 @@ public class CombatManager : MonoBehaviour
     {
         var enemyGameObject = Instantiate(FighterBasePrefab, position, Quaternion.identity);
         GameManager.Instance.SetDataToFighterGO(enemyGameObject, data);
+        Fighter enemy = enemyGameObject.GetComponent<Fighter>();
 
+        if (!enemy.reversed)
+        {
+            enemy.reversed = true;
+            enemyGameObject.transform.localScale = new Vector3(-1,1,1);
+        }
 
         var enemyButton = Instantiate(FighterClickButton);
 
         RectTransform rectTransform = enemyButton.GetComponent<RectTransform>();
 
+
+
         enemyButton.GetComponent<FighterSelect>().Fighter = enemyGameObject.GetComponent<Fighter>();
         enemyButton.transform.SetParent(CombatCanvas.transform, true);
 
-        Vector2 viewportPoint = Camera.main.WorldToViewportPoint(position);
 
-        rectTransform.anchorMin = viewportPoint;
-        rectTransform.anchorMax = viewportPoint;
+        var minAnchorPoint = enemyGameObject.transform.position + (enemy.Size.x / 2) * Vector3.left;
+        var maxAnchorPoint = enemyGameObject.transform.position + (enemy.Size.x / 2) * Vector3.right + enemy.Size.y * 0.75f * Vector3.up;
+        Vector2 viewportPointMin = Camera.main.WorldToViewportPoint(minAnchorPoint);
+        Vector2 viewportPointMax = Camera.main.WorldToViewportPoint(maxAnchorPoint);
+
+        rectTransform.anchorMin = viewportPointMin;
+        rectTransform.anchorMax = viewportPointMax;
+
         
         rectTransform.anchoredPosition = Vector2.zero;
 
@@ -258,7 +279,7 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.EnemyButtons.Add(enemyButton.GetComponent<FighterSelect>());
 
         //Se llena una lista con los enemigos recién creados
-        Fighter enemy = enemyGameObject.GetComponent<Fighter>();
+        
         EnemyFighters.Add(enemy);
         HordeMaxHP += enemy.MaxHP;
     }
@@ -296,6 +317,8 @@ public class CombatManager : MonoBehaviour
     }
     private void Start()
     {
+        GameManager.Instance.ShowPlayerFighters(true);
+           
         InitCombatScene(GameManager.Instance.currentEncounter);
         ResetWeaponCooldowns();
         ShowFighterCanvas(false);
@@ -331,7 +354,7 @@ public class CombatManager : MonoBehaviour
                 var sceneChanger = FindObjectOfType<SceneChanger>();
                 //sceneChanger.ChangeScene("Victory");
                 //Debug.Log("VICTORIA");
-                sceneChanger.ChangeScene("Exploration");
+                sceneChanger.ChangeScene("CombatVictoryScene");
             }
             else
             {
@@ -354,8 +377,15 @@ public class CombatManager : MonoBehaviour
             RectTransform rectTransform = CurrentPlayerButton.GetComponent<RectTransform>();
             Vector2 viewportPoint = Camera.main.WorldToViewportPoint(position);
 
-            rectTransform.anchorMin = viewportPoint;
-            rectTransform.anchorMax = viewportPoint;
+
+            var minAnchorPoint = ActiveFighter.transform.position + (ActiveFighter.Size.x / 2) * Vector3.left;
+            var maxAnchorPoint = ActiveFighter.transform.position + (ActiveFighter.Size.x / 2) * Vector3.right + ActiveFighter.Size.y*0.75f * Vector3.up;
+            Vector2 viewportPointMin = Camera.main.WorldToViewportPoint(minAnchorPoint);
+            Vector2 viewportPointMax = Camera.main.WorldToViewportPoint(maxAnchorPoint);
+
+            rectTransform.anchorMin = viewportPointMin;
+            rectTransform.anchorMax = viewportPointMax;
+
 
             rectTransform.anchoredPosition = Vector2.zero;
 

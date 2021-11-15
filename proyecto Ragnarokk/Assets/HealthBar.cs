@@ -16,13 +16,18 @@ public class HealthBar : MonoBehaviour
     }
     public void ResetValues()
     {
-        target.OnTakeDamage -= HealthChanged;
+        if (target != null)
+        {
+            target.OnTakeDamage = null;
+        }        
         target = null;
     }
     public void OnDisable()
     {
+
         ResetValues();
     }
+
 
     public void HealthChanged()
     {

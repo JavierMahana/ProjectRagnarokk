@@ -15,7 +15,7 @@ public class WeaponSwapManager : MonoBehaviour
 
     public List<GameObject> ObjectsToHideWhenShow = new List<GameObject>();
 
-    private bool isShop = false;
+    private bool isShop;
 
     public void Hide()
     {
@@ -26,13 +26,13 @@ public class WeaponSwapManager : MonoBehaviour
         }
     }
 
-    public void Show(Weapon newWeapon, bool isShop = false)
+    public void Show(Weapon newWeapon, int shopItemSlot = -1, bool isShop = false)
     {
         this.isShop = isShop;
 
         //este panel es solo para info. por eso no importa el fighter ni el slot.
-        NewWeaponPanel.Init(newWeapon, this, null, -1, true, isShop);
-        UpdateContent();
+        NewWeaponPanel.Init(newWeapon, this, null, -1, true, shopItemSlot,  this.isShop);
+        UpdateContent(shopItemSlot);
         content.SetActive(true);
 
         foreach (var obj in ObjectsToHideWhenShow)
@@ -42,7 +42,7 @@ public class WeaponSwapManager : MonoBehaviour
     }
 
 
-    private void UpdateContent()
+    private void UpdateContent(int shopItemSlot)
     {
         var gameManager = GameManager.Instance;
 
@@ -54,7 +54,7 @@ public class WeaponSwapManager : MonoBehaviour
             for (int j = 0; j < fighter.Weapons.Length; j++)
             {
                 var weapon = fighter.Weapons[j];
-                fighterWeaponPanels[i].Init(weapon, this, fighter, j);
+                fighterWeaponPanels[i].Init(weapon, this, fighter, j, false, shopItemSlot, true);
                 i++;
             }
         }
@@ -62,7 +62,7 @@ public class WeaponSwapManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateContent();
+        UpdateContent(-1);
     }
 
 }

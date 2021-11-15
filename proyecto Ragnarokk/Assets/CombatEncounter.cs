@@ -12,4 +12,8 @@ using Sirenix.OdinInspector;
 public class CombatEncounter : ScriptableObject
 {
     public List<FighterData> ListOfEncounterEnemies = new List<FighterData>();
+
+    public int ExpReward = 100;
+    public int MoneyReward = 25;
+    public bool CanEscape = true;
 }
