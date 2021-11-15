@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysPressed: 1
 --- !u!1 &201347753
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysPressed: 1
 --- !u!1 &601677352
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,6 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysPressed: 1
 --- !u!1001 &617652754
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -899,7 +902,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 58
+  m_fontSize: 43.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1251,6 +1254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysPressed: 1
 --- !u!1001 &1181677543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1845,56 +1849,56 @@ MonoBehaviour:
     source: {fileID: 0}
   WeaponSounds:
   - SoundName: Air
-    clip: {fileID: 8300000, guid: d7658d03b94e7784894654c5b3406d63, type: 3}
+    clip: {fileID: 8300000, guid: cd369c20802e26b478d90947f617c03a, type: 3}
     mixer: {fileID: 0}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: Physical
-    clip: {fileID: 8300000, guid: da4d06c354f8b7146a5af22dc74bcd0d, type: 3}
+    clip: {fileID: 8300000, guid: ae3cb2c1f7c08d64ba384bbabd68d830, type: 3}
     mixer: {fileID: 0}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: Alcohol
-    clip: {fileID: 8300000, guid: f96fbaf2ef067bc49aa62f8ee94f1110, type: 3}
+    clip: {fileID: 8300000, guid: 4c11ce18961d2154f8c14ced7fbb95bf, type: 3}
     mixer: {fileID: 0}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: Electric
-    clip: {fileID: 8300000, guid: 8b567aeb583453545af80eb965398a77, type: 3}
+    clip: {fileID: 8300000, guid: 67fd375845612f8448f4cd990a4f87d5, type: 3}
     mixer: {fileID: 0}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: Fire
-    clip: {fileID: 8300000, guid: 9c7296ec87094674f897536079c0cf2d, type: 3}
+    clip: {fileID: 8300000, guid: 67b3689a57f21e64a95091131a864747, type: 3}
     mixer: {fileID: 0}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: Earth
-    clip: {fileID: 8300000, guid: 945e6efd56ac3e4489b9fed091aa80df, type: 3}
+    clip: {fileID: 8300000, guid: 39bf05352effed14e9a5285b41620fc1, type: 3}
     mixer: {fileID: 0}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: Psychic
-    clip: {fileID: 8300000, guid: b95fd3d72ce8385488ccb77b9dbf9298, type: 3}
+    clip: {fileID: 8300000, guid: d73693db8705cd4498322e97064b7b45, type: 3}
     mixer: {fileID: 0}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: Water
-    clip: {fileID: 8300000, guid: c0eb44bd9263bcc468facfa1b50a20b8, type: 3}
+    clip: {fileID: 8300000, guid: e93da530f6964d747b7ea6bec7d5138c, type: 3}
     mixer: {fileID: 0}
     volume: 1
     pitch: 1
@@ -2148,6 +2152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysPressed: 1
 --- !u!1 &2020508208 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1081554539821461573, guid: 1379dafc3099df940a540c0020c7af25, type: 3}
@@ -2339,6 +2344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysPressed: 1
 --- !u!1 &2099742235 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1081554539733972078, guid: 1379dafc3099df940a540c0020c7af25, type: 3}
@@ -2356,6 +2362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysPressed: 1
 --- !u!1 &2124977551 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1081554539724859386, guid: 1379dafc3099df940a540c0020c7af25, type: 3}
@@ -2373,6 +2380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysPressed: 1
 --- !u!1001 &1081554540759249525
 PrefabInstance:
   m_ObjectHideFlags: 0

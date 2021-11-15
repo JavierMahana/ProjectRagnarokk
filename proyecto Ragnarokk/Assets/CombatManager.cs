@@ -641,7 +641,7 @@ public class CombatManager : MonoBehaviour
     public void Fight(FighterSelect targetButton)
     {
         ShowActionCanvas(false);
-        Debug.Log("Desactiva Canvas!!!!!");
+        //Debug.Log("Desactiva Canvas!!!!!");
         if (targetButton == null || targetButton.Fighter == null || targetButton.selfBbutton == null) { Debug.Log("No se encuentra el botón del objetivo"); }
         // se especifica el target con la fucion EnemySelected
 
@@ -650,7 +650,9 @@ public class CombatManager : MonoBehaviour
         //Debug.Log("OBJETIVO: " + Target.Name);
 
         CombatDescriptor.Clear();
-        CombatDescriptor.AddTextLine(ActiveFighter.Name + " uses " + AttackWeapon.Name); //Muestra atacante y arma
+        if (PlayerFighters.Contains(ActiveFighter)) { CombatDescriptor.AddTextLine(ActiveFighter.RealName + " uses " + AttackWeapon.Name); }
+        else { CombatDescriptor.AddTextLine(ActiveFighter.Name + " uses " + AttackWeapon.Name); }
+         //Muestra atacante y arma
 
         int damageToShow = -1;
 
@@ -748,7 +750,8 @@ public class CombatManager : MonoBehaviour
             CombatDescriptor.AddTextLine(synerDesc);
 
             //Indica por texto quién recibió cuánto daño
-            CombatDescriptor.AddTextLine(Target.Name + " loses " + finalDamage + " HP");
+            if (PlayerFighters.Contains(Target)) { CombatDescriptor.AddTextLine(Target.RealName + " loses " + finalDamage + " HP"); }
+            else { CombatDescriptor.AddTextLine(Target.Name + " loses " + finalDamage + " HP"); }
 
             if (attackerIsAlly && finalDamage == minDamage) 
             {
@@ -772,7 +775,11 @@ public class CombatManager : MonoBehaviour
                 Target.CurrentHP = 0;
                 RemoveCombatStates(Target);
 
-                string defeatDesc = Target.Name + " has been defeated! ";
+                string defeatDesc;
+
+                if (PlayerFighters.Contains(Target)) { defeatDesc = Target.RealName + " has been defeated! "; }
+                else { defeatDesc = Target.Name + " has been defeated! "; }
+                 
                 string defHopeChange = "";
 
                 if (targetIsAlly)
@@ -803,7 +810,8 @@ public class CombatManager : MonoBehaviour
                         //Debug.Log("Aplicado: " + weaponState.Name);
 
                         //Muestra por texto el estado adquirido
-                        CombatDescriptor.AddTextLine(Target.Name + " is " + weaponState.Name);
+                        if (PlayerFighters.Contains(Target)) { CombatDescriptor.AddTextLine(Target.RealName + " is " + weaponState.Name); }
+                        else { CombatDescriptor.AddTextLine(Target.Name + " is " + weaponState.Name); }
                     }
                 }
             }
@@ -1131,7 +1139,7 @@ public class CombatManager : MonoBehaviour
                 // ActiveFighter.Defense += 10;
 
                 CombatDescriptor.Clear(); //Si se llega a crear un método para aplicar la defensa, esta línea debe ir ahí
-                CombatDescriptor.AddTextLine(ActiveFighter.Name + " is defending");
+                CombatDescriptor.AddTextLine(ActiveFighter.RealName + " is defending");
 
                 // terminar turno
                 GameManager.Instance.ConfirmationClick = false;

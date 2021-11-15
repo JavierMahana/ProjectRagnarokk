@@ -79,15 +79,13 @@ public class SelectCharacterManager : MonoBehaviour
 
                 var pfs = FindObjectsOfType<PlayerFighter>();
                 int pfsCount = pfs.Length;
-
-                pf.transform.position = new Vector2((-1 + pfsCount), 1);
+                pf.transform.position = new Vector2((-2 + pfsCount), 1);
                 // aqui se podría actualizar el sprite dependiendo del sexo
             }
         }
 
         Inputfield.text = "";
         onNameChange = false;
-
         currentFighter = null;
         
         NameCanvas.SetActive(false);
