@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
+  m_Name: TheFrost
+  m_EditorClassIdentifier: 
+  Name: The Frost
+  Description: arma de leyenda
+  BaseCost: 100
+  sprite: {fileID: 0}
+  BaseDamage: 50
+  BaseAccuracy: 90
+  BaseCriticalRate: 15
+  BaseCooldown: 3
+  ListaDeEstadosQueAplica:
+  - {fileID: 11400000, guid: 8c308d1056e0bd043931bce23c8b896e, type: 2}
+  "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: e108f6fb37683784283e9b7209a9c32d, type: 2}

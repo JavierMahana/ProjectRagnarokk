@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
-  m_Name: MindAmplifier
+  m_Name: SmallBurner
   m_EditorClassIdentifier: 
-  Name: Mind Amplifier
-  Description: arma de mente
+  Name: Small Burner
+  Description: arma de cocina
   BaseCost: 100
-  sprite: {fileID: 21300000, guid: 00418cabfcc44504686dc5675db92d2f, type: 3}
-  BaseDamage: 35
-  BaseAccuracy: 97
-  BaseCriticalRate: 20
+  sprite: {fileID: 0}
+  BaseDamage: 10
+  BaseAccuracy: 85
+  BaseCriticalRate: 5
   BaseCooldown: 1
   ListaDeEstadosQueAplica:
-  - {fileID: 11400000, guid: e660ff7f827cf0747a70c71e4bf99834, type: 2}
-  "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: d9c98abbe4ca19c44b5bee3a65c524c5, type: 2}
+  - {fileID: 11400000, guid: 0786287dc73faa94bb20a5c15739beb4, type: 2}
+  "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 7fda126cf52d4f9478689f1d6d5477a2, type: 2}
