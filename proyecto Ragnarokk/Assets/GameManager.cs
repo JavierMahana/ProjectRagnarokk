@@ -116,6 +116,9 @@ public class GameManager : Singleton<GameManager>
     
     public List<Consumible> AllConsumibles = new List<Consumible>();
 
+
+    //public List<CombatState> AllCombatStates = new List<CombatState>();
+
     //DontDestroyOnLoad
     //objetos de los fighters del player.
     [ReadOnly]
@@ -242,6 +245,7 @@ public class GameManager : Singleton<GameManager>
         {
             var fighter = pf.GetComponent<Fighter>();
             fighter.CurrentHP = fighter.MaxHP;
+            fighter.transform.rotation = new Quaternion(0, 0, 0, 0);
         }
     }
 

@@ -76,6 +76,8 @@ public class Fighter : MonoBehaviour
 
     public bool isMale;
 
+    public bool IsDefending = false;
+
     public bool reversed;
     public Vector2 Size = new Vector2(1,1);
 

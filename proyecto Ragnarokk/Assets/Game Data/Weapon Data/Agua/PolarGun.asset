@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
+  m_Name: PolarGun
+  m_EditorClassIdentifier: 
+  Name: Polar Gun
+  Description: arma de hielo
+  BaseCost: 100
+  sprite: {fileID: 0}
+  BaseDamage: 30
+  BaseAccuracy: 85
+  BaseCriticalRate: 10
+  BaseCooldown: 1
+  ListaDeEstadosQueAplica:
+  - {fileID: 11400000, guid: f075e7e4326f99f4d9e7d5dae8eaa7d2, type: 2}
+  - {fileID: 11400000, guid: 8c308d1056e0bd043931bce23c8b896e, type: 2}
+  "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 99ddf6cb18f34644c857955877bf77d1, type: 2}

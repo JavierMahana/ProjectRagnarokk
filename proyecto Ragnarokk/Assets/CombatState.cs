@@ -8,4 +8,5 @@ public class CombatState : ScriptableObject
     //ESTO ES SOLO UN TAG.
     public string Name = "unnamed state";
 
+    public Sprite Sprite;
 }

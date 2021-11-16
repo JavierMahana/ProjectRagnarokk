@@ -16,6 +16,7 @@ public class CombatManager : MonoBehaviour
     public GameObject CombatCanvas;
     public GameObject EnemyCombatCanvas;
     public CombatDescriptor CombatDescriptor;
+    public CombatIconManager IconManager;
 
     public GameObject PrefabActionButton;
     public GameObject PrefabWeaponButton;
@@ -86,6 +87,8 @@ public class CombatManager : MonoBehaviour
     [HideInInspector]
     public Fighter ActiveFighter;
 
+    const int DefenseValue = 10; //Tal vez sea mejor definir un multiplicador en vez de una suma?
+
     [HideInInspector]
     public FighterSelect CurrentPlayerButton;
     Vector2 OriginalButtonPos;
@@ -96,6 +99,9 @@ public class CombatManager : MonoBehaviour
     public bool TurnInProcess;
 
     sbyte CombatState = 0;
+
+    bool FleeActionSelected = false;
+    bool OnFlee = false;
 
     //VARIABLES DE ACCIÓN DE UN TURNO
     /// <summary>
@@ -197,6 +203,7 @@ public class CombatManager : MonoBehaviour
     public void InitCombatScene(CombatEncounter encounter)
     {
         CombatDescriptor = gameObject.GetComponent<CombatDescriptor>();
+        IconManager = gameObject.GetComponent<CombatIconManager>();
 
         // Añade consumibles para testear, eliminar esto ya que luego los consumibles deben ser entregados
         // como recompensa de combate, exploración o comprados en la tienda.
@@ -273,7 +280,10 @@ public class CombatManager : MonoBehaviour
             j++;
         }
         PartyIsFine = (PartyCurrentHP >= PartyMaxHP * 0.75);
-        AlivePlayerFighters.AddRange(PlayerFighters);
+        foreach(Fighter pf in PlayerFighters)
+        {
+            if(pf.CurrentHP > 0) { AlivePlayerFighters.Add(pf); }
+        }
 
         int enemyCount = encounter.ListOfEncounterEnemies.Count;
         for (int i = 0; i < enemyCount; i++)
@@ -297,6 +307,11 @@ public class CombatManager : MonoBehaviour
         //Se unen los luchadores en una lista
         AllCombatFighters.AddRange(PlayerFighters);
         AllCombatFighters.AddRange(EnemyFighters);
+
+        foreach(Fighter fighter in AllCombatFighters)
+        {
+            fighter.IsDefending = false;
+        }
 
         //Los luchadores se ordenan por velocidad
         AllCombatFighters.Sort(SpeedComparer);
@@ -423,14 +438,7 @@ public class CombatManager : MonoBehaviour
             }
             else if(CombatState > 0)
             {
-                RemoveAllCombatStates();
-                ResetWeaponCooldowns();
-                HopeManager.Instance.ChangeHope(3, "Cambio por victoria");
-
-                var sceneChanger = FindObjectOfType<SceneChanger>();
-                //sceneChanger.ChangeScene("Victory");
-                //Debug.Log("VICTORIA");
-                sceneChanger.ChangeScene("CombatVictoryScene");
+                StartCoroutine(Victory());
             }
             else
             {
@@ -440,9 +448,49 @@ public class CombatManager : MonoBehaviour
             }
         }
 
+        //Finaliza el combate por huida
+        if(OnFlee)
+        {
+            RemoveAllCombatStates();
+            ResetWeaponCooldowns();
+
+            foreach (Fighter pf in PlayerFighters)
+            {
+                pf.IsDefending = false;
+            }
+
+            var sceneChanger = FindObjectOfType<SceneChanger>();
+            sceneChanger.ChangeScene("Exploration");
+        }
+
         // constantemente se revisa si es que se va activar el botón para seleccionar enemigos
         ShowEnemyInteractableButton(GameManager.Instance.ConfirmationClick);
 
+    }
+
+    private IEnumerator Victory()
+    {
+        RemoveAllCombatStates();
+        ResetWeaponCooldowns();
+
+        foreach (Fighter pf in PlayerFighters)
+        {
+            pf.IsDefending = false;
+        }
+
+        string victoryHopeChange = HopeManager.Instance.ChangeHope(3, "Cambio por victoria");
+        string victoryDesc = "YOU WIN! ";
+        victoryDesc += victoryHopeChange;
+        CombatDescriptor.Clear();
+        CombatDescriptor.AddTextLine(victoryDesc, 1.5f);
+
+        yield return null;
+        yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
+
+        var sceneChanger = FindObjectOfType<SceneChanger>();
+        //sceneChanger.ChangeScene("Victory");
+        //Debug.Log("VICTORIA");
+        sceneChanger.ChangeScene("CombatVictoryScene");
     }
 
     public void MoveActivePlayerButton(bool moveFoward)
@@ -512,11 +560,24 @@ public class CombatManager : MonoBehaviour
 
     private IEnumerator TurnAction()
     {
+        //Si el luchador estaba defendiéndose, sale de ese estado
+        if(ActiveFighter.IsDefending)
+        {
+            ActiveFighter.Defense -= DefenseValue;
+            ActiveFighter.IsDefending = false;
+        }
+        Debug.Log("En defensa:");
+        foreach (Fighter f in AllCombatFighters)
+        {
+            if (f.IsDefending) { Debug.Log(f.Name + " (" + f.Defense + ")"); }
+        }
+
         var iniPos = ActiveFighter.transform.position;
 
         const float pauseTime = 0.8f; //Tiempo estándar usado para pausas breves
 
-        yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty); //No está esperando, y no sé por qué
+        yield return null; //Es posible que la necesidad de esta línea se deba a que se consulta por la variable TextIsEmpty, la cual se actualiza en Update, en vez de consultar directamente el tamaño de la lista de TextLines.
+        yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
         CombatDescriptor.ShowFighterInTurn(ActiveFighter);
 
         
@@ -617,7 +678,13 @@ public class CombatManager : MonoBehaviour
             #endregion
 
             //No continúa hasta que la acción ha sido descrita por completo
-            yield return new WaitUntil(() => (ActionDone && CombatDescriptor.TextIsEmpty));
+            yield return new WaitUntil(() => ActionDone && CombatDescriptor.TextIsEmpty);
+            Debug.Log("Descriptor vacío");
+            if(FleeActionSelected)
+            {
+                OnFlee = true;
+                yield break; //Se interrumpe la corrutina. El turno NO se declara como terminado. Esto es para prevenir que se inicie un nuevo turno.
+            }
             ActionDone = false;
             MoveActivePlayerButton(false);
         }
@@ -633,6 +700,7 @@ public class CombatManager : MonoBehaviour
 
             AttackWeapon = ActiveFighter.Weapons[0];
             Target = AlivePlayerFighters[Random.Range(0, AlivePlayerFighters.Count)];
+            //Debug.Log("PRE-TARGET: " + Target.Name);
 
             // la variable button utiliza el boton de accion por default, sin embargo
             // debe ser reemplazado por el botón del jugador que será el target antes de llamar la funcion Fight
@@ -677,7 +745,7 @@ public class CombatManager : MonoBehaviour
 
         Target = targetButton.Fighter;
         //Debug.Log("ATACANTE: " + ActiveFighter.Name);
-        //Debug.Log("OBJETIVO: " + Target.Name);
+        //Debug.Log("TARGET: " + Target.Name);
 
         CombatDescriptor.Clear();
         if (PlayerFighters.Contains(ActiveFighter)) { CombatDescriptor.AddTextLine(ActiveFighter.RealName + " uses " + AttackWeapon.Name); }
@@ -727,7 +795,8 @@ public class CombatManager : MonoBehaviour
             float criticalFact = 1;
             int criticalRate = AttackWeapon.BaseCriticalRate + ActiveFighter.Luck; //Valor que se calcula como la suma de el índice de crítico del arma, y la suerte del atacante
             int criticalValue = Random.Range(0, 100);
-            Debug.Log(criticalRate + " > " + criticalValue + "?");
+            //Debug.Log(criticalRate + " > " + criticalValue + "?");
+
             //El índice calculado debe superar el valor aleatorio para asestar crítico
             if (criticalRate > criticalValue)
             {
@@ -804,6 +873,8 @@ public class CombatManager : MonoBehaviour
             {
                 Target.CurrentHP = 0;
                 RemoveCombatStates(Target);
+                IconManager.UpdateStateIcons(AllCombatFighters);
+                Target.IsDefending = false;
 
                 string defeatDesc;
 
@@ -844,6 +915,7 @@ public class CombatManager : MonoBehaviour
                         else { CombatDescriptor.AddTextLine(Target.Name + " is " + weaponState.Name); }
                     }
                 }
+                IconManager.UpdateStateIcons(AllCombatFighters);
             }
 
             //PASO 11: COMPROBACIÓN DE HP GRUPAL
@@ -1013,20 +1085,23 @@ public class CombatManager : MonoBehaviour
         bool thereAreStates = false;
         foreach(Fighter f in AllCombatFighters)
         {
-            thereAreStates = true;
-            RemoveCombatStates(f);
+            bool fighterHasStates = RemoveCombatStates(f);
+            if(!thereAreStates) { thereAreStates = fighterHasStates; }
         }
 
         if(thereAreStates) 
         {
             CombatDescriptor.AddTextLine("Everyone's states are gone", 1.5f);
-            //Debug.Log("HAY ESTADOS");
+            IconManager.UpdateStateIcons(AllCombatFighters);
+            Debug.Log("HAY ESTADOS");
         }
     }
 
-    public void RemoveCombatStates(Fighter fighter)
+    public bool RemoveCombatStates(Fighter fighter)
     {
+        if(fighter.States.Count == 0) { return false; }
         fighter.States.Clear();
+        return true;
     }
 
     public void ResetWeaponCooldowns()
@@ -1166,7 +1241,8 @@ public class CombatManager : MonoBehaviour
                 ShowActionCanvas(false);
                 // aumentar temporalmente la defensa del jugador activo
                 // podría usarse un array de bonuses, útil también para consumibles
-                // ActiveFighter.Defense += 10;
+                ActiveFighter.Defense += DefenseValue; //Se aumentará la defensa del luchador hasta que vuelva a ser su turno
+                ActiveFighter.IsDefending = true;
 
                 CombatDescriptor.Clear(); //Si se llega a crear un método para aplicar la defensa, esta línea debe ir ahí
                 CombatDescriptor.AddTextLine(ActiveFighter.RealName + " is defending");
@@ -1178,8 +1254,17 @@ public class CombatManager : MonoBehaviour
             }
             #endregion
 
+            #region FleeCombat
+            if (GameManager.Instance.OnFleeCombat)
+            {
+                //Se declara intención de huida
+                FleeActionSelected = true;
 
-    
+                string fleeDesc = "Party flees... ";
+                string fleeHopeChange = HopeManager.Instance.ChangeHope(-4, "Cambio por huida");
+                fleeDesc += fleeHopeChange;
+                CombatDescriptor.Clear();
+                CombatDescriptor.AddTextLine(fleeDesc, 1.5f); //El descriptor indica que el grupo huye, y cómo esto perjudica la esperanza
         }
     }
 

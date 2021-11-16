@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
-  m_Name: Ak47
+  m_Name: M16
   m_EditorClassIdentifier: 
-  Name: Ak47
-  SubName: 
-  Description: A classical weapon, reliable, fairly accurate and quite comfortable!
-    In the human Empire kids are thought from age 6 to use an Ak47 like a pro.
+  Name: M16
+  Description: arma de libertad
   BaseCost: 100
-  sprite: {fileID: -7636839179710111607, guid: 19e9eaf2e2324334c9bc5b91ad2b1b04, type: 3}
-  BaseDamage: 50
-  BaseAccuracy: 77
-  BaseCriticalRate: 20
+  sprite: {fileID: 0}
+  BaseDamage: 40
+  BaseAccuracy: 95
+  BaseCriticalRate: 10
   BaseCooldown: 2
   ListaDeEstadosQueAplica:
   - {fileID: 11400000, guid: 331b9f01a69a0c3479eda067888a04c5, type: 2}

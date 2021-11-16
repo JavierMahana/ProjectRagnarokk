@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
-  m_Name: MindAmplifier
+  m_Name: ConscienceSwitch
   m_EditorClassIdentifier: 
-  Name: Mind Amplifier
-  Description: These cartoony looking weapons are quite dangerous as they can cuase
-    Brain Damage... Most folk hit by it's psyquic waves have hallucinations of The
-    Dark Side of the Moon.
+  Name: Conscience Switch
+  Description: arma de zzz
   BaseCost: 100
-  sprite: {fileID: -6425176278016013195, guid: 6b96b41f8643d5342aab81fe27309a9f, type: 3}
-  BaseDamage: 35
-  BaseAccuracy: 97
-  BaseCriticalRate: 20
+  sprite: {fileID: 0}
+  BaseDamage: 10
+  BaseAccuracy: 85
+  BaseCriticalRate: 5
   BaseCooldown: 1
   ListaDeEstadosQueAplica:
   - {fileID: 11400000, guid: e660ff7f827cf0747a70c71e4bf99834, type: 2}
