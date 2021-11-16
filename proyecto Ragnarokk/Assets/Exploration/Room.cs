@@ -88,7 +88,7 @@ public class Room : MonoBehaviour
         //onMouseHover = false;
         //spriteRenderer.color = visitableColor;
 
-        if (Visitable)
+        if (Visitable && !Cleared)
         {
             data.LoadRoom(GameManager.Instance, SceneChanger.Instance, this);
         }

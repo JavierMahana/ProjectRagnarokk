@@ -593,9 +593,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7118101498860295703, guid: 63163a050f9ca384baf8a8a741f4189b, type: 3}
+      propertyPath: AllFloors.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118101498860295703, guid: 63163a050f9ca384baf8a8a741f4189b, type: 3}
       propertyPath: AllWeapons.Array.size
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7118101498860295703, guid: 63163a050f9ca384baf8a8a741f4189b, type: 3}
+      propertyPath: AllFloors.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7b99a9a926835ac469e626f01e8b217b, type: 2}
     - target: {fileID: 7118101498860295703, guid: 63163a050f9ca384baf8a8a741f4189b, type: 3}
       propertyPath: EnemyButtons.Array.size
       value: 1
@@ -1611,6 +1619,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7334008280690161, guid: 5b42f6b4cb4c14144af6fefbfbf22a2b, type: 3}
+      propertyPath: testFloor
+      value: 
+      objectReference: {fileID: 11400000, guid: 7b99a9a926835ac469e626f01e8b217b, type: 2}
     - target: {fileID: 408829274314781472, guid: 5b42f6b4cb4c14144af6fefbfbf22a2b, type: 3}
       propertyPath: m_RootOrder
       value: 7
