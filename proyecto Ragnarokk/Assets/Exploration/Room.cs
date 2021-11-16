@@ -17,7 +17,7 @@ public class Room : MonoBehaviour
     public bool Visitable = false;
     public bool Cleared = false;
 
-    private RoomData data;
+    public RoomData data;
     //ahora mismo los estados se van a representar mediante el cambio de color.
     //lo ideal es que luego se representen mediante el cambio de sprite
     private Color unknownColor = new Color(0.2f, 0.2f, 0.2f, 1);

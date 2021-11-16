@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
   m_Name: safety4k
   m_EditorClassIdentifier: 
+  ExpNeededToLevelUp: 100
+  IsMaxLevel: 0
+  Evolutions:
+  - {fileID: 0}
+  - {fileID: 0}
   Name: Safety4k
+  RealName: nameless
   Description: Robot descontrolado
   Speed: 7
   Atack: 10
@@ -27,5 +33,6 @@ MonoBehaviour:
   - {fileID: 0}
   Sprite: {fileID: -2185472608353246101, guid: cec2035407b3fcc4abb80075c6bd544a, type: 3}
   reversedSprite: 0
-  size: {x: 1, y: 1.5}
+  size: {x: 1, y: 1}
+  healthBarOffset: {x: 1, y: 1.5}
   Type: {fileID: 11400000, guid: 778e8c821ff9ef849aa6a6915952b4f3, type: 2}

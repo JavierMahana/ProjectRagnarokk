@@ -32,6 +32,7 @@ public class GameManager : Singleton<GameManager>
     //public bool FloorNeedToBeLoaded { get; set; }
 
     public int CurrentMoney;
+    public bool OnBossFight = false;
 
     public GAME_STATE GameState
     {

@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
   m_Name: Wraith
   m_EditorClassIdentifier: 
+  ExpNeededToLevelUp: 100
+  IsMaxLevel: 0
+  Evolutions:
+  - {fileID: 0}
+  - {fileID: 0}
   Name: Wraith
+  RealName: nameless
   Description: Ente Psiquico
   Speed: 1
   Atack: 13
@@ -27,5 +33,6 @@ MonoBehaviour:
   - {fileID: 0}
   Sprite: {fileID: 1577795329009410038, guid: 5e00a28322ad6494e89c1ae0f31097fe, type: 3}
   reversedSprite: 0
-  size: {x: 1, y: 1.5}
+  size: {x: 1, y: 1}
+  healthBarOffset: {x: 1, y: 1.5}
   Type: {fileID: 11400000, guid: d9c98abbe4ca19c44b5bee3a65c524c5, type: 2}

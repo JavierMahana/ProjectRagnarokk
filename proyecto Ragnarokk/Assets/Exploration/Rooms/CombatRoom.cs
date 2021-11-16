@@ -15,6 +15,11 @@ public class CombatRoom : RoomData
             Debug.LogError("Debes asignar un enfrentamiento a la sala de combate!");
             return;
         }
+        if (FloorEnd)
+        {
+            GameManager.Instance.OnBossFight = true;
+        }
+
         room.MarkAsCurrent();
         room.MarkAsCleared();
         sceneChanger.LoadCombatScene(encounter);

@@ -50,6 +50,7 @@ public class FighterData : ScriptableObject
     public Sprite Sprite;
     public bool reversedSprite = false;
     public Vector2 size = new Vector2(1, 1);
+    public Vector2 healthBarOffset = new Vector2(1,1);
     #endregion
 
     //Tipo para determinar que ataques hacen poco daño y mucho daño.

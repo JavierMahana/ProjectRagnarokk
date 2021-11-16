@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fe796ae76847e14abf4d15029621978, type: 3}
-  m_Name: Enc_1
+  m_Name: Enc_boss
   m_EditorClassIdentifier: 
   ListOfEncounterEnemies:
-  - {fileID: 11400000, guid: a5b9a44664d6de24eab3aebd6018b444, type: 2}
-  ExpReward: 100
-  MoneyReward: 25
-  CanEscape: 1
+  - {fileID: 11400000, guid: bf99a373a862aa840ab89a121e25cb7b, type: 2}
+  ExpReward: 500
+  MoneyReward: 150
+  CanEscape: 0

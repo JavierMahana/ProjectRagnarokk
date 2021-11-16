@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
   m_Name: Humano 1
   m_EditorClassIdentifier: 
+  ExpNeededToLevelUp: 100
+  IsMaxLevel: 0
+  Evolutions:
+  - {fileID: 0}
+  - {fileID: 0}
   Name: Humano
+  RealName: nameless
   Description: Description
   Speed: 10
   Atack: 10
@@ -27,5 +33,6 @@ MonoBehaviour:
   - {fileID: 0}
   Sprite: {fileID: 6487158567476109110, guid: b60e79b601e0c6549a68ae2054b95d88, type: 3}
   reversedSprite: 0
-  size: {x: 1, y: 1.6}
+  size: {x: 1, y: 1}
+  healthBarOffset: {x: 1, y: 1.6}
   Type: {fileID: 11400000, guid: 88f66a0be81a6404d914802b5ed0d83f, type: 2}

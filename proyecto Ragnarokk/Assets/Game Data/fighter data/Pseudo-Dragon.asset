@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
   m_Name: Pseudo-Dragon
   m_EditorClassIdentifier: 
+  ExpNeededToLevelUp: 100
+  IsMaxLevel: 0
+  Evolutions:
+  - {fileID: 0}
+  - {fileID: 0}
   Name: Pseudo-Dragon
+  RealName: nameless
   Description: Dragon lagarto
   Speed: 9
   Atack: 11
@@ -27,5 +33,6 @@ MonoBehaviour:
   - {fileID: 0}
   Sprite: {fileID: 1052507097846874316, guid: be03bd2529596cb4891b1b0972d28ce9, type: 3}
   reversedSprite: 0
-  size: {x: 1, y: 1.2}
+  size: {x: 1.2, y: 1.2}
+  healthBarOffset: {x: 1, y: 1.2}
   Type: {fileID: 11400000, guid: 7fda126cf52d4f9478689f1d6d5477a2, type: 2}

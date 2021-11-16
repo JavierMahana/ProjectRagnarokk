@@ -147,6 +147,7 @@ public class ExplorationManager : Singleton<ExplorationManager>
 
         if (GameManager.Instance.GameState == GAME_STATE.EXPLORATION)
         {
+
             int childCount = transform.childCount;
             for (int i = 0; i < childCount; i++)
             {

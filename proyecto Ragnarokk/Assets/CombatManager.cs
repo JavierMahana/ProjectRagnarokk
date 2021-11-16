@@ -103,6 +103,10 @@ public class CombatManager : MonoBehaviour
     bool FleeActionSelected = false;
     bool OnFlee = false;
 
+
+    private bool canFlee;
+    private bool isFinalRoom;
+
     //VARIABLES DE ACCIÓN DE UN TURNO
     /// <summary>
     /// Se utilizan para las condiciones de continuación de la corrutina TurnAction, y para el cálculo de daño en el método Fight.
@@ -202,6 +206,8 @@ public class CombatManager : MonoBehaviour
 
     public void InitCombatScene(CombatEncounter encounter)
     {
+        canFlee = encounter.CanEscape;
+        //isFinalRoom
         CombatDescriptor = gameObject.GetComponent<CombatDescriptor>();
         IconManager = gameObject.GetComponent<CombatIconManager>();
 
@@ -331,7 +337,10 @@ public class CombatManager : MonoBehaviour
 
     private void CreateEnemy(FighterData data, Vector3 position)
     {
+        position.z = 0;
         var enemyGameObject = Instantiate(FighterBasePrefab, position, Quaternion.identity);
+        enemyGameObject.transform.localScale = data.size;
+
         GameManager.Instance.SetDataToFighterGO(enemyGameObject, data);
         Fighter enemy = enemyGameObject.GetComponent<Fighter>();
 
@@ -490,7 +499,17 @@ public class CombatManager : MonoBehaviour
         var sceneChanger = FindObjectOfType<SceneChanger>();
         //sceneChanger.ChangeScene("Victory");
         //Debug.Log("VICTORIA");
-        sceneChanger.ChangeScene("CombatVictoryScene");
+
+        if (GameManager.Instance.OnBossFight)
+        {
+            sceneChanger.ChangeScene("Victory");
+        }
+        else
+        {
+            sceneChanger.ChangeScene("CombatVictoryScene");
+        }
+
+        
     }
 
     public void MoveActivePlayerButton(bool moveFoward)
@@ -1258,16 +1277,25 @@ public class CombatManager : MonoBehaviour
             #region FleeCombat
             if (GameManager.Instance.OnFleeCombat)
             {
-                //Se declara intención de huida
-                FleeActionSelected = true;
+                if (canFlee)
+                {
+                    //Se declara intención de huida
+                    FleeActionSelected = true;
 
-                ActionDone = true;
+                    ActionDone = true;
 
-                string fleeDesc = "Party flees... ";
-                string fleeHopeChange = HopeManager.Instance.ChangeHope(-4, "Cambio por huida");
-                fleeDesc += fleeHopeChange;
-                CombatDescriptor.Clear();
-                CombatDescriptor.AddTextLine(fleeDesc, 1.5f); //El descriptor indica que el grupo huye, y cómo esto perjudica la esperanza
+                    string fleeDesc = "Party flees... ";
+                    string fleeHopeChange = HopeManager.Instance.ChangeHope(-4, "Cambio por huida");
+                    fleeDesc += fleeHopeChange;
+                    CombatDescriptor.Clear();
+                    CombatDescriptor.AddTextLine(fleeDesc, 1.5f); //El descriptor indica que el grupo huye, y cómo esto perjudica la esperanza
+                }
+                else
+                {
+                    CombatDescriptor.Clear();
+                    CombatDescriptor.AddTextLine("Can't escape this encounter!", 1.5f);
+                }
+                
             }
             #endregion
         }

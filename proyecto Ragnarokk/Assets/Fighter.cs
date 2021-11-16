@@ -19,7 +19,7 @@ public class Fighter : MonoBehaviour
 
         Type = data.Type;
 
-        Size = data.size;
+        Size = data.healthBarOffset;
         reversed = data.reversedSprite;
 
         Evolutions = data.Evolutions;

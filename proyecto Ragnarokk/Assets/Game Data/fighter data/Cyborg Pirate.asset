@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
   m_Name: Cyborg Pirate
   m_EditorClassIdentifier: 
+  ExpNeededToLevelUp: 100
+  IsMaxLevel: 0
+  Evolutions:
+  - {fileID: 0}
+  - {fileID: 0}
   Name: Cyborg Pirate
+  RealName: nameless
   Description: Ta borracho
   Speed: 1
   Atack: 14
@@ -27,5 +33,6 @@ MonoBehaviour:
   - {fileID: 0}
   Sprite: {fileID: 4306723555328557234, guid: 7e42d01de81c65b4ab1fe456c9d84259, type: 3}
   reversedSprite: 0
-  size: {x: 1, y: 1.5}
+  size: {x: 1, y: 1}
+  healthBarOffset: {x: 1, y: 1.5}
   Type: {fileID: 11400000, guid: 9a61c964186081747ac8b0a27a5d7972, type: 2}

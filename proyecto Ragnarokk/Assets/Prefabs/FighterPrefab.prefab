@@ -45,17 +45,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830498a83817fdd48b27dadc35399e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sprite: {fileID: 0}
+  CurrentExp: 0
+  ExpNeededToLevelUp: 0
+  IsMaxLevel: 0
+  Evolutions:
+  - {fileID: 0}
+  - {fileID: 0}
   Name: 
   Speed: 0
   Atack: 0
   Defense: 0
+  Luck: 0
   MaxHP: 0
   CurrentHP: 0
+  PowerRating: 0
   Weapons:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  WeaponCooldowns: 00000000000000000000000000000000
+  CurrentWeapon: {fileID: 0}
+  Type: {fileID: 0}
+  States: []
+  RealName: 
+  isMale: 0
+  IsDefending: 0
+  reversed: 0
+  Size: {x: 1, y: 1}
 --- !u!212 &1611823039084583177
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -101,7 +119,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.48, y: 1.7636364}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
