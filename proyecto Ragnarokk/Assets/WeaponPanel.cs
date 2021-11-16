@@ -43,7 +43,7 @@ public class WeaponPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private void Awake()
     {
         imageComp = GetComponent<Image>();
-        imageComp.color = Color.white;
+        //imageComp.color = Color.white;
     }
     private void Start()
     {

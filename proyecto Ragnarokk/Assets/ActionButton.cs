@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ActionButton : MonoBehaviour
+public class ActionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Text actionText;
     public string initialActionText = "";
@@ -19,7 +20,7 @@ public class ActionButton : MonoBehaviour
     void Start()
     {
         ButtonPressed = false;
-        defaultColor = ColorBlock.defaultColorBlock.normalColor;
+        //defaultColor = ColorBlock.defaultColorBlock.normalColor;
         actionText.text = initialActionText;
         thisCase = actionText.text;
     }
@@ -66,7 +67,7 @@ public class ActionButton : MonoBehaviour
         {
             actionText.text = initialActionText;
 
-            GetComponent<Image>().color = defaultColor;
+            //GetComponent<Image>().color = defaultColor;
             ButtonPressed = false;
 
             GameManager.Instance.ConfirmationClick = false;
@@ -120,4 +121,40 @@ public class ActionButton : MonoBehaviour
         combatManager.SelectedConsumible = null;
 
     }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        string descripcion = "";
+        var cm = FindObjectOfType<CombatManager>();
+        switch (thisCase)
+        {
+            case "Attack":
+                descripcion = "Pick from one of your four weapons slots and then click on an enemy.";
+                break;
+            case "Consumable":
+                descripcion = "Pick from one of you consumibles and then select whoever you want to affect with it.";
+                break;
+            case "Defense":
+                descripcion = "The fighter takes a defensive posicion, increasing it's defense until his next turn.";
+                break;
+            case "Cancel":
+                descripcion = "Go back to the standard actions.";
+                break;
+            case "Flee Combat":
+                descripcion = "The team leaves the current combat, without chance to continue and losing a big amount of health.";
+                break;
+            default:
+                Debug.Log("la accion actual no existe");
+                break;
+        }
+
+        cm.SetlDescriptorText(descripcion);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        // aún no se escogio el arma no se limpia el panel de informacion 
+        if (!GameManager.Instance.ConfirmationClick) { FindObjectOfType<CombatManager>().ClearPanelDescriptor(); }
+    }
+
 }

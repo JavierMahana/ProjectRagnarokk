@@ -56,6 +56,7 @@ public class FighterSelect : MonoBehaviour
 
             else
             {
+                combatManager.SetlDescriptorText("Ivalid Action!");
                 Debug.Log("Falta escoger el ataque o el arma que se utilizará o bien el enemigo está muerto");
             }
 

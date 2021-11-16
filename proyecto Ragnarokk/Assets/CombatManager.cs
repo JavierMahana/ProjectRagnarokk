@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using TMPro;
 
 
 //ahora elementos de display pueden estar aca pero en el futuro moverlos.
@@ -13,15 +14,24 @@ public class CombatManager : MonoBehaviour
     public Consumible item2;
 
     public GameObject CombatCanvas;
-
+    public GameObject EnemyCombatCanvas;
     public CombatDescriptor CombatDescriptor;
 
     public GameObject PrefabActionButton;
     public GameObject PrefabWeaponButton;
     public GameObject PrefabConsumibleButton;
+    public GameObject PrefabDamageTypeButton;
+    public GameObject PrefabSynergyButton;
+
+    public Text PanelDescriptor;
+    public GameObject PanelDMGtypes;
+    public GameObject PanelSynergies;
 
     public GameObject PanelForActions;
     public GameObject FighterClickButton;
+
+    private List<GameObject> AllButtonsInDescriptorPanel = new List<GameObject>();
+
     public List<GameObject> AllButtonsInPanel = new List<GameObject>();
 
 
@@ -114,6 +124,68 @@ public class CombatManager : MonoBehaviour
     public bool ActionDone = false;
 
     //Comparador de rapidez para ordenar la lista de luchadores
+   
+    public void ClearPanelDescriptor()
+    {
+        foreach (GameObject button in AllButtonsInDescriptorPanel)
+        {
+            Destroy(button);
+        }
+        AllButtonsInDescriptorPanel.Clear();
+        PanelDescriptor.text = "";
+    }
+
+    public void SetlDescriptorText(string descripcion)
+    {
+        PanelDescriptor.text = descripcion;
+    }
+
+    public void AddDamageTypeButton(Weapon w)
+    {
+        //damage type
+        var damageType = w.TipoDeDañoQueAplica;
+
+        GameObject button = Instantiate(PrefabDamageTypeButton);
+        button.GetComponent<Button_DamageType>().SetButton(damageType);
+
+        button.transform.SetParent(PanelDMGtypes.transform, false);
+        AllButtonsInDescriptorPanel.Add(button);
+
+        AddSynergyButton(damageType);
+
+    }
+
+    public void AddSynergyButton(CombatType damageType)
+    {
+        // se añaden los botones de sinergías
+
+        int cantidad = 0;
+
+        foreach(Fighter f in AliveEnemyFighters)
+        {
+            foreach (CombatState targetState in f.States)
+            {
+                if (damageType.Sinergias.Contains(targetState))
+                {
+                    cantidad++;
+                }
+                else if (damageType.AntiSinergias.Contains(targetState))
+                {
+                    cantidad--;
+                }
+            }
+        }
+
+        for(int i = 0; i < cantidad; i++)
+        {
+            GameObject button = Instantiate(PrefabSynergyButton);
+
+            button.transform.SetParent(PanelSynergies.transform, false);
+            AllButtonsInDescriptorPanel.Add(button);
+        }
+    }
+
+
     public int SpeedComparer(Fighter f1, Fighter f2)
     {
         int speed1 = f1.Speed;
@@ -245,7 +317,7 @@ public class CombatManager : MonoBehaviour
         RectTransform rectTransform = enemyButton.GetComponent<RectTransform>();
 
         enemyButton.GetComponent<FighterSelect>().Fighter = enemyGameObject.GetComponent<Fighter>();
-        enemyButton.transform.SetParent(CombatCanvas.transform, true);
+        enemyButton.transform.SetParent(EnemyCombatCanvas.transform, true);
 
         Vector2 viewportPoint = Camera.main.WorldToViewportPoint(position);
 
@@ -263,7 +335,7 @@ public class CombatManager : MonoBehaviour
         HordeMaxHP += enemy.MaxHP;
     }
 
-    public void ShowFighterCanvas(bool show)
+    public void ShowActionCanvas(bool show)
     {
         CombatCanvas.GetComponent<Canvas>().enabled = show;
         CombatCanvas.SetActive(show);
@@ -298,11 +370,15 @@ public class CombatManager : MonoBehaviour
     {
         InitCombatScene(GameManager.Instance.currentEncounter);
         ResetWeaponCooldowns();
-        ShowFighterCanvas(false);
+        //ShowFighterCanvas(false);
+        GameManager.Instance.CheckOnLoadScene();
     }
     
     private void Update()
     {
+        //casi funcional, falta que esto se chequea justo antes del incio del turno del jugador
+       // if (!ActionDone) { CheckActivateActionCanvas(); }
+        
         if (initialized != true)
             return;
 
@@ -316,7 +392,7 @@ public class CombatManager : MonoBehaviour
                 //Debug.Log("Ejecutar turno");
                 TurnInProcess = true;
 
-                ShowFighterCanvas(false);
+                //ShowFighterCanvas(false);
                 CleanPanelSelecion();
 
                 FindNextActiveFighter();
@@ -413,17 +489,22 @@ public class CombatManager : MonoBehaviour
         yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty); //No está esperando, y no sé por qué
         CombatDescriptor.ShowFighterInTurn(ActiveFighter);
 
+        
+
         //TURNO DE UN ALIADO
         if (IsPlayerFighter(ActiveFighter))
         {
+            PanelDescriptor.text = "Pick an Action!";
+
             //Debug.Log("Turno Aliado");
             AttackWeapon = null;
             SelectedConsumible = null;
 
             // activa canvas de acciones 
-            ShowFighterCanvas(true);
+           // ShowFighterCanvas(true);
             ActionSelection();
-            
+            ShowActionCanvas(true);
+            ClearPanelDescriptor();
 
             // setea el boton del aliado actual 
             foreach (FighterSelect button in GameManager.Instance.PlayerButtons)
@@ -514,7 +595,7 @@ public class CombatManager : MonoBehaviour
         else
         {
             //Debug.Log("Turno Enemigo");
-            ShowFighterCanvas(false);
+            //ShowFighterCanvas(false);
 
             ActiveFighter.transform.position += new Vector3((float)-2.5, 0, 0);
 
@@ -531,7 +612,7 @@ public class CombatManager : MonoBehaviour
 
             foreach(FighterSelect button in GameManager.Instance.PlayerButtons)
             {
-                if (button.Fighter == Target)
+                if (button.Fighter == Target && button.Fighter.CurrentHP > 0)
                 {
                     targetButton = button;
                     //Debug.Log("Boton Aliado encontrado por el enemigo");
@@ -559,6 +640,8 @@ public class CombatManager : MonoBehaviour
     // al hacerle clic se activa Fight y el argumento es el boton cliqueado que contiene al target
     public void Fight(FighterSelect targetButton)
     {
+        ShowActionCanvas(false);
+        //Debug.Log("Desactiva Canvas!!!!!");
         if (targetButton == null || targetButton.Fighter == null || targetButton.selfBbutton == null) { Debug.Log("No se encuentra el botón del objetivo"); }
         // se especifica el target con la fucion EnemySelected
 
@@ -567,7 +650,9 @@ public class CombatManager : MonoBehaviour
         //Debug.Log("OBJETIVO: " + Target.Name);
 
         CombatDescriptor.Clear();
-        CombatDescriptor.AddTextLine(ActiveFighter.Name + " uses " + AttackWeapon.Name); //Muestra atacante y arma
+        if (PlayerFighters.Contains(ActiveFighter)) { CombatDescriptor.AddTextLine(ActiveFighter.RealName + " uses " + AttackWeapon.Name); }
+        else { CombatDescriptor.AddTextLine(ActiveFighter.Name + " uses " + AttackWeapon.Name); }
+         //Muestra atacante y arma
 
         int damageToShow = -1;
 
@@ -665,7 +750,8 @@ public class CombatManager : MonoBehaviour
             CombatDescriptor.AddTextLine(synerDesc);
 
             //Indica por texto quién recibió cuánto daño
-            CombatDescriptor.AddTextLine(Target.Name + " loses " + finalDamage + " HP");
+            if (PlayerFighters.Contains(Target)) { CombatDescriptor.AddTextLine(Target.RealName + " loses " + finalDamage + " HP"); }
+            else { CombatDescriptor.AddTextLine(Target.Name + " loses " + finalDamage + " HP"); }
 
             if (attackerIsAlly && finalDamage == minDamage) 
             {
@@ -689,7 +775,11 @@ public class CombatManager : MonoBehaviour
                 Target.CurrentHP = 0;
                 RemoveCombatStates(Target);
 
-                string defeatDesc = Target.Name + " has been defeated! ";
+                string defeatDesc;
+
+                if (PlayerFighters.Contains(Target)) { defeatDesc = Target.RealName + " has been defeated! "; }
+                else { defeatDesc = Target.Name + " has been defeated! "; }
+                 
                 string defHopeChange = "";
 
                 if (targetIsAlly)
@@ -720,7 +810,8 @@ public class CombatManager : MonoBehaviour
                         //Debug.Log("Aplicado: " + weaponState.Name);
 
                         //Muestra por texto el estado adquirido
-                        CombatDescriptor.AddTextLine(Target.Name + " is " + weaponState.Name);
+                        if (PlayerFighters.Contains(Target)) { CombatDescriptor.AddTextLine(Target.RealName + " is " + weaponState.Name); }
+                        else { CombatDescriptor.AddTextLine(Target.Name + " is " + weaponState.Name); }
                     }
                 }
             }
@@ -978,11 +1069,11 @@ public class CombatManager : MonoBehaviour
             defensa.transform.SetParent(PanelForActions.transform, false);
             AllButtonsInPanel.Add(defensa);
 
-            GameObject huida = Instantiate(PrefabActionButton);
+            GameObject huir = Instantiate(PrefabActionButton);
 
-            huida.GetComponent<ActionButton>().initialActionText = "Flee Combat";
-            huida.transform.SetParent(PanelForActions.transform, false);
-            AllButtonsInPanel.Add(huida);
+            huir.GetComponent<ActionButton>().initialActionText = "Flee Combat";
+            huir.transform.SetParent(PanelForActions.transform, false);
+            AllButtonsInPanel.Add(huir);
         }
 
         // si una accion ya fue seleccionada
@@ -1008,7 +1099,7 @@ public class CombatManager : MonoBehaviour
                     {
                         GameObject weaponButton = Instantiate(PrefabWeaponButton);
 
-                        weaponButton.GetComponent<WeaponSpecs>().weaponDamage.text = "damage: " + W.BaseDamage.ToString() + " - type:" + W.TipoDeDañoQueAplica.Name.ToString();
+                       // weaponButton.GetComponent<WeaponSpecs>().weaponDamage.text = "damage: " + W.BaseDamage.ToString() + " - type:" + W.TipoDeDañoQueAplica.Name.ToString();
                         weaponButton.GetComponent<WeaponSpecs>().weaponName.text = W.Name;
                         weaponButton.GetComponent<WeaponSpecs>().thisWeapon = W;
                         weaponButton.GetComponent<WeaponSpecs>().IndexOfFighterWeapon = i;
@@ -1042,12 +1133,13 @@ public class CombatManager : MonoBehaviour
             #region Defense
             if (GameManager.Instance.OnDefense)
             {
+                ShowActionCanvas(false);
                 // aumentar temporalmente la defensa del jugador activo
                 // podría usarse un array de bonuses, útil también para consumibles
                 // ActiveFighter.Defense += 10;
 
                 CombatDescriptor.Clear(); //Si se llega a crear un método para aplicar la defensa, esta línea debe ir ahí
-                CombatDescriptor.AddTextLine(ActiveFighter.Name + " is defending");
+                CombatDescriptor.AddTextLine(ActiveFighter.RealName + " is defending");
 
                 // terminar turno
                 GameManager.Instance.ConfirmationClick = false;
@@ -1056,17 +1148,8 @@ public class CombatManager : MonoBehaviour
             }
             #endregion
 
-            #region FleeCombat
-            if (GameManager.Instance.OnFleeCombat)
-            {
-                // se escapa del combate
 
-                // terminar turno
-                GameManager.Instance.ConfirmationClick = false;
-                CleanPanelSelecion();
-                ActionDone = true;
-            }
-            #endregion
+    
         }
     }
 

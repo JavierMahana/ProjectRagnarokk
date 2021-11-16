@@ -44,7 +44,7 @@ public class ExplorationManager : Singleton<ExplorationManager>
 
         UnloadFloor();
         Debug.Log("Loading floor");
-
+        
 
         int lenghtWidth = floorToLoad.RoomLayout.GetLength(0);
         int lenghtHeight = floorToLoad.RoomLayout.GetLength(1);
@@ -136,8 +136,9 @@ public class ExplorationManager : Singleton<ExplorationManager>
     // Start is called before the first frame update
     void Start()
     {
+
         //InitFloor(testFloor);
-        
+
     }
 
     // Update is called once per frame

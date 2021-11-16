@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,10 +15,12 @@ public class ConsumiblePanel : MonoBehaviour
 
     public Fighter currentFighter;
 
-    public Dropdown CurrentFighterConsume;
+    public TMP_Dropdown CurrentFighterConsume;
 
-    public Text Name;
-    public Text Health;
+    public TextMeshProUGUI Descriptor;
+    public TextMeshProUGUI Name;
+    public TextMeshProUGUI Health;
+
     public Image Image;
 
     public void SetUpPanel()
@@ -69,9 +72,11 @@ public class ConsumiblePanel : MonoBehaviour
 
     public void UpdatePanel()
     {
-        Name.text = currentFighter.Name;
+        Name.text = currentFighter.RealName;
         Health.text = currentFighter.CurrentHP.ToString() + " / " + currentFighter.MaxHP.ToString();
         Image.sprite = currentFighter.GetComponent<SpriteRenderer>().sprite;
+
+        if(SelectedConsumible != null) { Descriptor.text = SelectedConsumible.Description; }
     }
 
     public void FillPanel()

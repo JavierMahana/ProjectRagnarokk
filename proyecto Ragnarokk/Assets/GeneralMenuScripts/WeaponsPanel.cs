@@ -4,26 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class WeaponsPanel : MonoBehaviour
 {
     public Image thisImage;
-    public Text WeaponName;
-    public Text Description;
-    public Text ValueDamage;
-    public Text ValueAccuracy;
-    public Text ValueCriticalChance;
-    public Text ValueCooldown;
-    public Text ValueType;
+    public TextMeshProUGUI WeaponName;
+    public TextMeshProUGUI Description;
+    public TextMeshProUGUI ValueDamage;
+    public TextMeshProUGUI ValueAccuracy;
+    public TextMeshProUGUI ValueCriticalChance;
+    public TextMeshProUGUI ValueCooldown;
+    public TextMeshProUGUI ValueType;
 
-    public Text name1;
-    public Text name2;
-    public Text name3;
+    public TextMeshProUGUI name1;
+    public TextMeshProUGUI name2;
+    public TextMeshProUGUI name3;
 
     public WeaponMenuButton[] TeamWeapons;
     // slot [12] guarda una copia de la última arma escogida
     private WeaponMenuButton Recall;
-    private WeaponMenuButton currentWeaponButton;
+    public WeaponMenuButton currentWeaponButton;
 
     public bool OnChange;
 
@@ -45,9 +46,6 @@ public class WeaponsPanel : MonoBehaviour
         {
             //Updates Icon and color of all buttons
             UpdateAllbuttons();
-
-            //updates the display menu with all the info of weapons
-            UpdateWeaponPanel();
 
             if (currentWeaponButton == null)
             {
@@ -103,10 +101,13 @@ public class WeaponsPanel : MonoBehaviour
 
     public void UpdateAllbuttons()
     {
+        
         for (int i = 0; i < 12; i++)
         {
             TeamWeapons[i].UpdateButton();
+
             //updates currentWeapon the picked color
+            /*
             if (currentWeaponButton == TeamWeapons[i])
             {
                 if(currentWeaponButton.thisWeapon != null)
@@ -126,37 +127,43 @@ public class WeaponsPanel : MonoBehaviour
                     TeamWeapons[i].thisImage.color = Color.clear;
                 }
                 
-            } 
+            } */
         }
+        
     }
 
-    public void UpdateWeaponPanel()
+    public void UpdateWeaponPanel(WeaponMenuButton button)
     {
-        if (currentWeaponButton != null && currentWeaponButton.thisWeapon != null)
+        if (button != null && button.thisWeapon != null)
         {
-            thisImage.sprite = currentWeaponButton.thisImage.sprite;
-            Description.text = currentWeaponButton.thisWeapon.Description;
-            WeaponName.text = currentWeaponButton.thisWeapon.Name;
-            ValueDamage.text = currentWeaponButton.thisWeapon.BaseDamage.ToString();
-            ValueAccuracy.text = currentWeaponButton.thisWeapon.BaseAccuracy.ToString();
-            //ValueCriticalChance.text = ;
-            ValueCooldown.text = currentWeaponButton.thisWeapon.BaseCooldown.ToString();
-            ValueType.text = currentWeaponButton.thisWeapon.TipoDeDañoQueAplica.ToString();
+            thisImage.sprite = button.thisImage.sprite;
+            thisImage.color = button.defaultColor;
+            Description.text = button.thisWeapon.Description;
+            WeaponName.text = button.thisWeapon.Name;
+            ValueDamage.text = button.thisWeapon.BaseDamage.ToString();
+            ValueAccuracy.text = button.thisWeapon.BaseAccuracy.ToString();
+            ValueCriticalChance.text = button.thisWeapon.BaseCriticalRate.ToString(); 
+            ValueCooldown.text = button.thisWeapon.BaseCooldown.ToString();
+            ValueType.text = button.thisWeapon.TipoDeDañoQueAplica.ToString();
         }
         else
         {
-            thisImage.sprite = null;
-            WeaponName.text = "";
-            ValueDamage.text = "";
-            ValueAccuracy.text = "";
-            ValueCriticalChance.text = "";
-            ValueCooldown.text = "";
-            Description.text = "";
-            ValueType.text = "";
-
+            EmptyWeaponPanel();
         }
     }
 
+    public void EmptyWeaponPanel()
+    {
+        thisImage.sprite = null;
+        thisImage.color = Color.clear;
+        WeaponName.text = "No Weapon Selected";
+        ValueDamage.text = "";
+        ValueAccuracy.text = "";
+        ValueCriticalChance.text = "";
+        ValueCooldown.text = "";
+        Description.text = "";
+        ValueType.text = "";
+    }
     public void PrintArray()
     {
         
@@ -231,14 +238,21 @@ public class WeaponsPanel : MonoBehaviour
 
             FillWeaponsPanel();
             SetChange();
+
             currentWeaponButton = null;
+
+            var AM = FindObjectOfType<AudioManager>();
+            AM.Play("WeaponExchange");
+
+
+            EmptyWeaponPanel();
+            UpdateAllbuttons();
         }
         else
         {
             currentWeaponButton = button;
+            UpdateWeaponPanel(button);
         }
-
-       
 
     }
 
@@ -271,12 +285,12 @@ public class WeaponsPanel : MonoBehaviour
         if (!OnChange)
         {
             OnChange = true;
-            exchange.GetComponent<Image>().color = exchange.GetComponent<Button>().colors.selectedColor;
+            //exchange.GetComponent<Image>().color = exchange.GetComponent<Button>().colors.selectedColor;
         }
         else 
         { 
             OnChange = false;         
-            exchange.GetComponent<Image>().color = Color.white;
+            //exchange.GetComponent<Image>().color = Color.white;
         }
     }
 

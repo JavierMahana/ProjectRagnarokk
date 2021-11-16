@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class WeaponMenuButton : MonoBehaviour
+public class WeaponMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Weapon thisWeapon;
-    public Text thisWeaponName;
+    public TextMeshProUGUI thisWeaponName;
     public Image thisImage;
-
-    private Color defaultColor;
+    public Color defaultColor;
 
     private void Start()
     {
@@ -23,19 +24,52 @@ public class WeaponMenuButton : MonoBehaviour
 
     public void UpdateButton()
     {
-        if(thisWeapon == null)
+        var wp = FindObjectOfType<WeaponsPanel>();
+        
+
+        if (thisWeapon == null)
         {
             thisWeaponName.text = "Empty";
             thisImage.color = Color.clear;
             thisImage.sprite = null;
+            GetComponent<Image>().color = defaultColor;
         }
         else
         {
             thisWeaponName.text = "";
             thisImage.sprite = thisWeapon.sprite;
             thisImage.color = defaultColor;
-            GetComponent<Image>().color = defaultColor;
+            if (wp.currentWeaponButton == this)
+            {
+                GetComponent<Image>().color = GetComponent<Button>().colors.highlightedColor;
+            }
+            else
+            {
+                GetComponent<Image>().color = defaultColor;
+            }
         }
     }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        var wp = FindObjectOfType<WeaponsPanel>();
+        if(wp.OnChange)
+        {
+            wp.UpdateWeaponPanel(this);
+        }
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        var wp = FindObjectOfType<WeaponsPanel>();
+        if (wp.OnChange)
+        {
+            wp.UpdateWeaponPanel(null);
+        }
+    }
+
+
+
 }
 

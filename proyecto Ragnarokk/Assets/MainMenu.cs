@@ -1,60 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject PanelExplain;
+    public GameObject PanelMenu;
+
+
     public GameObject StartButton;
     public GameObject ControlsButton;
+    public GameObject Options;
     public GameObject CreditsButton;
-    public GameObject QuitButton;
+    public GameObject QuitButton; 
     public GameObject ReturnButton;
 
     public GameObject PanelText;
 
-    public Text ControlsText;
-    public Text CreditsText;
+    public TextMeshProUGUI ControlsText;
+    public TextMeshProUGUI CreditsText;
 
     void Start()
     {
+        if (PlayerPrefs.GetInt("firstTime") == 0)
+        {
+            PanelExplain.SetActive(true);
+        }
+        else
+        {
+            NormalMenuOn();
+        }
+    }
+    
+    public void NormalMenuOn()
+    {
+        PanelExplain.SetActive(false);
+        PanelMenu.SetActive(true);
         ActivateButtons(true);
     }
 
-    void Update()
-    {
-        
-    }
-    
     public void ActivateButtons(bool active)
     {
         StartButton.SetActive(active);
         ControlsButton.SetActive(active);
         CreditsButton.SetActive(active);
         QuitButton.SetActive(active);
-        ReturnButton.SetActive(!active);
-        PanelText.SetActive(!active);
+        Options.SetActive(active);
 
+        ReturnButton.SetActive(!active);
     }
 
     public void ClickStart()
     {
         SceneChanger.Instance.LoadMenuScene();
 
-    }
-
-    public void ClickControls()
-    {
-        ActivateButtons(false);
-        ControlsText.gameObject.SetActive(true);
-        CreditsText.gameObject.SetActive(false);
-    }
-
-    public void ClickCredits()
-    {
-        ActivateButtons(false);
-        CreditsText.gameObject.SetActive(true);
-        ControlsText.gameObject.SetActive(false);
+        //esto debería moverse a donde sea que termine el tutorial del juego.
+        GameManager.Instance.TutorialComplete();
     }
 
     public void ClickQuit()
@@ -62,10 +65,4 @@ public class MainMenu : MonoBehaviour
         SceneChanger.Instance.Exit();
     }
 
-    public void ClickReturn()
-    {
-        ActivateButtons(true);
-        ControlsText.gameObject.SetActive(false);
-        CreditsText.gameObject.SetActive(false);
-    }
 }

@@ -33,7 +33,9 @@ public class Fighter : MonoBehaviour
 
     public List<CombatState> States = new List<CombatState>();
 
+    public string RealName;
 
+    public bool isMale;
 
     public VoidDelegate OnTakeDamage;
     public VoidDelegate OnDie;

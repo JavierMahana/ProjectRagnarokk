@@ -34,6 +34,8 @@ public class TreasureRoomManager : MonoBehaviour
             Debug.LogError("You need a infobox!");
         }
         InfoBox.ShowInfo(defaultInfoBoxTitle, defaultInfoBoxDescription);
+        GameManager.Instance.CheckOnLoadScene();
+
     }
 
     //public void ShowItemInfoBox(Item item)

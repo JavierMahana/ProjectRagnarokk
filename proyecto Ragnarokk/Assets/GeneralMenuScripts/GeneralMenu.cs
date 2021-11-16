@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +8,9 @@ using UnityEngine.UI;
 public class GeneralMenu : MonoBehaviour
 {
     private ExplorationManager explorationManager;
-    public Text MenuTitle;
+    public TextMeshProUGUI MenuTitle;
 
-    public Dropdown MenuDropdown;
+    public TMP_Dropdown MenuDropdown;
 
     public GameObject Background;
 
@@ -94,7 +95,8 @@ public class GeneralMenu : MonoBehaviour
         }
         if (MenuDropdown.value == 4) 
         {
-            ActivatePanel(Options, "Options"); 
+            ActivatePanel(Options, "Options");
+            Options.GetComponent<Options>().OnOptions();
         }
         if (MenuDropdown.value == 5) 
         { 
