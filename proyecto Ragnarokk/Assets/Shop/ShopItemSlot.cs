@@ -11,7 +11,7 @@ public class ShopItemSlot : MonoBehaviour
     [HideInInspector]
     public Item CurrItem;
 
-    private int slot;
+    private int shopItemSlot;
 
     private ShopManager manager;
     private InfoBox infoBox;
@@ -39,6 +39,11 @@ public class ShopItemSlot : MonoBehaviour
 
     private void Update()
     {
+        if (CurrItem == null)
+        {
+            text.text = "";
+        }
+
         if (showingAlternateText && CurrItem != null)
         {
             currTimePassed += Time.deltaTime;
@@ -53,13 +58,19 @@ public class ShopItemSlot : MonoBehaviour
     }
 
 
-    public void Init(Item item, ShopManager manager, int slot)
+    public void Init(Item item, ShopManager manager, int shopItemSlot)
     {
-        this.slot = slot;
 
+        this.shopItemSlot = shopItemSlot;
         CurrItem = item;
         this.manager = manager;
 
+
+        UpdateContent(item);
+    }
+
+    public void UpdateContent(Item item)
+    {
         var renderer = GetComponent<SpriteRenderer>();
 
         if (item != null)
@@ -69,17 +80,20 @@ public class ShopItemSlot : MonoBehaviour
         }
         else
         {
+            renderer.sprite = manager.ItemSoldSprite;
             text.text = "";
         }
-            
 
-        
     }
+
 
     void OnMouseDown()
     {
+
+
         if (CurrItem == null)
         {
+            text.text = "";
             return;
         }
 
@@ -94,12 +108,13 @@ public class ShopItemSlot : MonoBehaviour
         var itemAsConsumible = CurrItem as Consumible;
         if (itemAsWeapon != null)
         {
-            weaponSwapManager.Show(itemAsWeapon, true);
+            Debug.Log("Mostrando en shopitem");
+            weaponSwapManager.Show(itemAsWeapon, shopItemSlot, true);
             //show weapon swap menu.
         }
         else if (itemAsConsumible != null)
         {
-            confirmScreen.Show(itemAsConsumible, true);
+            confirmScreen.Show(itemAsConsumible, shopItemSlot, true);
 
         }
     }

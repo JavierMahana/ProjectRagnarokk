@@ -13,7 +13,7 @@ public class HealthBarManager : MonoBehaviour
 
     private bool initialized;
 
-    Vector2 healthBarOffset = new Vector2(0, 1);
+    Vector2 healthBarOffset = new Vector2(0, 0.1f);
 
     private void Awake()
     {
@@ -45,7 +45,7 @@ public class HealthBarManager : MonoBehaviour
             
 
             var rectTransform = (RectTransform)healthBarObj.transform;
-            rectTransform.localPosition = new Vector3(healthBarOffset.x, healthBarOffset.y, 1);
+            rectTransform.localPosition = new Vector3(healthBarOffset.x, healthBarOffset.y + fighter.Size.y, 1);
 
             HealthBar healthBarComp;
             if (healthBarObj.TryGetComponent<HealthBar>(out healthBarComp))

@@ -22,7 +22,10 @@ using Sirenix.OdinInspector;
 [CreateAssetMenu(menuName ="Fighter Data")]
 public class FighterData : ScriptableObject
 {
-    
+    public int ExpNeededToLevelUp = 100;
+    public bool IsMaxLevel = false;
+    public FighterData[] Evolutions = new FighterData[2];
+
     public string Name = "unnamed fighter type";
 
     public string RealName = "nameless";
@@ -45,6 +48,8 @@ public class FighterData : ScriptableObject
 
     #region VISUAL DATA
     public Sprite Sprite;
+    public bool reversedSprite = false;
+    public Vector2 size = new Vector2(1, 1);
     #endregion
 
     //Tipo para determinar que ataques hacen poco daño y mucho daño.

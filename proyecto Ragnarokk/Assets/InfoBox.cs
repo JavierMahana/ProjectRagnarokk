@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Text;
+using UnityEngine.UI;
 
 public class InfoBox : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class InfoBox : MonoBehaviour
     public TextMeshProUGUI HPText;
     public TextMeshProUGUI TypeText;
     public TextMeshProUGUI FighterDescriptionText;
+    public Image FighterImage; 
 
     public GameObject GenericFormatObj;
 
@@ -108,6 +110,7 @@ public class InfoBox : MonoBehaviour
         HPText.text = fighterData.MaxHP.ToString();
         TypeText.text = fighterData.Luck.ToString();
 
+        FighterImage.sprite = fighterData.Sprite;
     }
 
 }

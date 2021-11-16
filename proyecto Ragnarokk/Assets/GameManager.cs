@@ -186,7 +186,7 @@ public class GameManager : Singleton<GameManager>
         //Debug.Log($"{GameState}");
 
         PlayerFighters.Clear();
-        var pFighter = FindObjectsOfType<PlayerFighter>(false);
+        var pFighter = FindObjectsOfType<PlayerFighter>(true);
         foreach (var item in pFighter)
         {
             PlayerFighters.Add(item);
@@ -245,6 +245,14 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void ShowPlayerFighters(bool show)
+    {
+        var fightersaliados = PlayerFighters;
+        foreach (var fighter in fightersaliados)
+        {
+            fighter.gameObject.SetActive(show);
+        }
+    }
 
     public void SetDataToFighterGO(GameObject fighterGO, FighterData data, bool playerFighter = false)
     {
@@ -256,17 +264,7 @@ public class GameManager : Singleton<GameManager>
         {
             renderer.sprite = data.Sprite;
 
-            fighterComp.Name = data.Name;
-            fighterComp.Atack = data.Atack;
-            fighterComp.Defense = data.Defense;
-            fighterComp.Speed = data.Speed;
-            fighterComp.Luck = data.Luck;
-            fighterComp.MaxHP = data.MaxHP;
-            fighterComp.CurrentHP = fighterComp.MaxHP;
-
-            fighterComp.PowerRating = data.PowerRating;
-
-            fighterComp.Type = data.Type;
+            fighterComp.Init(data);
 
             for (int i = 0; i < fighterComp.Weapons.Length; i++)
             {

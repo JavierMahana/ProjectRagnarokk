@@ -35,6 +35,8 @@ public class GeneralMenu : MonoBehaviour
     //Quit & Save
     public GameObject SaveQuit;
 
+    public GameObject ReturnButton;
+
     public List<GameObject> Panels = new List<GameObject>();
 
     public bool initialized;
@@ -55,14 +57,25 @@ public class GeneralMenu : MonoBehaviour
         Panels.Add(Consumibles);
         Panels.Add(Options);
         Panels.Add(SaveQuit);
+
+        
         OnClick();
     }
 
+    public void ChangeDropdownValue(int value)
+    {
+        MenuDropdown.value = value;
+    }
+
+    /// <param name="value">valor es un atributo pensado por si quieres sobreescribir el menu-dropdown</param>
     public void OnClick()
     {
+
         //revisa el dropdown actual al explorar
         if (MenuDropdown.value == 0) 
-        { 
+        {
+            ReturnButton.SetActive(false);
+
             HideAllPanels();
             explorationManager.gameObject.SetActive(true);
             Background.SetActive(false);
@@ -71,6 +84,9 @@ public class GeneralMenu : MonoBehaviour
         }
         else 
         {
+            Debug.Log("No toy explorando.");
+
+            ReturnButton.SetActive(true);
             Background.SetActive(true);
             explorationManager.gameObject.SetActive(false);
             this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.9f);

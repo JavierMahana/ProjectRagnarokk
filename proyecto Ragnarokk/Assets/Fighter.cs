@@ -5,6 +5,45 @@ using Sirenix.OdinInspector;
 
 public class Fighter : MonoBehaviour
 {
+    public void Init(FighterData data)
+    {
+        Name = data.Name;
+        Atack = data.Atack;
+        Defense = data.Defense;
+        Speed = data.Speed;
+        Luck = data.Luck;
+        MaxHP = data.MaxHP;
+        CurrentHP = MaxHP;
+
+        PowerRating = data.PowerRating;
+
+        Type = data.Type;
+
+        Size = data.size;
+        reversed = data.reversedSprite;
+
+        Evolutions = data.Evolutions;
+        CurrentExp = 0;
+        ExpNeededToLevelUp = data.ExpNeededToLevelUp;
+        IsMaxLevel = data.IsMaxLevel;
+
+        Sprite = data.Sprite;
+    }
+
+    [ReadOnly]
+    public Sprite Sprite;
+
+    [ReadOnly]
+    public int CurrentExp;
+    [ReadOnly]
+    public int ExpNeededToLevelUp;
+    [ReadOnly]
+    public bool IsMaxLevel;
+
+    [ReadOnly]
+    public FighterData[] Evolutions = new FighterData[2];
+
+
     [ReadOnly]
     public string Name;
 
@@ -36,6 +75,9 @@ public class Fighter : MonoBehaviour
     public string RealName;
 
     public bool isMale;
+
+    public bool reversed;
+    public Vector2 Size = new Vector2(1,1);
 
     public VoidDelegate OnTakeDamage;
     public VoidDelegate OnDie;

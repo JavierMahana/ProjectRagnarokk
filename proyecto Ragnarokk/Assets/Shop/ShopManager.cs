@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
+    public Sprite ItemSoldSprite;
+
     public string defaultInfoBoxTitle = "Shop";
     public string defaultInfoBoxDescription = "You can buy any item.\nIf you have the money...";
 
@@ -12,6 +14,8 @@ public class ShopManager : MonoBehaviour
 
     void Start()
     {
+        GameManager.Instance.ShowPlayerFighters(false);
+
         ShopSlots[0].Init(GameManager.Instance.CurrShopData.weapon1, this, 0);
         ShopSlots[1].Init(GameManager.Instance.CurrShopData.weapon2, this, 1);
         ShopSlots[2].Init(GameManager.Instance.CurrShopData.weapon3, this, 2);

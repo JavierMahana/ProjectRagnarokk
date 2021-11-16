@@ -8,6 +8,7 @@ public class ExplorationState : MonoBehaviour
     void Start()
     {
         GameManager.Instance.CheckOnLoadScene();
+        GameManager.Instance.ShowPlayerFighters(false);
     }
 
     // Update is called once per frame

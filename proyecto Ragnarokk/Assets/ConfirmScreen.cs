@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class ConfirmScreen : MonoBehaviour
 {
+
+    private ShopManager shopManager;
+
+    private void Start()
+    {
+        shopManager = FindObjectOfType<ShopManager>();
+    }
+
     public List<GameObject> ObjectsToHideWhenShow = new List<GameObject>();
     public GameObject WeaponsSwapObj;
     private bool showWeaponsSwapObjWhenClose = false;
@@ -19,6 +27,11 @@ public class ConfirmScreen : MonoBehaviour
 
     private int currMoneyAmmount;
 
+    private int itemShopSlotIndex;
+
+    private EvolutionPanelManager evolutionManager;
+    private Fighter evolvingFighter;
+    private FighterData evolvingData;
 
     public void Confirm()
     {
@@ -33,6 +46,14 @@ public class ConfirmScreen : MonoBehaviour
             if (isShop)
             {
                 GameManager.Instance.CurrentMoney -= currItem.BaseCost;
+
+                if (shopManager == null)
+                {
+                    Debug.LogError("To confirm the buy of an item you need a shopManager!");
+                }
+                ShopItemSlot slot = shopManager.ShopSlots[itemShopSlotIndex];
+                slot.UpdateContent(null);
+                    
             }
         }
         
@@ -54,6 +75,12 @@ public class ConfirmScreen : MonoBehaviour
         {
             GameManager.Instance.CurrentMoney += currMoneyAmmount;
         }
+        else if(evolvingFighter != null && evolvingData != null)
+        {
+            evolvingFighter.Init(evolvingData);
+            evolvingFighter.gameObject.GetComponent<SpriteRenderer>().sprite = evolvingData.Sprite;
+            evolutionManager.Hide();
+        }
         else
         {
             Debug.LogError("Can't confirm. The item selected is not a weapon nor a consumible.");
@@ -61,7 +88,21 @@ public class ConfirmScreen : MonoBehaviour
 
         if (isShop)
         {
-            Cancel();
+            Cancel(true);
+
+        }
+        else if (evolutionManager != null)
+        {
+            evolutionManager = null;
+            evolvingData = null;
+            evolvingFighter = null;
+            isShop = false;
+            currItem = null;
+            currFighter = null;
+            currSlot = -1;
+            currMoneyAmmount = -1;
+            Hide(false, true);            
+
         }
         else
         {
@@ -71,18 +112,37 @@ public class ConfirmScreen : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("WeaponExchange");
         
     }
-    public void Cancel()
+    public void Cancel(bool forceCloseSwapWeapon = false)
     {
+        evolutionManager = null;
+        evolvingData = null;
+        evolvingFighter = null;
         isShop = false;
         currItem = null;
         currFighter = null;
         currSlot = -1;
         currMoneyAmmount = -1;
-        Hide();
+
+
+        Hide(forceCloseSwapWeapon);
     }
 
-    public void Show(int moneyAmmount, bool isShop = false)
+    public void Show(Fighter evolvingFighter, FighterData newData, EvolutionPanelManager evManager)
     {
+        this.evolutionManager = evManager;
+        this.evolvingFighter = evolvingFighter;
+        this.evolvingData = newData;
+
+        Panel.SetActive(true);
+        foreach (var obj in ObjectsToHideWhenShow)
+        {            
+            obj.SetActive(false);
+        }
+    }
+    public void Show(int moneyAmmount,int itemShopSlotIndex = -1,  bool isShop = false)
+    {
+        this.itemShopSlotIndex = itemShopSlotIndex;
+
         this.isShop = isShop;
         showWeaponsSwapObjWhenClose = false;
 
@@ -94,8 +154,10 @@ public class ConfirmScreen : MonoBehaviour
             obj.SetActive(false);
         }
     }
-    public void Show(Consumible consumible, bool isShop = false)
+    public void Show(Consumible consumible,int itemShopSlotIndex = -1, bool isShop = false)
     {
+        this.itemShopSlotIndex = itemShopSlotIndex;
+
         this.isShop = isShop;
         showWeaponsSwapObjWhenClose = false;
 
@@ -108,8 +170,10 @@ public class ConfirmScreen : MonoBehaviour
             obj.SetActive(false);
         }
     }
-    public void Show(Weapon weapon, Fighter fighter, int slot, bool isShop = false)
+    public void Show(Weapon weapon, Fighter fighter, int slot, int itemShopSlotIndex = -1, bool isShop = false)
     {
+        this.itemShopSlotIndex = itemShopSlotIndex;
+
         this.isShop = isShop;
 
         showWeaponsSwapObjWhenClose = true;
@@ -128,18 +192,22 @@ public class ConfirmScreen : MonoBehaviour
         }
     }
 
-    public void Hide()
+    public void Hide(bool forceCloseSwapWeapon = false, bool ShowObjectsToHide = true)
     {
         Panel.SetActive(false);
 
-        if (showWeaponsSwapObjWhenClose)
+        if (showWeaponsSwapObjWhenClose && !forceCloseSwapWeapon)
         {
             if (WeaponsSwapObj != null)
                 WeaponsSwapObj.SetActive(true);
         }
-        foreach (var obj in ObjectsToHideWhenShow)
+
+        if (ShowObjectsToHide)
         {
-            obj.SetActive(true);
+            foreach (var obj in ObjectsToHideWhenShow)
+            {
+                obj.SetActive(true);
+            }
         }
     }    
 }
