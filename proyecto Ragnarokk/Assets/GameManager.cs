@@ -308,6 +308,7 @@ public class GameManager : Singleton<GameManager>
     public void SaveNQuit() 
     {
         //save data and exit game
+        Application.Quit();
     }
 
     public bool CheckTutorialComplete()
