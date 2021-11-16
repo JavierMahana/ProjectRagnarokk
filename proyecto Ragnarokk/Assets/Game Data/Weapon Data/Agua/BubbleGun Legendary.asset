@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
+  m_Name: BubbleGun Legendary
+  m_EditorClassIdentifier: 
+  Name: Water Minigun
+  SubName: Legendary
+  Description: This gun fires water so fast that it can leave cut someone in half,
+    it's true I swear!... Quite gruesome too.
+  BaseCost: 200
+  sprite: {fileID: -3058749858876906216, guid: a6a05ba60a9f05a409c78ed1085b2b89, type: 3}
+  BaseDamage: 15
+  BaseAccuracy: 100
+  BaseCriticalRate: 15
+  BaseCooldown: 1
+  ListaDeEstadosQueAplica:
+  - {fileID: 11400000, guid: f075e7e4326f99f4d9e7d5dae8eaa7d2, type: 2}
+  "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 99ddf6cb18f34644c857955877bf77d1, type: 2}

@@ -8,7 +8,7 @@ using TMPro;
 
 //ahora elementos de display pueden estar aca pero en el futuro moverlos.
 public class CombatManager : MonoBehaviour
-{
+{ 
     //eliminar las 2 lineas siguientes luego de testear los consumibles
     public Consumible item1;
     public Consumible item2;
@@ -68,7 +68,7 @@ public class CombatManager : MonoBehaviour
     public List<Fighter> AllCombatFighters = new List<Fighter>(); //Lista que almacenará a los luchadores del combate actual
 
     //Luchadores aliados  
-    List<Fighter> PlayerFighters = new List<Fighter>();
+    public List<Fighter> PlayerFighters = new List<Fighter>();
     List<Fighter> AlivePlayerFighters = new List<Fighter>();
 
     int PartyMaxHP;
@@ -682,6 +682,7 @@ public class CombatManager : MonoBehaviour
             Debug.Log("Descriptor vacío");
             if(FleeActionSelected)
             {
+                Debug.Log("On flee = true");
                 OnFlee = true;
                 yield break; //Se interrumpe la corrutina. El turno NO se declara como terminado. Esto es para prevenir que se inicie un nuevo turno.
             }
@@ -1260,11 +1261,15 @@ public class CombatManager : MonoBehaviour
                 //Se declara intención de huida
                 FleeActionSelected = true;
 
+                ActionDone = true;
+
                 string fleeDesc = "Party flees... ";
                 string fleeHopeChange = HopeManager.Instance.ChangeHope(-4, "Cambio por huida");
                 fleeDesc += fleeHopeChange;
                 CombatDescriptor.Clear();
                 CombatDescriptor.AddTextLine(fleeDesc, 1.5f); //El descriptor indica que el grupo huye, y cómo esto perjudica la esperanza
+            }
+            #endregion
         }
     }
 

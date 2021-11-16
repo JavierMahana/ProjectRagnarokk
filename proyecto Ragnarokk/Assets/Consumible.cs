@@ -20,34 +20,67 @@ public class Consumible : Item
     {
         var combatDescriptor = FindObjectOfType<CombatDescriptor>();
         var combatManager = FindObjectOfType<CombatManager>();
-        Fighter fighterInTurn = combatManager.ActiveFighter;
+
+
+        string userName = "";
+        string fighterInTurnName = "";
+        Fighter fighterInTurn = null;
+        if (combatManager != null)
+        {
+            if (combatManager.PlayerFighters.Contains(user))
+            {
+                userName = user.RealName;
+            }
+            else
+            {
+                userName = user.Name;
+            }
+
+
+            fighterInTurn = combatManager.ActiveFighter;
+            if (combatManager.PlayerFighters.Contains(fighterInTurn))
+            {
+                fighterInTurnName = fighterInTurn.RealName;
+            }
+            else
+            {
+                fighterInTurnName = fighterInTurn.Name;
+            }
+            
+        }
 
         switch (type)
         {
             #region objeto 1
-            case ConsumibleType.HEALTH_REGEN_1: if (user.CurrentHP != user.MaxHP)
+            case ConsumibleType.HEALTH_REGEN_1:
+                if (user.CurrentHP != user.MaxHP && user.CurrentHP > 0)
+                {
+                    const int recoveryValue = 15;
+                    user.CurrentHP += recoveryValue;
+                    if (user.CurrentHP > user.MaxHP)
                     {
-                        const int recoveryValue = 15;
-                        user.CurrentHP += recoveryValue;
-                        if (user.CurrentHP > user.MaxHP)
-                        {
-                            user.CurrentHP = user.MaxHP;
-                        }
+                        user.CurrentHP = user.MaxHP;
+                    }
 
+                    if(combatManager != null)
+                    {
                         combatDescriptor.Clear();
 
                         string useLine = "";
-                        if(user.Equals(fighterInTurn)) { useLine = fighterInTurn.Name + " uses " + Name; }
-                        else { useLine = fighterInTurn.Name + " uses " + Name + " on " + user.Name; }
+                        if (user.Equals(fighterInTurn)) { useLine = fighterInTurnName + " uses " + Name; }
+                        else { useLine = fighterInTurnName + " uses " + Name + " on " + userName; }
                         combatDescriptor.AddTextLine(useLine);
-                        combatDescriptor.AddTextLine(user.Name + " recovers " + recoveryValue + " HP");
+                        combatDescriptor.AddTextLine(userName + " recovers " + recoveryValue + " HP");
 
-                        ItemUsedCorrectly();
                     }
-                    else
-                    {
-                        ItemNotUsedCorrectly();
-                    }
+
+
+                ItemUsedCorrectly();
+                }
+                else
+                {
+                    ItemNotUsedCorrectly();
+                }
                 break;
             #endregion
 
@@ -58,11 +91,14 @@ public class Consumible : Item
                 {
                     user.CurrentHP = user.MaxHP;
 
-                    combatManager.LiftPlayerFighter(user);
+                    if (combatManager != null)
+                    {
+                        combatManager.LiftPlayerFighter(user);
 
-                    combatDescriptor.Clear();
-                    combatDescriptor.AddTextLine(fighterInTurn.Name + " uses " + Name + " on " + user.Name);
-                    combatDescriptor.AddTextLine(user.Name + " has risen!");
+                        combatDescriptor.Clear();
+                        combatDescriptor.AddTextLine(fighterInTurnName + " uses " + Name + " on " + userName);
+                        combatDescriptor.AddTextLine(userName + " has risen!");
+                    }
 
                     ItemUsedCorrectly();
                 }
@@ -83,7 +119,8 @@ public class Consumible : Item
         var combatManager = FindObjectOfType<CombatManager>();
         var consumiblePanel = FindObjectOfType<ConsumiblePanel>();
 
-        combatManager.ShowActionCanvas(false); 
+        
+        
 
         // se elimina el consumible recien utilizado de la lista de consumibles
         GameManager.Instance.AllConsumibles.Remove(this);
@@ -94,6 +131,7 @@ public class Consumible : Item
         // se termina el turno
         if (GameManager.Instance.GameState == GAME_STATE.COMBAT)
         {
+            combatManager.ShowActionCanvas(false);
             combatManager.ActionDone = true;
         }
 
@@ -104,7 +142,6 @@ public class Consumible : Item
             consumiblePanel.SetUpPanel();
         }
 
-        
 
     }
 

@@ -32,7 +32,7 @@ public class WeaponSwapManager : MonoBehaviour
 
         //este panel es solo para info. por eso no importa el fighter ni el slot.
         NewWeaponPanel.Init(newWeapon, this, null, -1, true, shopItemSlot,  this.isShop);
-        UpdateContent(shopItemSlot);
+        UpdateContent(shopItemSlot, isShop);
         content.SetActive(true);
 
         foreach (var obj in ObjectsToHideWhenShow)
@@ -42,7 +42,7 @@ public class WeaponSwapManager : MonoBehaviour
     }
 
 
-    private void UpdateContent(int shopItemSlot)
+    private void UpdateContent(int shopItemSlot, bool isShop)
     {
         var gameManager = GameManager.Instance;
 
@@ -54,7 +54,15 @@ public class WeaponSwapManager : MonoBehaviour
             for (int j = 0; j < fighter.Weapons.Length; j++)
             {
                 var weapon = fighter.Weapons[j];
-                fighterWeaponPanels[i].Init(weapon, this, fighter, j, false, shopItemSlot, true);
+                if (isShop)
+                {
+                    fighterWeaponPanels[i].Init(weapon, this, fighter, j, false, shopItemSlot, true);
+                }
+                else
+                {
+                    fighterWeaponPanels[i].Init(weapon, this, fighter, j);
+                }
+                
                 i++;
             }
         }
@@ -62,7 +70,7 @@ public class WeaponSwapManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateContent(-1);
+        UpdateContent(-1, false);
     }
 
 }
