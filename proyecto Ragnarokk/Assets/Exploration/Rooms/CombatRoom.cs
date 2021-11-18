@@ -17,7 +17,8 @@ public class CombatRoom : RoomData
         }
         if (FloorEnd)
         {
-            GameManager.Instance.OnBossFight = true;
+            GameManager.Instance.InFloorEnd = true;
+            GameManager.Instance.FloorToLoadInFloorEnd = floorToLoadAtFinish;
         }
 
         room.MarkAsCurrent();

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Button_StartFloor : MonoBehaviour
 {
+    public FloorToLoad floorLevel = FloorToLoad.FIRST;
     public void StartFloor()
     {
-        GameManager.Instance.StartFloor();
+        GameManager.Instance.StartFloor(floorLevel);
     }
 }

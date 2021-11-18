@@ -11,7 +11,7 @@ public class Weapon : Item
     [Range(0, 100)]
     public int BaseAccuracy;
 
-    [Range(5, 20)]
+    [Range(0, 20)]
     public int BaseCriticalRate;
 
     public int BaseCooldown;

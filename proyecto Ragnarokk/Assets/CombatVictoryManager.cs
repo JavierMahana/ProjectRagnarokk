@@ -13,6 +13,9 @@ public class CombatVictoryManager : MonoBehaviour
 
     private void Start()
     {
+        //GameManager.Instance.CheckOnLoadScene();
+        GameManager.Instance.ShowPlayerFighters(false);
+
         infoBox = FindObjectOfType<InfoBox>(true);
         if (infoBox == null)
             Debug.LogError("You need a info box!");
@@ -36,6 +39,7 @@ public class CombatVictoryManager : MonoBehaviour
     {
         infoBox.ShowInfo("Victory!", $"You eraned {encounter.MoneyReward}$ and {encounter.ExpReward} EXP!");
 
+        GameManager.Instance.CurrentMoney += encounter.MoneyReward;
 
         yield return StartCoroutine(expManager.Init(encounter.ExpReward));
 
