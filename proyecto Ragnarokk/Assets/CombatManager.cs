@@ -784,25 +784,22 @@ public class CombatManager : MonoBehaviour
         //ACIERTO
         if (AttackWeapon.BaseAccuracy > missValue)
         {
-            #region SECUENCIA LÓGICA (12 pasos)
+            #region SECUENCIA LÓGICA (10 pasos)
             // 1- Cambio de esperanza por sinergias
             // 2- Cálculo de efectividad (altera esperanza)
             // 3- Obtención factor esperanza
             // 4- Cálculo de factor crítico
-            // 5- Obtención factor variabilidad
-            // 6- Cálculo de daño base
-            // 7- Cálculo de daño final (considera factores efectividad y esperanza) (incluye posterior disminución de esperanza por daño mínimo)
-            // 8- Ajuste de daño para que un aliado no muera únicamente porque el ataque es crítico
-            // 9- Aplicación de daño
-            // 10- Alteración de esperanza por target derrotado, o aplicación de estados cuando el target sobrevive
-            // 11- Alteración de esperanza por grupo en mal estado
-            // 12- Activación de cooldown de arma atacante
+            // 5- Cálculo de daño (5 subpasos)
+            // 6- Textos para Combat Descriptor (algunos)
+            // 7- Aplicación de daño
+            // 8- Alteración de esperanza por target derrotado, o aplicación de estados cuando el target sobrevive
+            // 9- Alteración de esperanza por grupo en mal estado
+            // 10- Activación de cooldown de arma atacante
             #endregion
 
             string critDesc, effectDesc, synerDesc; //Algunos posibles mensajes a mostrar
             critDesc = effectDesc = synerDesc = "";
 
-            //Debug.Log("Precision " + AttackWeapon.BaseAccuracy + " > " + missValue);
             //PASO 1: SINERGIAS
             ApplySynergy(out synerDesc);
 
@@ -814,16 +811,15 @@ public class CombatManager : MonoBehaviour
 
             //PASO 4: CRÍTICO
             bool criticalAttack = false;
-            float criticalFact = 1;
+            float criticalFact = 0;
             int criticalRate = AttackWeapon.BaseCriticalRate + ActiveFighter.Luck; //Valor que se calcula como la suma de el índice de crítico del arma, y la suerte del atacante
             int criticalValue = Random.Range(0, 100);
-            //Debug.Log(criticalRate + " > " + criticalValue + "?");
 
             //El índice calculado debe superar el valor aleatorio para asestar crítico
             if (criticalRate > criticalValue)
             {
                 criticalAttack = true;
-                criticalFact = 2;
+                criticalFact = 1;
                 critDesc = "CRITICAL HIT!!!";
                 if (attackerIsAlly) 
                 { 
@@ -832,38 +828,44 @@ public class CombatManager : MonoBehaviour
                 }
             }
 
-            //PASO 5: VARIABILIDAD
-            const float variabilityRatio = 0.15f;
-            float variabilityFact = Random.Range(1 - variabilityRatio, 1 + variabilityRatio);
-
-            //Debug.Log("Factor efectividad: " + effectivenessFact);
-            //Debug.Log("Factor esperanza: " + hopeFact);
-
+            //PASO 5: CÁLCULO DE DAÑO
             const int minDamage = 1;
 
-            //PASO 6: DAÑO BASE
+            //PASO 5.1: DAÑO BASE
             //FÓRMULA DE DAÑO (Prototipo en uso. Debe ser bien definida más adelante)
-            int baseDamage = (AttackWeapon.BaseDamage / 25) + ActiveFighter.Atack - Target.Defense;
+            int baseDamage = Mathf.RoundToInt((AttackWeapon.BaseDamage * 0.1f) + ActiveFighter.Atack - Target.Defense * 0.8f);
             if (baseDamage < minDamage) { baseDamage = minDamage; }
 
-            //PASO 7: DAÑO FINAL
-            //Debug.Log("Daño inicial: " + baseDamage);
-            int finalDamage = (int)(baseDamage * hopeFact * effectivenessFact * criticalFact * variabilityFact);
-            //Debug.Log("Daño: " + baseDamage + " * " + hopeFact + " * " + effectivenessFact + " * " + criticalFact + " * " + variabilityFact);
+            //PASO 5.2: MULTIPLICADOR
+            float damageMultiplier = hopeFact + effectivenessFact + criticalFact;
+            Debug.Log($"Multiplier: {hopeFact} + {effectivenessFact} + {criticalFact} = {damageMultiplier}");
+
+            //PASO 5.3: VARIABILIDAD
+            const float variabilityRatio = 0.1f;
+            float variabilityFact = Random.Range(1 - variabilityRatio, 1 + variabilityRatio);
+
+            //PASO 5.4: DAÑO FINAL
+            int finalDamage = Mathf.RoundToInt(baseDamage * damageMultiplier * variabilityFact);
+            Debug.Log($"Daño final: {baseDamage} * {damageMultiplier} * {variabilityFact} = {finalDamage}");
+            //finalDamage = (int)(baseDamage * hopeFact * effectivenessFact * criticalFact * variabilityFact);
             if (finalDamage < minDamage) { finalDamage = minDamage; }
 
-            //PASO 8: CORRECCIÓN POR CRÍTICO MORTAL
+            //PASO 5.5: CORRECCIÓN POR CRÍTICO MORTAL
             //Se impide que un ataque crítico mate a un aliado si este hubiera sobrevivido al ataque normal. El aliado quedará con 1 HP.
             if(targetIsAlly  &&  criticalAttack)
             {
-                if (Target.CurrentHP - finalDamage <= 0 && Target.CurrentHP - finalDamage / criticalFact > 0)
+                int finalDamageNoCrit = Mathf.RoundToInt(baseDamage * (damageMultiplier - criticalFact) * variabilityFact);
+                if (finalDamageNoCrit < minDamage) { finalDamageNoCrit = minDamage; }
+
+                if (Target.CurrentHP - finalDamage <= 0 && Target.CurrentHP - finalDamageNoCrit > 0)
                 {
                     finalDamage = Target.CurrentHP - 1;
                 }
             }
 
             damageToShow = finalDamage;
-            //Debug.Log("Daño final: " + finalDamage);
+
+            //PASO 6: TEXTOS PARA COMBAT DESCRIPTOR
 
             //Crítico, efectividad y sinergia se muestran
             CombatDescriptor.AddTextLine(critDesc);
@@ -880,16 +882,12 @@ public class CombatManager : MonoBehaviour
                 CombatDescriptor.AddTextLine("How pathetic... " + minDamageHopeChange); //Mensaje para daño mínimo
             }
 
-            //PASO 9: APLICACIÓN DEL DAÑO
+            //PASO 7: APLICACIÓN DEL DAÑO
             Target.CurrentHP -= finalDamage;
-
-            //string e = IsPlayerFighter(ActiveFighter) ? "ALIADO " : "ENEMIGO ";
-            //Debug.Log(e + ActiveFighter.Name + " ATACA con el ARMA " + AttackWeapon.Name + " al OBJETIVO " + Target.Name + " cuyo HP ERA " + Target.CurrentHP + " y AHORA ES " + (Target.CurrentHP - damage));
-            //Debug.Log("Arma atacante: " + AttackWeapon.Name);
 
             Target.OnTakeDamage?.Invoke();
 
-            //PASO 10: LUCHADOR DERROTADO / APLICACIÓN DE ESTADOS
+            //PASO 8: LUCHADOR DERROTADO / APLICACIÓN DE ESTADOS
             //El objetivo es DERROTADO
             if (Target.CurrentHP <= 0)
             {
@@ -903,22 +901,22 @@ public class CombatManager : MonoBehaviour
                 if (PlayerFighters.Contains(Target)) { defeatDesc = Target.RealName + " has been defeated! "; }
                 else { defeatDesc = Target.Name + " has been defeated! "; }
                  
-                string defHopeChange = "";
+                string defeatHopeChange = "";
 
                 if (targetIsAlly)
                 {
                     AlivePlayerFighters.Remove(Target);
-                    defHopeChange = HopeManager.Instance.ChangeHope((sbyte)(AlivePlayerFighters.Count - 5), "Cambio por aliado muerto");
+                    defeatHopeChange = HopeManager.Instance.ChangeHope((sbyte)(AlivePlayerFighters.Count - 5), "Cambio por aliado muerto");
                 }
                 else
                 {
                     AliveEnemyFighters.Remove(Target);
-                    defHopeChange = HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
+                    defeatHopeChange = HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
                 }
 
                 Target.transform.rotation = new Quaternion(0, 0, 90, 0);
 
-                defeatDesc += defHopeChange;
+                defeatDesc += defeatHopeChange;
                 CombatDescriptor.AddTextLine(defeatDesc);
             }
             //El objetivo SOBREVIVE
@@ -930,7 +928,6 @@ public class CombatManager : MonoBehaviour
                     if (!Target.States.Contains(weaponState))
                     {
                         Target.States.Add(weaponState);
-                        //Debug.Log("Aplicado: " + weaponState.Name);
 
                         //Muestra por texto el estado adquirido
                         if (PlayerFighters.Contains(Target)) { CombatDescriptor.AddTextLine(Target.RealName + " is " + weaponState.Name); }
@@ -940,12 +937,12 @@ public class CombatManager : MonoBehaviour
                 IconManager.UpdateStateIcons(AllCombatFighters);
             }
 
-            //PASO 11: COMPROBACIÓN DE HP GRUPAL
+            //PASO 9: COMPROBACIÓN DE HP GRUPAL
             //EL fin de estos métodos no es otro que cambiar la esperanza.
             CheckPartyHP();
             CheckHordeHP();
 
-            //PASO 12: COOLDOWN DE ARMA
+            //PASO 10: COOLDOWN DE ARMA
             ActiveFighter.WeaponCooldowns[AttackWeaponIndex] = AttackWeapon.BaseCooldown + 1;
         }
         //FALLO
@@ -958,7 +955,6 @@ public class CombatManager : MonoBehaviour
                 string failHopeChange = HopeManager.Instance.ChangeHope(-2, "Cambio por ataque fallido");
                 failDesc += " " + failHopeChange;
             }
-            //Debug.Log("Precision " + AttackWeapon.BaseAccuracy + " <= " + missValue);
 
             CombatDescriptor.AddTextLine(failDesc); //Indica ataque fallido
         }
@@ -996,7 +992,6 @@ public class CombatManager : MonoBehaviour
                 statesToErase.Add(targetState);
             }
         }
-        //float synergyFact = Mathf.Pow(2, synergyCounter);
 
         foreach (CombatState state in statesToErase)
         {
@@ -1006,13 +1001,11 @@ public class CombatManager : MonoBehaviour
         if(IsPlayerFighter(ActiveFighter))
         {
             sbyte hopeChangeMagnitude = 0;
-            switch (synergyCounter)
-            {
-                case 1: hopeChangeMagnitude = 3; break;
-                case 2: hopeChangeMagnitude = 4; break;
-                case -1: hopeChangeMagnitude = -3; break;
-                case -2: hopeChangeMagnitude = -4; break;
-            }
+
+            if      (synergyCounter == 1)   { hopeChangeMagnitude = 3; }
+            else if (synergyCounter >= 2)   { hopeChangeMagnitude = 4; }
+            else if (synergyCounter == -1)  { hopeChangeMagnitude = -3; }
+            else if (synergyCounter <= -2)  { hopeChangeMagnitude = -4; }
 
             //Cambia esperanza, y prepara un mensaje sobre la sinergia generada
             if (hopeChangeMagnitude != 0)
@@ -1027,28 +1020,32 @@ public class CombatManager : MonoBehaviour
 
     public float CalculateEffectivenessFactor(out string effectDesc)
     {
-        const float resistanceFactor    = 0.75f;
-        const float weaknessFactor      = 1.5f;
+        const float resistanceFactor    = -0.25f;
+        const float weaknessFactor      = 0.5f;
+
+        bool attackerIsAlly = IsPlayerFighter(ActiveFighter);
 
         CombatType weaponType = AttackWeapon.TipoDeDañoQueAplica;
         CombatType targetType = Target.Type;
         if(targetType.Resistencias.Contains(weaponType)) 
         {
             effectDesc = "Non-effective type... ";
-            string hopeChange = HopeManager.Instance.ChangeHope(-2, "Cambio por inefectividad");
+            string hopeChange = "";
+            if (attackerIsAlly) { hopeChange = HopeManager.Instance.ChangeHope(-1, "Cambio por inefectividad"); }
             effectDesc += hopeChange;
             return resistanceFactor; 
         }
         if(targetType.Debilidades.Contains(weaponType)) 
         {
             effectDesc = "Effective type! ";
-            string hopeChange = HopeManager.Instance.ChangeHope(2, "Cambio por efectividad");
+            string hopeChange = "";
+            if (attackerIsAlly) { hopeChange = HopeManager.Instance.ChangeHope(1, "Cambio por efectividad"); }
             effectDesc += hopeChange;
             return weaknessFactor; 
         }
 
         effectDesc = "";
-        return 1;
+        return 0;
     }
 
     //Al finalizar un ataque, se comprueba el porcentaje de HP de ambos grupos respecto a su correspondiente HP máximo de grupo.
@@ -1093,7 +1090,8 @@ public class CombatManager : MonoBehaviour
             string hopeChange = HopeManager.Instance.ChangeHope(2, "Cambio por mal estado de la horda enemiga");
 
             string hordeHPDesc = "";
-            if(EnemyFighters.Count == 1) { hordeHPDesc = "The enemy is weak! "; }
+            if(HordeCurrentHP <= 0) { hordeHPDesc = "How powerful!"; }
+            else if(EnemyFighters.Count == 1) { hordeHPDesc = "The enemy is weak! "; }
             else { hordeHPDesc = "Enemies are weak! "; }
             hordeHPDesc += hopeChange;
             CombatDescriptor.AddTextLine(hordeHPDesc);
