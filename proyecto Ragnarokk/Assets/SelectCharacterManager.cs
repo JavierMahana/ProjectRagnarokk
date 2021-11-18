@@ -87,8 +87,8 @@ public class SelectCharacterManager : MonoBehaviour
                 pf.transform.position = new Vector2((-2 + pfsCount), 1);
                 // aqui se podría actualizar el sprite dependiendo del sexo
 
-                if(isMale) { pf.GetComponent<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteMale; }
-                else { pf.GetComponent<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteFemale; }
+                if(isMale) { pf.GetComponentInChildren<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteMale; }
+                else { pf.GetComponentInChildren<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteFemale; }
             }
         }
 

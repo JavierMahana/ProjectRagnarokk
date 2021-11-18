@@ -84,7 +84,7 @@ public class CombatDescriptor : MonoBehaviour
     //NO ELIMINA LÍNEAS PERMANENTES
     IEnumerator RemoveLineDelayed(TextLine textLine)
     {
-        yield return new WaitForSeconds(textLine.PermanenceTime);
+        yield return new WaitForSeconds(textLine.PermanenceTime / PlayerPrefs.GetFloat("combatDescriptorSpeed")); //velocidad minima es demasiado lento
         TextLines.Remove(textLine);
         //Debug.Log("SAKUJO");
     }

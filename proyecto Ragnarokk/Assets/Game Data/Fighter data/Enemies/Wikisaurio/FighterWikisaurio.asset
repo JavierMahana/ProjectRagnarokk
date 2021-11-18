@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FighterWikisaurio
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
+  Level: 0
   IsMaxLevel: 0
   Evolutions:
   - {fileID: 0}
@@ -32,7 +33,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 2279308219513959142, guid: 6d2b39b5dcc116c44be958387e14109f, type: 3}
+  SpriteFemale: {fileID: 0}
+  SpriteMale: {fileID: 0}
   reversedSprite: 1
   size: {x: 1, y: 1}
-  healthBarOffset: {x: 1, y: 1}
+  healthBarOffset: {x: 1, y: 0.5}
   Type: {fileID: 11400000, guid: 7a85a4f3edc5b8d48a6c9671218529d7, type: 2}

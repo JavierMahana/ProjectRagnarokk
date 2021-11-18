@@ -63,6 +63,7 @@ public class HopeManager : Singleton<HopeManager>
     {
         if(Initialized)
         {
+            Debug.Log($"Esperanza: {PartyHope}");
             UpdateHopePhase();
             UpdateCombatFactor();
 
