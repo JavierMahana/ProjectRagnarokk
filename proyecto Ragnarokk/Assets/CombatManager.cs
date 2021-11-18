@@ -291,6 +291,7 @@ public class CombatManager : MonoBehaviour
             if(pf.CurrentHP > 0) { AlivePlayerFighters.Add(pf); }
         }
 
+        //Se crean los enemigos
         int enemyCount = encounter.ListOfEncounterEnemies.Count;
         for (int i = 0; i < enemyCount; i++)
         {
@@ -339,7 +340,7 @@ public class CombatManager : MonoBehaviour
     {
         position.z = 0;
         var enemyGameObject = Instantiate(FighterBasePrefab, position, Quaternion.identity);
-        enemyGameObject.transform.localScale = data.size;
+        enemyGameObject.GetComponentInChildren<SpriteRenderer>().transform.localScale  = data.size;
 
         GameManager.Instance.SetDataToFighterGO(enemyGameObject, data);
         Fighter enemy = enemyGameObject.GetComponent<Fighter>();
@@ -500,7 +501,10 @@ public class CombatManager : MonoBehaviour
         //sceneChanger.ChangeScene("Victory");
         //Debug.Log("VICTORIA");
 
-        if (GameManager.Instance.OnBossFight)
+
+        //al final del juego no se da exp.
+        if (GameManager.Instance.InFloorEnd &&
+            GameManager.Instance.FloorToLoadInFloorEnd == FloorToLoad.VICTORY)
         {
             sceneChanger.ChangeScene("Victory");
         }

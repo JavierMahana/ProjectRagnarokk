@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
+  m_Name: AirWraith
+  m_EditorClassIdentifier: 
+  ExpNeededToLevelUp: 100
+  IsMaxLevel: 0
+  Evolutions:
+  - {fileID: 0}
+  - {fileID: 0}
+  Name: Air Wraith
+  RealName: nameless
+  Description: 
+  Speed: 1
+  Atack: 15
+  Defense: 0
+  Luck: 0
+  MaxHP: 40
+  PowerRating: 2
+  DefaultWeapons:
+  - {fileID: 11400000, guid: 3c66cae0ff97d8540aae7d4c09b5baab, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Sprite: {fileID: 1577795329009410038, guid: 5e00a28322ad6494e89c1ae0f31097fe, type: 3}
+  reversedSprite: 0
+  size: {x: 1, y: 1}
+  healthBarOffset: {x: 1, y: 1.5}
+  Type: {fileID: 11400000, guid: d9c98abbe4ca19c44b5bee3a65c524c5, type: 2}

@@ -20,6 +20,8 @@ public class ExperiencePanelManager : MonoBehaviour
 
     private void Start()
     {
+
+
         infoBox = FindObjectOfType<InfoBox>(true);
         if (infoBox == null)
             Debug.LogError("You need a info box!");
@@ -76,6 +78,8 @@ public class ExperiencePanelManager : MonoBehaviour
         var fightersThatWillGainExp = GetFightersThatWillGainExp();
         if (fightersThatWillGainExp.Count == 0)
         {
+            infoBox.ShowInfo("No fighter can recieve XP", "All your fighters are max level or are dead");
+            yield return new WaitForSeconds(2);
             SceneChanger.Instance.LoadExplorationScene();
         }
         int expDivided = totalEXP / (fightersThatWillGainExp.Count + 1);
@@ -91,7 +95,14 @@ public class ExperiencePanelManager : MonoBehaviour
             panel2.UpdatePanel();
             panel3.UpdatePanel();
         }
-        
+
+
+        //se revisa denuevo si hay fighters que pueden recibir XP, ya que se les entrego XP anteriormente.
+        fightersThatWillGainExp = GetFightersThatWillGainExp();
+        if (fightersThatWillGainExp.Count == 0)
+        {
+            SceneChanger.Instance.LoadExplorationScene();
+        }
 
         panel1.MarkAsReady();
         panel2.MarkAsReady();

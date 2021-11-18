@@ -5,6 +5,13 @@ using Sirenix.OdinInspector;
 
 public class Fighter : MonoBehaviour
 {
+    private SpriteRenderer spRenderer;
+    private void Awake()
+    {
+        spRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (spRenderer == null)
+            Debug.LogError("Debe tener un hijo con sprite renderer!");
+    }
     public void Init(FighterData data)
     {
         Name = data.Name;
@@ -28,6 +35,14 @@ public class Fighter : MonoBehaviour
         IsMaxLevel = data.IsMaxLevel;
 
         Sprite = data.Sprite;
+
+        spRenderer.sprite = Sprite;
+
+        for (int i = 0; i < Weapons.Length; i++)
+        {
+            Weapons[i] = data.DefaultWeapons[i];
+            WeaponCooldowns[i] = 0;
+        }
     }
 
     [ReadOnly]

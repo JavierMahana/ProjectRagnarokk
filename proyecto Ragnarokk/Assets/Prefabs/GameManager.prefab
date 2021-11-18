@@ -44,9 +44,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _persistent: 1
-  AllFloors:
-  - {fileID: 11400000, guid: 92d37ea7ae8099d46bca92e38d46ada2, type: 2}
+  TutorialFloor: {fileID: 0}
+  Floor1Variants:
+  - {fileID: 11400000, guid: e64aad7b205989b4590d6d7eedbcd1e2, type: 2}
+  Floor2Variants:
+  - {fileID: 11400000, guid: cc87b2364cdb1614b887c0769283c3d1, type: 2}
   CurrentMoney: 0
+  InFloorEnd: 0
+  FloorToLoadInFloorEnd: 0
   currentTreasureItems: []
   treasureRoomMoney: 0
   currentEncounter: {fileID: 0}
@@ -56,21 +61,6 @@ MonoBehaviour:
   Enemies: []
   EnemyButtons: []
   AllConsumibles: []
-  AllCombatStates:
-  - {fileID: 11400000, guid: a1ede23dfff83a841a32a07ebab67a03, type: 2}
-  - {fileID: 11400000, guid: 331b9f01a69a0c3479eda067888a04c5, type: 2}
-  - {fileID: 11400000, guid: bd7fa0e3d52e6bd4fae72ad30d5bd1f1, type: 2}
-  - {fileID: 11400000, guid: 9307b971ac377f44d873d171454dc2ca, type: 2}
-  - {fileID: 11400000, guid: 0160189efd22f6f4e969d4e722d96c26, type: 2}
-  - {fileID: 11400000, guid: 755ed5c98ef09d643b0a99a06b0c11d4, type: 2}
-  - {fileID: 11400000, guid: 273b580507b04234db9e93df41b6bbd0, type: 2}
-  - {fileID: 11400000, guid: 8c308d1056e0bd043931bce23c8b896e, type: 2}
-  - {fileID: 11400000, guid: fadb458fdf939e7448558760e64563f3, type: 2}
-  - {fileID: 11400000, guid: f075e7e4326f99f4d9e7d5dae8eaa7d2, type: 2}
-  - {fileID: 11400000, guid: 303a681001e42f4499d52b48c405313f, type: 2}
-  - {fileID: 11400000, guid: 0786287dc73faa94bb20a5c15739beb4, type: 2}
-  - {fileID: 11400000, guid: ab85d418c15675c45975672cfd8a1ce0, type: 2}
-  - {fileID: 11400000, guid: e660ff7f827cf0747a70c71e4bf99834, type: 2}
   PlayerFighters:
   - {fileID: 0}
   - {fileID: 0}

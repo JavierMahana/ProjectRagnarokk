@@ -25,14 +25,23 @@ public enum GAME_STATE
 
 public class GameManager : Singleton<GameManager>
 {
-    //por ahora se almacenan todas las floors. Si es que se implementan mas pisos es necesario crear una lista de floors por piso.
-    public List<Floor> AllFloors = new List<Floor>();
+
+
+    public Floor TutorialFloor;
+    public List<Floor> Floor1Variants = new List<Floor>();
+    public List<Floor> Floor2Variants = new List<Floor>();
+
+    //public List<Floor> AllFloors = new List<Floor>();
     public Floor CurrentFloor { get; set; }
     //[HideInInspector]
     //public bool FloorNeedToBeLoaded { get; set; }
 
     public int CurrentMoney;
-    public bool OnBossFight = false;
+    
+    
+    //Floor end variables
+    public bool InFloorEnd = false;
+    public FloorToLoad FloorToLoadInFloorEnd;
 
     public GAME_STATE GameState
     {
@@ -208,25 +217,56 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    public void StartFloor()
+    public void StartFloor(FloorToLoad floorLevelToLoad)
     {
         InitializedShopsInFloor.Clear();
+        int count;
 
-        int count = AllFloors.Count;
-        if (count > 0)
+        switch (floorLevelToLoad)
         {
-            int selected = Random.Range(0, count);
-            CurrentFloor = AllFloors[selected];
-            //FloorNeedToBeLoaded = true;
-            //Debug.Log(FloorNeedToBeLoaded);
+            case FloorToLoad.TUTORIAL:
+                if (TutorialFloor != null)
+                {
+                    CurrentFloor = TutorialFloor;
+                }
+                break;
+            case FloorToLoad.FIRST:
+                count = Floor1Variants.Count;
+                if (count > 0)
+                {
+                    int selected = Random.Range(0, count);
+                    CurrentFloor = Floor1Variants[selected];
+                }
+                else
+                {
+                    Debug.LogError("You need to put floors 1 variants in the game manager!");
+                    return;
+                }
+                break;
+            case FloorToLoad.SECOND:
+                count = Floor2Variants.Count;
+                if (count > 0)
+                {
+                    int selected = Random.Range(0, count);
+                    CurrentFloor = Floor2Variants[selected];
+                }
+                else
+                {
+                    Debug.LogError("You need to put floors 2 variants in the game manager!");
+                    return;
+                }
+                break;
+            case FloorToLoad.VICTORY:
+                Debug.Log("Se trata de cargar una sala de visctoria, desde el startFloor.");
+                SceneChanger.Instance.ChangeScene("Victory");
+                break;
+            default:
+                Debug.LogError("You need to put one of the FloorToLoad enum values!");
+                break;
+        }
 
-            SceneChanger.Instance.ChangeScene("Exploration");
-        }
-        else
-        {
-            Debug.LogError("You need to put floors in the game manager!");
-            return;
-        }
+        ExplorationManager.Instance.InitFloor(CurrentFloor);
+        SceneChanger.Instance.ChangeScene("Exploration");
     }
 
     public void DeletePlayerFighters()
@@ -241,8 +281,7 @@ public class GameManager : Singleton<GameManager>
     //esto debe revivr los fighter si es q estan muertos.
     public void HealPlayerFighters()
     {
-        var pfs = FindObjectsOfType<PlayerFighter>();
-        foreach (var pf in pfs)
+        foreach (var pf in PlayerFighters)
         {
             var fighter = pf.GetComponent<Fighter>();
             fighter.CurrentHP = fighter.MaxHP;
@@ -262,21 +301,11 @@ public class GameManager : Singleton<GameManager>
     public void SetDataToFighterGO(GameObject fighterGO, FighterData data, bool playerFighter = false)
     {
 
-        SpriteRenderer renderer;
         Fighter fighterComp;
 
-        if (fighterGO.TryGetComponent(out renderer) && fighterGO.TryGetComponent(out fighterComp))
+        if (fighterGO.TryGetComponent(out fighterComp))
         {
-            renderer.sprite = data.Sprite;
-
             fighterComp.Init(data);
-
-            for (int i = 0; i < fighterComp.Weapons.Length; i++)
-            {
-                    //Debug.Log("Arma " + i);
-                fighterComp.Weapons[i] = data.DefaultWeapons[i];
-                fighterComp.WeaponCooldowns[i] = 0;
-            }
         }
         else
         {

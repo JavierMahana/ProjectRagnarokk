@@ -39,7 +39,7 @@ public class ExplorationManager : Singleton<ExplorationManager>
         CurrentFloorData = null;
     }
 
-    private void InitFloor(Floor floorToLoad)
+    public void InitFloor(Floor floorToLoad)
     {
 
         UnloadFloor();
@@ -163,11 +163,11 @@ public class ExplorationManager : Singleton<ExplorationManager>
             }
         }
 
-        if (GameManager.Instance.CurrentFloor != null && !FloorIsLoaded)
-        {
+        //if (GameManager.Instance.CurrentFloor != null && !FloorIsLoaded)
+        //{
             
-            InitFloor(GameManager.Instance.CurrentFloor);
-            //GameManager.Instance.FloorNeedToBeLoaded = false;
-        }
+        //    InitFloor(GameManager.Instance.CurrentFloor);
+        //    //GameManager.Instance.FloorNeedToBeLoaded = false;
+        //}
     }
 }

@@ -41,7 +41,7 @@ public class HealthBarManager : MonoBehaviour
 
         foreach (var fighter in combatManager.AllCombatFighters)
         {
-            var healthBarObj = Instantiate(HealthBarPrevab, fighter.transform);
+            var healthBarObj = Instantiate(HealthBarPrevab, fighter.GetComponentInChildren<SpriteRenderer>().transform);
             
 
             var rectTransform = (RectTransform)healthBarObj.transform;

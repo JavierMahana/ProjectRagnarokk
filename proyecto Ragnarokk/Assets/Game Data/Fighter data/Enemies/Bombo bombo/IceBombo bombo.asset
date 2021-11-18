@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
+  m_Name: IceBombo bombo
+  m_EditorClassIdentifier: 
+  ExpNeededToLevelUp: 100
+  IsMaxLevel: 0
+  Evolutions:
+  - {fileID: 0}
+  - {fileID: 0}
+  Name: Ice Bombo bombo
+  RealName: nameless
+  Description: "Jabal\xED de piedra"
+  Speed: 7
+  Atack: 6
+  Defense: 5
+  Luck: 0
+  MaxHP: 70
+  PowerRating: 2
+  DefaultWeapons:
+  - {fileID: 11400000, guid: 19b70df0bdff40743a054c92c09b0763, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Sprite: {fileID: 7906575023279151323, guid: 6717351c1a0752341bc0b9e65c7c5436, type: 3}
+  reversedSprite: 1
+  size: {x: 1, y: 1}
+  healthBarOffset: {x: 1, y: 1}
+  Type: {fileID: 11400000, guid: 99ddf6cb18f34644c857955877bf77d1, type: 2}
