@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class GeneralMenu : MonoBehaviour
 {
     private ExplorationManager explorationManager;
+    // sirve para el display del piso Actual
     public TextMeshProUGUI MenuTitle;
 
     public TMP_Dropdown MenuDropdown;
@@ -41,10 +42,12 @@ public class GeneralMenu : MonoBehaviour
 
     public bool initialized;
 
+    private string floor;
     private void Awake()
     {
+        floor = "Exploring Floor " + PlayerPrefs.GetInt("currentFloor");
         //DontDestroyOnLoad(this);
-        
+
     }
     void Start()
     {
@@ -58,7 +61,6 @@ public class GeneralMenu : MonoBehaviour
         Panels.Add(Options);
         Panels.Add(SaveQuit);
 
-        
         OnClick();
     }
 
@@ -154,7 +156,7 @@ public class GeneralMenu : MonoBehaviour
         }
 
         //actualizar el piso a futuro
-        MenuTitle.text = "Exploring Floor" + " 1";
+        MenuTitle.text = floor;
     }
 
 }

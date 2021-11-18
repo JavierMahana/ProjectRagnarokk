@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: Flamethrower
   m_EditorClassIdentifier: 
   Name: Flamethrower
+  SubName: 
   Description: Popular since the Second World War and after that in Nam. Now they
     are back for the Sauna Wars... A pyromancer's best friend.
   BaseCost: 100
-  sprite: {fileID: -7639875328558060560, guid: 4fffbb0a3cdc6804b8548e8483a61e43, type: 3}
+  IconSprite: {fileID: 21300000, guid: 128c606be2b062149a441074823923d8, type: 3}
   BaseDamage: 30
   BaseAccuracy: 85
   BaseCriticalRate: 10
   BaseCooldown: 1
   ListaDeEstadosQueAplica:
   - {fileID: 11400000, guid: 0786287dc73faa94bb20a5c15739beb4, type: 2}
+  WeaponSprite: {fileID: 0}
   "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 7fda126cf52d4f9478689f1d6d5477a2, type: 2}

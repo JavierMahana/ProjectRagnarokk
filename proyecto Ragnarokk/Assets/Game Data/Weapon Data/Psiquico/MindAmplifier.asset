@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: MindAmplifier
   m_EditorClassIdentifier: 
   Name: Mind Amplifier
+  SubName: 
   Description: arma de mente
   BaseCost: 100
-  sprite: {fileID: 21300000, guid: 00418cabfcc44504686dc5675db92d2f, type: 3}
+  IconSprite: {fileID: 21300000, guid: 872fab22fd5f8d449b1abf74e5899b16, type: 3}
   BaseDamage: 30
   BaseAccuracy: 85
   BaseCriticalRate: 5
   BaseCooldown: 1
   ListaDeEstadosQueAplica:
   - {fileID: 11400000, guid: e660ff7f827cf0747a70c71e4bf99834, type: 2}
+  WeaponSprite: {fileID: 0}
   "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: d9c98abbe4ca19c44b5bee3a65c524c5, type: 2}

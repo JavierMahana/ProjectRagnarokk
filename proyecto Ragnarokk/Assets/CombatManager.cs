@@ -193,7 +193,16 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-
+    public void FillWithAttackWeapon()
+    {
+        if(AttackWeapon != null)
+        {
+            ClearPanelDescriptor();
+            AddDamageTypeButton(AttackWeapon.TipoDeDañoQueAplica);
+            string description = $" Acc: {AttackWeapon.BaseAccuracy} \n Dmg: {AttackWeapon.BaseDamage} \n Crit: {AttackWeapon.BaseCriticalRate} \n Cooldown: {AttackWeapon.BaseCooldown}";
+            SetlDescriptorText(description);
+        }
+    }
     public int SpeedComparer(Fighter f1, Fighter f2)
     {
         int speed1 = f1.Speed;

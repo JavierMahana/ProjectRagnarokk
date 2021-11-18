@@ -75,7 +75,7 @@ public class ShopItemSlot : MonoBehaviour
 
         if (item != null)
         {
-            renderer.sprite = item.sprite;
+            renderer.sprite = item.IconSprite;
             text.text = item.BaseCost.ToString();
         }
         else

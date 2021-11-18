@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: VodkaShotgun
   m_EditorClassIdentifier: 
   Name: Vodka Shotgun
+  SubName: 
   Description: arma de resaca
   BaseCost: 100
-  sprite: {fileID: 0}
+  IconSprite: {fileID: 21300000, guid: b00796e68299bd24facab8ff599b36fb, type: 3}
   BaseDamage: 40
   BaseAccuracy: 85
   BaseCriticalRate: 10
@@ -23,4 +24,5 @@ MonoBehaviour:
   ListaDeEstadosQueAplica:
   - {fileID: 11400000, guid: 9307b971ac377f44d873d171454dc2ca, type: 2}
   - {fileID: 11400000, guid: bd7fa0e3d52e6bd4fae72ad30d5bd1f1, type: 2}
+  WeaponSprite: {fileID: 0}
   "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 9a61c964186081747ac8b0a27a5d7972, type: 2}

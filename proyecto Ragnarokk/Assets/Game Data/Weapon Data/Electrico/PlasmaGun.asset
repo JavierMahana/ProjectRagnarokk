@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: PlasmaGun
   m_EditorClassIdentifier: 
   Name: Plasma Gun
+  SubName: 
   Description: arma de starwars
   BaseCost: 100
-  sprite: {fileID: 21300000, guid: 00418cabfcc44504686dc5675db92d2f, type: 3}
+  IconSprite: {fileID: 21300000, guid: 3e8ef7416aafb7340a9175b1ff636bdc, type: 3}
   BaseDamage: 20
   BaseAccuracy: 95
   BaseCriticalRate: 10
   BaseCooldown: 1
   ListaDeEstadosQueAplica:
   - {fileID: 11400000, guid: 0160189efd22f6f4e969d4e722d96c26, type: 2}
+  WeaponSprite: {fileID: 0}
   "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 778e8c821ff9ef849aa6a6915952b4f3, type: 2}
