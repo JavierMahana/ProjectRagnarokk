@@ -69,7 +69,7 @@ public class WeaponSpecs : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         if (cm.AttackWeapon == null)
         {
-            cm.AddDamageTypeButton(thisWeapon);
+            cm.AddDamageTypeButton(thisWeapon.TipoDeDañoQueAplica);
             string description = $" Acc: {thisWeapon.BaseAccuracy} \n Dmg: {thisWeapon.BaseDamage} \n Crit: {thisWeapon.BaseCriticalRate} \n Cooldown: {thisWeapon.BaseCooldown}";
             cm.SetlDescriptorText(description);
         }
@@ -91,7 +91,7 @@ public class WeaponSpecs : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if(cm.AttackWeapon != thisWeapon && cm.AttackWeapon != null)
         {
             cm.ClearPanelDescriptor();
-            cm.AddDamageTypeButton(cm.AttackWeapon);
+            cm.AddDamageTypeButton(cm.AttackWeapon.TipoDeDañoQueAplica);
             string description = $" Acc: {thisWeapon.BaseAccuracy} \n Dmg: {thisWeapon.BaseDamage} \n Crit: {thisWeapon.BaseCriticalRate} \n Cooldown: {thisWeapon.BaseCooldown}";
             cm.SetlDescriptorText(description);
         }

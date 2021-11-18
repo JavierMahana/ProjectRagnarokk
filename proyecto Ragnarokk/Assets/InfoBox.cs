@@ -110,7 +110,9 @@ public class InfoBox : MonoBehaviour
         HPText.text = fighterData.MaxHP.ToString();
         TypeText.text = fighterData.Luck.ToString();
 
-        FighterImage.sprite = fighterData.Sprite;
+        //FighterImage.sprite = fighterData.Sprite;
+        Male.sprite = fighterData.SpriteMale;
+        Female.sprite = fighterData.SpriteFemale;
     }
 
 }

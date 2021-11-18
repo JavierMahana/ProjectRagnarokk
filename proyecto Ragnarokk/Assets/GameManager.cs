@@ -156,7 +156,7 @@ public class GameManager : Singleton<GameManager>
     {
         // comentar la linea de abajo para que que se guarden los cambios que el jugador realice
         // El valor de un PlayerPref cuando no se encuentra, es 0, es el valor incial default
-        PlayerPrefs.SetInt("firstTime", 0);
+        //PlayerPrefs.SetInt("firstTime", 0);
         // si es la primera vez que se inicia el juego, la data cargada es ésta, de lo contrario
         // se carga la data de Options.
         if (PlayerPrefs.GetInt("firstTime") == 0)
@@ -172,7 +172,7 @@ public class GameManager : Singleton<GameManager>
             PlayerPrefs.SetInt("width", Screen.currentResolution.width);
             PlayerPrefs.SetInt("height", Screen.currentResolution.height);
 
-            //PlayerPrefs.SetInt("firstTime", 1);
+            PlayerPrefs.SetInt("firstTime", 1);
         }
         
         // se aplica la configuración del jugador
