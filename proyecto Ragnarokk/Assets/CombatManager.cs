@@ -76,7 +76,7 @@ public class CombatManager : MonoBehaviour
     bool PartyIsFine; //Se inicializa en true si el combate empieza con el HP general sobre el 75%.
 
     //Luchadores enemigos
-    List<Fighter> EnemyFighters = new List<Fighter>();
+    public List<Fighter> EnemyFighters = new List<Fighter>();
     List<Fighter> AliveEnemyFighters = new List<Fighter>();
 
     int HordeMaxHP;
@@ -1280,6 +1280,8 @@ public class CombatManager : MonoBehaviour
                     //Se declara intención de huida
                     FleeActionSelected = true;
 
+                    ShowActionCanvas(false);
+                    CleanPanelSelecion();
                     ActionDone = true;
 
                     string fleeDesc = "Party flees... ";
