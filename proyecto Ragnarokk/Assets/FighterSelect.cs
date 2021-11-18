@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class FighterSelect : MonoBehaviour
+public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Button selfBbutton;
 
@@ -27,15 +28,15 @@ public class FighterSelect : MonoBehaviour
 
     void Update()
     {
-        if(Fighter == null) { Destroy(this); }
-        if(showTimer !=0) { showTimer--;}
-        if(showTimer == 0 && damage.text != defaultText) { damage.text = defaultText; }
+        if (Fighter == null) { Destroy(this); }
+        if (showTimer != 0) { showTimer--; }
+        if (showTimer == 0 && damage.text != defaultText) { damage.text = defaultText; }
         //if (!selfBbutton.interactable) { selfBbutton.gameObject.SetActive(false); }
     }
 
     public void ShowDamage(int damage)
     {
-        this.damage.text = (damage > 0)? damage.ToString() : "MISS";
+        this.damage.text = (damage > 0) ? damage.ToString() : "MISS";
         showTimer = 200;
     }
 
@@ -75,9 +76,40 @@ public class FighterSelect : MonoBehaviour
 
             }
         }
-           
+
         GameManager.Instance.ConfirmationClick = false;
 
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        string descripcion = "";
+        string fighterName = "";
+        var cm = FindObjectOfType<CombatManager>();
+        cm.ClearPanelDescriptor();
+
+        if (Fighter != null)
+        {
+            if ( cm.PlayerFighters.Contains(Fighter)) {fighterName = Fighter.RealName; }
+            else { fighterName = Fighter.Name; }
+
+            if (Fighter.CurrentHP <= 0)
+            {
+                descripcion = $" {fighterName} is dead";
+                cm.SetlDescriptorText(descripcion);
+            }
+            else
+            {
+                cm.AddDamageTypeButton(Fighter.Type);
+                descripcion = $" Name: {fighterName}\n Level: {Fighter.Level} \n Health: {Fighter.CurrentHP} / {Fighter.MaxHP}";
+                cm.SetlDescriptorText(descripcion);
+            }
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        FindObjectOfType<CombatManager>().ClearPanelDescriptor();
     }
 
 }

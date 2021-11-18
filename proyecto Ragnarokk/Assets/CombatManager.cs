@@ -150,11 +150,9 @@ public class CombatManager : MonoBehaviour
         PanelDescriptor.text = descripcion;
     }
 
-    public void AddDamageTypeButton(Weapon w)
+    public void AddDamageTypeButton(CombatType damageType)
     {
         //damage type
-        var damageType = w.TipoDeDañoQueAplica;
-
         GameObject button = Instantiate(PrefabDamageTypeButton);
         button.GetComponent<Button_DamageType>().SetButton(damageType);
 

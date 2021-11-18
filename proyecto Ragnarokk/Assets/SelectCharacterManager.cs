@@ -9,6 +9,7 @@ public class SelectCharacterManager : MonoBehaviour
     public GameObject RestartButton;
     public GameObject StartButton;
     public GameObject SelectFighterButtons;
+    public GameObject RandomTeam;
     
     [HideInInspector]
     public GameObject currentFighter;
@@ -38,6 +39,7 @@ public class SelectCharacterManager : MonoBehaviour
         {
             SexCanvas.SetActive(true);
             SelectFighterButtons.SetActive(false);
+            RandomTeam.SetActive(false);
             var infoBox = FindObjectOfType<InfoBox>();
             if(infoBox != null) 
             {
@@ -49,12 +51,15 @@ public class SelectCharacterManager : MonoBehaviour
         if(!onNameChange && !SexCanvas.activeSelf)
         {
             SelectFighterButtons.SetActive(true);
+            RandomTeam.SetActive(true);
             StartButton.SetActive(false);
 
             if (GameManager.Instance.PlayerFighters.Count >= 3)
             {
                 SelectFighterButtons.SetActive(false);
+                RandomTeam.SetActive(false);
                 StartButton.SetActive(true);
+                
             }
         }
 
@@ -81,6 +86,9 @@ public class SelectCharacterManager : MonoBehaviour
                 int pfsCount = pfs.Length;
                 pf.transform.position = new Vector2((-2 + pfsCount), 1);
                 // aqui se podría actualizar el sprite dependiendo del sexo
+
+                if(isMale) { pf.GetComponent<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteMale; }
+                else { pf.GetComponent<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteFemale; }
             }
         }
 
@@ -115,5 +123,51 @@ public class SelectCharacterManager : MonoBehaviour
         {
             infoBox.GenericFormatObj.SetActive(false);
         }
+    }
+
+    public void RandomTeamCreate()
+    {
+        GameManager.Instance.DeletePlayerFighters();
+        var AddPlayerFighters = FindObjectsOfType<Button_AddPlayerFighter>();
+        int sex;
+        int cont;
+        int numName;
+        string randomName = "";
+
+        if (AddPlayerFighters.Length != 0)
+        {
+            // 8 nombres
+            string[] MaleNames = { "Sven", "Toby", "Rupert", "Kairos", "Semat", "Vulcan", "Matthew", "Galahad" };
+            string[] FemaleNames = { "Jazmin", "Claudia", "Yerel", "Imoen", "Olga", "Vivianne", "Kelith", "Morgana" };
+            
+            for (int i = 0; i < 3; i++)
+            {
+                sex = Random.Range(0, 2);
+                cont = Random.Range(0, 4);
+                numName = Random.Range(0, 8);
+
+                AddPlayerFighters[cont].CreatePlayerFighter();
+                isMale = sex == 1 ? true : false;
+
+                if (isMale)
+                {
+                    randomName = MaleNames[numName];
+                }
+                else
+                {
+                    randomName = FemaleNames[numName];
+                }
+
+                FighterName.text = randomName;
+                FinishSetFighter();
+            }
+        }
+
+       
+    }
+
+    public void OnNameChange(bool set)
+    {
+        onNameChange = set;
     }
 }

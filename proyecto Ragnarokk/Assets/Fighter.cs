@@ -28,10 +28,18 @@ public class Fighter : MonoBehaviour
         IsMaxLevel = data.IsMaxLevel;
 
         Sprite = data.Sprite;
-    }
+
+        SpriteFemale = data.SpriteFemale;
+        SpriteMale = data.SpriteMale;
+
+        Level++;
+}
 
     [ReadOnly]
     public Sprite Sprite;
+
+    public Sprite SpriteFemale;
+    public Sprite SpriteMale;
 
     [ReadOnly]
     public int CurrentExp;
@@ -39,6 +47,8 @@ public class Fighter : MonoBehaviour
     public int ExpNeededToLevelUp;
     [ReadOnly]
     public bool IsMaxLevel;
+
+    public int Level;
 
     [ReadOnly]
     public FighterData[] Evolutions = new FighterData[2];
