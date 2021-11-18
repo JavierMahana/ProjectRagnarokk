@@ -28,7 +28,7 @@ public class HopeManager : Singleton<HopeManager>
 
     private float PhaseInterval; //Distancia entre fases (en porcentaje)
 
-    public const float BaseCombatFactor = 1.1f; //El multiplicador de daño se calcula como potencias de este valor
+    public const float BaseCombatFactor = 1.25f; //El multiplicador de daño se calcula como potencias de este valor
     public float CombatFactor;
 
     protected override void OnAwake()
@@ -42,9 +42,9 @@ public class HopeManager : Singleton<HopeManager>
         HopeModifiers.Add(-4, -20);
         HopeModifiers.Add(-3, -10);
         HopeModifiers.Add(-2, -5);
-        HopeModifiers.Add(-1, -1);
+        HopeModifiers.Add(-1, -2);
 
-        HopeModifiers.Add(1, 1);
+        HopeModifiers.Add(1, 2);
         HopeModifiers.Add(2, 5);
         HopeModifiers.Add(3, 10);
         HopeModifiers.Add(4, 20);
