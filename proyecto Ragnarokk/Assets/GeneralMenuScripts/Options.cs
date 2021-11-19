@@ -43,7 +43,8 @@ public class Options : MonoBehaviour
         AudioMusic.value = PlayerPrefs.GetFloat("audioMusic");
         AudioAmbient.value = PlayerPrefs.GetFloat("audioAmbient");
 
-        CombatSpeed.value = PlayerPrefs.GetFloat("combatDescriptorSpeed");
+        Debug.Log(PlayerPrefs.GetFloat("combatDescriptorSpeed"));
+        CombatSpeed.value = PlayerPrefs.GetFloat("combatDescriptorSpeed")*5f;
 
         Mode.value = PlayerPrefs.GetInt("Fullscreen");
         if (Resolution.gameObject.activeSelf)
@@ -92,7 +93,7 @@ public class Options : MonoBehaviour
         {
             // el default es 5, entonces el factor es 1
             // max es 2, min es 0.2
-            PlayerPrefs.SetFloat("combatDescriptorSpeed", CombatSpeed.value / 5);
+            PlayerPrefs.SetFloat("combatDescriptorSpeed", CombatSpeed.value/5f);
         }
 
         if (GraphicsPanel.activeSelf)

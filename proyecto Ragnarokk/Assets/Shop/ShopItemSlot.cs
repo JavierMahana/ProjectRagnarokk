@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider), typeof(SpriteRenderer))]
 public class ShopItemSlot : MonoBehaviour
@@ -71,7 +72,9 @@ public class ShopItemSlot : MonoBehaviour
 
     public void UpdateContent(Item item)
     {
+
         var renderer = GetComponent<SpriteRenderer>();
+        
 
         if (item != null)
         {
@@ -82,8 +85,7 @@ public class ShopItemSlot : MonoBehaviour
         {
             renderer.sprite = manager.ItemSoldSprite;
             text.text = "";
-        }
-
+        }        
     }
 
 

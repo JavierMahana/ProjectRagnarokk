@@ -162,7 +162,7 @@ public class GameManager : Singleton<GameManager>
             PlayerPrefs.SetInt("width", Screen.currentResolution.width);
             PlayerPrefs.SetInt("height", Screen.currentResolution.height);
 
-            PlayerPrefs.SetInt("firstTime", 1);
+            //PlayerPrefs.SetInt("firstTime", 1);
             PlayerPrefs.SetInt("currentFloor", 0);
         }
         
