@@ -38,11 +38,15 @@ public class Fighter : MonoBehaviour
 
         spRenderer.sprite = Sprite;
 
-        for (int i = 0; i < Weapons.Length; i++)
+        if(Level == 0)
         {
-            Weapons[i] = data.DefaultWeapons[i];
-            WeaponCooldowns[i] = 0;
+            for (int i = 0; i < Weapons.Length; i++)
+            {
+                Weapons[i] = data.DefaultWeapons[i];
+                WeaponCooldowns[i] = 0;
+            }
         }
+        
 
         SpriteFemale = data.SpriteFemale;
         SpriteMale = data.SpriteMale;
