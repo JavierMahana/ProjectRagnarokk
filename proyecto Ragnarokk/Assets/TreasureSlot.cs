@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider), typeof(SpriteRenderer))]
 public class TreasureSlot : MonoBehaviour
@@ -30,10 +31,15 @@ public class TreasureSlot : MonoBehaviour
     public void Init(Item item, TreasureRoomManager manager)
     {
         CurrItem = item;
-        this.manager = manager;
+        this.manager = manager;     
+
+        var image = GetComponent<Image>();
+        image.sprite = item.IconSprite;
+        image.preserveAspect = true;
 
         var renderer = GetComponent<SpriteRenderer>();
         renderer.sprite = item.IconSprite;
+
     }
 
     void OnMouseDown() 
@@ -73,4 +79,5 @@ public class TreasureSlot : MonoBehaviour
             infoBox.Clear();
         }
     }
+
 }
