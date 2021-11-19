@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Xixi
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
-  Level: 0
   IsMaxLevel: 0
   Evolutions:
   - {fileID: 0}
@@ -22,10 +21,10 @@ MonoBehaviour:
   RealName: nameless
   Description: Description
   Speed: 10
-  Atack: 12
-  Defense: 6
+  Atack: 13
+  Defense: 7
   Luck: 0
-  MaxHP: 55
+  MaxHP: 26
   PowerRating: 2
   DefaultWeapons:
   - {fileID: 11400000, guid: 61251d08e008fc942914439379e6a020, type: 2}
@@ -33,8 +32,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 1695138769994977630, guid: 638e828c4233f364eb4f7384b4ca6661, type: 3}
-  SpriteFemale: {fileID: 0}
-  SpriteMale: {fileID: 0}
   reversedSprite: 1
   size: {x: 1.5, y: 1.5}
   healthBarOffset: {x: 1, y: 1.6}

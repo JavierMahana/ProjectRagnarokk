@@ -78,7 +78,7 @@ public class ConfirmScreen : MonoBehaviour
         else if(evolvingFighter != null && evolvingData != null)
         {
             evolvingFighter.Init(evolvingData);
-            evolvingFighter.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = evolvingData.Sprite;
+            evolvingFighter.gameObject.GetComponent<SpriteRenderer>().sprite = evolvingData.Sprite;
             evolutionManager.Hide();
         }
         else
