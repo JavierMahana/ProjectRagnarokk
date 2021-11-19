@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Progenitor
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
+  Level: 0
   IsMaxLevel: 0
   Evolutions:
   - {fileID: 0}
@@ -21,10 +22,10 @@ MonoBehaviour:
   RealName: Progenitor
   Description: Grandd first being
   Speed: 1
-  Atack: 40
-  Defense: 30
+  Atack: 20
+  Defense: 12
   Luck: 0
-  MaxHP: 200
+  MaxHP: 150
   PowerRating: 3
   DefaultWeapons:
   - {fileID: 11400000, guid: 61ad84289cccf074dbad12aa091c8df0, type: 2}
@@ -32,6 +33,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6b7782c2da9bb9d47bb7787d79126356, type: 2}
   - {fileID: 11400000, guid: 895bcdf030178d548b2c88f958e52c3b, type: 2}
   Sprite: {fileID: -6248741079362886434, guid: 89b00aadba434e74ebd920505f6bb056, type: 3}
+  SpriteFemale: {fileID: 0}
+  SpriteMale: {fileID: 0}
   reversedSprite: 1
   size: {x: 3.5, y: 3.5}
   healthBarOffset: {x: 1, y: 1.5}
