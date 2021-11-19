@@ -32,6 +32,37 @@ public class Options : MonoBehaviour
         if (!GameplayPanel.activeSelf) { GameplayPanel.SetActive(true);}
     }
 
+    private void Start()
+    {
+        UpdateOptionsPanels();
+    }
+    public void UpdateOptionsPanels()
+    {
+        AudioGeneral.value = PlayerPrefs.GetFloat("audioGeneral");
+        AudioSfx.value = PlayerPrefs.GetFloat("audioSFX");
+        AudioMusic.value = PlayerPrefs.GetFloat("audioMusic");
+        AudioAmbient.value = PlayerPrefs.GetFloat("audioAmbient");
+
+        CombatSpeed.value = PlayerPrefs.GetFloat("combatDescriptorSpeed");
+
+        Mode.value = PlayerPrefs.GetInt("Fullscreen");
+        if (Resolution.gameObject.activeSelf)
+        {
+            var width = PlayerPrefs.GetFloat("width", Screen.currentResolution.width);
+            var height = PlayerPrefs.GetFloat("height", Screen.currentResolution.height);
+            string resolution = width.ToString() + "X" + height.ToString();
+
+            var size = Resolution.options.Count;
+            for(int i = 0; i < size; i++)
+            {
+                if(Resolution.options[i].text == resolution)
+                {
+                    Resolution.value = i;
+                }
+            }
+        }
+    }
+
     public void SetDefault()
     {
         if(GameplayPanel.activeSelf)

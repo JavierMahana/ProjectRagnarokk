@@ -22,6 +22,8 @@ public class Weapon : Item
     //Los estados que aplica.
     public List<CombatState> ListaDeEstadosQueAplica;
 
+    public Sprite WeaponSprite;
+
     //Tipo
     public CombatType TipoDeDañoQueAplica;
 

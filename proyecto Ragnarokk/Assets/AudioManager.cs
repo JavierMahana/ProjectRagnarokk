@@ -34,7 +34,9 @@ public class AudioManager : MonoBehaviour
 		}
 		else if(GameManager.Instance.GameState == GAME_STATE.COMBAT)
         {
-			var i = Random.Range(0, 1) + 2;
+			int i = 2;
+			var cb = FindObjectOfType<CombatManager>();
+			if(cb.EnemyFighters[0].Name == "Progenitor") {i++; }
 			foreach (Sound music in sounds)
 			{
 				if (music.SoundName == Music[i].SoundName) { SetMusic(music); }

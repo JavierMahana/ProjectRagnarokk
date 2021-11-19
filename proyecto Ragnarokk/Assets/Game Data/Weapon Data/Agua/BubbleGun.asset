@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: BubbleGun
   m_EditorClassIdentifier: 
   Name: Water Minigun
+  SubName: 
   Description: This gun fires water so fast that it can leave cut someone in half,
     it's true I swear!... Quite gruesome too.
   BaseCost: 100
-  sprite: {fileID: -3058749858876906216, guid: a6a05ba60a9f05a409c78ed1085b2b89, type: 3}
+  IconSprite: {fileID: 21300000, guid: 2da53946287d5e24698624a108014096, type: 3}
   BaseDamage: 10
   BaseAccuracy: 90
   BaseCriticalRate: 5
   BaseCooldown: 1
   ListaDeEstadosQueAplica:
   - {fileID: 11400000, guid: f075e7e4326f99f4d9e7d5dae8eaa7d2, type: 2}
+  WeaponSprite: {fileID: 0}
   "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 99ddf6cb18f34644c857955877bf77d1, type: 2}

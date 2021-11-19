@@ -76,7 +76,7 @@ public class CombatManager : MonoBehaviour
     bool PartyIsFine; //Se inicializa en true si el combate empieza con el HP general sobre el 75%.
 
     //Luchadores enemigos
-    List<Fighter> EnemyFighters = new List<Fighter>();
+    public List<Fighter> EnemyFighters = new List<Fighter>();
     List<Fighter> AliveEnemyFighters = new List<Fighter>();
 
     int HordeMaxHP;
@@ -193,7 +193,16 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-
+    public void FillWithAttackWeapon()
+    {
+        if(AttackWeapon != null)
+        {
+            ClearPanelDescriptor();
+            AddDamageTypeButton(AttackWeapon.TipoDeDañoQueAplica);
+            string description = $" Acc: {AttackWeapon.BaseAccuracy} \n Dmg: {AttackWeapon.BaseDamage} \n Crit: {AttackWeapon.BaseCriticalRate} \n Cooldown: {AttackWeapon.BaseCooldown}";
+            SetlDescriptorText(description);
+        }
+    }
     public int SpeedComparer(Fighter f1, Fighter f2)
     {
         int speed1 = f1.Speed;
@@ -1282,6 +1291,8 @@ public class CombatManager : MonoBehaviour
                     //Se declara intención de huida
                     FleeActionSelected = true;
 
+                    ShowActionCanvas(false);
+                    CleanPanelSelecion();
                     ActionDone = true;
 
                     string fleeDesc = "Party flees... ";

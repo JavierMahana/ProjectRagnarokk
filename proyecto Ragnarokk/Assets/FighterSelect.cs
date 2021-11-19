@@ -109,7 +109,11 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        FindObjectOfType<CombatManager>().ClearPanelDescriptor();
+        var cm = FindObjectOfType<CombatManager>();
+        if(cm!=null)
+        {
+            cm.FillWithAttackWeapon();
+        }
     }
 
 }

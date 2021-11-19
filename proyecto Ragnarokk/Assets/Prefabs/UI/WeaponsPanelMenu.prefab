@@ -412,6 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysPressed: 1
 --- !u!1 &1560054253528138115
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,6 +424,7 @@ GameObject:
   - component: {fileID: 1560054253528138112}
   - component: {fileID: 1560054253528138118}
   - component: {fileID: 1560054253528138113}
+  - component: {fileID: 2468891788199651925}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -479,7 +481,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 0}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -487,6 +489,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2468891788199651925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560054253528138115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 0
+  m_AspectRatio: 1.3142437
 --- !u!1 &1625156647806213961
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,6 +782,7 @@ GameObject:
   - component: {fileID: 3657451276905447703}
   - component: {fileID: 8117294396167642306}
   - component: {fileID: 4733026224678047837}
+  - component: {fileID: 5021819004869792393}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -830,6 +847,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5021819004869792393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2789758111146351403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 0
+  m_AspectRatio: 1.3108733
 --- !u!1 &3798940745305594349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,6 +1059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysPressed: 1
 --- !u!1 &6633149785964801975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,6 +1392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysPressed: 1
 --- !u!1 &7148638908003237705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,6 +1538,7 @@ GameObject:
   - component: {fileID: 9003347331197278495}
   - component: {fileID: 3830955163288767479}
   - component: {fileID: 1467948963151470904}
+  - component: {fileID: 514120496153563437}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1569,6 +1603,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &514120496153563437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8474976554023731017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 0
+  m_AspectRatio: 1.3145307
 --- !u!1 &8780854009471574635
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,6 +1628,7 @@ GameObject:
   - component: {fileID: 6374370465120037699}
   - component: {fileID: 8009040859079290575}
   - component: {fileID: 3395522001441428822}
+  - component: {fileID: 5246899139127129445}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1644,6 +1693,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5246899139127129445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8780854009471574635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 0
+  m_AspectRatio: 1.3232424
 --- !u!1 &9218428031842425757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,3 +1905,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysPressed: 1

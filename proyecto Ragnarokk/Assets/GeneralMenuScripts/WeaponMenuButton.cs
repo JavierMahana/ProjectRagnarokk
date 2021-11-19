@@ -37,7 +37,8 @@ public class WeaponMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
         else
         {
             thisWeaponName.text = "";
-            thisImage.sprite = thisWeapon.sprite;
+            thisImage.sprite = thisWeapon.IconSprite;
+            thisImage.preserveAspect = true;
             thisImage.color = defaultColor;
             if (wp.currentWeaponButton == this)
             {

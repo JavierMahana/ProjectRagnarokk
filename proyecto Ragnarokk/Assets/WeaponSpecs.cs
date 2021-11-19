@@ -67,13 +67,10 @@ public class WeaponSpecs : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         var cm = FindObjectOfType<CombatManager>();
 
-        if (cm.AttackWeapon == null)
-        {
-            cm.AddDamageTypeButton(thisWeapon.TipoDeDañoQueAplica);
-            string description = $" Acc: {thisWeapon.BaseAccuracy} \n Dmg: {thisWeapon.BaseDamage} \n Crit: {thisWeapon.BaseCriticalRate} \n Cooldown: {thisWeapon.BaseCooldown}";
-            cm.SetlDescriptorText(description);
-        }
-
+        cm.ClearPanelDescriptor();
+        cm.AddDamageTypeButton(thisWeapon.TipoDeDañoQueAplica);
+        string description = $" Acc: {thisWeapon.BaseAccuracy} \n Dmg: {thisWeapon.BaseDamage} \n Crit: {thisWeapon.BaseCriticalRate} \n Cooldown: {thisWeapon.BaseCooldown}";
+        cm.SetlDescriptorText(description);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -85,16 +82,10 @@ public class WeaponSpecs : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         var cm = FindObjectOfType<CombatManager>();
         // aún no se escogio el arma no se limpia el panel de informacion 
-        if(cm.AttackWeapon == null)
-            cm.ClearPanelDescriptor();
+        if(cm.AttackWeapon == null) { cm.ClearPanelDescriptor(); }
+        else { cm.FillWithAttackWeapon(); }    
 
-        if(cm.AttackWeapon != thisWeapon && cm.AttackWeapon != null)
-        {
-            cm.ClearPanelDescriptor();
-            cm.AddDamageTypeButton(cm.AttackWeapon.TipoDeDañoQueAplica);
-            string description = $" Acc: {thisWeapon.BaseAccuracy} \n Dmg: {thisWeapon.BaseDamage} \n Crit: {thisWeapon.BaseCriticalRate} \n Cooldown: {thisWeapon.BaseCooldown}";
-            cm.SetlDescriptorText(description);
-        }
+       
         
     }
 }

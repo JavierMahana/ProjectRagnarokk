@@ -137,6 +137,7 @@ public class WeaponsPanel : MonoBehaviour
         if (button != null && button.thisWeapon != null)
         {
             thisImage.sprite = button.thisImage.sprite;
+            thisImage.preserveAspect = true;
             thisImage.color = button.defaultColor;
             Description.text = button.thisWeapon.Description;
             WeaponName.text = button.thisWeapon.Name;

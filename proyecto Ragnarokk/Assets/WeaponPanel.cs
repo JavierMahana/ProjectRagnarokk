@@ -39,7 +39,7 @@ public class WeaponPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             if(imageComp == null)
                 imageComp = GetComponent<Image>();
-            imageComp.sprite = weapon.sprite;
+            imageComp.sprite = weapon.IconSprite;
         }
     }
 

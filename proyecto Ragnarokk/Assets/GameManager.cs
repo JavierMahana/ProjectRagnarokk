@@ -112,7 +112,6 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector]
     public CombatEncounter currentEncounter;
 
-
     public Dictionary<Room, ShopData> InitializedShopsInFloor = new Dictionary<Room, ShopData>();
     public ShopData CurrShopData;
 
@@ -156,23 +155,24 @@ public class GameManager : Singleton<GameManager>
     {
         // comentar la linea de abajo para que que se guarden los cambios que el jugador realice
         // El valor de un PlayerPref cuando no se encuentra, es 0, es el valor incial default
-        //PlayerPrefs.SetInt("firstTime", 0);
+        PlayerPrefs.SetInt("firstTime", 0);
         // si es la primera vez que se inicia el juego, la data cargada es ésta, de lo contrario
         // se carga la data de Options.
         if (PlayerPrefs.GetInt("firstTime") == 0)
         {
-            PlayerPrefs.SetFloat("audioGeneral", 90);
-            PlayerPrefs.SetFloat("audioSFX", 80);
-            PlayerPrefs.SetFloat("audioMusic", 70);
-            PlayerPrefs.SetFloat("audioAmbient", 60);
+            PlayerPrefs.SetFloat("audioGeneral", 90f);
+            PlayerPrefs.SetFloat("audioSFX", 80f);
+            PlayerPrefs.SetFloat("audioMusic", 70f);
+            PlayerPrefs.SetFloat("audioAmbient", 60f);
 
-            PlayerPrefs.SetFloat("combatDescriptorSpeed", 1);
+            PlayerPrefs.SetFloat("combatDescriptorSpeed", 5f);
 
             PlayerPrefs.SetInt("Fullscreen", 0);
             PlayerPrefs.SetInt("width", Screen.currentResolution.width);
             PlayerPrefs.SetInt("height", Screen.currentResolution.height);
 
             PlayerPrefs.SetInt("firstTime", 1);
+            PlayerPrefs.SetInt("currentFloor", 0);
         }
         
         // se aplica la configuración del jugador
@@ -219,6 +219,10 @@ public class GameManager : Singleton<GameManager>
 
     public void StartFloor(FloorToLoad floorLevelToLoad)
     {
+        int floorNumber = PlayerPrefs.GetInt("currentFloor");
+        floorNumber++;
+        PlayerPrefs.SetInt("currentFloor", floorNumber);
+
         InitializedShopsInFloor.Clear();
         int count;
 

@@ -33,7 +33,7 @@ public class TreasureSlot : MonoBehaviour
         this.manager = manager;
 
         var renderer = GetComponent<SpriteRenderer>();
-        renderer.sprite = item.sprite;
+        renderer.sprite = item.IconSprite;
     }
 
     void OnMouseDown() 
