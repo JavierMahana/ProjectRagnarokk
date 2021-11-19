@@ -85,7 +85,7 @@ public class SelectCharacterManager : MonoBehaviour
                 var pfs = FindObjectsOfType<PlayerFighter>();
                 int pfsCount = pfs.Length;
                 pf.transform.position = new Vector2((-2 + pfsCount), 1);
-                // aqui se podría actualizar el sprite dependiendo del sexo
+
 
                 if(isMale) { pf.GetComponentInChildren<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteMale; }
                 else { pf.GetComponentInChildren<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteFemale; }
@@ -128,6 +128,7 @@ public class SelectCharacterManager : MonoBehaviour
     public void RandomTeamCreate()
     {
         GameManager.Instance.DeletePlayerFighters();
+        currentFighter = null;
         var AddPlayerFighters = FindObjectsOfType<Button_AddPlayerFighter>();
         int sex;
         int cont;
