@@ -135,13 +135,13 @@ public class ActionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 descripcion = "Pick from one of you consumibles and then select whoever you want to affect with it.";
                 break;
             case "Defense":
-                descripcion = "The fighter takes a defensive posicion, increasing it's defense until his next turn.";
+                descripcion = "The fighter takes a defensive position, increasing it's defense until his next turn.";
                 break;
             case "Cancel":
                 descripcion = "Go back to the standard actions.";
                 break;
             case "Flee Combat":
-                descripcion = "The team leaves the current combat, without chance to continue and losing a big amount of health.";
+                descripcion = "The team leaves the current combat, without chance to continue and losing a big amount of hope.";
                 break;
             default:
                 Debug.Log("la accion actual no existe");
