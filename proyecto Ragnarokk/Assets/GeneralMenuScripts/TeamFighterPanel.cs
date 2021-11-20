@@ -11,6 +11,7 @@ public class TeamFighterPanel : MonoBehaviour
     public TextMeshProUGUI healthPosition;
     public TextMeshProUGUI FighterName;
     public TextMeshProUGUI ValueLevel;
+    public TextMeshProUGUI ValueType;
     public TextMeshProUGUI ValueAttack;
     public TextMeshProUGUI ValueDefense;
     public TextMeshProUGUI ValueSpeed;
@@ -24,6 +25,7 @@ public class TeamFighterPanel : MonoBehaviour
         FighterName.text = f.RealName;
         healthPosition.text = f.CurrentHP.ToString() + " / " + f.MaxHP.ToString();
         ValueLevel.text = f.Level.ToString();
+        ValueType.text = f.Type.Name;
         ValueAttack.text = f.Atack.ToString();
         ValueDefense.text = f.Defense.ToString();
         ValueSpeed.text = f.Speed.ToString();
