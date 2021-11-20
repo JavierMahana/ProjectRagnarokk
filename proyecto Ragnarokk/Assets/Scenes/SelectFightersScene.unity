@@ -926,7 +926,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1511407908}
         m_TargetAssemblyTypeName: SelectCharacterManager, Assembly-CSharp
-        m_MethodName: FinishSetFighter
+        m_MethodName: EndEdit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -968,7 +968,7 @@ MonoBehaviour:
   m_GlobalFontAsset: {fileID: 11400000, guid: 275948b269f4ea943ba0be216200fd65, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
-  m_RestoreOriginalTextOnEscape: 1
+  m_RestoreOriginalTextOnEscape: 0
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}

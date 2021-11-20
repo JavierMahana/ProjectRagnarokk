@@ -6,7 +6,8 @@ using UnityEngine;
 public enum ConsumibleType
 {
     HEALTH_REGEN_1,
-    REVIVE_1
+    REVIVE_1,
+    REVIERE_1
 }
 
 [CreateAssetMenu(fileName = "New Consumible", menuName = "Consumibles")]
@@ -106,6 +107,36 @@ public class Consumible : Item
                 {
                     ItemNotUsedCorrectly();
                 }
+                break;
+            #endregion
+
+            #region objeto 3
+            case ConsumibleType.REVIERE_1:
+                var hope = HopeManager.Instance;
+                if ( hope.PartyHope < hope.Limit)
+                {
+                    hope.PartyHope += 25f;
+                    if(hope.PartyHope > 100) { hope.PartyHope = hope.Limit; }
+
+                    if (combatManager != null)
+                    {
+                        combatDescriptor.Clear();
+
+                        int recovery = 25;
+                        string useLine = "";
+                        if (user.Equals(fighterInTurn)) { useLine = fighterInTurnName + " uses " + Name; }
+                        else { useLine = fighterInTurnName + " uses " + Name + " on " + userName; }
+                        combatDescriptor.AddTextLine(useLine);
+                        combatDescriptor.AddTextLine("The party revers "+ recovery + "hope");
+
+                    }
+                    ItemUsedCorrectly();
+                }
+                else
+                {
+                    ItemNotUsedCorrectly();
+                }
+
                 break;
             #endregion
             default: Debug.Log("El item no tiene una función asignada");
