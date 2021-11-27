@@ -23,6 +23,7 @@ public class InfoBox : MonoBehaviour
     public TextMeshProUGUI DefenceText;
     public TextMeshProUGUI SpeedText;
     public TextMeshProUGUI HPText;
+    public TextMeshProUGUI LuckText;
     public TextMeshProUGUI TypeText;
     public TextMeshProUGUI FighterDescriptionText;
     public Image FighterImage; 
@@ -108,7 +109,8 @@ public class InfoBox : MonoBehaviour
         DefenceText.text = fighterData.Defense.ToString();
         SpeedText.text = fighterData.Speed.ToString();
         HPText.text = fighterData.MaxHP.ToString();
-        TypeText.text = fighterData.Luck.ToString();
+        TypeText.text = fighterData.Type.Name;
+        LuckText.text = fighterData.Luck.ToString();
 
         //FighterImage.sprite = fighterData.Sprite;
         Male.sprite = fighterData.SpriteMale;

@@ -19,6 +19,7 @@ public class HopeManager : Singleton<HopeManager>
     private const float MaxHope = 100;
     private const float MinHope = 0;
 
+    public float Limit = MaxHope;
     private Dictionary<sbyte, float> HopeModifiers; //Relacionado a la magnitud con que se altera la esperanza
 
     //La esperanza consta de fases, que se van alcanzando cuando ésta se modifica.
@@ -63,7 +64,7 @@ public class HopeManager : Singleton<HopeManager>
     {
         if(Initialized)
         {
-            Debug.Log($"Esperanza: {PartyHope}");
+            //Debug.Log($"Esperanza: {PartyHope}");
             UpdateHopePhase();
             UpdateCombatFactor();
 

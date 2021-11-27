@@ -81,7 +81,7 @@ public class GeneralMenu : MonoBehaviour
             HideAllPanels();
             explorationManager.gameObject.SetActive(true);
             Background.SetActive(false);
-            this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
+            //this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
 
         }
         else 
@@ -91,7 +91,7 @@ public class GeneralMenu : MonoBehaviour
             ReturnButton.SetActive(true);
             Background.SetActive(true);
             explorationManager.gameObject.SetActive(false);
-            this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.9f);
+            //this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.9f);
         }
 
 

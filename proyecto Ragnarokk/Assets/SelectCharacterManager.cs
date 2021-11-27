@@ -75,6 +75,7 @@ public class SelectCharacterManager : MonoBehaviour
 
     public void FinishSetFighter()
     {
+
         foreach( PlayerFighter pf in GameManager.Instance.PlayerFighters)
         {
             if (pf == currentFighter.GetComponent<PlayerFighter>())
@@ -145,21 +146,44 @@ public class SelectCharacterManager : MonoBehaviour
             {
                 sex = Random.Range(0, 2);
                 cont = Random.Range(0, 4);
-                numName = Random.Range(0, 8);
 
-                AddPlayerFighters[cont].CreatePlayerFighter();
-                isMale = sex == 1 ? true : false;
-
-                if (isMale)
+                if(GameManager.Instance.PlayerFighters.Count > 0)
                 {
-                    randomName = MaleNames[numName];
+                    foreach (PlayerFighter f in GameManager.Instance.PlayerFighters)
+                    {
+                        do
+                        {
+                            isMale = sex == 1 ? true : false;
+                            numName = Random.Range(0, 8);
+                            if (isMale)
+                            {
+                                randomName = MaleNames[numName];
+                            }
+                            else
+                            {
+                                randomName = FemaleNames[numName];
+                            }
+                        } while (f.GetComponent<Fighter>().RealName == randomName);
+                    }
                 }
                 else
                 {
-                    randomName = FemaleNames[numName];
+                    isMale = sex == 1 ? true : false;
+                    numName = Random.Range(0, 8);
+                    if (isMale)
+                    {
+                        randomName = MaleNames[numName];
+                    }
+                    else
+                    {
+                        randomName = FemaleNames[numName];
+                    }
                 }
 
+                AddPlayerFighters[cont].CreatePlayerFighter();
+                
                 FighterName.text = randomName;
+                Debug.Log(randomName);
                 FinishSetFighter();
             }
         }
@@ -171,4 +195,22 @@ public class SelectCharacterManager : MonoBehaviour
     {
         onNameChange = set;
     }
+
+    public void EndEdit()
+    {
+        bool pass = false;
+
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetButtonDown("Submit"))
+        {
+            pass = true;
+        }
+
+        if (!pass || Inputfield.text == "")
+        {
+            return;
+        }
+
+        FinishSetFighter();
+    }
+
 }
