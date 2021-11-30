@@ -41,12 +41,11 @@ public class SceneChanger : Singleton<SceneChanger>
 	}
 	public void ChangeScene(string sceneName)
 	{
-		SceneManager.LoadScene(sceneName);
+		SceneManager.LoadScene(sceneName); 
 	}
 	public void Exit()
 	{
 		Application.Quit();
 	}
-
 
 }

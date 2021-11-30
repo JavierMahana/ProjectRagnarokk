@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class LorePanel : MonoBehaviour
     //private Sprite sprite = null;
     //private string text = "";
 
-    public Text textComp;
+    public TextMeshProUGUI textComp;
     public Image imageComp;
 
     public void UpdateContent(Sprite sprite, string text)

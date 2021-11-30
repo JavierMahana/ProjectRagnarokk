@@ -8,12 +8,10 @@ using TMPro;
 
 //ahora elementos de display pueden estar aca pero en el futuro moverlos.
 public class CombatManager : MonoBehaviour
-{ 
-    //eliminar las 2 lineas siguientes luego de testear los consumibles
-    public Consumible item1;
-    public Consumible item2;
-
+{
+    public GameObject Background;
     public GameObject CombatCanvas;
+    public GameObject OptionsCanvas;
     public GameObject EnemyCombatCanvas;
     public CombatDescriptor CombatDescriptor;
     public CombatIconManager IconManager;
@@ -218,14 +216,6 @@ public class CombatManager : MonoBehaviour
         CombatDescriptor = gameObject.GetComponent<CombatDescriptor>();
         IconManager = gameObject.GetComponent<CombatIconManager>();
 
-        // Añade consumibles para testear, eliminar esto ya que luego los consumibles deben ser entregados
-        // como recompensa de combate, exploración o comprados en la tienda.
-        Consumible i1 = Instantiate(item1);
-        Consumible i3 = Instantiate(item1);
-        Consumible i2 = Instantiate(item2);
-        GameManager.Instance.AllConsumibles.Add(i1);
-        GameManager.Instance.AllConsumibles.Add(i2);
-        GameManager.Instance.AllConsumibles.Add(i3);
 
         // limpia la lista de enemigos y sus botones más los botones aliados
         // antes de instanciar los del nuevo encuentro
@@ -422,7 +412,9 @@ public class CombatManager : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.ShowPlayerFighters(true);
-           
+        if (OptionsCanvas.activeSelf) { OptionsCanvas.SetActive(false); }
+        
+
         InitCombatScene(GameManager.Instance.currentEncounter);
         ResetWeaponCooldowns();
         //ShowFighterCanvas(false);
