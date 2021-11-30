@@ -10,32 +10,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
-  m_Name: Xixi
+  m_Name: lvl2_Cazador
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
   Level: 0
-  IsMaxLevel: 0
+  IsMaxLevel: 1
   Evolutions:
   - {fileID: 0}
   - {fileID: 0}
-  Name: Xixi
+  Name: Hunter
   RealName: nameless
   Description: Description
-  Speed: 10
-  Atack: 12
-  Defense: 6
-  Luck: 0
-  MaxHP: 55
-  PowerRating: 2
+  Speed: 17
+  Atack: 17
+  Defense: 8
+  Luck: 4
+  MaxHP: 115
+  PowerRating: 1
   DefaultWeapons:
-  - {fileID: 11400000, guid: 61251d08e008fc942914439379e6a020, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  Sprite: {fileID: 1695138769994977630, guid: 638e828c4233f364eb4f7384b4ca6661, type: 3}
+  - {fileID: 0}
+  Sprite: {fileID: -3619339640398832058, guid: c6de62a92fc229e4cab12f0a0b1c606d, type: 3}
   SpriteFemale: {fileID: 0}
   SpriteMale: {fileID: 0}
-  reversedSprite: 1
-  size: {x: 1.5, y: 1.5}
+  reversedSprite: 0
+  size: {x: 1, y: 1}
   healthBarOffset: {x: 1, y: 1.6}
   Type: {fileID: 11400000, guid: c8332d004a10a164486b93f259a6df2b, type: 2}
+  WaterDamageBonus: 0
+  EarthDamageBonus: 0
+  FireDamageBonus: 0
+  AirDamageBonus: 0
+  PhysicalDamageBonus: 1
+  PsychicDamageBonus: 0
+  ElectricDamageBonus: 0
+  AlcoholDamageBonus: 0
+  WaterResistanceBonus: 0
+  EarthResistanceBonus: 0
+  FireResistanceBonus: 0
+  AirResistanceBonus: 0
+  PhysicalResistanceBonus: 0
+  PsychicResistanceBonus: 0
+  ElectricResistanceBonus: 0
+  AlcoholResistanceBonus: 0

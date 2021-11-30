@@ -10,29 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
-  m_Name: lvl2_Humano_B
+  m_Name: lvl2_Soldado
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
+  Level: 0
   IsMaxLevel: 1
   Evolutions:
   - {fileID: 0}
   - {fileID: 0}
-  Name: Milico
+  Name: Soldier
   RealName: nameless
   Description: Le gustan las armas
-  Speed: 12
-  Atack: 17
-  Defense: 9
-  Luck: 4
-  MaxHP: 100
+  Speed: 15
+  Atack: 16
+  Defense: 12
+  Luck: 5
+  MaxHP: 130
   PowerRating: 1
   DefaultWeapons:
-  - {fileID: 11400000, guid: c3612c52e49b6024d8d628796893e2a8, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 2956019481997181711, guid: fc49f21342571774d846b196d8d280b2, type: 3}
+  SpriteFemale: {fileID: 0}
+  SpriteMale: {fileID: 0}
   reversedSprite: 0
   size: {x: 1, y: 1}
   healthBarOffset: {x: 1, y: 1.6}
-  Type: {fileID: 11400000, guid: 88f66a0be81a6404d914802b5ed0d83f, type: 2}
+  Type: {fileID: 11400000, guid: 778e8c821ff9ef849aa6a6915952b4f3, type: 2}

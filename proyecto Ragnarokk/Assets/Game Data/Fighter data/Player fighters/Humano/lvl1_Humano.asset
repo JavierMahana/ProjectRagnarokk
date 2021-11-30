@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
-  m_Name: Humano
+  m_Name: lvl1_Humano
   m_EditorClassIdentifier: 
-  ExpNeededToLevelUp: 100
+  ExpNeededToLevelUp: 10
   Level: 0
-  IsMaxLevel: 1
+  IsMaxLevel: 0
   Evolutions:
   - {fileID: 11400000, guid: 1e26af4970679bc4390dc74cec4a8a93, type: 2}
   - {fileID: 11400000, guid: fa77921f15f41f4438e080db93403366, type: 2}
-  Name: Humano
+  Name: Human
   RealName: nameless
   Description: Humankind comes from the planet Earth, ruled by the facist regime
     known as the Eternal Empire. As there was nowhere left to colonize on earth,
@@ -26,11 +26,11 @@ MonoBehaviour:
   Speed: 10
   Atack: 10
   Defense: 7
-  Luck: 0
+  Luck: 3
   MaxHP: 100
   PowerRating: 1
   DefaultWeapons:
-  - {fileID: 11400000, guid: c3612c52e49b6024d8d628796893e2a8, type: 2}
+  - {fileID: 11400000, guid: dd75f349b1cdfcc45bf90c499fbf1242, type: 2}
   - {fileID: 11400000, guid: 5b4c9a7c35839084d9f8bebce16b9703, type: 2}
   - {fileID: 0}
   - {fileID: 0}

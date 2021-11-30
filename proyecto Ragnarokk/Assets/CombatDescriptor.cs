@@ -71,11 +71,11 @@ public class CombatDescriptor : MonoBehaviour
     }
 
     //Método especial para mostrar de quién es el turno actual. Limpia el descriptor antes de añadir la línea, la cual es PERMANENTE.
-    public void ShowFighterInTurn(Fighter activeFighter)
+    public void ShowFighterInTurn(Fighter activeFighter, bool isPlayerFighter)
     {
         //Clear();
 
-        string fName = activeFighter.Name;
+        string fName = isPlayerFighter? activeFighter.RealName : activeFighter.Name;
         string line = fName + "'s turn";
         TextLines.Add(new TextLine(line, 0));
     }

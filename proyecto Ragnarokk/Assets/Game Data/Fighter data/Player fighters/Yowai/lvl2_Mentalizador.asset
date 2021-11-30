@@ -10,32 +10,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
-  m_Name: PsyquicGorb
+  m_Name: lvl2_Mentalizador
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
   Level: 0
-  IsMaxLevel: 0
+  IsMaxLevel: 1
   Evolutions:
   - {fileID: 0}
   - {fileID: 0}
-  Name: Psyquic Gorb
+  Name: Mentalizer
   RealName: nameless
-  Description: metal in conciusness
-  Speed: 3
-  Atack: 15
-  Defense: 8
-  Luck: 0
-  MaxHP: 85
-  PowerRating: 2
+  Description: Description
+  Speed: 10
+  Atack: 14
+  Defense: 6
+  Luck: 10
+  MaxHP: 95
+  PowerRating: 1
   DefaultWeapons:
-  - {fileID: 11400000, guid: 430b04e70cf211547b2526cceddf4b86, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  Sprite: {fileID: 7923608585065091488, guid: 6388677ed6cfa7840b26c5370cda0991, type: 3}
+  - {fileID: 0}
+  Sprite: {fileID: 1798614187947317398, guid: 173659c0f0c6464459fe061bb5bc9898, type: 3}
   SpriteFemale: {fileID: 0}
   SpriteMale: {fileID: 0}
   reversedSprite: 0
   size: {x: 1, y: 1}
-  healthBarOffset: {x: 1, y: 1.5}
+  healthBarOffset: {x: 1, y: 1.6}
   Type: {fileID: 11400000, guid: d9c98abbe4ca19c44b5bee3a65c524c5, type: 2}
+  WaterDamageBonus: 0
+  EarthDamageBonus: 0
+  FireDamageBonus: 0
+  AirDamageBonus: 0
+  PhysicalDamageBonus: 0
+  PsychicDamageBonus: 1
+  ElectricDamageBonus: 0
+  AlcoholDamageBonus: 0
+  WaterResistanceBonus: 0
+  EarthResistanceBonus: 0
+  FireResistanceBonus: 0
+  AirResistanceBonus: 0
+  PhysicalResistanceBonus: 0
+  PsychicResistanceBonus: 0
+  ElectricResistanceBonus: 0
+  AlcoholResistanceBonus: 0

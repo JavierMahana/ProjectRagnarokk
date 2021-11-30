@@ -10,29 +10,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
-  m_Name: lvl2_Humano_A
+  m_Name: lvl2_Colonizador
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
+  Level: 0
   IsMaxLevel: 1
   Evolutions:
   - {fileID: 0}
   - {fileID: 0}
-  Name: Cura
+  Name: Colonizer
   RealName: nameless
-  Description: Deboto religioso
-  Speed: 8
-  Atack: 14
-  Defense: 4
-  Luck: 8
-  MaxHP: 100
+  Description: 
+  Speed: 13
+  Atack: 13
+  Defense: 9
+  Luck: 7
+  MaxHP: 120
   PowerRating: 1
   DefaultWeapons:
-  - {fileID: 11400000, guid: c3612c52e49b6024d8d628796893e2a8, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 2956019481997181711, guid: fc49f21342571774d846b196d8d280b2, type: 3}
+  SpriteFemale: {fileID: 0}
+  SpriteMale: {fileID: 0}
   reversedSprite: 0
   size: {x: 1, y: 1}
   healthBarOffset: {x: 1, y: 1.6}
-  Type: {fileID: 11400000, guid: 88f66a0be81a6404d914802b5ed0d83f, type: 2}
+  Type: {fileID: 11400000, guid: 9a61c964186081747ac8b0a27a5d7972, type: 2}
+  WaterDamageBonus: 0
+  EarthDamageBonus: 0
+  FireDamageBonus: 0
+  AirDamageBonus: 0
+  PhysicalDamageBonus: 0
+  PsychicDamageBonus: 0
+  ElectricDamageBonus: 1
+  AlcoholDamageBonus: 1
+  WaterResistanceBonus: 0
+  EarthResistanceBonus: 0
+  FireResistanceBonus: 0
+  AirResistanceBonus: 0
+  PhysicalResistanceBonus: 0
+  PsychicResistanceBonus: 0
+  ElectricResistanceBonus: 0
+  AlcoholResistanceBonus: 0

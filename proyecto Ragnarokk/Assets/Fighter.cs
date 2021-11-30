@@ -10,7 +10,15 @@ public class Fighter : MonoBehaviour
     {
         spRenderer = GetComponentInChildren<SpriteRenderer>();
         if (spRenderer == null)
+        {
             Debug.LogError("Debe tener un hijo con sprite renderer!");
+        }
+        
+        foreach(CombatType type in GameManager.Instance.AllCombatTypes)
+        {
+            TypeDamageBonuses.Add(type, 0);
+            TypeResistanceBonuses.Add(type, 0);
+        }
     }
     public void Init(FighterData data)
     {
@@ -25,6 +33,20 @@ public class Fighter : MonoBehaviour
         PowerRating = data.PowerRating;
 
         Type = data.Type;
+
+        //Añade bonus de daño elemental
+        Dictionary<CombatType, int> typeDamageAddedBonuses = new Dictionary<CombatType, int>(GetNewTypeDamageBonuses(data));
+        foreach (CombatType type in GameManager.Instance.AllCombatTypes)
+        {
+            TypeDamageBonuses[type] += typeDamageAddedBonuses[type];
+        }
+
+        //Añade bonus de resistencia elemental
+        Dictionary<CombatType, int> typeResistanceAddedBonuses = new Dictionary<CombatType, int>(GetNewTypeResistanceBonuses(data));
+        foreach (CombatType type in GameManager.Instance.AllCombatTypes)
+        {
+            TypeResistanceBonuses[type] += typeResistanceAddedBonuses[type];
+        }
 
         Size = data.healthBarOffset;
         reversed = data.reversedSprite;
@@ -52,6 +74,62 @@ public class Fighter : MonoBehaviour
         SpriteMale = data.SpriteMale;
 
         Level++;
+
+        Debug.Log($"Bonus ataque {Name}:");
+        foreach(CombatType type in GameManager.Instance.AllCombatTypes)
+        {
+            Debug.Log($"{type.Name}: {TypeDamageBonuses[type]}");
+        }
+
+        Debug.Log($"Bonus resistencia {Name}:");
+        foreach (CombatType type in GameManager.Instance.AllCombatTypes)
+        {
+            Debug.Log($"{type.Name}: {TypeResistanceBonuses[type]}");
+        }
+    }
+
+    private Dictionary<CombatType, int> GetNewTypeDamageBonuses(FighterData data)
+    {
+        Dictionary<CombatType, int> bonuses = new Dictionary<CombatType, int>();
+
+        foreach(CombatType type in GameManager.Instance.AllCombatTypes)
+        {
+            switch(type.Name)
+            {
+                case "Water"    : bonuses.Add(type, data.WaterDamageBonus);       break;
+                case "Earth"    : bonuses.Add(type, data.EarthDamageBonus);       break;
+                case "Fire"     : bonuses.Add(type, data.FireDamageBonus);        break;
+                case "Air"      : bonuses.Add(type, data.AirDamageBonus);         break;
+                case "Physical" : bonuses.Add(type, data.PhysicalDamageBonus);    break;
+                case "Psychic"  : bonuses.Add(type, data.PsychicDamageBonus);     break;
+                case "Electric" : bonuses.Add(type, data.ElectricDamageBonus);    break;
+                case "Alcohol"  : bonuses.Add(type, data.AlcoholDamageBonus);     break;
+            }
+        }
+
+        return bonuses;
+    }
+
+    private Dictionary<CombatType, int> GetNewTypeResistanceBonuses(FighterData data)
+    {
+        Dictionary<CombatType, int> bonuses = new Dictionary<CombatType, int>();
+
+        foreach (CombatType type in GameManager.Instance.AllCombatTypes)
+        {
+            switch (type.Name)
+            {
+                case "Water"    : bonuses.Add(type, data.WaterResistanceBonus);     break;
+                case "Earth"    : bonuses.Add(type, data.EarthResistanceBonus);     break;
+                case "Fire"     : bonuses.Add(type, data.FireResistanceBonus);      break;
+                case "Air"      : bonuses.Add(type, data.AirResistanceBonus);       break;
+                case "Physical" : bonuses.Add(type, data.PhysicalResistanceBonus);  break;
+                case "Psychic"  : bonuses.Add(type, data.PsychicResistanceBonus);   break;
+                case "Electric" : bonuses.Add(type, data.ElectricResistanceBonus);  break;
+                case "Alcohol"  : bonuses.Add(type, data.AlcoholResistanceBonus);   break;
+            }
+        }
+
+        return bonuses;
     }
 
     [ReadOnly]
@@ -98,6 +176,8 @@ public class Fighter : MonoBehaviour
     public Weapon CurrentWeapon;
 
     public CombatType Type;
+    public Dictionary<CombatType, int> TypeDamageBonuses = new Dictionary<CombatType, int>();
+    public Dictionary<CombatType, int> TypeResistanceBonuses = new Dictionary<CombatType, int>();
 
     public List<CombatState> States = new List<CombatState>();
 

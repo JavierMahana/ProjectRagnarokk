@@ -59,4 +59,24 @@ public class FighterData : ScriptableObject
 
     //Tipo para determinar que ataques hacen poco daño y mucho daño.
     public CombatType Type;
+
+    //Bonus de daño elemental al adquirir esta evolución
+    public int WaterDamageBonus = 0;
+    public int EarthDamageBonus = 0;
+    public int FireDamageBonus = 0;
+    public int AirDamageBonus = 0;
+    public int PhysicalDamageBonus = 0;
+    public int PsychicDamageBonus = 0;
+    public int ElectricDamageBonus = 0;
+    public int AlcoholDamageBonus = 0;
+
+    //Bonus de resistencia elemental al adquirir esta evolución
+    public int WaterResistanceBonus = 0;
+    public int EarthResistanceBonus = 0;
+    public int FireResistanceBonus = 0;
+    public int AirResistanceBonus = 0;
+    public int PhysicalResistanceBonus = 0;
+    public int PsychicResistanceBonus = 0;
+    public int ElectricResistanceBonus = 0;
+    public int AlcoholResistanceBonus = 0;
 }

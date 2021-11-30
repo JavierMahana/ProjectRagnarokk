@@ -608,7 +608,7 @@ public class CombatManager : MonoBehaviour
 
         yield return null; //Es posible que la necesidad de esta línea se deba a que se consulta por la variable TextIsEmpty, la cual se actualiza en Update, en vez de consultar directamente el tamaño de la lista de TextLines.
         yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
-        CombatDescriptor.ShowFighterInTurn(ActiveFighter);
+        CombatDescriptor.ShowFighterInTurn(ActiveFighter, IsPlayerFighter(ActiveFighter));
 
         
 
@@ -709,10 +709,13 @@ public class CombatManager : MonoBehaviour
 
             //No continúa hasta que la acción ha sido descrita por completo
             yield return new WaitUntil(() => ActionDone && CombatDescriptor.TextIsEmpty);
-            Debug.Log("Descriptor vacío");
-            if(FleeActionSelected)
+
+            //Por seguridad se nulifican variables de ataque
+            AttackWeapon = null;
+            Target = null;
+
+            if (FleeActionSelected)
             {
-                Debug.Log("On flee = true");
                 OnFlee = true;
                 yield break; //Se interrumpe la corrutina. El turno NO se declara como terminado. Esto es para prevenir que se inicie un nuevo turno.
             }
@@ -729,7 +732,19 @@ public class CombatManager : MonoBehaviour
 
             yield return new WaitForSeconds(pauseTime);
 
-            AttackWeapon = ActiveFighter.Weapons[0];
+            //Selección de arma
+            List<int> indexes = new List<int>();
+            for(int i = 0;i<4;i++) //Se podria comprobar si existe el arma del index antes de añadir, y asi evitar el ciclo while despues
+            {
+                indexes.Add(i); 
+            }
+            while(AttackWeapon == null)
+            {
+                int index = indexes[Random.Range(0, indexes.Count)];
+                AttackWeapon = ActiveFighter.Weapons[index];
+                indexes.Remove(index);
+            }
+            
             Target = AlivePlayerFighters[Random.Range(0, AlivePlayerFighters.Count)];
             //Debug.Log("PRE-TARGET: " + Target.Name);
 
@@ -754,7 +769,6 @@ public class CombatManager : MonoBehaviour
             yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
             
             //Por seguridad se nulifican variables de ataque
-            //(En el turno del jugador se anulan antes de la elección de cada una. ¿Sería preferible anularlas tras el ataque, igual que aquí?)
             AttackWeapon = null;
             Target = null;
         }
@@ -793,17 +807,24 @@ public class CombatManager : MonoBehaviour
         //ACIERTO
         if (AttackWeapon.BaseAccuracy > missValue)
         {
-            #region SECUENCIA LÓGICA (10 pasos)
+            #region SECUENCIA LÓGICA (11 pasos)
             // 1- Cambio de esperanza por sinergias
             // 2- Cálculo de efectividad (altera esperanza)
             // 3- Obtención factor esperanza
-            // 4- Cálculo de factor crítico
-            // 5- Cálculo de daño (5 subpasos)
-            // 6- Textos para Combat Descriptor (algunos)
-            // 7- Aplicación de daño
-            // 8- Alteración de esperanza por target derrotado, o aplicación de estados cuando el target sobrevive
-            // 9- Alteración de esperanza por grupo en mal estado
-            // 10- Activación de cooldown de arma atacante
+            // 4- Cálculo bonus elemental
+            // 5- Cálculo de factor crítico
+               #region 6- Cálculo de daño (5 subpasos)
+                // 6.1- Cálculo de daño base
+                // 6.2- Cálculo de multiplicador
+                // 6.3- Cálculo de variabilidad
+                // 6.4- Cálculo de daño final
+                // 6.5- Corrección por crítico mortal
+            #endregion
+            // 7- Textos para Combat Descriptor (algunos)
+            // 8- Aplicación de daño
+            // 9- Alteración de esperanza por target derrotado, o aplicación de estados cuando el target sobrevive
+            // 10- Alteración de esperanza por grupo en mal estado
+            // 11- Activación de cooldown de arma atacante
             #endregion
 
             string critDesc, effectDesc, synerDesc; //Algunos posibles mensajes a mostrar
@@ -818,7 +839,11 @@ public class CombatManager : MonoBehaviour
             //PASO 3: FACTOR ESPERANZA
             float hopeFact = attackerIsAlly ? HopeManager.Instance.GetHopeFactor() : 1;
 
-            //PASO 4: CRÍTICO
+            //PASO 4: BONUS ELEMENTAL
+            CombatType weaponType = AttackWeapon.TipoDeDañoQueAplica;
+            float damageBonusFact = (ActiveFighter.TypeDamageBonuses[weaponType] - Target.TypeResistanceBonuses[weaponType]) * 0.25f;
+
+            //PASO 5: CRÍTICO
             bool criticalAttack = false;
             float criticalFact = 0;
             int criticalRate = AttackWeapon.BaseCriticalRate + ActiveFighter.Luck; //Valor que se calcula como la suma de el índice de crítico del arma, y la suerte del atacante
@@ -837,29 +862,29 @@ public class CombatManager : MonoBehaviour
                 }
             }
 
-            //PASO 5: CÁLCULO DE DAÑO
+            //PASO 6: CÁLCULO DE DAÑO
             const int minDamage = 1;
 
-            //PASO 5.1: DAÑO BASE
+            //PASO 6.1: DAÑO BASE
             //FÓRMULA DE DAÑO (Prototipo en uso. Debe ser bien definida más adelante)
             int baseDamage = Mathf.RoundToInt((AttackWeapon.BaseDamage * 0.1f) + ActiveFighter.Atack - Target.Defense * 0.8f);
             if (baseDamage < minDamage) { baseDamage = minDamage; }
 
-            //PASO 5.2: MULTIPLICADOR
-            float damageMultiplier = hopeFact + effectivenessFact + criticalFact;
-            Debug.Log($"Multiplier: {hopeFact} + {effectivenessFact} + {criticalFact} = {damageMultiplier}");
+            //PASO 6.2: MULTIPLICADOR
+            float damageMultiplier = hopeFact + effectivenessFact + damageBonusFact + criticalFact;
+            Debug.Log($"Multiplier: {hopeFact} + {effectivenessFact} + {damageBonusFact} + {criticalFact} = {damageMultiplier}");
 
-            //PASO 5.3: VARIABILIDAD
+            //PASO 6.3: VARIABILIDAD
             const float variabilityRatio = 0.1f;
             float variabilityFact = Random.Range(1 - variabilityRatio, 1 + variabilityRatio);
 
-            //PASO 5.4: DAÑO FINAL
+            //PASO 6.4: DAÑO FINAL
             int finalDamage = Mathf.RoundToInt(baseDamage * damageMultiplier * variabilityFact);
             Debug.Log($"Daño final: {baseDamage} * {damageMultiplier} * {variabilityFact} = {finalDamage}");
             //finalDamage = (int)(baseDamage * hopeFact * effectivenessFact * criticalFact * variabilityFact);
             if (finalDamage < minDamage) { finalDamage = minDamage; }
 
-            //PASO 5.5: CORRECCIÓN POR CRÍTICO MORTAL
+            //PASO 6.5: CORRECCIÓN POR CRÍTICO MORTAL
             //Se impide que un ataque crítico mate a un aliado si este hubiera sobrevivido al ataque normal. El aliado quedará con 1 HP.
             if(targetIsAlly  &&  criticalAttack)
             {
@@ -874,7 +899,7 @@ public class CombatManager : MonoBehaviour
 
             damageToShow = finalDamage;
 
-            //PASO 6: TEXTOS PARA COMBAT DESCRIPTOR
+            //PASO 7: TEXTOS PARA COMBAT DESCRIPTOR
 
             //Crítico, efectividad y sinergia se muestran
             CombatDescriptor.AddTextLine(critDesc);
@@ -891,12 +916,12 @@ public class CombatManager : MonoBehaviour
                 CombatDescriptor.AddTextLine("How pathetic... " + minDamageHopeChange); //Mensaje para daño mínimo
             }
 
-            //PASO 7: APLICACIÓN DEL DAÑO
+            //PASO 8: APLICACIÓN DEL DAÑO
             Target.CurrentHP -= finalDamage;
 
             Target.OnTakeDamage?.Invoke();
 
-            //PASO 8: LUCHADOR DERROTADO / APLICACIÓN DE ESTADOS
+            //PASO 9: LUCHADOR DERROTADO / APLICACIÓN DE ESTADOS
             //El objetivo es DERROTADO
             if (Target.CurrentHP <= 0)
             {
@@ -946,12 +971,12 @@ public class CombatManager : MonoBehaviour
                 IconManager.UpdateStateIcons(AllCombatFighters);
             }
 
-            //PASO 9: COMPROBACIÓN DE HP GRUPAL
+            //PASO 10: COMPROBACIÓN DE HP GRUPAL
             //EL fin de estos métodos no es otro que cambiar la esperanza.
             CheckPartyHP();
             CheckHordeHP();
 
-            //PASO 10: COOLDOWN DE ARMA
+            //PASO 11: COOLDOWN DE ARMA
             ActiveFighter.WeaponCooldowns[AttackWeaponIndex] = AttackWeapon.BaseCooldown + 1;
         }
         //FALLO

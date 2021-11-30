@@ -126,6 +126,8 @@ public class GameManager : Singleton<GameManager>
     public List<Consumible> AllConsumibles = new List<Consumible>();
 
 
+    public List<CombatType> AllCombatTypes = new List<CombatType>();
+    //[HideInInspector] public Dictionary<CombatType, int> DefaultFighterTypeBonuses = new Dictionary<CombatType, int>();
     //public List<CombatState> AllCombatStates = new List<CombatState>();
 
     //DontDestroyOnLoad
