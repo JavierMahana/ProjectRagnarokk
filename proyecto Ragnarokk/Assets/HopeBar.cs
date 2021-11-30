@@ -45,7 +45,11 @@ public class HopeBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if(GM.GameState == GAME_STATE.MENU)
         {
             HopePanel.transform.SetParent(EM.Canvas.transform, true);
-            faceEmoji.transform.position = imagePos + new Vector3(0, 70, 0);
+            if(faceEmoji.transform.position == imagePos)
+            {
+                faceEmoji.transform.position = imagePos + new Vector3(0, 70, 0);
+            }
+            
         }
         else
         {
@@ -53,8 +57,12 @@ public class HopeBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
 
         if (GM.GameState == GAME_STATE.COMBAT || GM.GameState == GAME_STATE.EXPLORATION) 
-        { 
-            faceEmoji.transform.position = imagePos;
+        {
+            if (faceEmoji.transform.position != imagePos)
+            {
+                faceEmoji.transform.position = imagePos;
+            }
+                
         }
         
     }
