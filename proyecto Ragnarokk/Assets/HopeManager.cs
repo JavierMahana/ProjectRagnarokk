@@ -24,7 +24,7 @@ public class HopeManager : Singleton<HopeManager>
 
     //La esperanza consta de fases, que se van alcanzando cuando ésta se modifica.
     private const byte TotalHopePhases = 11; //Este valor se puede modificar a gusto, pero debe armonizar con BaseCombatFactor
-    private byte CurrentHopePhase; //Las fases se cuentan de 0 a (TotalHopePhases - 1)
+    public byte CurrentHopePhase; //Las fases se cuentan de 0 a (TotalHopePhases - 1)
     private byte NeutralPhase; //Fase intermedia en la que el daño no se verá afectado por la esperanza
 
     private float PhaseInterval; //Distancia entre fases (en porcentaje)
