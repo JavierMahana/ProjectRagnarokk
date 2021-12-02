@@ -1,44 +1,81 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public Button selfBbutton;
+    //public Button selfBbutton;
 
     public Fighter Fighter;
 
-    public Text damage;
+    public TextMeshProUGUI showText;
 
     public int showTimer;
 
     private string defaultText = "";
+    private Color normalColor;
+    private Color healColor;
+    private Color critColor;
 
     //agregar despues una lista de imagenes (estados) dentro de un canvas (atributo) que se activa si hay efectos en Fighter
 
     void Start()
     {
-        selfBbutton.interactable = true;
+        float r, g, b;
+
+        r = 1f;
+        g = 120 / 255f;
+        b = 0;
+        healColor = new Color(r, g, b, 0.8f);
+
+        r = 0;
+        g = 200 / 255f;
+        b = 130 / 255f;
+        critColor = new Color(r, g, b, 1);
+
+
+        normalColor = showText.color;
+        healColor = Color.cyan;
+        critColor = Color.black;
+
         showTimer = 0;
-        damage.text = defaultText;
+        showText.text = defaultText;
+
     }
 
 
     void Update()
     {
         if (Fighter == null) { Destroy(this); }
-        if (showTimer != 0) { showTimer--; }
-        if (showTimer == 0 && damage.text != defaultText) { damage.text = defaultText; }
+        else
+        {
+            if (showTimer != 0) { showTimer--; }
+            if (showTimer == 0 && showText.text != defaultText) { showText.text = defaultText; showText.color = normalColor; }
+        }
         //if (!selfBbutton.interactable) { selfBbutton.gameObject.SetActive(false); }
     }
 
-    public void ShowDamage(int damage)
+    public void ShowDamage(int damage, bool isCrit)
     {
-        this.damage.text = (damage > 0) ? damage.ToString() : "MISS";
+        string predamage = "HIT ";
+        showText.color = normalColor;
+
+        if (isCrit) { showText.color = critColor; predamage = "CRIT HIT "; }
+
+        this.showText.text = (damage > 0) ? predamage + damage.ToString() : "MISS";
         showTimer = 200;
     }
+
+    public void ShowHeal(int heal)
+    {
+        showText.color = healColor;
+        this.showText.text = heal.ToString();
+        showTimer = 200;
+    }
+
 
     public void OnClick()
     {
@@ -114,6 +151,20 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             cm.FillWithAttackWeapon();
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        var cm = FindObjectOfType<CombatManager>();
+        if (cm.SelectedConsumible != null && cm.PlayerFighters.Contains(Fighter))
+        {
+            OnClick();
+        }
+        else if(!cm.PlayerFighters.Contains(Fighter) && cm.AttackWeapon != null)
+        {
+            OnClick();
+        }
+        
     }
 
 }
