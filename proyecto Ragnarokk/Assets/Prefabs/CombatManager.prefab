@@ -45,26 +45,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5222553dafb0b0e4b9bf0ca604e4f306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item1: {fileID: 0}
-  item2: {fileID: 0}
+  Background: {fileID: 0}
   CombatCanvas: {fileID: 253975490868383963, guid: 62b4487792b51d9448192a664df18928, type: 3}
+  OptionsCanvas: {fileID: 0}
+  EnemyCombatCanvas: {fileID: 0}
   CombatDescriptor: {fileID: 0}
+  IconManager: {fileID: 0}
   PrefabActionButton: {fileID: 0}
   PrefabWeaponButton: {fileID: 0}
   PrefabConsumibleButton: {fileID: 0}
+  PrefabDamageTypeButton: {fileID: 0}
+  PrefabSynergyButton: {fileID: 0}
+  PanelDescriptor: {fileID: 0}
+  PanelDMGtypes: {fileID: 0}
+  PanelSynergies: {fileID: 0}
   PanelForActions: {fileID: 0}
   FighterClickButton: {fileID: 0}
   AllButtonsInPanel: []
   PermanentCanvas: {fileID: 0}
-  playerFightersX: 0
-  playerFightersMinY: 0
-  playerFightersMaxY: 0
-  enemyFightersX: 0.731
-  enemyFightersMinY: 0.184
-  enemyFightersMaxY: 0.819
+  playerFightersX: 0.1
+  playerFightersMinY: 0.2
+  playerFightersMaxY: 0.6
+  enemyXColoumn1: 0.882
+  enemyMinY_Coloumn1: 0.136
+  enemyMaxY_Coloumn1: 0.8
+  enemyXColoumn2: 0.731
+  enemyMinY_Coloumn2: 0.232
+  enemyMaxY_Coloumn2: 0.696
   initialized: 0
   FighterBasePrefab: {fileID: 4375212014534626024, guid: ee9478e7f28706048b4a3bf1312faf01, type: 3}
   AllCombatFighters: []
+  PlayerFighters: []
+  EnemyFighters: []
   ActiveFighter: {fileID: 0}
   CurrentPlayerButton: {fileID: 0}
   TurnInProcess: 0

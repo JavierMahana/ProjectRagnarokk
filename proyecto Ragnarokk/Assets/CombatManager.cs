@@ -47,12 +47,21 @@ public class CombatManager : MonoBehaviour
 
 
     [Range(0.0f, 1.0f)]
-    public float enemyFightersX;
+    public float enemyXColoumn1;
 
     [Range(0.0f, 1.0f)]
-    public float enemyFightersMinY;
+    public float enemyMinY_Coloumn1;
     [Range(0.0f, 1.0f)]
-    public float enemyFightersMaxY;
+    public float enemyMaxY_Coloumn1;
+
+
+    [Range(0.0f, 1.0f)]
+    public float enemyXColoumn2;
+
+    [Range(0.0f, 1.0f)]
+    public float enemyMinY_Coloumn2;
+    [Range(0.0f, 1.0f)]
+    public float enemyMaxY_Coloumn2;
 
 
     [HideInInspector]
@@ -288,22 +297,46 @@ public class CombatManager : MonoBehaviour
             if(pf.CurrentHP > 0) { AlivePlayerFighters.Add(pf); }
         }
 
+
+
+        #region Creación de enemigos y posicionamiento
         //Se crean los enemigos
         int enemyCount = encounter.ListOfEncounterEnemies.Count;
         for (int i = 0; i < enemyCount; i++)
         {
+            Vector3 worldPos;
+            int coloumn1MaxEnemyCount = 3;
 
-            float t = (((float)enemyCount - 1) - i) / Mathf.Max(enemyCount - 1, 1);//t=1 cuando i = 0; t=0 cuando i = enemyCount-1
-            Debug.Log($"VALOR T: {t}");
-            float viewPortY = Mathf.Lerp(enemyFightersMinY, enemyFightersMaxY, t);
-            Vector3 viewPortPos = new Vector3(enemyFightersX, viewPortY, Camera.main.nearClipPlane);
+            if (i < coloumn1MaxEnemyCount)
+            {
+                float t = (float)i / coloumn1MaxEnemyCount;//((float)coloumn1MaxEnemyCount - i) / coloumn1MaxEnemyCount;//t=1 cuando i = 0; t=0 cuando i = enemyCount-1
+                Debug.Log($"VALOR T: {t}");
+                float viewPortY = Mathf.Lerp(enemyMinY_Coloumn1, enemyMaxY_Coloumn1, t);
+                Vector3 viewPortPos = new Vector3(enemyXColoumn1, viewPortY, Camera.main.nearClipPlane);
 
-            var worldPos = Camera.main.ViewportToWorldPoint(viewPortPos);
+                worldPos = Camera.main.ViewportToWorldPoint(viewPortPos);
+
+            }
+            else
+            {
+                int coloumn2Count = enemyCount - coloumn1MaxEnemyCount;
+                int k = i - coloumn1MaxEnemyCount;
+                float t = (float)k / coloumn2Count;//(((float)coloumn2Count - k) / coloumn2Count);
+
+
+
+                float viewPortY = Mathf.Lerp(enemyMinY_Coloumn2, enemyMaxY_Coloumn2, t);
+                Vector3 viewPortPos = new Vector3(enemyXColoumn2, viewPortY, Camera.main.nearClipPlane);
+
+                worldPos = Camera.main.ViewportToWorldPoint(viewPortPos);
+            }
 
             var enemyData = encounter.ListOfEncounterEnemies[i];
-
             CreateEnemy(enemyData, worldPos);
+
         }
+        #endregion
+
         HordeCurrentHP = HordeMaxHP;
         HordeIsFine = true;
         AliveEnemyFighters.AddRange(EnemyFighters);
@@ -507,9 +540,13 @@ public class CombatManager : MonoBehaviour
         {
             sceneChanger.ChangeScene("Victory");
         }
-        else
+        else if (ExperiencePanelManager.GetFightersThatWillGainExp().Count >= 1)
         {
             sceneChanger.ChangeScene("CombatVictoryScene");
+        }
+        else
+        {
+            sceneChanger.LoadExplorationScene();
         }
 
         

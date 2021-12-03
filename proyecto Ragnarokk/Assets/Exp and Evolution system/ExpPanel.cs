@@ -39,6 +39,7 @@ public class ExpPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         yield return StartCoroutine(manager.ApplyExp(extraXPAmmount, currFighter, manager.ExpAplySpeed));
 
         //se aplica la experiencia extra. se carga la escena de exploracion.
+        Debug.Log("Se termina de aplicar la XP");
         SceneChanger.Instance.LoadExplorationScene();
     }
 
@@ -106,5 +107,7 @@ public class ExpPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         this.extraXPAmmount = extraXPAmmount;
         this.currFighter = currFighter;
+
+        UpdatePanel();
     }
 }
