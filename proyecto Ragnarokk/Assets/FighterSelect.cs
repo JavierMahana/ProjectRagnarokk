@@ -8,10 +8,13 @@ using UnityEngine.UI;
 public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     //public Button selfBbutton;
+    public Animator animThis1;
+    public Animator animThis2;
 
     public Fighter Fighter;
-
+    
     public TextMeshProUGUI showText;
+    public TextMeshProUGUI synergyText;
 
     public int showTimer;
 
@@ -20,29 +23,36 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private Color healColor;
     private Color critColor;
 
+    private Color synergyColor;
+    private Color antiSynergyColor;
+
+
     //agregar despues una lista de imagenes (estados) dentro de un canvas (atributo) que se activa si hay efectos en Fighter
 
     void Start()
     {
-        float r, g, b;
+        float r = 0;
+        float g = 0;
+        float b = 0;
 
         r = 1f;
         g = 120 / 255f;
         b = 0;
-        healColor = new Color(r, g, b, 0.8f);
+        healColor = new Color(r, g, b, 1f);
 
         r = 0;
         g = 200 / 255f;
         b = 130 / 255f;
-        critColor = new Color(r, g, b, 1);
+        critColor = new Color(r, g, b, 1f);
 
+        antiSynergyColor = Color.red;
+        synergyColor = healColor;
 
         normalColor = showText.color;
-        healColor = Color.cyan;
-        critColor = Color.black;
 
         showTimer = 0;
         showText.text = defaultText;
+
 
     }
 
@@ -52,33 +62,86 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (Fighter == null) { Destroy(this); }
         else
         {
-            if (showTimer != 0) { showTimer--; }
-            if (showTimer == 0 && showText.text != defaultText) { showText.text = defaultText; showText.color = normalColor; }
+            if (showTimer != 0) 
+            {
+                showTimer--; 
+            }
+            if (showTimer == 0 && showText.text != defaultText) 
+            {
+                showText.text = defaultText; 
+                showText.color = normalColor;
+
+                synergyText.text = defaultText;
+                synergyText.color = synergyColor;
+
+                animThis1.SetTrigger("End");
+                animThis2.SetTrigger("End");
+            }
         }
         //if (!selfBbutton.interactable) { selfBbutton.gameObject.SetActive(false); }
     }
 
-    public void ShowDamage(int damage, bool isCrit)
+    
+    public void ShowDamage(int damage, bool isCrit, int syn)
     {
+        // syn 0 para cuando no hay sinergia alguna
+        // syn -1 para cuando hay antisinergia
+        // syn 1 para cuando hay sinergia
+
+        animThis1.SetTrigger("Start");
+        animThis2.SetTrigger("Start");
+
+
         string predamage = "HIT ";
+        string synergyText = "";
         showText.color = normalColor;
 
         if (isCrit) { showText.color = critColor; predamage = "CRIT HIT "; }
 
-        this.showText.text = (damage > 0) ? predamage + damage.ToString() : "MISS";
-        showTimer = 200;
-    }
+        switch(syn)
+        {
+            case 1: 
+                synergyText = "Synergy!";
+                Debug.Log("hubo sinergia");
+                this.synergyText.color = synergyColor;
+                break;
 
+            case -1: 
+                synergyText = "AntiSynergy";
+                Debug.Log("hubo antisinergias");
+                this.synergyText.color = antiSynergyColor;
+                break;
+
+            default: 
+                Debug.Log("no hubo sinergias");
+                break;
+
+        }
+
+        showText.text = (damage > 0) ? predamage + damage.ToString() : "MISS";
+        this.synergyText.text = synergyText;
+        showTimer = 400;
+
+    }
     public void ShowHeal(int heal)
     {
+        animThis1.SetTrigger("Start");
+        animThis2.SetTrigger("Start");
+
         showText.color = healColor;
         this.showText.text = heal.ToString();
-        showTimer = 200;
+        showTimer = 400;
+
     }
 
 
     public void OnClick()
     {
+        animThis1.ResetTrigger("Start");
+        animThis2.ResetTrigger("Start");
+
+      
+
         var combatManager = FindObjectOfType<CombatManager>();
 
         if (GameManager.Instance.ConfirmationClick)
@@ -162,6 +225,8 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
         else if(!cm.PlayerFighters.Contains(Fighter) && cm.AttackWeapon != null)
         {
+
+
             OnClick();
         }
         
