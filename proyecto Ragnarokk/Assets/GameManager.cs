@@ -122,6 +122,8 @@ public class GameManager : Singleton<GameManager>
 
     public List<Fighter> Enemies = new List<Fighter>();
     public List<FighterSelect> EnemyButtons = new List<FighterSelect>();
+
+    public GameObject PrefabFighterSelect;
     
     public List<Consumible> AllConsumibles = new List<Consumible>();
 
