@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,7 +8,8 @@ using UnityEngine.UI;
 
 public class WeaponSpecs : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Text weaponName;
+    public TextMeshProUGUI weaponName;
+    public TextMeshProUGUI synergyCount;
     //public Text weaponDamage;
     public Weapon thisWeapon;
 

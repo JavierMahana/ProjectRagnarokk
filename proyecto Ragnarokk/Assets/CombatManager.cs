@@ -11,7 +11,6 @@ public class CombatManager : MonoBehaviour
 {
     public GameObject Background;
     public GameObject CombatCanvas;
-    public GameObject OptionsCanvas;
     public GameObject EnemyCombatCanvas;
     public CombatDescriptor CombatDescriptor;
     public CombatIconManager IconManager;
@@ -116,6 +115,8 @@ public class CombatManager : MonoBehaviour
     private bool canFlee;
     private bool isFinalRoom;
 
+    public int round;
+
     //VARIABLES DE ACCIÓN DE UN TURNO
     /// <summary>
     /// Se utilizan para las condiciones de continuación de la corrutina TurnAction, y para el cálculo de daño en el método Fight.
@@ -168,39 +169,43 @@ public class CombatManager : MonoBehaviour
         button.transform.SetParent(PanelDMGtypes.transform, false);
         AllButtonsInDescriptorPanel.Add(button);
 
-        AddSynergyButton(damageType);
+        //AddSynergyButton(damageType);
 
     }
 
-    public void AddSynergyButton(CombatType damageType)
+    public void AddSynergyButton(CombatType damageType, Fighter f)
     {
         // se añaden los botones de sinergías
         int cantidad = 0;
 
-        foreach (Fighter f in AliveEnemyFighters)
+        foreach (CombatState targetState in f.States)
         {
-            foreach (CombatState targetState in f.States)
+            if (damageType.Sinergias.Contains(targetState))
             {
-                if (damageType.Sinergias.Contains(targetState))
-                {
-                    cantidad++;
-                }
-                else if (damageType.AntiSinergias.Contains(targetState))
-                {
-                    cantidad--;
-                }
+                cantidad++;
+            }
+            else if (damageType.AntiSinergias.Contains(targetState))
+            {
+                cantidad--;
             }
         }
-
-        for (int i = 0; i < cantidad; i++)
-        {
-            GameObject button = Instantiate(PrefabSynergyButton);
-
-            button.transform.SetParent(PanelSynergies.transform, false);
-            AllButtonsInDescriptorPanel.Add(button);
-        }
         
-       
+
+        int total = Mathf.Abs(cantidad);
+        Debug.Log($"Cantidad sinergias de Arma escogida contra el enemigo: {cantidad}");
+        if (total > 0)
+        {
+            for (int i = 0; i < total; i++)
+            {
+                GameObject button = Instantiate(PrefabSynergyButton);
+
+                if(cantidad < 0) { button.GetComponent<SynergyButton>().SynergyIcon.color = Color.black; }
+
+                button.transform.SetParent(PanelSynergies.transform, false);
+                AllButtonsInDescriptorPanel.Add(button);
+            }
+        }
+             
     }
 
     public void FillWithAttackWeapon()
@@ -447,9 +452,8 @@ public class CombatManager : MonoBehaviour
     }
     private void Start()
     {
-        GameManager.Instance.ShowPlayerFighters(true);
-        if (OptionsCanvas.activeSelf) { OptionsCanvas.SetActive(false); }
-        
+        round = 0;
+        GameManager.Instance.ShowPlayerFighters(true);      
 
         InitCombatScene(GameManager.Instance.currentEncounter);
         ResetWeaponCooldowns();
@@ -616,6 +620,7 @@ public class CombatManager : MonoBehaviour
 
     public void StartNewTurnCycle()
     {
+        round++;
         RemoveAllCombatStates();
         DiminishWeaponCooldowns();
     }
@@ -1291,6 +1296,12 @@ public class CombatManager : MonoBehaviour
 
                 for (int i = 0; i < 4; i++)
                 {
+                    float r;
+                    float g;
+                    float b;
+                    int cantidad = 0;
+                    Color buttonColor = Color.white;
+
                     var W = ActiveFighter.Weapons[i];
                     if (W != null)
                     {
@@ -1302,8 +1313,46 @@ public class CombatManager : MonoBehaviour
                         weaponButton.GetComponent<WeaponSpecs>().IndexOfFighterWeapon = i;
 
                         if (ActiveFighter.WeaponCooldowns[i] > 0) weaponButton.GetComponent<WeaponSpecs>().GetComponent<Button>().interactable = false;
-                        weaponButton.transform.SetParent(PanelForActions.transform, false);
 
+
+                        foreach (Fighter f in AliveEnemyFighters)
+                        {
+                            foreach (CombatState targetState in f.States)
+                            {
+                                if (W.TipoDeDañoQueAplica.Sinergias.Contains(targetState))
+                                {
+                                    cantidad++;
+                                }
+                                if(W.TipoDeDañoQueAplica.AntiSinergias.Contains(targetState))
+                                { 
+                                    cantidad--; 
+                                }
+                            }
+                        }
+
+                        if(cantidad > 0) 
+                        {
+                            r = 0;
+                            g = 200 / 255f;
+                            b = 130 / 255f;
+
+                            buttonColor = new Color(r, g, b, 1f);
+                        }
+                        else if (cantidad < 0)
+                        {
+                            r = 70f;
+                            g = 95f;
+                            b = 95f;
+
+                            buttonColor = new Color(r, g, b, 1f);
+                        }
+                        if (cantidad != 0)
+                        {
+                            Debug.Log($"cantidad de singergias del boton {i + 1} : {cantidad}");
+                            weaponButton.GetComponent<WeaponSpecs>().synergyCount.text = cantidad.ToString();
+                        }
+
+                        weaponButton.transform.SetParent(PanelForActions.transform, false);
                         AllButtonsInPanel.Add(weaponButton);
                     }
                 }

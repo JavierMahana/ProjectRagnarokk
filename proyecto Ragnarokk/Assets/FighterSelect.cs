@@ -203,6 +203,11 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 cm.AddDamageTypeButton(Fighter.Type);
                 descripcion = $" Name: {fighterName}\n Level: {Fighter.Level} \n Health: {Fighter.CurrentHP} / {Fighter.MaxHP}";
                 cm.SetlDescriptorText(descripcion);
+
+                if(cm.AttackWeapon != null)
+                {
+                    cm.AddSynergyButton(cm.AttackWeapon.TipoDeDañoQueAplica, Fighter);
+                }
             }
         }
     }
