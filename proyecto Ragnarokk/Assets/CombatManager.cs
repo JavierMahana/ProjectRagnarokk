@@ -520,7 +520,7 @@ public class CombatManager : MonoBehaviour
             pf.IsDefending = false;
         }
 
-        string victoryHopeChange = HopeManager.Instance.ChangeHope(2, "Cambio por victoria");
+        string victoryHopeChange = HopeManager.Instance.ChangeHope(3, "Cambio por victoria");
         string victoryDesc = "YOU WIN! ";
         victoryDesc += victoryHopeChange;
         CombatDescriptor.Clear();
@@ -889,7 +889,7 @@ public class CombatManager : MonoBehaviour
                 isCrit = true;
                 if (attackerIsAlly) 
                 { 
-                    string critHopeChange = HopeManager.Instance.ChangeHope(1, "Cambio por ataque crítico");
+                    string critHopeChange = HopeManager.Instance.ChangeHope(2, "Cambio por ataque crítico");
                     critDesc += " " + critHopeChange;
                 }
             }
@@ -943,7 +943,7 @@ public class CombatManager : MonoBehaviour
             if (PlayerFighters.Contains(Target)) { CombatDescriptor.AddTextLine(Target.RealName + " loses " + finalDamage + " HP"); }
             else { CombatDescriptor.AddTextLine(Target.Name + " loses " + finalDamage + " HP"); }
 
-            if (false    &&    attackerIsAlly && finalDamage == minDamage) 
+            if (attackerIsAlly && finalDamage == minDamage) 
             {
                 string minDamageHopeChange = HopeManager.Instance.ChangeHope(-2, "Cambio por daño mínimo");
                 CombatDescriptor.AddTextLine("How pathetic... " + minDamageHopeChange); //Mensaje para daño mínimo
@@ -978,7 +978,7 @@ public class CombatManager : MonoBehaviour
                 else
                 {
                     AliveEnemyFighters.Remove(Target);
-                    //defeatHopeChange = HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
+                    defeatHopeChange = HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
                 }
 
                 Target.transform.rotation = new Quaternion(0, 0, 90, 0);
@@ -1019,7 +1019,7 @@ public class CombatManager : MonoBehaviour
 
             if(attackerIsAlly) 
             {
-                string failHopeChange = HopeManager.Instance.ChangeHope(-1, "Cambio por ataque fallido");
+                string failHopeChange = HopeManager.Instance.ChangeHope(-2, "Cambio por ataque fallido");
                 failDesc += " " + failHopeChange;
             }
 
