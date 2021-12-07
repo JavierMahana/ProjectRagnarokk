@@ -101,6 +101,8 @@ public class CombatManager : MonoBehaviour
     bool FleeActionSelected = false;
     bool OnFlee = false;
 
+    int SynergyDeterminant;
+
     private bool isCrit;
     private bool canFlee;
     private bool isFinalRoom;
@@ -164,10 +166,9 @@ public class CombatManager : MonoBehaviour
     public void AddSynergyButton(CombatType damageType)
     {
         // se añaden los botones de sinergías
-
         int cantidad = 0;
 
-        foreach(Fighter f in AliveEnemyFighters)
+        foreach (Fighter f in AliveEnemyFighters)
         {
             foreach (CombatState targetState in f.States)
             {
@@ -182,13 +183,15 @@ public class CombatManager : MonoBehaviour
             }
         }
 
-        for(int i = 0; i < cantidad; i++)
+        for (int i = 0; i < cantidad; i++)
         {
             GameObject button = Instantiate(PrefabSynergyButton);
 
             button.transform.SetParent(PanelSynergies.transform, false);
             AllButtonsInDescriptorPanel.Add(button);
         }
+        
+       
     }
 
     public void FillWithAttackWeapon()
@@ -788,10 +791,12 @@ public class CombatManager : MonoBehaviour
         CombatDescriptor.Clear();
         if (PlayerFighters.Contains(ActiveFighter)) { CombatDescriptor.AddTextLine(ActiveFighter.RealName + " uses " + AttackWeapon.Name); }
         else { CombatDescriptor.AddTextLine(ActiveFighter.Name + " uses " + AttackWeapon.Name); }
-         //Muestra atacante y arma
+        //Muestra atacante y arma
+
 
         int damageToShow = -1;
         isCrit = false;
+        SynergyDeterminant = 0;
 
         bool targetIsAlly = IsPlayerFighter(Target);
         bool attackerIsAlly = IsPlayerFighter(ActiveFighter);
@@ -992,7 +997,7 @@ public class CombatManager : MonoBehaviour
         //Debug.Log("Precision: " + AttackWeapon.BaseAccuracy + " | damageToShow: " + damageToShow);
 
         // el botón imprime el daño infligido
-        targetButton.ShowDamage(damageToShow, isCrit);
+        targetButton.ShowDamage(damageToShow, isCrit, SynergyDeterminant);
     }
 
     public void ApplySynergy(out string synerDesc)
@@ -1032,16 +1037,16 @@ public class CombatManager : MonoBehaviour
         {
             sbyte hopeChangeMagnitude = 0;
 
-            if      (synergyCounter == 1)   { hopeChangeMagnitude = 3; }
-            else if (synergyCounter >= 2)   { hopeChangeMagnitude = 4; }
-            else if (synergyCounter == -1)  { hopeChangeMagnitude = -3; }
-            else if (synergyCounter <= -2)  { hopeChangeMagnitude = -4; }
+            if      (synergyCounter == 1)   { hopeChangeMagnitude = 3; SynergyDeterminant = 1; }
+            else if (synergyCounter >= 2)   { hopeChangeMagnitude = 4; SynergyDeterminant = 1; }
+            else if (synergyCounter == -1)  { hopeChangeMagnitude = -3; SynergyDeterminant = -1; }
+            else if (synergyCounter <= -2)  { hopeChangeMagnitude = -4; SynergyDeterminant = -1; }
 
             //Cambia esperanza, y prepara un mensaje sobre la sinergia generada
             if (hopeChangeMagnitude != 0)
             {
                 if(hopeChangeMagnitude > 0) { synerDesc = "Synergy generated! "; }
-                else { synerDesc = "Anti-synergy generated... "; }
+                else { synerDesc = "Anti-synergy generated... ";  }
                 string hopeChange = HopeManager.Instance.ChangeHope(hopeChangeMagnitude, "Cambio por sinergia");
                 synerDesc += hopeChange;
             }
