@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
-  m_Name: Felsen
+  m_Name: lvl2_Trabajador
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
   Level: 0
@@ -18,26 +18,40 @@ MonoBehaviour:
   Evolutions:
   - {fileID: 0}
   - {fileID: 0}
-  Name: Felsen
+  Name: Worker
   RealName: nameless
-  Description: These strong species live in giant colonies built inside asteroids.
-    They travel the galaxy in search of knowledge, new worlds and forms of life,
-    t amongst the starts.
-  Speed: 5
-  Atack: 8
-  Defense: 10
-  Luck: 0
-  MaxHP: 140
+  Description: Description
+  Speed: 8
+  Atack: 11
+  Defense: 13
+  Luck: 5
+  MaxHP: 180
   PowerRating: 1
   DefaultWeapons:
-  - {fileID: 11400000, guid: 5b4c9a7c35839084d9f8bebce16b9703, type: 2}
-  - {fileID: 11400000, guid: 45b1481f7e2c9094ab473ce9b7e53673, type: 2}
   - {fileID: 0}
   - {fileID: 0}
-  Sprite: {fileID: 0}
-  SpriteFemale: {fileID: 7406501890428492521, guid: dbab33379d04c9d4482c6db10c6e326d, type: 3}
-  SpriteMale: {fileID: -8684406738462456065, guid: c0ec7a0688a911e40b52425573447df4, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  Sprite: {fileID: -8684406738462456065, guid: c0ec7a0688a911e40b52425573447df4, type: 3}
+  SpriteFemale: {fileID: 0}
+  SpriteMale: {fileID: 0}
   reversedSprite: 0
   size: {x: 1, y: 1}
   healthBarOffset: {x: 1, y: 1.6}
   Type: {fileID: 11400000, guid: 7a85a4f3edc5b8d48a6c9671218529d7, type: 2}
+  WaterDamageBonus: 0
+  EarthDamageBonus: 1
+  FireDamageBonus: 0
+  AirDamageBonus: 0
+  PhysicalDamageBonus: 0
+  PsychicDamageBonus: 0
+  ElectricDamageBonus: 0
+  AlcoholDamageBonus: 0
+  WaterResistanceBonus: -1
+  EarthResistanceBonus: 0
+  FireResistanceBonus: 0
+  AirResistanceBonus: 0
+  PhysicalResistanceBonus: 0
+  PsychicResistanceBonus: 0
+  ElectricResistanceBonus: 0
+  AlcoholResistanceBonus: 0

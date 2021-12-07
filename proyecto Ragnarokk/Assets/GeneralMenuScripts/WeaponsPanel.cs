@@ -66,9 +66,9 @@ public class WeaponsPanel : MonoBehaviour
     public void FillWeaponsPanel()
     {
         EmptyArray();
-        name1.text = GameManager.Instance.PlayerFighters[0].GetComponent<Fighter>().Name;
-        name2.text = GameManager.Instance.PlayerFighters[1].GetComponent<Fighter>().Name;
-        name3.text = GameManager.Instance.PlayerFighters[2].GetComponent<Fighter>().Name;
+        name1.text = GameManager.Instance.PlayerFighters[0].GetComponent<Fighter>().RealName;
+        name2.text = GameManager.Instance.PlayerFighters[1].GetComponent<Fighter>().RealName;
+        name3.text = GameManager.Instance.PlayerFighters[2].GetComponent<Fighter>().RealName;
 
         for (int i = 0; i < 4; i++)
         {

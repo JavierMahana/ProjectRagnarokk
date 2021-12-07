@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ExplorationState : MonoBehaviour
 {
+    public GameObject Canvas;
     // Start is called before the first frame update
     void Start()
     {

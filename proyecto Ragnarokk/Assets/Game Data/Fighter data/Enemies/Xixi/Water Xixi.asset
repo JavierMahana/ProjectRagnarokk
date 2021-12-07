@@ -13,18 +13,19 @@ MonoBehaviour:
   m_Name: Water Xixi
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
+  Level: 0
   IsMaxLevel: 0
   Evolutions:
   - {fileID: 0}
   - {fileID: 0}
-  Name: sample4
+  Name: Water Xixi
   RealName: nameless
   Description: Description
-  Speed: 13
-  Atack: 15
-  Defense: 7
+  Speed: 10
+  Atack: 14
+  Defense: 8
   Luck: 0
-  MaxHP: 30
+  MaxHP: 85
   PowerRating: 2
   DefaultWeapons:
   - {fileID: 11400000, guid: 1fc74fae12e24aa4ba6a7efbf6debddb, type: 2}
@@ -32,7 +33,25 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 1695138769994977630, guid: 638e828c4233f364eb4f7384b4ca6661, type: 3}
+  SpriteFemale: {fileID: 0}
+  SpriteMale: {fileID: 0}
   reversedSprite: 1
   size: {x: 1.5, y: 1.5}
-  healthBarOffset: {x: 1, y: 1.6}
+  healthBarOffset: {x: 1, y: 1}
   Type: {fileID: 11400000, guid: 99ddf6cb18f34644c857955877bf77d1, type: 2}
+  WaterDamageBonus: 0
+  EarthDamageBonus: 0
+  FireDamageBonus: 0
+  AirDamageBonus: 0
+  PhysicalDamageBonus: 0
+  PsychicDamageBonus: 0
+  ElectricDamageBonus: 0
+  AlcoholDamageBonus: 0
+  WaterResistanceBonus: 0
+  EarthResistanceBonus: 0
+  FireResistanceBonus: 0
+  AirResistanceBonus: 0
+  PhysicalResistanceBonus: 0
+  PsychicResistanceBonus: 0
+  ElectricResistanceBonus: 0
+  AlcoholResistanceBonus: 0

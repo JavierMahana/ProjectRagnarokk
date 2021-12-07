@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Electro Cyborg Pirate
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
+  Level: 0
   IsMaxLevel: 0
   Evolutions:
   - {fileID: 0}
@@ -20,11 +21,11 @@ MonoBehaviour:
   Name: Cyborg Pirate
   RealName: nameless
   Description: Ta borracho
-  Speed: 1
-  Atack: 14
-  Defense: 4
+  Speed: 4
+  Atack: 16
+  Defense: 10
   Luck: 0
-  MaxHP: 60
+  MaxHP: 80
   PowerRating: 2
   DefaultWeapons:
   - {fileID: 11400000, guid: fcbc0e7a06838cf44b84ec4788938592, type: 2}
@@ -32,6 +33,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 4306723555328557234, guid: 7e42d01de81c65b4ab1fe456c9d84259, type: 3}
+  SpriteFemale: {fileID: 0}
+  SpriteMale: {fileID: 0}
   reversedSprite: 0
   size: {x: 1, y: 1}
   healthBarOffset: {x: 1, y: 1.5}

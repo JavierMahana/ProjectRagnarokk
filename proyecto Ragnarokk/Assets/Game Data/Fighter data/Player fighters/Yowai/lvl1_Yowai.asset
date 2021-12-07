@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
-  m_Name: Yowai
+  m_Name: lvl1_Yowai
   m_EditorClassIdentifier: 
-  ExpNeededToLevelUp: 100
+  ExpNeededToLevelUp: 10
   Level: 0
-  IsMaxLevel: 1
+  IsMaxLevel: 0
   Evolutions:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: f98247e2efba2a844a4c97e5eb97ac6d, type: 2}
+  - {fileID: 11400000, guid: 1abcfffda615e584390cfb79193406e2, type: 2}
   Name: Yowai
   RealName: nameless
   Description: While short in stature, the Yowai have great intellect and psychic
@@ -27,12 +27,12 @@ MonoBehaviour:
   Speed: 12
   Atack: 10
   Defense: 4
-  Luck: 0
+  Luck: 5
   MaxHP: 80
   PowerRating: 1
   DefaultWeapons:
-  - {fileID: 11400000, guid: 5b4c9a7c35839084d9f8bebce16b9703, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: f92fc6a6fdca1e541accdf3a8b79d601, type: 2}
+  - {fileID: 11400000, guid: 21d997da98d0bd7439bf026a12a9eac5, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 0}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Storm-Dragon
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
+  Level: 0
   IsMaxLevel: 0
   Evolutions:
   - {fileID: 0}
@@ -20,11 +21,11 @@ MonoBehaviour:
   Name: Storm-Dragon
   RealName: nameless
   Description: Dragon lagarto
-  Speed: 20
-  Atack: 13
-  Defense: 1
+  Speed: 9
+  Atack: 18
+  Defense: 10
   Luck: 0
-  MaxHP: 40
+  MaxHP: 110
   PowerRating: 2
   DefaultWeapons:
   - {fileID: 11400000, guid: 8aee3a96a51eac54eb8f9dd0c593809d, type: 2}
@@ -32,6 +33,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 1052507097846874316, guid: be03bd2529596cb4891b1b0972d28ce9, type: 3}
+  SpriteFemale: {fileID: 0}
+  SpriteMale: {fileID: 0}
   reversedSprite: 0
   size: {x: 1.2, y: 1.2}
   healthBarOffset: {x: 1, y: 1.2}
