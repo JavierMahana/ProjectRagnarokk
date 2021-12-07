@@ -21,8 +21,7 @@ public class Consumible : Item
     {
         var combatDescriptor = FindObjectOfType<CombatDescriptor>();
         var combatManager = FindObjectOfType<CombatManager>();
-
-
+ 
         string userName = "";
         string fighterInTurnName = "";
         Fighter fighterInTurn = null;
@@ -65,6 +64,8 @@ public class Consumible : Item
 
                     if(combatManager != null)
                     {
+                        user.GetComponent<FighterSelect>().ShowHeal(recoveryValue); 
+                        
                         combatDescriptor.Clear();
 
                         string useLine = "";
@@ -94,6 +95,8 @@ public class Consumible : Item
 
                     if (combatManager != null)
                     {
+                        user.GetComponent<FighterSelect>().ShowHeal(user.MaxHP);
+
                         combatManager.LiftPlayerFighter(user);
 
                         combatDescriptor.Clear();

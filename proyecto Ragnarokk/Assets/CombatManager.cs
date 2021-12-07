@@ -110,7 +110,7 @@ public class CombatManager : MonoBehaviour
     bool FleeActionSelected = false;
     bool OnFlee = false;
 
-
+    private bool isCrit;
     private bool canFlee;
     private bool isFinalRoom;
 
@@ -421,7 +421,7 @@ public class CombatManager : MonoBehaviour
     {
         foreach (FighterSelect button in GameManager.Instance.EnemyButtons)
         {
-            button.selfBbutton.interactable = show;
+            //button.selfBbutton.interactable = show;
         }
     }
 
@@ -814,7 +814,8 @@ public class CombatManager : MonoBehaviour
     {
         ShowActionCanvas(false);
         //Debug.Log("Desactiva Canvas!!!!!");
-        if (targetButton == null || targetButton.Fighter == null || targetButton.selfBbutton == null) { Debug.Log("No se encuentra el botón del objetivo"); }
+        if (targetButton == null || targetButton.Fighter == null)// || targetButton.selfBbutton == null) 
+        { Debug.Log("No se encuentra el botón del objetivo"); }
         // se especifica el target con la fucion EnemySelected
 
         Target = targetButton.Fighter;
@@ -827,6 +828,7 @@ public class CombatManager : MonoBehaviour
          //Muestra atacante y arma
 
         int damageToShow = -1;
+        isCrit = false;
 
         bool targetIsAlly = IsPlayerFighter(Target);
         bool attackerIsAlly = IsPlayerFighter(ActiveFighter);
@@ -884,12 +886,14 @@ public class CombatManager : MonoBehaviour
                 criticalAttack = true;
                 criticalFact = 1;
                 critDesc = "CRITICAL HIT!!!";
+                isCrit = true;
                 if (attackerIsAlly) 
                 { 
                     string critHopeChange = HopeManager.Instance.ChangeHope(2, "Cambio por ataque crítico");
                     critDesc += " " + critHopeChange;
                 }
             }
+            else { isCrit = false; }
 
             //PASO 6: CÁLCULO DE DAÑO
             const int minDamage = 1;
@@ -1025,7 +1029,7 @@ public class CombatManager : MonoBehaviour
         //Debug.Log("Precision: " + AttackWeapon.BaseAccuracy + " | damageToShow: " + damageToShow);
 
         // el botón imprime el daño infligido
-        targetButton.ShowDamage(damageToShow);
+        targetButton.ShowDamage(damageToShow, isCrit);
     }
 
     public void ApplySynergy(out string synerDesc)
