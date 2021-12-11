@@ -9,8 +9,10 @@ public class HopeManager : Singleton<HopeManager>
     public bool Initialized;
 
     public GameObject CanvasHope;
-    public GameObject HopeBar;
+    public GameObject HopeBarPrefab;
     public Image HopeBarFill;
+
+    private GameObject HopeBarGO;
 
     [Range(0, 100)]
     public float PartyHope; //La esperanza del grupo
@@ -159,12 +161,10 @@ public class HopeManager : Singleton<HopeManager>
     {
         PartyHope = 50;
 
-        var hopeBar = Instantiate(HopeBar, CanvasHope.transform);
+        HopeBarGO = Instantiate(HopeBarPrefab, CanvasHope.transform);
 
-        RectTransform rectTransform = hopeBar.GetComponent<RectTransform>();
-        //hopeBar.transform.SetParent(CanvasHope.transform);
-
-        var images = GetComponentsInChildren<Image>();
+        Image[] images = GetComponentsInChildren<Image>(true);
+        Debug.Log($"Imagenes en Hope Manager: {images.Length}");
         foreach(Image image in images)
         {
             if(image.type == Image.Type.Filled)
@@ -183,6 +183,7 @@ public class HopeManager : Singleton<HopeManager>
     {
         PartyHope = 0;
         CurrentHopePhase = 0;
+        Destroy(HopeBarGO);
         Initialized = false;
     }
 

@@ -12,8 +12,19 @@ public class LorePanel : MonoBehaviour
     public TextMeshProUGUI textComp;
     public Image imageComp;
 
+    private void Awake()
+    {
+        textComp = GetComponentInChildren<TextMeshProUGUI>();
+        Debug.Log(textComp != null);
+    }
+
     public void UpdateContent(Sprite sprite, string text)
     {
+        if(textComp == null)
+        {
+            textComp = GetComponentInChildren<TextMeshProUGUI>();
+        }
+
         if (textComp != null)
         {
             textComp.text = text;

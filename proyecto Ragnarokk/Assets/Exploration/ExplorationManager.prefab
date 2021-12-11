@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 408829274314781472}
   - component: {fileID: 7334008280690161}
+  - component: {fileID: 6122508494458024882}
   m_Layer: 0
   m_Name: ExplorationManager
   m_TagString: Untagged
@@ -44,5 +45,116 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _persistent: 1
-  testFloor: {fileID: 11400000, guid: 92d37ea7ae8099d46bca92e38d46ada2, type: 2}
+  testFloor: {fileID: 0}
   RoomPrefab: {fileID: 3615692151566787109, guid: 8dde0d389839f1d488d37d22efb69740, type: 3}
+--- !u!114 &6122508494458024882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9159574348551333473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a445dc8e9d7044a814e50d089767d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Lore:
+  - 'You find some human writings:
+
+    Day 59 of the Tesla project.
+
+    After almost
+    2 months of tireless work, the project is almost finished.
+
+    It has been hell
+    to extract the gold from the specimens in its purest form.
+
+    About 40 have
+    died in the attempt. It is a real shame that when they die, more than 80% of
+    their bodies turn to dust.
+
+    However, we did get enough gold to test the Tesla''s
+    Machine.
+
+    It is the most advanced electricity technology ever. This will
+    make it much easier to subdue the reptilians.'
+  - 'Ard gives you a vision:
+
+    You can see the rocky, dry land of Grandd. The
+    horizon is disfigured by the heat.
+
+    A group of Warrior Felsen returns from
+    hunting some Bombo Bombo.
+
+    They meet up with other group of Worker Felsen
+    and throw the hunt in the middle.
+
+    The Laborer Felsen are dedicating to extracting
+    the diamonds from the Bombo Bombo, as that is the tastiest part.
+
+    The atmosphere
+    is suddenly upset. A Bombo Bombo is still alive, and he''s made a beast.
+
+    The
+    Laborers try to contain it. They are good at resisting its stampedes.
+
+    Once
+    cornered, a Warrior raises his Golden Hammer.
+
+    It crushes it with such force
+    that the diamonds fly through the air.
+
+    Now they can start the feast.'
+  - 'Notes from a Gaun''s Acolyte:
+
+    A group of humans assaulted us recently with
+    weapons of that poisonous substance.
+
+    We were about to retreat, but a young
+    took a Small Burner and pointed it at a human.
+
+    "Fool!" I yelled at him.
+    "That''s sacred! Gaun will punish you!"
+
+    But the Small Burner was already
+    incinerating that human, leaving him the color of the earth.
+
+    We rethought
+    our strategy, and decided to use Gaun''s weapons to save ourselves.
+
+    Once
+    again, Gaun has blessed us with his power.
+
+    We took some weapons from the
+    humans.
+
+    Alcohol. That''s the name of the poisonous substance these guys
+    are made of.
+
+    Although it seems that it is not so poisonous after all.'
+  - 'Remnants of psyche enter the minds of the group:
+
+    Reddel was wounded by
+    a group of Gorbs.
+
+    The wound is serious, but I can feel that he does not
+    intend to die.
+
+    We have been cleaning The Unit of these aquatic creatures
+    for decades.
+
+    It amazes me how we stand firm knowing that any day we may
+    fall in battle.
+
+    I think that we can maintain Hope because we synergize with
+    each other.
+
+    Our psychic weapons breach the target''s mind, making it easier
+    to continue damaging them.
+
+    A Sleepy or Agitated mind is easy prey for psychics.
+
+    Although
+    sometimes we make mistakes and attack a Sleepy enemy with Water. That discourages
+    us.'

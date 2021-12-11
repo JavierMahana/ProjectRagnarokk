@@ -126,19 +126,19 @@ public class ExplorationManager : Singleton<ExplorationManager>
 
     }
 
-    
+    public LoreManager LoreManager;
 
-    //private void Awake()
-    //{
-    //    base.OnAwake();
-    //}
+    protected override void OnAwake()
+    {
+        LoreManager = gameObject.GetComponentInChildren<LoreManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-
         //InitFloor(testFloor);
 
+        LoreManager.Init();
     }
 
     // Update is called once per frame
