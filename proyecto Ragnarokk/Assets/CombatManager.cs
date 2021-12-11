@@ -47,12 +47,21 @@ public class CombatManager : MonoBehaviour
 
 
     [Range(0.0f, 1.0f)]
-    public float enemyFightersX;
+    public float enemyXColoumn1;
 
     [Range(0.0f, 1.0f)]
-    public float enemyFightersMinY;
+    public float enemyMinY_Coloumn1;
     [Range(0.0f, 1.0f)]
-    public float enemyFightersMaxY;
+    public float enemyMaxY_Coloumn1;
+
+
+    [Range(0.0f, 1.0f)]
+    public float enemyXColoumn2;
+
+    [Range(0.0f, 1.0f)]
+    public float enemyMinY_Coloumn2;
+    [Range(0.0f, 1.0f)]
+    public float enemyMaxY_Coloumn2;
 
 
     [HideInInspector]
@@ -101,7 +110,9 @@ public class CombatManager : MonoBehaviour
     bool FleeActionSelected = false;
     bool OnFlee = false;
 
+    int SynergyDeterminant;
 
+    private bool isCrit;
     private bool canFlee;
     private bool isFinalRoom;
 
@@ -164,10 +175,9 @@ public class CombatManager : MonoBehaviour
     public void AddSynergyButton(CombatType damageType)
     {
         // se añaden los botones de sinergías
-
         int cantidad = 0;
 
-        foreach(Fighter f in AliveEnemyFighters)
+        foreach (Fighter f in AliveEnemyFighters)
         {
             foreach (CombatState targetState in f.States)
             {
@@ -182,13 +192,15 @@ public class CombatManager : MonoBehaviour
             }
         }
 
-        for(int i = 0; i < cantidad; i++)
+        for (int i = 0; i < cantidad; i++)
         {
             GameObject button = Instantiate(PrefabSynergyButton);
 
             button.transform.SetParent(PanelSynergies.transform, false);
             AllButtonsInDescriptorPanel.Add(button);
         }
+        
+       
     }
 
     public void FillWithAttackWeapon()
@@ -288,22 +300,46 @@ public class CombatManager : MonoBehaviour
             if(pf.CurrentHP > 0) { AlivePlayerFighters.Add(pf); }
         }
 
+
+
+        #region Creación de enemigos y posicionamiento
         //Se crean los enemigos
         int enemyCount = encounter.ListOfEncounterEnemies.Count;
         for (int i = 0; i < enemyCount; i++)
         {
+            Vector3 worldPos;
+            int coloumn1MaxEnemyCount = 3;
 
-            float t = (((float)enemyCount - 1) - i) / Mathf.Max(enemyCount - 1, 1);//t=1 cuando i = 0; t=0 cuando i = enemyCount-1
-            Debug.Log($"VALOR T: {t}");
-            float viewPortY = Mathf.Lerp(enemyFightersMinY, enemyFightersMaxY, t);
-            Vector3 viewPortPos = new Vector3(enemyFightersX, viewPortY, Camera.main.nearClipPlane);
+            if (i < coloumn1MaxEnemyCount)
+            {
+                float t = (float)i / coloumn1MaxEnemyCount;//((float)coloumn1MaxEnemyCount - i) / coloumn1MaxEnemyCount;//t=1 cuando i = 0; t=0 cuando i = enemyCount-1
+                Debug.Log($"VALOR T: {t}");
+                float viewPortY = Mathf.Lerp(enemyMinY_Coloumn1, enemyMaxY_Coloumn1, t);
+                Vector3 viewPortPos = new Vector3(enemyXColoumn1, viewPortY, Camera.main.nearClipPlane);
 
-            var worldPos = Camera.main.ViewportToWorldPoint(viewPortPos);
+                worldPos = Camera.main.ViewportToWorldPoint(viewPortPos);
+
+            }
+            else
+            {
+                int coloumn2Count = enemyCount - coloumn1MaxEnemyCount;
+                int k = i - coloumn1MaxEnemyCount;
+                float t = (float)k / coloumn2Count;//(((float)coloumn2Count - k) / coloumn2Count);
+
+
+
+                float viewPortY = Mathf.Lerp(enemyMinY_Coloumn2, enemyMaxY_Coloumn2, t);
+                Vector3 viewPortPos = new Vector3(enemyXColoumn2, viewPortY, Camera.main.nearClipPlane);
+
+                worldPos = Camera.main.ViewportToWorldPoint(viewPortPos);
+            }
 
             var enemyData = encounter.ListOfEncounterEnemies[i];
-
             CreateEnemy(enemyData, worldPos);
+
         }
+        #endregion
+
         HordeCurrentHP = HordeMaxHP;
         HordeIsFine = true;
         AliveEnemyFighters.AddRange(EnemyFighters);
@@ -388,7 +424,7 @@ public class CombatManager : MonoBehaviour
     {
         foreach (FighterSelect button in GameManager.Instance.EnemyButtons)
         {
-            button.selfBbutton.interactable = show;
+            //button.selfBbutton.interactable = show;
         }
     }
 
@@ -487,7 +523,7 @@ public class CombatManager : MonoBehaviour
             pf.IsDefending = false;
         }
 
-        string victoryHopeChange = HopeManager.Instance.ChangeHope(2, "Cambio por victoria");
+        string victoryHopeChange = HopeManager.Instance.ChangeHope(3, "Cambio por victoria");
         string victoryDesc = "YOU WIN! ";
         victoryDesc += victoryHopeChange;
         CombatDescriptor.Clear();
@@ -507,9 +543,13 @@ public class CombatManager : MonoBehaviour
         {
             sceneChanger.ChangeScene("Victory");
         }
-        else
+        else if (ExperiencePanelManager.GetFightersThatWillGainExp().Count >= 1)
         {
             sceneChanger.ChangeScene("CombatVictoryScene");
+        }
+        else
+        {
+            sceneChanger.LoadExplorationScene();
         }
 
         
@@ -777,7 +817,8 @@ public class CombatManager : MonoBehaviour
     {
         ShowActionCanvas(false);
         //Debug.Log("Desactiva Canvas!!!!!");
-        if (targetButton == null || targetButton.Fighter == null || targetButton.selfBbutton == null) { Debug.Log("No se encuentra el botón del objetivo"); }
+        if (targetButton == null || targetButton.Fighter == null)// || targetButton.selfBbutton == null) 
+        { Debug.Log("No se encuentra el botón del objetivo"); }
         // se especifica el target con la fucion EnemySelected
 
         Target = targetButton.Fighter;
@@ -787,9 +828,12 @@ public class CombatManager : MonoBehaviour
         CombatDescriptor.Clear();
         if (PlayerFighters.Contains(ActiveFighter)) { CombatDescriptor.AddTextLine(ActiveFighter.RealName + " uses " + AttackWeapon.Name); }
         else { CombatDescriptor.AddTextLine(ActiveFighter.Name + " uses " + AttackWeapon.Name); }
-         //Muestra atacante y arma
+        //Muestra atacante y arma
+
 
         int damageToShow = -1;
+        isCrit = false;
+        SynergyDeterminant = 0;
 
         bool targetIsAlly = IsPlayerFighter(Target);
         bool attackerIsAlly = IsPlayerFighter(ActiveFighter);
@@ -847,12 +891,14 @@ public class CombatManager : MonoBehaviour
                 criticalAttack = true;
                 criticalFact = 1;
                 critDesc = "CRITICAL HIT!!!";
+                isCrit = true;
                 if (attackerIsAlly) 
                 { 
-                    string critHopeChange = HopeManager.Instance.ChangeHope(1, "Cambio por ataque crítico");
+                    string critHopeChange = HopeManager.Instance.ChangeHope(2, "Cambio por ataque crítico");
                     critDesc += " " + critHopeChange;
                 }
             }
+            else { isCrit = false; }
 
             //PASO 6: CÁLCULO DE DAÑO
             const int minDamage = 1;
@@ -902,7 +948,7 @@ public class CombatManager : MonoBehaviour
             if (PlayerFighters.Contains(Target)) { CombatDescriptor.AddTextLine(Target.RealName + " loses " + finalDamage + " HP"); }
             else { CombatDescriptor.AddTextLine(Target.Name + " loses " + finalDamage + " HP"); }
 
-            if (false    &&    attackerIsAlly && finalDamage == minDamage) 
+            if (attackerIsAlly && finalDamage == minDamage) 
             {
                 string minDamageHopeChange = HopeManager.Instance.ChangeHope(-2, "Cambio por daño mínimo");
                 CombatDescriptor.AddTextLine("How pathetic... " + minDamageHopeChange); //Mensaje para daño mínimo
@@ -937,7 +983,7 @@ public class CombatManager : MonoBehaviour
                 else
                 {
                     AliveEnemyFighters.Remove(Target);
-                    //defeatHopeChange = HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
+                    defeatHopeChange = HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
                 }
 
                 Target.transform.rotation = new Quaternion(0, 0, 90, 0);
@@ -978,7 +1024,7 @@ public class CombatManager : MonoBehaviour
 
             if(attackerIsAlly) 
             {
-                string failHopeChange = HopeManager.Instance.ChangeHope(-1, "Cambio por ataque fallido");
+                string failHopeChange = HopeManager.Instance.ChangeHope(-2, "Cambio por ataque fallido");
                 failDesc += " " + failHopeChange;
             }
 
@@ -988,7 +1034,7 @@ public class CombatManager : MonoBehaviour
         //Debug.Log("Precision: " + AttackWeapon.BaseAccuracy + " | damageToShow: " + damageToShow);
 
         // el botón imprime el daño infligido
-        targetButton.ShowDamage(damageToShow);
+        targetButton.ShowDamage(damageToShow, isCrit, SynergyDeterminant);
     }
 
     public void ApplySynergy(out string synerDesc)
@@ -1028,16 +1074,16 @@ public class CombatManager : MonoBehaviour
         {
             sbyte hopeChangeMagnitude = 0;
 
-            if      (synergyCounter == 1)   { hopeChangeMagnitude = 3; }
-            else if (synergyCounter >= 2)   { hopeChangeMagnitude = 4; }
-            else if (synergyCounter == -1)  { hopeChangeMagnitude = -3; }
-            else if (synergyCounter <= -2)  { hopeChangeMagnitude = -4; }
+            if      (synergyCounter == 1)   { hopeChangeMagnitude = 3; SynergyDeterminant = 1; }
+            else if (synergyCounter >= 2)   { hopeChangeMagnitude = 4; SynergyDeterminant = 1; }
+            else if (synergyCounter == -1)  { hopeChangeMagnitude = -3; SynergyDeterminant = -1; }
+            else if (synergyCounter <= -2)  { hopeChangeMagnitude = -4; SynergyDeterminant = -1; }
 
             //Cambia esperanza, y prepara un mensaje sobre la sinergia generada
             if (hopeChangeMagnitude != 0)
             {
                 if(hopeChangeMagnitude > 0) { synerDesc = "Synergy generated! "; }
-                else { synerDesc = "Anti-synergy generated... "; }
+                else { synerDesc = "Anti-synergy generated... ";  }
                 string hopeChange = HopeManager.Instance.ChangeHope(hopeChangeMagnitude, "Cambio por sinergia");
                 synerDesc += hopeChange;
             }

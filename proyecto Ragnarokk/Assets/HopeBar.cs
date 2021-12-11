@@ -13,16 +13,21 @@ public class HopeBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public TextMeshProUGUI HopeMultiplier;
     public Image faceEmoji;
     public Sprite[] faces;
-    public Vector3 imagePos;
+    private Vector3 imagePos;
+    private Vector3 anchor;
+    private bool OnChange;
 
 
     void Start()
     {
         if (HopePanel.activeSelf) { HopePanel.SetActive(false); }        
-        //faceEmoji.preserveAspect = true;
-        imagePos = faceEmoji.transform.position;
-    }
+        faceEmoji.preserveAspect = true;
 
+        RectTransform myRectTransform = faceEmoji.GetComponent<RectTransform>();
+        imagePos = myRectTransform.localPosition;
+        anchor = myRectTransform.anchoredPosition;
+        OnChange = false;
+    }
 
     void Update()
     {
@@ -45,7 +50,18 @@ public class HopeBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if(GM.GameState == GAME_STATE.MENU)
         {
             HopePanel.transform.SetParent(EM.Canvas.transform, true);
-            faceEmoji.transform.position = imagePos + new Vector3(0, 70, 0);
+            if(!OnChange)
+            {
+                
+                OnChange = true;
+                RectTransform myRectTransform = faceEmoji.GetComponent<RectTransform>();
+
+                imagePos = myRectTransform.localPosition;
+                myRectTransform.localPosition += new Vector3(0, 15, 0);
+                
+                //faceEmoji.transform.position = imagePos + new Vector3(0, 35, 0);
+            }
+            
         }
         else
         {
@@ -53,8 +69,15 @@ public class HopeBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
 
         if (GM.GameState == GAME_STATE.COMBAT || GM.GameState == GAME_STATE.EXPLORATION) 
-        { 
-            faceEmoji.transform.position = imagePos;
+        {
+            if (OnChange) 
+            {
+                RectTransform myRectTransform = faceEmoji.GetComponent<RectTransform>();
+                myRectTransform.localPosition = imagePos;
+                //anchor = myRectTransform.anchoredPosition;
+
+                OnChange = false;
+            }
         }
         
     }

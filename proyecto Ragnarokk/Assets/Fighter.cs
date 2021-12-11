@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 public class Fighter : MonoBehaviour
 {
     private SpriteRenderer spRenderer;
+
     private void Awake()
     {
         spRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -88,6 +89,13 @@ public class Fighter : MonoBehaviour
             Debug.Log($"{type.Name}: {TypeResistanceBonuses[type]}");
         }
         */
+
+        GameObject fPanel = Instantiate(GameManager.Instance.PrefabFighterSelect, this.transform);
+        fPanel.GetComponent<FighterSelect>().Fighter = this;
+        gameObject.AddComponent<FighterSelect>();
+        var fs = gameObject.GetComponent<FighterSelect>();
+        fs.Fighter = this;
+        fs.showText = fPanel.GetComponent<FighterSelect>().showText;
     }
 
     private Dictionary<CombatType, int> GetNewTypeDamageBonuses(FighterData data)

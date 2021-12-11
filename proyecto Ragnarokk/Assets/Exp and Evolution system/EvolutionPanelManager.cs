@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class EvolutionPanelManager : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public bool showingEvolution = false;
 
     public GameObject Root;
@@ -25,8 +25,13 @@ public class EvolutionPanelManager : MonoBehaviour
     }
     public void Hide()
     {
+
         showingEvolution = false;
         Root.SetActive(false);
+        if (FindObjectOfType<ExperiencePanelManager>().showingExtraEX)
+        {
+            SceneChanger.Instance.LoadExplorationScene();
+        }
     }
 
 }
