@@ -75,7 +75,6 @@ public class Fighter : MonoBehaviour
 
         Level++;
 
-        /*
         Debug.Log($"Bonus ataque {Name}:");
         foreach(CombatType type in GameManager.Instance.AllCombatTypes)
         {
@@ -87,7 +86,6 @@ public class Fighter : MonoBehaviour
         {
             Debug.Log($"{type.Name}: {TypeResistanceBonuses[type]}");
         }
-        */
     }
 
     private Dictionary<CombatType, int> GetNewTypeDamageBonuses(FighterData data)
