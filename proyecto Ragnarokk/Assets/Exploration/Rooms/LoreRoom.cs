@@ -18,7 +18,4 @@ public class LoreRoom : RoomData
         room.MarkAsCurrent();
         room.MarkAsCleared();
     }
-
-    List<string> lore = new List<string>();
-
 }
