@@ -2505,7 +2505,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.083000004, y: 0.90300006}
   m_AnchorMax: {x: 0.93274105, y: 1}
-  m_AnchoredPosition: {x: -0.5999756, y: 0.43001938}
+  m_AnchoredPosition: {x: -0.5999756, y: 0.430027}
   m_SizeDelta: {x: 1.2, y: -1.5080996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1449428951
@@ -3262,10 +3262,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 55221290}
     - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
-      propertyPath: playerFightersX
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
       propertyPath: EnemyCombatCanvas
       value: 
       objectReference: {fileID: 55221290}
@@ -3289,14 +3285,6 @@ PrefabInstance:
       propertyPath: PrefabWeaponButton
       value: 
       objectReference: {fileID: 7854260418722980485, guid: 3624587157fd91843850c1136720c800, type: 3}
-    - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
-      propertyPath: playerFightersMaxY
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
-      propertyPath: playerFightersMinY
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 8547385059972138565, guid: db1ac9bfa9d1442468e4fe3dc6ca2ba6, type: 3}
       propertyPath: PrefabSynergyButton
       value: 

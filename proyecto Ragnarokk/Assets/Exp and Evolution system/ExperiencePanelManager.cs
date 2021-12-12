@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ExperiencePanelManager : MonoBehaviour
 {
+    public bool showingExtraEX = false;
+
     public GameObject content;
 
     public ExpPanel panel1;
@@ -66,7 +68,7 @@ public class ExperiencePanelManager : MonoBehaviour
             content.SetActive(false);
 
             evolutionManager.Show(fighterToApply);
-            yield return new WaitUntil(() => !evolutionManager.showingEvolution);
+            yield return new WaitUntil(() => evolutionManager.showingEvolution == false);
 
             Debug.Log("Se termino la evolucion");
             content.SetActive(true);
@@ -78,7 +80,7 @@ public class ExperiencePanelManager : MonoBehaviour
         var fightersThatWillGainExp = GetFightersThatWillGainExp();
         if (fightersThatWillGainExp.Count == 0)
         {
-            infoBox.ShowInfo("No fighter can recieve XP", "All your fighters are max level or are dead");
+            infoBox.ShowInfo("No fighter can recieve XP", "All your fighters are max level");
             yield return new WaitForSeconds(2);
             SceneChanger.Instance.LoadExplorationScene();
         }
@@ -108,11 +110,13 @@ public class ExperiencePanelManager : MonoBehaviour
         panel2.MarkAsReady();
         panel3.MarkAsReady();
 
+        showingExtraEX = true;
+
         infoBox.ShowInfo("Give extra XP", $"Select a fighter to give {expDivided} extra XP");
 
     }
 
-    private List<Fighter> GetFightersThatWillGainExp()
+    public static List<Fighter> GetFightersThatWillGainExp()
     {
         var fightersThatWillGainExp = new List<Fighter>();
         foreach (var p in GameManager.Instance.PlayerFighters)
