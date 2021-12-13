@@ -83,6 +83,7 @@ public class ShopItemSlot : MonoBehaviour
         }
         else
         {
+            CurrItem = null;
             renderer.sprite = manager.ItemSoldSprite;
             text.text = "";
         }        
@@ -91,8 +92,6 @@ public class ShopItemSlot : MonoBehaviour
 
     void OnMouseDown()
     {
-
-
         if (CurrItem == null)
         {
             text.text = "";

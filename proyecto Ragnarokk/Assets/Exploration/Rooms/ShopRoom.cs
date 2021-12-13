@@ -35,12 +35,12 @@ public class ShopRoom : RoomData
                 {
                     do //se loopea hasta que se encuentre un item que no se ha usado.
                     {
-                        selection = Random.Range(0, AllPosibleWeapons.Count - 1);
+                        selection = Random.Range(0, AllPosibleWeapons.Count);
                     } while (numbersAlreadyUsed.Contains(selection));
                 }
                 else
                 {
-                    selection = Random.Range(0, AllPosibleWeapons.Count - 1);
+                    selection = Random.Range(0, AllPosibleWeapons.Count);
                 }
 
                 numbersAlreadyUsed.Add(selection);
@@ -52,7 +52,7 @@ public class ShopRoom : RoomData
             for (int i = 0; i < 3; i++)
             {
                 int selection;
-                selection = Random.Range(0, AllPosibleConsumibles.Count - 1);
+                selection = Random.Range(0, AllPosibleConsumibles.Count);
 
                 selectedConsumibles[i] = AllPosibleConsumibles[selection];
             }

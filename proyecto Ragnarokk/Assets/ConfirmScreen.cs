@@ -53,6 +53,7 @@ public class ConfirmScreen : MonoBehaviour
                 }
                 ShopItemSlot slot = shopManager.ShopSlots[itemShopSlotIndex];
                 slot.UpdateContent(null);
+                GameManager.Instance.CurrShopData.UpdateContent(itemShopSlotIndex);
                     
             }
         }

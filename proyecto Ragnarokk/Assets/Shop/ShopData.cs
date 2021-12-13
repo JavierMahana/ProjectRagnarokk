@@ -23,4 +23,17 @@ public class ShopData
         this.consumible2 = consumible2;
         this.consumible3 = consumible3;
     }
+    public void UpdateContent(int soldIndex)
+    {
+        switch(soldIndex)
+        {
+            case 0: weapon1 = null; break;
+            case 1: weapon2 = null; break;
+            case 2: weapon3 = null; break;
+            case 3: consumible1 = null; break;
+            case 4: consumible2 = null; break;
+            case 5: consumible3 = null; break;
+            default: Debug.LogWarning("Sold item index is not valid!"); break;
+        }
+    }
 }
