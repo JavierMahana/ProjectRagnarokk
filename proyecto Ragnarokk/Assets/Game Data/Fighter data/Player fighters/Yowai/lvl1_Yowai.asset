@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
   m_Name: lvl1_Yowai
   m_EditorClassIdentifier: 
-  ExpNeededToLevelUp: 10
+  ExpNeededToLevelUp: 150
   Level: 0
   IsMaxLevel: 0
   Evolutions:
@@ -31,8 +31,8 @@ MonoBehaviour:
   MaxHP: 80
   PowerRating: 1
   DefaultWeapons:
-  - {fileID: 11400000, guid: f92fc6a6fdca1e541accdf3a8b79d601, type: 2}
-  - {fileID: 11400000, guid: 21d997da98d0bd7439bf026a12a9eac5, type: 2}
+  - {fileID: 11400000, guid: 1d70bab6a09162848b220774f9d9310b, type: 2}
+  - {fileID: 11400000, guid: 51dd5ff077ab1504eb5dd8148c7cb849, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 0}
@@ -42,3 +42,19 @@ MonoBehaviour:
   size: {x: 1, y: 1}
   healthBarOffset: {x: 1, y: 1.5}
   Type: {fileID: 11400000, guid: d9c98abbe4ca19c44b5bee3a65c524c5, type: 2}
+  WaterDamageBonus: 0
+  EarthDamageBonus: 0
+  FireDamageBonus: 0
+  AirDamageBonus: 0
+  PhysicalDamageBonus: 0
+  PsychicDamageBonus: 0
+  ElectricDamageBonus: 0
+  AlcoholDamageBonus: 0
+  WaterResistanceBonus: 0
+  EarthResistanceBonus: 0
+  FireResistanceBonus: 0
+  AirResistanceBonus: 0
+  PhysicalResistanceBonus: 0
+  PsychicResistanceBonus: 0
+  ElectricResistanceBonus: 0
+  AlcoholResistanceBonus: 0

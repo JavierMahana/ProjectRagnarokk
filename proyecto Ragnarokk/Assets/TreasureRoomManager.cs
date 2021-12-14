@@ -10,7 +10,7 @@ public class TreasureRoomManager : MonoBehaviour
     public InfoBox InfoBox;
 
     public string defaultInfoBoxTitle = "Treasure Room";
-    public string defaultInfoBoxDescription = "You can only pick one tresure!\nPick carefully...";
+    public string defaultInfoBoxDescription = "You can only pick one treasure!\nPick carefully...";
 
     void Start()
     {

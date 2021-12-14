@@ -47,9 +47,11 @@ MonoBehaviour:
   _persistent: 1
   Initialized: 0
   CanvasHope: {fileID: 2665141655882975279}
-  HopeBar: {fileID: 3436832124613946751, guid: 7198fbe7dd6906141b20d82bc70d2a80, type: 3}
-  ShowingHopeBar: 0
+  HopeBarPrefab: {fileID: 3436832124613946751, guid: 7198fbe7dd6906141b20d82bc70d2a80, type: 3}
+  HopeBarFill: {fileID: 0}
   PartyHope: 0
+  Limit: 100
+  CurrentHopePhase: 0
   CombatFactor: 0
 --- !u!1001 &6467889446545881144
 PrefabInstance:

@@ -76,6 +76,7 @@ public class Fighter : MonoBehaviour
 
         Level++;
 
+        /*
         Debug.Log($"Bonus ataque {Name}:");
         foreach(CombatType type in GameManager.Instance.AllCombatTypes)
         {
@@ -87,13 +88,14 @@ public class Fighter : MonoBehaviour
         {
             Debug.Log($"{type.Name}: {TypeResistanceBonuses[type]}");
         }
-
+        */
+        /*
         GameObject fPanel = Instantiate(GameManager.Instance.PrefabFighterSelect, this.transform);
         fPanel.GetComponent<FighterSelect>().Fighter = this;
         gameObject.AddComponent<FighterSelect>();
         var fs = gameObject.GetComponent<FighterSelect>();
         fs.Fighter = this;
-        fs.showText = fPanel.GetComponent<FighterSelect>().showText;
+        fs.showText = fPanel.GetComponent<FighterSelect>().showText;*/
     }
 
     private Dictionary<CombatType, int> GetNewTypeDamageBonuses(FighterData data)

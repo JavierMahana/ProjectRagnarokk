@@ -57,7 +57,7 @@ public class Consumible : Item
             case ConsumibleType.HEALTH_REGEN_1:
                 if (user.CurrentHP != user.MaxHP && user.CurrentHP > 0)
                 {
-                    const int recoveryValue = 15;
+                    const int recoveryValue = 30;
                     user.CurrentHP += recoveryValue;
                     if (user.CurrentHP > user.MaxHP)
                     {

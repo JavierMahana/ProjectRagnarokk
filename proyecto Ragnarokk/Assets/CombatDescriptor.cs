@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,7 @@ public class CombatDescriptor : MonoBehaviour
     }
 
     public GameObject CanvasCombatDescriptor; //Prefab del canvas del descriptor (EN DESUSO)
-    public Text Text; //Texto único del canvas, el cual muestra las líneas de texto
+    public TextMeshProUGUI Text; //Texto único del canvas, el cual muestra las líneas de texto
     List<TextLine> TextLines; //Todas las líneas que serán mostradas
     public bool TextIsEmpty { private set; get; }
 

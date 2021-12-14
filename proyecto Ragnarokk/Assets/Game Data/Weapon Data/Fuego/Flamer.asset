@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
+  m_Name: Flamer
+  m_EditorClassIdentifier: 
+  Name: Flamer
+  SubName: 
+  Description: arma de flama
+  BaseCost: 100
+  IconSprite: {fileID: 21300000, guid: 128c606be2b062149a441074823923d8, type: 3}
+  BaseDamage: 5
+  BaseAccuracy: 100
+  BaseCriticalRate: 0
+  BaseCooldown: 0
+  ListaDeEstadosQueAplica: []
+  WeaponSprite: {fileID: -7639875328558060560, guid: 4fffbb0a3cdc6804b8548e8483a61e43, type: 3}
+  "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 7fda126cf52d4f9478689f1d6d5477a2, type: 2}

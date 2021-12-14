@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
-  m_Name: Weap_WaterPeck
+  m_Name: PPS-43
   m_EditorClassIdentifier: 
-  Name: Water Peck
+  Name: PPS-43
   SubName: 
-  Description: 
+  Description: arma de guerra
   BaseCost: 100
-  sprite: {fileID: 0}
+  IconSprite: {fileID: 21300000, guid: 26f39b31c70bb754fa19df4d08f6b7ec, type: 3}
   BaseDamage: 50
-  BaseAccuracy: 75
-  BaseCriticalRate: 5
+  BaseAccuracy: 0
+  BaseCriticalRate: 0
   BaseCooldown: 0
   ListaDeEstadosQueAplica: []
-  "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 99ddf6cb18f34644c857955877bf77d1, type: 2}
+  WeaponSprite: {fileID: -7636839179710111607, guid: 19e9eaf2e2324334c9bc5b91ad2b1b04, type: 3}
+  "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: c8332d004a10a164486b93f259a6df2b, type: 2}
