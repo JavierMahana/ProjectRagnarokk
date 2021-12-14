@@ -57,7 +57,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     void Update()
     {
-        if (Fighter == null) { Destroy(this); }
+        if (Fighter == null) { Destroy(this.gameObject); }
         else
         {
             if (showTimer != 0) 

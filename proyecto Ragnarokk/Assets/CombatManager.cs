@@ -89,6 +89,8 @@ public class CombatManager : MonoBehaviour
     int HordeCurrentHP;
     bool HordeIsFine;
 
+    Fighter EnemyToDestroy;
+
     //public List<Fighter> AllAliveFighters = new List<Fighter>(); 
     [HideInInspector]
     public Fighter ActiveFighter;
@@ -481,6 +483,12 @@ public class CombatManager : MonoBehaviour
 
                 //ShowFighterCanvas(false);
                 CleanPanelSelecion();
+
+                if(EnemyToDestroy != null)
+                {
+                    Destroy(EnemyToDestroy.gameObject);
+                    EnemyToDestroy = null;
+                }
 
                 FindNextActiveFighter();
                 StartCoroutine(TurnAction());
@@ -989,6 +997,7 @@ public class CombatManager : MonoBehaviour
                 else
                 {
                     AliveEnemyFighters.Remove(Target);
+                    EnemyToDestroy = Target;
                     //defeatHopeChange = HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
                 }
 
