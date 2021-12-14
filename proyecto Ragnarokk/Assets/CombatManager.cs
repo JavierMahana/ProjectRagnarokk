@@ -1039,7 +1039,7 @@ public class CombatManager : MonoBehaviour
         //Debug.Log("Precision: " + AttackWeapon.BaseAccuracy + " | damageToShow: " + damageToShow);
 
         // el botón imprime el daño infligido
-        targetButton.ShowDamage(damageToShow, isCrit, SynergyDeterminant);
+        targetButton.ShowText(true, damageToShow, isCrit, SynergyDeterminant);
     }
 
     public void ApplySynergy(out string synerDesc)

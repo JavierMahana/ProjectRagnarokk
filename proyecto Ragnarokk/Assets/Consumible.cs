@@ -17,8 +17,10 @@ public class Consumible : Item
 
     // Aqui se añade especifica la funcion del consumible, al terminar de usarse debería destruirse
     // su destruiccion y eliminación de la lista de consumibles debería estar en el gameManager.
-    public void OnUse(Fighter user)
+    public void OnUse(Fighter user, FighterSelect button = null)
     {
+        if (button != null) { user = button.Fighter; }
+        
         var combatDescriptor = FindObjectOfType<CombatDescriptor>();
         var combatManager = FindObjectOfType<CombatManager>();
  
@@ -64,7 +66,7 @@ public class Consumible : Item
 
                     if(combatManager != null)
                     {
-                        user.GetComponent<FighterSelect>().ShowHeal(recoveryValue); 
+                        button.ShowText(false, recoveryValue, false, 0); 
                         
                         combatDescriptor.Clear();
 
@@ -95,7 +97,7 @@ public class Consumible : Item
 
                     if (combatManager != null)
                     {
-                        user.GetComponent<FighterSelect>().ShowHeal(user.MaxHP);
+                        button.ShowText(false, user.MaxHP, false, 0);
 
                         combatManager.LiftPlayerFighter(user);
 
@@ -153,14 +155,10 @@ public class Consumible : Item
         var combatManager = FindObjectOfType<CombatManager>();
         var consumiblePanel = FindObjectOfType<ConsumiblePanel>();
 
-        
-        
-
         // se elimina el consumible recien utilizado de la lista de consumibles
         GameManager.Instance.AllConsumibles.Remove(this);
 
         // destruye la instancia porque el objeto fue usado
-        Destroy(this);
 
         // se termina el turno
         if (GameManager.Instance.GameState == GAME_STATE.COMBAT)
