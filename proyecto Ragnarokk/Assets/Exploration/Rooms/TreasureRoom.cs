@@ -14,17 +14,27 @@ public class TreasureRoom : RoomData
     private int VeryRareGoal = 80;
     private int LegendaryGoal = 95;
 
-    public List<Item> AllPosibleTreasures = new List<Item>();
+    //public List<Item> AllPosibleTreasures = new List<Item>();
+    private List<Item> AllTreasures = new List<Item>();
     public int MoneyAmmount = 50;
     //public int moneyAmount
     public override void LoadRoom(GameManager gameManager, SceneChanger sceneChanger, Room room)
     {
         gameManager.currentTreasureItems.Clear();
 
+        AllTreasures.AddRange(CommonTreasures);
+        AllTreasures.AddRange(RareTreasures);
+        AllTreasures.AddRange(VeryRareTreasures);
+        AllTreasures.AddRange(LegendaryTreasures);
+
         //List<int> numbersAlreadyUsed = new List<int>();
-        int count = AllPosibleTreasures.Count;
+        int count = AllTreasures.Count;
         if (count == 0)
+        {
             Debug.LogError("The tresure room must have posibles treasures.");
+            return;
+        }
+            
 
         List<List<Item>> RemainingT = new List<List<Item>>();
 
@@ -60,14 +70,7 @@ public class TreasureRoom : RoomData
 
             if (count > 3)//esto es para esegurarse que no salgan items repetidos como recompenza
             {
-                Debug.Log($"Restantes lista {TListIndex}:");
-                foreach (Item item in RemainingT[TListIndex])
-                {
-                    Debug.Log(item.Name);
-                }
-                //Debug.Log($"Lista {TListIndex} Antes: {RemainingT[TListIndex].Count}");
                 RemainingT[TListIndex].RemoveAt(selection);
-                //Debug.Log($"Lista {TListIndex} Despues: {RemainingT[TListIndex].Count}");
                 /*
                 do //se loopea hasta que se encuentre un item que no se ha usado.
                 {
