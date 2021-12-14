@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
-  m_Name: Nightmare
+  m_Name: MindRaider
   m_EditorClassIdentifier: 
-  Name: Nightmare
+  Name: Mind Raider
   SubName: 
-  Description: arma de pesadilla
+  Description: arma de invasion
   BaseCost: 100
   IconSprite: {fileID: 21300000, guid: 872fab22fd5f8d449b1abf74e5899b16, type: 3}
-  BaseDamage: 50
-  BaseAccuracy: 85
-  BaseCriticalRate: 15
-  BaseCooldown: 2
-  ListaDeEstadosQueAplica:
-  - {fileID: 11400000, guid: 331b9f01a69a0c3479eda067888a04c5, type: 2}
+  BaseDamage: 5
+  BaseAccuracy: 100
+  BaseCriticalRate: 0
+  BaseCooldown: 0
+  ListaDeEstadosQueAplica: []
   WeaponSprite: {fileID: -6425176278016013195, guid: 6b96b41f8643d5342aab81fe27309a9f, type: 3}
   "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: d9c98abbe4ca19c44b5bee3a65c524c5, type: 2}

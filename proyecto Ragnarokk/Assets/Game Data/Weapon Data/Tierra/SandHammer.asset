@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
-  m_Name: PetroleumHammer
+  m_Name: SandHammer
   m_EditorClassIdentifier: 
-  Name: Petroleum Hammer
+  Name: Sand Hammer
   SubName: 
-  Description: arma de petroleo
+  Description: arma de arena
   BaseCost: 100
   IconSprite: {fileID: 21300000, guid: c6c52db91d1043b4db515c3aad49498c, type: 3}
-  BaseDamage: 30
-  BaseAccuracy: 85
-  BaseCriticalRate: 10
-  BaseCooldown: 1
-  ListaDeEstadosQueAplica:
-  - {fileID: 11400000, guid: a1ede23dfff83a841a32a07ebab67a03, type: 2}
+  BaseDamage: 5
+  BaseAccuracy: 100
+  BaseCriticalRate: 0
+  BaseCooldown: 0
+  ListaDeEstadosQueAplica: []
   WeaponSprite: {fileID: 2031736154224517468, guid: d1c69f4583f30584eb4ab4eb2224605d, type: 3}
   "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 7a85a4f3edc5b8d48a6c9671218529d7, type: 2}

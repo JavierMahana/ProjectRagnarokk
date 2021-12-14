@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
-  m_Name: HurricaneKnife
+  m_Name: BreezeKnife
   m_EditorClassIdentifier: 
-  Name: Hurricane Knife
+  Name: Breeze Knife
   SubName: 
-  Description: arma de huracan
+  Description: arma de brisa
   BaseCost: 100
   IconSprite: {fileID: -8803686413640206328, guid: 044b3bc48754f234a94b275ef5e3b4c8, type: 3}
-  BaseDamage: 30
-  BaseAccuracy: 90
-  BaseCriticalRate: 15
-  BaseCooldown: 2
-  ListaDeEstadosQueAplica:
-  - {fileID: 11400000, guid: bd7fa0e3d52e6bd4fae72ad30d5bd1f1, type: 2}
+  BaseDamage: 5
+  BaseAccuracy: 100
+  BaseCriticalRate: 0
+  BaseCooldown: 0
+  ListaDeEstadosQueAplica: []
   WeaponSprite: {fileID: 7727245651530515326, guid: 3e60084bfa1020a41ae18e545af57e8c, type: 3}
   "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: e108f6fb37683784283e9b7209a9c32d, type: 2}
