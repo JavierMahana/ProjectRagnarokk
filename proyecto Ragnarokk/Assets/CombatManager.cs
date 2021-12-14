@@ -912,6 +912,7 @@ public class CombatManager : MonoBehaviour
             //FÓRMULA DE DAÑO (Prototipo en uso. Debe ser bien definida más adelante)
             int baseDamage = Mathf.RoundToInt((AttackWeapon.BaseDamage * 0.1f) + ActiveFighter.Atack - Target.Defense * 0.8f);
             if (baseDamage < minDamage) { baseDamage = minDamage; }
+            Debug.Log($"Base: {AttackWeapon.BaseDamage}/10 + {ActiveFighter.Atack} - {Target.Defense}*0.8");
 
             //PASO 6.2: MULTIPLICADOR
             float damageMultiplier = hopeFact + effectivenessFact + damageBonusFact + criticalFact;
