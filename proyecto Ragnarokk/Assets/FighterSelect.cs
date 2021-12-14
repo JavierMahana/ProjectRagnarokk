@@ -141,8 +141,8 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void EndTextAnimation()
     {
-        animableObject1.GetComponent<TextAnimations>().AnimationReset();
-        animableObject2.GetComponent<TextAnimations>().AnimationReset();
+        animableObject1.GetComponent<TextAnimations>().AnimationEnd();
+        animableObject2.GetComponent<TextAnimations>().AnimationEnd();
     }
 
     public void OnClick()
