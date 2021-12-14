@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class ForAllButtons : MonoBehaviour, IPointerClickHandler
 {
     private bool IsButtonPressed;
-    private Color Pressed;
-    private Color Normal;
+    public Color Pressed;
+    public Color Normal;
 
     public bool staysPressed = true;
     public void Start()

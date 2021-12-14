@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ActionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Text actionText;
+    public TextMeshProUGUI actionText;
     public string initialActionText = "";
     public Color defaultColor;
 

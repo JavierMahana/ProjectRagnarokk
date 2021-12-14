@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1252870459784183051}
   - component: {fileID: 7844404899770420648}
   - component: {fileID: 6466599398303705672}
+  - component: {fileID: 8992820574302042047}
   m_Layer: 0
   m_Name: Synergy
   m_TagString: Untagged
@@ -27,7 +28,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5216051329051973603}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.0618992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8367963724786948742}
@@ -35,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 117.9, y: 67.4}
-  m_SizeDelta: {x: 146.3831, y: 50}
+  m_AnchoredPosition: {x: -44.966454, y: 74.599976}
+  m_SizeDelta: {x: 170.8882, y: 56.8147}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1252870459784183051
 CanvasRenderer:
@@ -75,8 +76,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290969344
-  m_fontColor: {r: 0, g: 1, b: 0.76022506, a: 1}
+    rgba: 12779264
+  m_fontColor: {r: 0, g: 1, b: 0.76022506, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -154,6 +155,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8992820574302042047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5216051329051973603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48edf6d0fe0ec03418de25c9c74226c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6466599398303705672}
 --- !u!1 &7126765607254235271
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +180,7 @@ GameObject:
   - component: {fileID: 6265686295940235780}
   - component: {fileID: 7158503316722318863}
   - component: {fileID: 508206994407198118}
+  - component: {fileID: 2843293252477497249}
   m_Layer: 0
   m_Name: Value
   m_TagString: Untagged
@@ -181,7 +196,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7126765607254235271}
   m_LocalRotation: {x: -0, y: 0.28992835, z: -0, w: 0.9570484}
-  m_LocalPosition: {x: 0, y: 0, z: -72.6}
+  m_LocalPosition: {x: 0, y: 0, z: -57.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8367963724786948742}
@@ -189,8 +204,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 33.707, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 127.7, y: 34.3}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -49, y: 17.863892}
+  m_SizeDelta: {x: 213.3034, y: 55.1382}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6265686295940235780
 CanvasRenderer:
@@ -220,7 +235,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: texto prueba
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 275948b269f4ea943ba0be216200fd65, type: 2}
   m_sharedMaterial: {fileID: -6459498466985604572, guid: 275948b269f4ea943ba0be216200fd65, type: 2}
@@ -247,7 +262,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.3
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -308,6 +323,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2843293252477497249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126765607254235271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48edf6d0fe0ec03418de25c9c74226c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 508206994407198118}
 --- !u!1 &8091166855456819100
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,8 +483,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2891e336c695e9942a1c1328f6d99738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animThis1: {fileID: 508206994407198118}
-  animThis2: {fileID: 6466599398303705672}
+  animableObject1: {fileID: 7126765607254235271}
+  animableObject2: {fileID: 5216051329051973603}
   Fighter: {fileID: 0}
   showText: {fileID: 7158503316722318863}
   synergyText: {fileID: 7844404899770420648}

@@ -7,9 +7,8 @@ using UnityEngine.UI;
 
 public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    //public Button selfBbutton;
-    public Animator animThis1;
-    public Animator animThis2;
+    public GameObject animableObject1;
+    public GameObject animableObject2;
 
     public Fighter Fighter;
     
@@ -38,12 +37,12 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         r = 1f;
         g = 120 / 255f;
         b = 0;
-        healColor = new Color(r, g, b, 1f);
+        critColor = new Color(r, g, b, 1f);
 
         r = 0;
         g = 200 / 255f;
         b = 130 / 255f;
-        critColor = new Color(r, g, b, 1f);
+        healColor = new Color(r, g, b, 1f);
 
         antiSynergyColor = Color.red;
         synergyColor = healColor;
@@ -52,7 +51,6 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         showTimer = 0;
         showText.text = defaultText;
-
 
     }
 
@@ -74,73 +72,82 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 synergyText.text = defaultText;
                 synergyText.color = synergyColor;
 
-                animThis1.SetTrigger("End");
-                animThis2.SetTrigger("End");
+                EndTextAnimation();
             }
         }
-        //if (!selfBbutton.interactable) { selfBbutton.gameObject.SetActive(false); }
     }
 
     
-    public void ShowDamage(int damage, bool isCrit, int syn)
+    public void ShowText(bool isDamage, int value, bool isCrit, int syn)
     {
         // syn 0 para cuando no hay sinergia alguna
         // syn -1 para cuando hay antisinergia
         // syn 1 para cuando hay sinergia
 
-        animThis1.SetTrigger("Start");
-        animThis2.SetTrigger("Start");
+        BeginTextAnimation();
 
-
-        string predamage = "HIT ";
-        string synergyText = "";
-        showText.color = normalColor;
-
-        if (isCrit) { showText.color = critColor; predamage = "CRIT HIT "; }
-
-        switch(syn)
+        if(isDamage)
         {
-            case 1: 
-                synergyText = "Synergy!";
-                Debug.Log("hubo sinergia");
-                this.synergyText.color = synergyColor;
-                break;
+            string predamage = "HIT ";
+            string synergyText = "";
+            showText.color = normalColor;
 
-            case -1: 
-                synergyText = "AntiSynergy";
-                Debug.Log("hubo antisinergias");
-                this.synergyText.color = antiSynergyColor;
-                break;
+            if (isCrit) { showText.color = critColor; predamage = "CRIT HIT "; }
 
-            default: 
-                Debug.Log("no hubo sinergias");
-                break;
+            switch (syn)
+            {
+                case 1:
+                    synergyText = "Synergy!";
+                    Debug.Log("hubo sinergia");
+                    this.synergyText.color = synergyColor;
+                    break;
 
+                case -1:
+                    synergyText = "AntiSynergy";
+                    Debug.Log("hubo antisinergias");
+                    this.synergyText.color = antiSynergyColor;
+                    break;
+
+                default:
+                    Debug.Log("no hubo sinergias");
+                    break;
+
+            }
+
+            showText.text = (value > 0) ? predamage + value.ToString() : "MISS";
+            this.synergyText.text = synergyText;
+            showTimer = 400;
         }
-
-        showText.text = (damage > 0) ? predamage + damage.ToString() : "MISS";
-        this.synergyText.text = synergyText;
-        showTimer = 400;
-
+        else
+        {
+            showText.text = "";
+            this.synergyText.text = "+ " + value.ToString() + "!"; ;
+            showText.color = healColor;
+            showTimer = 400;
+        }
     }
-    public void ShowHeal(int heal)
+
+    private void BeginTextAnimation()
     {
-        animThis1.SetTrigger("Start");
-        animThis2.SetTrigger("Start");
-
-        showText.color = healColor;
-        this.showText.text = heal.ToString();
-        showTimer = 400;
-
+        animableObject1.GetComponent<TextAnimations>().AnimationStart();
+        animableObject2.GetComponent<TextAnimations>().AnimationStart();
     }
 
+    private void ResetTextAnimation()
+    {
+        animableObject1.GetComponent<TextAnimations>().AnimationReset();
+        animableObject2.GetComponent<TextAnimations>().AnimationReset();
+    }
+
+    private void EndTextAnimation()
+    {
+        animableObject1.GetComponent<TextAnimations>().AnimationReset();
+        animableObject2.GetComponent<TextAnimations>().AnimationReset();
+    }
 
     public void OnClick()
     {
-        animThis1.ResetTrigger("Start");
-        animThis2.ResetTrigger("Start");
-
-      
+        ResetTextAnimation();
 
         var combatManager = FindObjectOfType<CombatManager>();
 
@@ -168,10 +175,10 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 // se activa la funcion en useo del consumible seleccionado, sobre el fighter
                 // al que corresponde el botón
                 Debug.Log("SaludAntes: " + Fighter.CurrentHP);
-                combatManager.SelectedConsumible.OnUse(Fighter);
+                combatManager.SelectedConsumible.OnUse(Fighter, this);
                 Debug.Log("SaludDespues: " + Fighter.CurrentHP);
 
-                // AQUI ACTUALIZAR BARRA
+                // AQUI ACTUALIZAR BARRA -- 
                 Fighter.OnTakeDamage();
 
             }
@@ -203,6 +210,11 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 cm.AddDamageTypeButton(Fighter.Type);
                 descripcion = $" Name: {fighterName}\n Level: {Fighter.Level} \n Health: {Fighter.CurrentHP} / {Fighter.MaxHP}";
                 cm.SetlDescriptorText(descripcion);
+
+                if(cm.AttackWeapon != null)
+                {
+                    cm.AddSynergyButton(cm.AttackWeapon.TipoDeDañoQueAplica, Fighter);
+                }
             }
         }
     }
@@ -225,8 +237,6 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
         else if(!cm.PlayerFighters.Contains(Fighter) && cm.AttackWeapon != null)
         {
-
-
             OnClick();
         }
         
