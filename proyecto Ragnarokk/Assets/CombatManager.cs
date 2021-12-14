@@ -21,7 +21,7 @@ public class CombatManager : MonoBehaviour
     public GameObject PrefabDamageTypeButton;
     public GameObject PrefabSynergyButton;
 
-    public Text PanelDescriptor;
+    public TextMeshProUGUI PanelDescriptor;
     public GameObject PanelDMGtypes;
     public GameObject PanelSynergies;
 
