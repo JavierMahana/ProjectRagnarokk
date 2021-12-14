@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3965616021231290482}
   - component: {fileID: 2686939866833127143}
   - component: {fileID: 6161116064137001456}
+  - component: {fileID: 5868528402258355359}
   m_Layer: 5
   m_Name: Button_Synergy
   m_TagString: Untagged
@@ -142,6 +143,19 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
+--- !u!114 &5868528402258355359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3857209539979112695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe5352d375574f4fbe0568710fd0a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SynergyIcon: {fileID: 8616564739905095120}
 --- !u!1 &4366798139370309903
 GameObject:
   m_ObjectHideFlags: 0
