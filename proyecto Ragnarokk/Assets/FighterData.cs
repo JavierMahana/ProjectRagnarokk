@@ -33,6 +33,8 @@ public class FighterData : ScriptableObject
 
     public string Description = "Description";
 
+    public Animator animator;
+
     #region BASE STATS
     public int Speed = 10;
     public int Atack = 10;

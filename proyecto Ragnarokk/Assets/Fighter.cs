@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 public class Fighter : MonoBehaviour
 {
     private SpriteRenderer spRenderer;
+    public Animator animator;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class Fighter : MonoBehaviour
     }
     public void Init(FighterData data)
     {
+        animator = data.animator;
         Name = data.Name;
         Atack = data.Atack;
         Defense = data.Defense;
