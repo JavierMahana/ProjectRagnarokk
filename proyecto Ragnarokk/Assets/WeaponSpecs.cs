@@ -71,7 +71,7 @@ public class WeaponSpecs : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         cm.ClearPanelDescriptor();
         cm.AddDamageTypeButton(thisWeapon.TipoDeDañoQueAplica);
-        string description = $" Acc: {thisWeapon.BaseAccuracy} \n Dmg: {thisWeapon.BaseDamage} \n Crit: {thisWeapon.BaseCriticalRate} \n Cooldown: {thisWeapon.BaseCooldown}";
+        string description = $" Dmg: {thisWeapon.BaseDamage} \n Acc: {thisWeapon.BaseAccuracy}% \n Crit: {thisWeapon.BaseCriticalRate}% \n Cooldown: {thisWeapon.BaseCooldown}";
         cm.SetlDescriptorText(description);
     }
 
