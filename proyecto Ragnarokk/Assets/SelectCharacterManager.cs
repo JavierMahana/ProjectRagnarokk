@@ -80,16 +80,29 @@ public class SelectCharacterManager : MonoBehaviour
         {
             if (pf == currentFighter.GetComponent<PlayerFighter>())
             {
-                pf.GetComponent<Fighter>().isMale = isMale;
-                pf.GetComponent<Fighter>().RealName = FighterName.text;
+                var cf = pf.GetComponent<Fighter>();
+                cf.isMale = isMale;
+                cf.RealName = FighterName.text;
 
                 var pfs = FindObjectsOfType<PlayerFighter>();
                 int pfsCount = pfs.Length;
                 pf.transform.position = new Vector2((-2 + pfsCount), 1);
 
+                var sr = pf.GetComponentInChildren<SpriteRenderer>();
+               
+                if (isMale) 
+                { 
+                    sr.sprite = cf.SpriteMale;
+                    if (cf.animator != null) {cf.animator.SetBool("isMale", true); }
+                }
+                else 
+                { 
+                    sr.sprite = cf.SpriteFemale;
+                    if (cf.animator != null) { cf.animator.SetBool("isMale", false); }
 
-                if(isMale) { pf.GetComponentInChildren<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteMale; }
-                else { pf.GetComponentInChildren<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteFemale; }
+                }
+
+                cf.animator.Play("Sex");
             }
         }
 

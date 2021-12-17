@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 public class Fighter : MonoBehaviour
 {
     private SpriteRenderer spRenderer;
+    [HideInInspector]
     public Animator animator;
 
     private void Awake()
@@ -15,8 +16,14 @@ public class Fighter : MonoBehaviour
         {
             Debug.LogError("Debe tener un hijo con sprite renderer!");
         }
-        
-        foreach(CombatType type in GameManager.Instance.AllCombatTypes)
+
+        animator = GetComponentInChildren<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Debe tener un hijo con animator!");
+        }
+
+        foreach (CombatType type in GameManager.Instance.AllCombatTypes)
         {
             TypeDamageBonuses.Add(type, 0);
             TypeResistanceBonuses.Add(type, 0);
@@ -24,7 +31,9 @@ public class Fighter : MonoBehaviour
     }
     public void Init(FighterData data)
     {
-        animator = data.animator;
+        if(data.animatorController != null) { animator.runtimeAnimatorController = data.animatorController; }
+        
+
         Name = data.Name;
         Atack = data.Atack;
         Defense = data.Defense;
@@ -72,7 +81,6 @@ public class Fighter : MonoBehaviour
             }
         }
         
-
         SpriteFemale = data.SpriteFemale;
         SpriteMale = data.SpriteMale;
 
