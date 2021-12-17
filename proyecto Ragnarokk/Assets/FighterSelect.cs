@@ -25,7 +25,8 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private Color synergyColor;
     private Color antiSynergyColor;
 
-
+    TextAnimations a1;
+    TextAnimations a2;
     //agregar despues una lista de imagenes (estados) dentro de un canvas (atributo) que se activa si hay efectos en Fighter
 
     void Start()
@@ -52,6 +53,8 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         showTimer = 0;
         showText.text = defaultText;
 
+        a1 = animableObject1.GetComponent<TextAnimations>();
+        a2 = animableObject2.GetComponent<TextAnimations>();
     }
 
 
@@ -129,20 +132,20 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void BeginTextAnimation()
     {
-        animableObject1.GetComponent<TextAnimations>().AnimationStart();
-        animableObject2.GetComponent<TextAnimations>().AnimationStart();
+        a1.AnimationStart();
+        a2.AnimationStart();
     }
 
     private void ResetTextAnimation()
     {
-        animableObject1.GetComponent<TextAnimations>().AnimationReset();
-        animableObject2.GetComponent<TextAnimations>().AnimationReset();
+        a1.AnimationReset();
+        a2.AnimationReset();
     }
 
     private void EndTextAnimation()
     {
-        animableObject1.GetComponent<TextAnimations>().AnimationEnd();
-        animableObject2.GetComponent<TextAnimations>().AnimationEnd();
+        a1.AnimationEnd();
+        a2.AnimationEnd();
     }
 
     public void OnClick()
@@ -151,11 +154,11 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         var combatManager = FindObjectOfType<CombatManager>();
 
+
         if (GameManager.Instance.ConfirmationClick)
         {
             if (combatManager.AttackWeapon != null && Fighter.CurrentHP > 0)
             {
-                // se utiliza la función fight sobre el fighter al que corresponde el botón
                 combatManager.Fight(this);
                 // se termina el turno
                 combatManager.ActionDone = true;

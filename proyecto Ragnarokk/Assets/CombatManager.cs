@@ -249,7 +249,7 @@ public class CombatManager : MonoBehaviour
         //Se obtienen los luchadores del jugador
         foreach (PlayerFighter pf in GameManager.Instance.PlayerFighters)
         {
-            float t = (((float)3 - 1) - j) / Mathf.Max(3 - 1, 1);
+                float t = (((float)3 - 1) - j) / Mathf.Max(3 - 1, 1);
 
             float viewPortY = Mathf.Lerp(playerFightersMinY, playerFightersMaxY, t);
             Vector3 viewPortPos = new Vector3(playerFightersX, viewPortY, Camera.main.nearClipPlane);
@@ -261,6 +261,10 @@ public class CombatManager : MonoBehaviour
 
             Fighter ally = pf.gameObject.GetComponent<Fighter>();
 
+
+            //arreglo feo pero, funciona para las animaciones
+            bool ismale = ally.isMale;
+            ally.GetComponentInChildren<Animator>().SetBool("isMale", ismale);
 
             PlayerFighters.Add(ally);
             PartyMaxHP += ally.MaxHP;
@@ -829,10 +833,25 @@ public class CombatManager : MonoBehaviour
     public void Fight(FighterSelect targetButton)
     {
         ShowActionCanvas(false);
-        //Debug.Log("Desactiva Canvas!!!!!");
+
         if (targetButton == null || targetButton.Fighter == null)// || targetButton.selfBbutton == null) 
         { Debug.Log("No se encuentra el botón del objetivo"); }
         // se especifica el target con la fucion EnemySelected
+        
+        //Attack Animation
+        // Para los players
+        if(PlayerFighters.Contains(ActiveFighter))
+        {
+            string damageType = AttackWeapon.TipoDeDañoQueAplica.Name;
+            ActiveFighter.animator.SetTrigger(damageType);
+            AudioManager.instance.Play(damageType);
+        }
+
+        // Para los enemigos
+        else
+        {
+
+        }
 
         Target = targetButton.Fighter;
         //Debug.Log("ATACANTE: " + ActiveFighter.Name);

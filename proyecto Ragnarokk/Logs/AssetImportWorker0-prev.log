@@ -15,11 +15,11 @@ D:/joaqu/Documents/GitHub/ProjectRagnarokk/proyecto Ragnarokk
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-62871
+65349
 Successfully changed project path to: D:/joaqu/Documents/GitHub/ProjectRagnarokk/proyecto Ragnarokk
 D:/joaqu/Documents/GitHub/ProjectRagnarokk/proyecto Ragnarokk
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 76.46 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 93.16 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.18f1 (a7d1c678663c)
 [Subsystems] Discovering subsystems at path D:/Program Files/Unity/Editor/Data/Resources/UnitySubsystems
@@ -35,73 +35,73 @@ Initialize mono
 Mono path[0] = 'D:/Program Files/Unity/Editor/Data/Managed'
 Mono path[1] = 'D:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'D:/Program Files/Unity/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56156
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56016
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/Program Files/Unity/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001306 seconds.
+Registered in 0.001293 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 74.26 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 68.90 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.211 seconds
+- Completed reload, in  1.243 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1211ms)
-		BeginReloadAssembly (65ms)
+	ReloadAssembly (1243ms)
+		BeginReloadAssembly (77ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (434ms)
-			LoadAssemblies (64ms)
+		EndReloadAssembly (443ms)
+			LoadAssemblies (76ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (144ms)
+			SetupTypeCache (168ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (31ms)
-			SetupLoadedEditorAssemblies (195ms)
+			RebuildScriptCaches (29ms)
+			SetupLoadedEditorAssemblies (182ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (4ms)
+				InitializePlatformSupportModulesInManaged (3ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (74ms)
-				BeforeProcessingInitializeOnLoad (16ms)
-				ProcessInitializeOnLoadAttributes (75ms)
-				ProcessInitializeOnLoadMethodAttributes (26ms)
+				RefreshPlugins (69ms)
+				BeforeProcessingInitializeOnLoad (15ms)
+				ProcessInitializeOnLoadAttributes (70ms)
+				ProcessInitializeOnLoadMethodAttributes (25ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.007313 seconds.
+Registered in 0.007087 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 72.34 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 71.64 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.611 seconds
+- Completed reload, in  1.527 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1612ms)
-		BeginReloadAssembly (150ms)
+	ReloadAssembly (1528ms)
+		BeginReloadAssembly (143ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (17ms)
-		EndReloadAssembly (1407ms)
-			LoadAssemblies (110ms)
+			CreateAndSetChildDomain (16ms)
+		EndReloadAssembly (1334ms)
+			LoadAssemblies (114ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (316ms)
-			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (51ms)
-			SetupLoadedEditorAssemblies (824ms)
+			SetupTypeCache (293ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (53ms)
+			SetupLoadedEditorAssemblies (776ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (4ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (72ms)
-				BeforeProcessingInitializeOnLoad (77ms)
-				ProcessInitializeOnLoadAttributes (584ms)
-				ProcessInitializeOnLoadMethodAttributes (83ms)
+				BeforeProcessingInitializeOnLoad (67ms)
+				ProcessInitializeOnLoadAttributes (559ms)
+				ProcessInitializeOnLoadMethodAttributes (72ms)
 				AfterProcessingInitializeOnLoad (3ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
@@ -110,14 +110,14 @@ Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
-Refreshing native plugins compatible for Editor in 0.78 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 0.80 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2209 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 124.8 MB.
 System memory in use after: 125.0 MB.
 
 Unloading 35 unused Assets to reduce memory usage. Loaded Objects now: 2722.
-Total: 22.888800 ms (FindLiveObjects: 0.192300 ms CreateObjectMapping: 0.077200 ms MarkObjects: 22.590200 ms  DeleteObjects: 0.027800 ms)
+Total: 21.893300 ms (FindLiveObjects: 0.218200 ms CreateObjectMapping: 0.079700 ms MarkObjects: 21.568400 ms  DeleteObjects: 0.026000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -132,1001 +132,374 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Male/Idle.anim
-  artifactKey: Guid(f30da33427038734f92f06055c98837b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Male/Idle.anim using Guid(f30da33427038734f92f06055c98837b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '91fd5abef583ef2b0d4dcb7483e1d9a3') in 0.026234 seconds 
-  Import took 0.029978 seconds .
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00047.png
+  artifactKey: Guid(80edfd8967c1ade4eb3d9ea33e807c51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00047.png using Guid(80edfd8967c1ade4eb3d9ea33e807c51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '102436f96a0be189e4189cd5d15a8b44') in 0.725969 seconds 
+  Import took 0.774672 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 15.517973 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Male/GoldenHammer.anim
-  artifactKey: Guid(cf89976e23feb374785beb35cc6bdf93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Male/GoldenHammer.anim using Guid(cf89976e23feb374785beb35cc6bdf93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69728919420b47f4e0350e00840a07ec') in 0.009679 seconds 
-  Import took 0.121350 seconds .
+  Time since last request: 0.000281 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00021.png
+  artifactKey: Guid(8c53bfac15062114e9902ac9dcd61cb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00021.png using Guid(8c53bfac15062114e9902ac9dcd61cb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2ea15cbe5fffab15b5747b49a6c16059') in 0.599293 seconds 
+  Import took 0.649026 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 17.793983 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/Fidle.anim
-  artifactKey: Guid(bfd9ac48cef8ea647a0136fd9d64980e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/Fidle.anim using Guid(bfd9ac48cef8ea647a0136fd9d64980e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9a1113233fef715533f43b5fc147c165') in 0.023978 seconds 
-  Import took 0.034462 seconds .
+  Time since last request: 0.000310 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00046.png
+  artifactKey: Guid(610ec6c331d02bc49b0ac360dd34944a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00046.png using Guid(610ec6c331d02bc49b0ac360dd34944a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59e0b34d82aba72a8049684421ef5e51') in 0.502675 seconds 
+  Import took 0.682395 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 33.640394 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Female/FGoldenHammer.anim
-  artifactKey: Guid(262c2db92550aea4e83ff843ed561fe8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/FGoldenHammer.anim using Guid(262c2db92550aea4e83ff843ed561fe8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4438c7272be188217cb256ef9444e805') in 0.008881 seconds 
-  Import took 0.054122 seconds .
+  Time since last request: 0.000358 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00036.png
+  artifactKey: Guid(fad85c0899fd8ae49b3e9486142fb579) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00036.png using Guid(fad85c0899fd8ae49b3e9486142fb579) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59037bf7ce41a41391eec450add761da') in 0.064344 seconds 
+  Import took 0.101683 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.200893 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Fidle.anim
-  artifactKey: Guid(87a6d536983a794469513692320a5d35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Fidle.anim using Guid(87a6d536983a794469513692320a5d35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5afcfd95d557c28e092f1d34bb8fdae') in 0.003779 seconds 
-  Import took 0.007854 seconds .
+  Time since last request: 0.000305 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00046.png
+  artifactKey: Guid(45de34abc2df4ef4bb2b1a1144296420) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00046.png using Guid(45de34abc2df4ef4bb2b1a1144296420) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '776c2a8bb63d1985fc59c704e91df4c5') in 0.720182 seconds 
+  Import took 0.888631 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 8.207500 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Female/FPlasmaGun.anim
-  artifactKey: Guid(0973279c551b05b4e8dc32708355017f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/FPlasmaGun.anim using Guid(0973279c551b05b4e8dc32708355017f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e455a038434aa0b4a33beac215c150e5') in 0.011148 seconds 
-  Import took 0.014951 seconds .
+  Time since last request: 0.000331 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00033.png
+  artifactKey: Guid(055c83dc4efd3494d9907daf41b902f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00033.png using Guid(055c83dc4efd3494d9907daf41b902f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '748bcf17636a4432a3c24b71db036c3a') in 0.464046 seconds 
+  Import took 0.554824 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.138314 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Female/FMindGun.anim
-  artifactKey: Guid(f970585e0c4fd8049a663bb7b3b16605) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/FMindGun.anim using Guid(f970585e0c4fd8049a663bb7b3b16605) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b23988554846c64b28b4878fc1a3b43') in 0.010266 seconds 
-  Import took 0.076008 seconds .
+  Time since last request: 0.000306 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00034.png
+  artifactKey: Guid(1d80d0939500734448992af0fba38763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00034.png using Guid(1d80d0939500734448992af0fba38763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '045da8d7bdc86fd313ac2768d29945eb') in 0.306962 seconds 
+  Import took 0.320471 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.553954 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Female/FWaterMinigun.anim
-  artifactKey: Guid(a715d4d9a4fa21b498e2f8426d120318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/FWaterMinigun.anim using Guid(a715d4d9a4fa21b498e2f8426d120318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f762ec569a5d5db07c5fbd7bb3dc8e7') in 0.007048 seconds 
-  Import took 0.043441 seconds .
+  Time since last request: 0.000312 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00020.png
+  artifactKey: Guid(6f09e419e871f5649b704d19de4011f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00020.png using Guid(6f09e419e871f5649b704d19de4011f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '830b74361dc3daac18e3ad9b9687f60c') in 0.061866 seconds 
+  Import took 0.103969 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.001150 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Female/FWaterMinigun.anim
-  artifactKey: Guid(a715d4d9a4fa21b498e2f8426d120318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/FWaterMinigun.anim using Guid(a715d4d9a4fa21b498e2f8426d120318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f762ec569a5d5db07c5fbd7bb3dc8e7') in 0.003999 seconds 
-  Import took 0.007724 seconds .
+  Time since last request: 0.000284 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00040.png
+  artifactKey: Guid(d0fb9902d99b9d241938121709d4b18e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00040.png using Guid(d0fb9902d99b9d241938121709d4b18e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a6765893e0a8944c1ca399abae80866') in 0.650494 seconds 
+  Import took 0.657421 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 11.703069 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FGoldenHammer.anim
-  artifactKey: Guid(8001153866f0a924893ae9d211c514e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FGoldenHammer.anim using Guid(8001153866f0a924893ae9d211c514e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '82443b218aee0a750a50b407cf7adae4') in 0.002761 seconds 
-  Import took 0.006479 seconds .
+  Time since last request: 0.000273 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00013.png
+  artifactKey: Guid(709efb7cd3f9f4347be51ed5ef393bc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00013.png using Guid(709efb7cd3f9f4347be51ed5ef393bc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97d42b5efb479a2e6d204ad49dd5f432') in 0.637291 seconds 
+  Import took 0.741014 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 36.673963 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Female/FAirKnife.anim
-  artifactKey: Guid(278c3072644dc11439198ee4569d6ae2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Female/FAirKnife.anim using Guid(278c3072644dc11439198ee4569d6ae2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0374af580e92a64e09485df233503f63') in 0.006426 seconds 
-  Import took 0.010089 seconds .
+  Time since last request: 0.000292 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00001.png
+  artifactKey: Guid(29e4adb51241d7248b1aa66eb3ac8036) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00001.png using Guid(29e4adb51241d7248b1aa66eb3ac8036) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'baa9887bdaa78ca300c12bc33bf1b3a8') in 0.634112 seconds 
+  Import took 0.791023 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 2.749592 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Female/FAk47.anim
-  artifactKey: Guid(9993f85d0964e6e4f8bc4a3c3ba6f1b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Female/FAk47.anim using Guid(9993f85d0964e6e4f8bc4a3c3ba6f1b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '093adf6761886e7aac19e0e6168666f7') in 0.002767 seconds 
-  Import took 0.006663 seconds .
+  Time since last request: 0.000306 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00038.png
+  artifactKey: Guid(631f1e21bd87dc24e8897c5855d77243) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00038.png using Guid(631f1e21bd87dc24e8897c5855d77243) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b7285daa77b72da8131729af8a45e04') in 0.599657 seconds 
+  Import took 0.727880 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.906710 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Female/FBeerShotgun.anim
-  artifactKey: Guid(5be8ce952062bdf4b96de315157c60f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Female/FBeerShotgun.anim using Guid(5be8ce952062bdf4b96de315157c60f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b23a361b5f8712daa16c2a5284c7ea5f') in 0.003509 seconds 
-  Import took 0.008392 seconds .
+  Time since last request: 0.000294 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00040.png
+  artifactKey: Guid(95e75da4f2c334b4ea01f2423d5f9856) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00040.png using Guid(95e75da4f2c334b4ea01f2423d5f9856) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '571534f269b4bc02ce88e8248f44d62f') in 0.596528 seconds 
+  Import took 0.612585 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 4.608495 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Female/FFlamethrower.anim
-  artifactKey: Guid(cf289a9ab962b7b4595bbc674dd8365b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Female/FFlamethrower.anim using Guid(cf289a9ab962b7b4595bbc674dd8365b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65324535bc9483c9e70d166cc07245ca') in 0.026174 seconds 
-  Import took 0.029613 seconds .
+  Time since last request: 0.000338 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00022.png
+  artifactKey: Guid(97cca40ddff8a5443ad5e7eac547c8c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00022.png using Guid(97cca40ddff8a5443ad5e7eac547c8c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afe2dea6c4129c3d0884e943f03707ea') in 0.338160 seconds 
+  Import took 0.341383 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.145346 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Female/FGoldenHammer.anim
-  artifactKey: Guid(1da597b61c0c26642b3f8efc725f32b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Female/FGoldenHammer.anim using Guid(1da597b61c0c26642b3f8efc725f32b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b1bbc159576b787322e4c0624cb0e840') in 0.002920 seconds 
-  Import took 0.020174 seconds .
+  Time since last request: 0.000277 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00025.png
+  artifactKey: Guid(006b2dbe54ef7094bb54469b934a8565) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00025.png using Guid(006b2dbe54ef7094bb54469b934a8565) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '67bea2f36681c11948e688fe85fc2252') in 0.523917 seconds 
+  Import took 0.649691 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.228952 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Female/FIdle.anim
-  artifactKey: Guid(a4444012e4210bd4a82344a8478452e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Female/FIdle.anim using Guid(a4444012e4210bd4a82344a8478452e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '287787c37d497928bf5038f71a9702e8') in 0.005963 seconds 
-  Import took 0.020838 seconds .
+  Time since last request: 0.000308 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00005.png
+  artifactKey: Guid(255398bd7d0f4dc4ba5ead612e84bb3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00005.png using Guid(255398bd7d0f4dc4ba5ead612e84bb3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8f5b08bff4c37a6f5f5bc611171570a') in 0.423724 seconds 
+  Import took 0.497197 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 7.891192 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Female/FMindGun.anim
-  artifactKey: Guid(5848ef618152abf4e92fed03d4206f5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Female/FMindGun.anim using Guid(5848ef618152abf4e92fed03d4206f5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f7312abe1857743cdb9c1b3c30ef7df') in 0.034864 seconds 
-  Import took 0.055670 seconds .
+  Time since last request: 0.000302 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00038.png
+  artifactKey: Guid(2ff95e69523e7fa4aa92548dcbd27fa7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00038.png using Guid(2ff95e69523e7fa4aa92548dcbd27fa7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '61fe484d7105afd387cad653c483c885') in 0.329165 seconds 
+  Import took 0.437853 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 5.178290 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Female/FPlasmaGun.anim
-  artifactKey: Guid(118d961e1f19b24499c7d8a24e236e11) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Female/FPlasmaGun.anim using Guid(118d961e1f19b24499c7d8a24e236e11) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '39e60b1631d56daa27635a2d70fc9636') in 0.003371 seconds 
-  Import took 0.007698 seconds .
+  Time since last request: 0.000293 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00019.png
+  artifactKey: Guid(c550b7300482aa546bf90113e44487d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00019.png using Guid(c550b7300482aa546bf90113e44487d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4377260284e2cd227ff6b302e92965dd') in 0.534286 seconds 
+  Import took 0.748104 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.310750 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Female/FWaterMinigun.anim
-  artifactKey: Guid(12172e21adcd4da4c95ed6abe884318a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Female/FWaterMinigun.anim using Guid(12172e21adcd4da4c95ed6abe884318a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f027e05437d552512221c5faccf6cd2f') in 0.002983 seconds 
-  Import took 0.006868 seconds .
+  Time since last request: 0.000280 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00017.png
+  artifactKey: Guid(95d15e145de150347ba31be758c22c06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00017.png using Guid(95d15e145de150347ba31be758c22c06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '95d97e066e75a13b2d14ce22856ee5e3') in 0.524424 seconds 
+  Import took 0.562729 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 7.816817 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Male/AirKnife.anim
-  artifactKey: Guid(431825476d842d447867097d581e22e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Male/AirKnife.anim using Guid(431825476d842d447867097d581e22e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4fdd888c5913d021d3439432add49bc5') in 0.002794 seconds 
-  Import took 0.023213 seconds .
+  Time since last request: 0.000308 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00017.png
+  artifactKey: Guid(485c00e7a7ba23741b0785a7958f4fc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00017.png using Guid(485c00e7a7ba23741b0785a7958f4fc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '282d2559fca058fd37cbf77df6e8cad5') in 0.042942 seconds 
+  Import took 0.444405 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 9.280725 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Male/Ak-47.anim
-  artifactKey: Guid(528a47a5520f9394483e568081034e21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Male/Ak-47.anim using Guid(528a47a5520f9394483e568081034e21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6718eb5b30ba3820f78c5c29cb214a09') in 0.030444 seconds 
-  Import took 0.033951 seconds .
+  Time since last request: 0.000290 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00020.png
+  artifactKey: Guid(ed205e53a2a150d4da73b53c6a51f595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00020.png using Guid(ed205e53a2a150d4da73b53c6a51f595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a517eb7259927d94f547686e881d44e') in 0.603161 seconds 
+  Import took 0.613560 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.004252 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Male/Ak-47.anim
-  artifactKey: Guid(528a47a5520f9394483e568081034e21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Male/Ak-47.anim using Guid(528a47a5520f9394483e568081034e21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6718eb5b30ba3820f78c5c29cb214a09') in 0.002725 seconds 
-  Import took 0.006667 seconds .
+  Time since last request: 0.000281 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00006.png
+  artifactKey: Guid(727b54eeab0a7a641bd468cb835effc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00006.png using Guid(727b54eeab0a7a641bd468cb835effc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ba8f5fcd8c572654d6508e132a48e15') in 0.509145 seconds 
+  Import took 0.859580 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.175105 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Male/BeerShotgun.anim
-  artifactKey: Guid(d39b601c885bb534097c4ab14022d1a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Male/BeerShotgun.anim using Guid(d39b601c885bb534097c4ab14022d1a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7156acf94d3e4098757dea47d57514ff') in 0.002729 seconds 
-  Import took 0.007241 seconds .
+  Time since last request: 0.000333 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00028.png
+  artifactKey: Guid(a10189eb3893add4884ce23dd2702049) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00028.png using Guid(a10189eb3893add4884ce23dd2702049) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '29ee4c3d15dbc96fd39434e22617da3d') in 0.484414 seconds 
+  Import took 0.494745 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 7.325833 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Male/Flamethrower.anim
-  artifactKey: Guid(a697236f9cb0e91458015bf043cebbca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Male/Flamethrower.anim using Guid(a697236f9cb0e91458015bf043cebbca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7183ae679931df5147388c83f0013a6d') in 0.003202 seconds 
-  Import took 0.007060 seconds .
+  Time since last request: 0.000312 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00032.png
+  artifactKey: Guid(7828fdaf7af0e7941abccbab322c81f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00032.png using Guid(7828fdaf7af0e7941abccbab322c81f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8805b2a3356d16845e51942b059e0719') in 0.238968 seconds 
+  Import took 0.307569 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 4.444685 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/Male/GoldenHammer.anim
-  artifactKey: Guid(ca642650deee5e14c9b2fb962d20b2f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/Male/GoldenHammer.anim using Guid(ca642650deee5e14c9b2fb962d20b2f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3710e3098fe428732910b5d76ae1e349') in 0.003201 seconds 
-  Import took 0.007149 seconds .
+  Time since last request: 0.000335 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00039.png
+  artifactKey: Guid(6331865f48434744a85c7be116f9181d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00039.png using Guid(6331865f48434744a85c7be116f9181d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb99aefcd66d6c0d46d03ffbd7118568') in 0.587280 seconds 
+  Import took 0.600939 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 41.827288 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Male/AirKnife.anim
-  artifactKey: Guid(abfecb65962f07c41bbc6f9104310b1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Male/AirKnife.anim using Guid(abfecb65962f07c41bbc6f9104310b1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f0e369391c08ab70e700d7eb5c66b08') in 0.003351 seconds 
-  Import took 0.008312 seconds .
+  Time since last request: 0.000349 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00000.png
+  artifactKey: Guid(a1830c368f1617c45ba28080c3c7aadf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00000.png using Guid(a1830c368f1617c45ba28080c3c7aadf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5bb53c5b1376abc2ea424f944baf687a') in 0.370205 seconds 
+  Import took 0.434993 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 9.912315 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Male/BeerShotgun.anim
-  artifactKey: Guid(5fb7278f1ee3da74ea535b63158784d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Male/BeerShotgun.anim using Guid(5fb7278f1ee3da74ea535b63158784d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be6f1136b59640496c3552c1e172cde2') in 0.004804 seconds 
-  Import took 0.009400 seconds .
+  Time since last request: 0.000315 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00041.png
+  artifactKey: Guid(80174bafe52a3b2468a40d5655ac9a15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00041.png using Guid(80174bafe52a3b2468a40d5655ac9a15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '922fcac474c2e6b77cba5c00054cc66c') in 0.662680 seconds 
+  Import took 0.753564 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 7.072932 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Male/Flamethrower.anim
-  artifactKey: Guid(e5ed0bb27fcb5524c9a3edb46a7e4c04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Male/Flamethrower.anim using Guid(e5ed0bb27fcb5524c9a3edb46a7e4c04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44162ef94f9e406ed74ce1274188b3e0') in 0.003025 seconds 
-  Import took 0.007052 seconds .
+  Time since last request: 0.000321 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00016.png
+  artifactKey: Guid(869fdf328ed59d5479a24562bca2f234) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00016.png using Guid(869fdf328ed59d5479a24562bca2f234) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa2467e41151a52e7cbaff90c8b68460') in 0.488950 seconds 
+  Import took 0.491960 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 63.302327 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Male/MindGun.anim
-  artifactKey: Guid(2fbf5d73ccea73a41bab9e256ccd602c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Male/MindGun.anim using Guid(2fbf5d73ccea73a41bab9e256ccd602c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f118e39bad4273c7a0434f79256755c3') in 0.007122 seconds 
-  Import took 0.010675 seconds .
+  Time since last request: 0.000395 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00004.png
+  artifactKey: Guid(dc83da9bc20aab3418d23643335e510d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00004.png using Guid(dc83da9bc20aab3418d23643335e510d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6dbfba3972c214ef09f16830244e4b02') in 0.053049 seconds 
+  Import took 0.086498 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 14.528805 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Male/PlasmaGun.anim
-  artifactKey: Guid(556f77888f8f2d5489d24c87f19333f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Male/PlasmaGun.anim using Guid(556f77888f8f2d5489d24c87f19333f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dd97531f5eb7835525d97930da4c8f12') in 0.007002 seconds 
-  Import took 0.010503 seconds .
+  Time since last request: 0.000311 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00014.png
+  artifactKey: Guid(b1374a2b59346de47b07be73f6e9fb54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00014.png using Guid(b1374a2b59346de47b07be73f6e9fb54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '996d7c846f7f91d3ae752b0fdd0f9373') in 0.541257 seconds 
+  Import took 0.712786 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 34.929865 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FariKnife.anim
-  artifactKey: Guid(fcc184830d75d614c97bb9c6501f77b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FariKnife.anim using Guid(fcc184830d75d614c97bb9c6501f77b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '102109405af3fa96f659708ea12876cb') in 0.007204 seconds 
-  Import took 0.011046 seconds .
+  Time since last request: 0.000378 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00030.png
+  artifactKey: Guid(74a28eda6d476e145ba68194c764ec18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00030.png using Guid(74a28eda6d476e145ba68194c764ec18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f1a9582ebe1664a3d0390e51fe7e42e') in 0.593452 seconds 
+  Import took 0.611341 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 7.510508 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FBeerShotgun.anim
-  artifactKey: Guid(65f7e792adc49cf4583bf3054bfd02af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FBeerShotgun.anim using Guid(65f7e792adc49cf4583bf3054bfd02af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '62a063174c4f8728921bc7a5d9d6976b') in 0.002467 seconds 
-  Import took 0.006165 seconds .
+  Time since last request: 0.000317 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00042.png
+  artifactKey: Guid(91a86433f44ec7843a5b2e47529a2113) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00042.png using Guid(91a86433f44ec7843a5b2e47529a2113) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2ac406c1e716749b6376362c618edc62') in 0.481284 seconds 
+  Import took 0.498006 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 7.032743 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FFlamethrower.anim
-  artifactKey: Guid(8000415ef40499d48b1d4f3e3895b195) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FFlamethrower.anim using Guid(8000415ef40499d48b1d4f3e3895b195) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '273ee7c69c00a3be91a77907884dbc2d') in 0.002858 seconds 
-  Import took 0.006460 seconds .
+  Time since last request: 0.000318 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00044.png
+  artifactKey: Guid(a0cecb491785b3b488762bf1b7c454b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00044.png using Guid(a0cecb491785b3b488762bf1b7c454b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f077c7152778a763cfbefd3b8e4180f') in 0.663640 seconds 
+  Import took 0.695435 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 43.911659 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FMindGun.anim
-  artifactKey: Guid(2b55c7537a993c74a90736f703905b86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FMindGun.anim using Guid(2b55c7537a993c74a90736f703905b86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dbbc82cafa39cb2242b2e1085f60d729') in 0.002754 seconds 
-  Import took 0.006833 seconds .
+  Time since last request: 0.000318 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00012.png
+  artifactKey: Guid(9288fadfdc1fa7c43b44eea5048bd9a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00012.png using Guid(9288fadfdc1fa7c43b44eea5048bd9a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9b2483c408961ad269c24b35259f744b') in 0.497428 seconds 
+  Import took 0.574438 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.936581 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FPlasmaGun.anim
-  artifactKey: Guid(532e806520d889c4790c33734a3d8317) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FPlasmaGun.anim using Guid(532e806520d889c4790c33734a3d8317) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc9a3f24c2be890c24d4c46498012033') in 0.003342 seconds 
-  Import took 0.058133 seconds .
+  Time since last request: 0.000468 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00015.png
+  artifactKey: Guid(89b6b15432fba8944a625d94b38e9fa5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00015.png using Guid(89b6b15432fba8944a625d94b38e9fa5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '749b62e1345b1b0b4aa66945da67e43e') in 0.715064 seconds 
+  Import took 0.792786 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 7.961891 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FWaterMinigun.anim
-  artifactKey: Guid(99496cd795c143f49b479966248a1fd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FWaterMinigun.anim using Guid(99496cd795c143f49b479966248a1fd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32c190a7b2b44cb4ecd56c5ff7d0a14a') in 0.002828 seconds 
-  Import took 0.031321 seconds .
+  Time since last request: 0.000323 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00035.png
+  artifactKey: Guid(9c425db7737e7d149bf2b228be2e4d35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00035.png using Guid(9c425db7737e7d149bf2b228be2e4d35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ccedf5b9dd3cb7d5cfb8b4d3ffeb3b2') in 0.363768 seconds 
+  Import took 0.367142 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 71.228422 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Male/Idle.anim
-  artifactKey: Guid(4f0cf288d44fae74eb40263f9cf8175f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Male/Idle.anim using Guid(4f0cf288d44fae74eb40263f9cf8175f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1956de838be2f180cf805a4f0e0993de') in 0.003257 seconds 
-  Import took 0.007564 seconds .
+  Time since last request: 0.000309 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00025.png
+  artifactKey: Guid(960311ad7c9a79d4c8446086117aa435) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00025.png using Guid(960311ad7c9a79d4c8446086117aa435) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ffe6bdb815cc3050054460f8ce180ac8') in 0.389101 seconds 
+  Import took 0.624317 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.994435 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Male/MindGun.anim
-  artifactKey: Guid(b6c252f16f043fa49b33b091bfbb0aa5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Male/MindGun.anim using Guid(b6c252f16f043fa49b33b091bfbb0aa5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ced1f3741eec061ce5f8b0d35118fae4') in 0.002593 seconds 
-  Import took 0.006313 seconds .
+  Time since last request: 0.000318 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00007.png
+  artifactKey: Guid(b4298983b06d99d4aa3a3b02e33a638a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00007.png using Guid(b4298983b06d99d4aa3a3b02e33a638a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ac511969b4efd8523622cd1553a535cf') in 0.421586 seconds 
+  Import took 0.497004 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 8.619567 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Male/PlasmaGun.anim
-  artifactKey: Guid(2994dea9654a876458f84ac53c24ca88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Male/PlasmaGun.anim using Guid(2994dea9654a876458f84ac53c24ca88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2d914be611cb0d0e405bf645c753b79') in 0.002963 seconds 
-  Import took 0.006748 seconds .
+  Time since last request: 0.000282 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00016.png
+  artifactKey: Guid(efe4d6a9f5167a945b4ec792ebd0d425) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00016.png using Guid(efe4d6a9f5167a945b4ec792ebd0d425) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72e05a86f6a77bba724f79d8f360ba7b') in 0.349541 seconds 
+  Import took 0.389931 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.306296 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Male/WaterMinigun.anim
-  artifactKey: Guid(202401c4519929b4aa4eacad9baa7c83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Male/WaterMinigun.anim using Guid(202401c4519929b4aa4eacad9baa7c83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f4fbe8affe80e8c862e3f4edcbb1785') in 0.002662 seconds 
-  Import took 0.006366 seconds .
+  Time since last request: 0.000289 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00029.png
+  artifactKey: Guid(36b15533b1c36d440b7ae6a94231e742) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00029.png using Guid(36b15533b1c36d440b7ae6a94231e742) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '29acc73a3be536f57c6bb48410cf6931') in 0.461774 seconds 
+  Import took 0.623300 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 22.351170 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Male/Idle.anim
-  artifactKey: Guid(4f0cf288d44fae74eb40263f9cf8175f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Male/Idle.anim using Guid(4f0cf288d44fae74eb40263f9cf8175f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3238388f33ee6460ace8a994904c4ffa') in 0.002499 seconds 
-  Import took 0.006303 seconds .
+  Time since last request: 0.000320 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00008.png
+  artifactKey: Guid(ec702300288a94a488408584a05c3338) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00008.png using Guid(ec702300288a94a488408584a05c3338) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd37bcc392322b89ffc6260d20b7c470f') in 0.832647 seconds 
+  Import took 0.847486 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 8.226720 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FariKnife.anim
-  artifactKey: Guid(fcc184830d75d614c97bb9c6501f77b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FariKnife.anim using Guid(fcc184830d75d614c97bb9c6501f77b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf22a6aec42992de20d5debf76b78151') in 0.002520 seconds 
-  Import took 0.006556 seconds .
+  Time since last request: 0.000303 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00022.png
+  artifactKey: Guid(addb56ec4723af54c9eeb35a638d30a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/Shotgun_Humano2_00022.png using Guid(addb56ec4723af54c9eeb35a638d30a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fbcdb5276fcb3457626c141c29201a37') in 0.052191 seconds 
+  Import took 0.119599 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.493293 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FBeerShotgun.anim
-  artifactKey: Guid(65f7e792adc49cf4583bf3054bfd02af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FBeerShotgun.anim using Guid(65f7e792adc49cf4583bf3054bfd02af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '91cca6e860a172e75602b73afff95146') in 0.002860 seconds 
-  Import took 0.006579 seconds .
+  Time since last request: 0.000301 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00014.png
+  artifactKey: Guid(f3992df4cfb35274ca6a681477c7b7d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00014.png using Guid(f3992df4cfb35274ca6a681477c7b7d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b42c817502727780aac21af5b26870a1') in 0.569371 seconds 
+  Import took 0.632860 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.041924 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FFlamethrower.anim
-  artifactKey: Guid(8000415ef40499d48b1d4f3e3895b195) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FFlamethrower.anim using Guid(8000415ef40499d48b1d4f3e3895b195) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56a0cc1f5b764de70114009617ea9e14') in 0.002456 seconds 
-  Import took 0.006364 seconds .
+  Time since last request: 0.000294 seconds.
+  path: Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00002.png
+  artifactKey: Guid(c1d273ae4636ec8459c27b4d1b4cf5ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/CharacterAnimations/Players/Human/Female/Images/waterMinigun_humano2_00002.png using Guid(c1d273ae4636ec8459c27b4d1b4cf5ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f09e37cbdab02e62d001a73c14331cd5') in 0.496419 seconds 
+  Import took 0.535542 seconds .
 
 ========================================================================
-Received Import Request.
-  Time since last request: 0.035688 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FGoldenHammer.anim
-  artifactKey: Guid(8001153866f0a924893ae9d211c514e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FGoldenHammer.anim using Guid(8001153866f0a924893ae9d211c514e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c04bd06bb5b21d747509817c16c8dc97') in 0.003285 seconds 
-  Import took 0.007114 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.016897 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/Fidle.anim
-  artifactKey: Guid(bfd9ac48cef8ea647a0136fd9d64980e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/Fidle.anim using Guid(bfd9ac48cef8ea647a0136fd9d64980e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a17e0b83b7143eea058d12b412dc7df8') in 0.002324 seconds 
-  Import took 0.006091 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.069665 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FMindGun.anim
-  artifactKey: Guid(2b55c7537a993c74a90736f703905b86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FMindGun.anim using Guid(2b55c7537a993c74a90736f703905b86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7cf26a4e70a39cb5c97581f3608b56c6') in 0.002823 seconds 
-  Import took 0.014947 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.008166 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FPlasmaGun.anim
-  artifactKey: Guid(532e806520d889c4790c33734a3d8317) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FPlasmaGun.anim using Guid(532e806520d889c4790c33734a3d8317) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f0aa5be6354b025e35f0dd09dc2f7c4') in 0.002417 seconds 
-  Import took 0.006268 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.023145 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FWaterMinigun.anim
-  artifactKey: Guid(99496cd795c143f49b479966248a1fd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/FWaterMinigun.anim using Guid(99496cd795c143f49b479966248a1fd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '246d23289b2748c3db489622cb850d41') in 0.002594 seconds 
-  Import took 0.006855 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.990043 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Female/WaterMinigun_Reptiliano 2_00000 1.controller
-  artifactKey: Guid(affb484cd59cc9c47853b15d31e1a5b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Female/WaterMinigun_Reptiliano 2_00000 1.controller using Guid(affb484cd59cc9c47853b15d31e1a5b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68f2ca4cf40919115964fa3f23e94d52') in 0.006905 seconds 
-  Import took 0.152022 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.981955 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Male/Flamethrower.anim
-  artifactKey: Guid(f47a9a3cc90e7c748952c11166e19528) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Male/Flamethrower.anim using Guid(f47a9a3cc90e7c748952c11166e19528) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6db44c75c8f605bf40493944e2e2f0de') in 0.033114 seconds 
-  Import took 0.038369 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.523631 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Male/BeerShotgun.anim
-  artifactKey: Guid(1350314da3e6bc142b5347336f7217fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Male/BeerShotgun.anim using Guid(1350314da3e6bc142b5347336f7217fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '117c0a09199b3e89e7614360f3838c35') in 0.002428 seconds 
-  Import took 0.006198 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.412172 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Male/PlasmaGun.anim
-  artifactKey: Guid(2994dea9654a876458f84ac53c24ca88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Male/PlasmaGun.anim using Guid(2994dea9654a876458f84ac53c24ca88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ce8df3ab0d31e22f2dcdae4725e439d') in 0.002385 seconds 
-  Import took 0.006273 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.208151 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/Male/WaterMinigun.anim
-  artifactKey: Guid(202401c4519929b4aa4eacad9baa7c83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/Male/WaterMinigun.anim using Guid(202401c4519929b4aa4eacad9baa7c83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9576f2b43f5c3bf033ca02852521661') in 0.002595 seconds 
-  Import took 0.006131 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.245144 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/AirKnife_yowai_00000 1.controller
-  artifactKey: Guid(902d0ddf12f76e141bea83837e1b9bd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/AirKnife_yowai_00000 1.controller using Guid(902d0ddf12f76e141bea83837e1b9bd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad3d190485f19942e9ab0071bbf82897') in 0.007530 seconds 
-  Import took 0.011115 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.856714 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/Ak_yowai_00000 1.controller
-  artifactKey: Guid(238a864f9da94d948bb0657282006c3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/Ak_yowai_00000 1.controller using Guid(238a864f9da94d948bb0657282006c3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e91131a1ce5edd72612ee49c17902d9') in 0.006176 seconds 
-  Import took 0.009793 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.661680 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/Beershotgun_yowai_00000 1.controller
-  artifactKey: Guid(7189b7b2381ab2942a61780a8bf332cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/Beershotgun_yowai_00000 1.controller using Guid(7189b7b2381ab2942a61780a8bf332cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f84172b031d3571ff5674099d1c9045') in 0.006336 seconds 
-  Import took 0.009905 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.095784 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/Electro_yowai_00000 1.controller
-  artifactKey: Guid(60c67b3e7e11a664fa24939a6e458dc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/Electro_yowai_00000 1.controller using Guid(60c67b3e7e11a664fa24939a6e458dc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17e59cc635d5a04db666012d1a4b956d') in 0.006530 seconds 
-  Import took 0.010082 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000793 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/Electro_yowai_00000 1.controller
-  artifactKey: Guid(60c67b3e7e11a664fa24939a6e458dc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/Electro_yowai_00000 1.controller using Guid(60c67b3e7e11a664fa24939a6e458dc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17e59cc635d5a04db666012d1a4b956d') in 0.002206 seconds 
-  Import took 0.005743 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.000684 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/FAirKnife.anim
-  artifactKey: Guid(cf34bf606d774e34d88ccd6cd7139358) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/FAirKnife.anim using Guid(cf34bf606d774e34d88ccd6cd7139358) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f876f5076565bdc2d57ce7e8b0ca547') in 0.002476 seconds 
-  Import took 0.031389 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 208.561149 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/FBeerShotgun.anim
-  artifactKey: Guid(86aec4003b364a341abe5393f17ea25b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/FBeerShotgun.anim using Guid(86aec4003b364a341abe5393f17ea25b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3300d3a9b2577d398d7c712e798e1076') in 0.003776 seconds 
-  Import took 0.008143 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.822236 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/FFlamethrower.anim
-  artifactKey: Guid(2ed12ce510be9694abfd596432e76dd6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/FFlamethrower.anim using Guid(2ed12ce510be9694abfd596432e76dd6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '96b5441a21e933f89e7158fce9f93d09') in 0.002445 seconds 
-  Import took 0.020403 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.322999 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/FGoldenHammer.anim
-  artifactKey: Guid(789ea2e029b0bcc4c92003d0742fd460) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/FGoldenHammer.anim using Guid(789ea2e029b0bcc4c92003d0742fd460) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f30703389032f09021f4fd0ee0ee4d82') in 0.003208 seconds 
-  Import took 0.040033 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.008447 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/Flamethrower_yowai_00000 1.controller
-  artifactKey: Guid(de8d51de7653eed43968d861996f6314) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/Flamethrower_yowai_00000 1.controller using Guid(de8d51de7653eed43968d861996f6314) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5084a22249c2d60331c70d973ca75cbf') in 0.007447 seconds 
-  Import took 0.011534 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.635538 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/Fidle.anim
-  artifactKey: Guid(a7f723d08d1697842bcc0b5439c4abbf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/Fidle.anim using Guid(a7f723d08d1697842bcc0b5439c4abbf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cec465f4b7ad46397842f5b8c3271fc5') in 0.006865 seconds 
-  Import took 0.010572 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.501384 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/FMindGun.anim
-  artifactKey: Guid(dfe1ad5ef9b96574a81607bbfc6ab0f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/FMindGun.anim using Guid(dfe1ad5ef9b96574a81607bbfc6ab0f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81533887d9d5a1851b798760639f558f') in 0.002684 seconds 
-  Import took 0.006459 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.069109 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/FPlasmaGun.anim
-  artifactKey: Guid(313c97398ed9ab7489e32254dd13821c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/FPlasmaGun.anim using Guid(313c97398ed9ab7489e32254dd13821c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b0f8acc9ef7d04982c04b3e294496d76') in 0.002031 seconds 
-  Import took 0.019903 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 68.153328 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/FFlamethrower.anim
-  artifactKey: Guid(2ed12ce510be9694abfd596432e76dd6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/FFlamethrower.anim using Guid(2ed12ce510be9694abfd596432e76dd6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0da3be10b7dae78260de5cb750cbf19') in 0.003109 seconds 
-  Import took 0.007759 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.487128 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/FGoldenHammer.anim
-  artifactKey: Guid(789ea2e029b0bcc4c92003d0742fd460) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/FGoldenHammer.anim using Guid(789ea2e029b0bcc4c92003d0742fd460) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84ce3f7f8382442e89f5279911b9407b') in 0.002620 seconds 
-  Import took 0.050060 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.586203 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/Fidle.anim
-  artifactKey: Guid(a7f723d08d1697842bcc0b5439c4abbf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/Fidle.anim using Guid(a7f723d08d1697842bcc0b5439c4abbf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99b5e1c885c7800e9090300092fafb4d') in 0.002917 seconds 
-  Import took 0.025974 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.146104 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/FMindGun.anim
-  artifactKey: Guid(dfe1ad5ef9b96574a81607bbfc6ab0f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/FMindGun.anim using Guid(dfe1ad5ef9b96574a81607bbfc6ab0f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '818647fdeded601397d3df06b5f05b8a') in 0.002780 seconds 
-  Import took 0.140808 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.970287 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/FWaterMinigun.anim
-  artifactKey: Guid(f85427f03282ccf49aef51f8e548f000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/FWaterMinigun.anim using Guid(f85427f03282ccf49aef51f8e548f000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e28694bf6d82a52d15695378de2b7def') in 0.002651 seconds 
-  Import took 0.042232 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 13.404632 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/Hammer_yowai_00000 1.controller
-  artifactKey: Guid(dc7a20cbae0643842a3a332ec1740422) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/Hammer_yowai_00000 1.controller using Guid(dc7a20cbae0643842a3a332ec1740422) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72ffb6d54eeedd500b1cc57d5bfe20f4') in 0.007539 seconds 
-  Import took 0.011619 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.506429 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/idle_yowai_00000.controller
-  artifactKey: Guid(b1b2f4cbca7acc34d801af9aa700b636) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/idle_yowai_00000.controller using Guid(b1b2f4cbca7acc34d801af9aa700b636) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '402d5c0e740001e6ad85925db3a43aa3') in 0.006690 seconds 
-  Import took 0.039486 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.848964 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/mindGun_yowai_00000 1.controller
-  artifactKey: Guid(e248146369adf16409272299a4ecb0bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/mindGun_yowai_00000 1.controller using Guid(e248146369adf16409272299a4ecb0bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0fa90c76438957ef3baba32513843abe') in 0.006522 seconds 
-  Import took 0.021899 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.473882 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Female/WaterMinigun_yowai_00000 1.controller
-  artifactKey: Guid(c4b0d29748d65b64295db68859e7a9dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Female/WaterMinigun_yowai_00000 1.controller using Guid(c4b0d29748d65b64295db68859e7a9dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d3e7140df998f1f24a46ce5ee9b60cc') in 0.007236 seconds 
-  Import took 0.030325 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.319878 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/AirKnife.anim
-  artifactKey: Guid(ae85484067b426c4ebbf27691c9f61b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/AirKnife.anim using Guid(ae85484067b426c4ebbf27691c9f61b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17cc197cf481627d761699b97d03acf0') in 0.002605 seconds 
-  Import took 0.006582 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.065047 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/AirKnife_yowai 2_00000.controller
-  artifactKey: Guid(07a58628c8b5b4440b458c8feffe123d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/AirKnife_yowai 2_00000.controller using Guid(07a58628c8b5b4440b458c8feffe123d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '48572353fffbaa7d648c0df2ae623910') in 0.007488 seconds 
-  Import took 0.026004 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.889960 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Ak_yowai 2_00000.controller
-  artifactKey: Guid(53b4e23073f297441a487d64863e7a94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Ak_yowai 2_00000.controller using Guid(53b4e23073f297441a487d64863e7a94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83ad25f8e9bfa97a8e88194452b1dddd') in 0.006430 seconds 
-  Import took 0.051377 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 349.157469 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/idle_yowai 2_00000.controller
-  artifactKey: Guid(40fcc8a27a5395b4094a933f23c0e737) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/idle_yowai 2_00000.controller using Guid(40fcc8a27a5395b4094a933f23c0e737) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05eb75f91d410abc62a430a0099f3662') in 0.013729 seconds 
-  Import took 0.050861 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.680068 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/AirKnife.anim
-  artifactKey: Guid(ae85484067b426c4ebbf27691c9f61b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/AirKnife.anim using Guid(ae85484067b426c4ebbf27691c9f61b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05b76f09121ec4031731c4229ef7d7a9') in 0.003098 seconds 
-  Import took 0.024894 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.384924 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/AirKnife_yowai 2_00000 1.controller
-  artifactKey: Guid(38ef69be28f5c79468f5c52f597e82d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/AirKnife_yowai 2_00000 1.controller using Guid(38ef69be28f5c79468f5c52f597e82d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8010eb4e84ed7ec538968187ae67118') in 0.007454 seconds 
-  Import took 0.592243 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.658861 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Ak47.anim
-  artifactKey: Guid(c22ac759655df3e47aec9c8a28b78f48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Ak47.anim using Guid(c22ac759655df3e47aec9c8a28b78f48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd217d260af1ef5a24ad9b39adc20622') in 0.006409 seconds 
-  Import took 0.090926 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.129806 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Ak_yowai 2_00000 1.controller
-  artifactKey: Guid(aa3fad27582b22d42be5c930f2367954) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Ak_yowai 2_00000 1.controller using Guid(aa3fad27582b22d42be5c930f2367954) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d11ab0a39b69afea7afbbe04a4bf766') in 0.008770 seconds 
-  Import took 0.012411 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000944 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Ak_yowai 2_00000 1.controller
-  artifactKey: Guid(aa3fad27582b22d42be5c930f2367954) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Ak_yowai 2_00000 1.controller using Guid(aa3fad27582b22d42be5c930f2367954) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d11ab0a39b69afea7afbbe04a4bf766') in 0.003054 seconds 
-  Import took 0.007064 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.038380 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/BeerShotgun.anim
-  artifactKey: Guid(d53dc517cebdeac4bbe9540b43365542) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/BeerShotgun.anim using Guid(d53dc517cebdeac4bbe9540b43365542) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '486357b4b4b50a67cfe6e6fdfee84ac5') in 0.003630 seconds 
-  Import took 0.078854 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.029983 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Beershotgun_yowai 2_00000 1.controller
-  artifactKey: Guid(c4f0137185dd2cf41b91fb3b29f2d113) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Beershotgun_yowai 2_00000 1.controller using Guid(c4f0137185dd2cf41b91fb3b29f2d113) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a32beede7a8e5e369ab21a7862edd05') in 0.008371 seconds 
-  Import took 0.029603 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.637800 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Beershotgun_yowai 2_00000.controller
-  artifactKey: Guid(bcfcf80af0eb7ac40ae6a9f3c6261cbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Beershotgun_yowai 2_00000.controller using Guid(bcfcf80af0eb7ac40ae6a9f3c6261cbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a26da9beb03d86110d3bc1d1cebaa8a') in 0.006023 seconds 
-  Import took 0.061058 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.386664 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Electro_yowai 2_00000 1.controller
-  artifactKey: Guid(83e235437be0f664487448b0ce281d89) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Electro_yowai 2_00000 1.controller using Guid(83e235437be0f664487448b0ce281d89) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ea4e250eceebc0f4464de9eb3c06316') in 0.006892 seconds 
-  Import took 0.201243 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.568121 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Electro_yowai 2_00000.controller
-  artifactKey: Guid(86f6a6c67056f3e41a3c89fa449f2a27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Electro_yowai 2_00000.controller using Guid(86f6a6c67056f3e41a3c89fa449f2a27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4cb170a79d03eee1cda5edae272f725') in 0.021351 seconds 
-  Import took 0.073588 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.980163 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Flamethrower.anim
-  artifactKey: Guid(db1a0d34368a460478918e59d57ed39b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Flamethrower.anim using Guid(db1a0d34368a460478918e59d57ed39b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fa2ba01d5c98dea45cb9ddb937c08425') in 0.002905 seconds 
-  Import took 0.369434 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.963315 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Flamethrower_yowai 2_00000 1.controller
-  artifactKey: Guid(6345f336c0ace78428da63aa414e684d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Flamethrower_yowai 2_00000 1.controller using Guid(6345f336c0ace78428da63aa414e684d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adc22ad6b121e22386add50f34e53b91') in 0.007096 seconds 
-  Import took 0.018487 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.605316 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Flamethrower_yowai 2_00000.controller
-  artifactKey: Guid(18323eabb94d8cf4eaf6819b8609ef67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Flamethrower_yowai 2_00000.controller using Guid(18323eabb94d8cf4eaf6819b8609ef67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb3b6f939a4dfc5c65c0ca8d8517c3ca') in 0.006211 seconds 
-  Import took 0.043169 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.143943 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/GoldenHammer.anim
-  artifactKey: Guid(c03c3cbf9c653b94c9fda31cd50ad9d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/GoldenHammer.anim using Guid(c03c3cbf9c653b94c9fda31cd50ad9d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6fc16ba64d6c2fb5fee1a82d3e3c85fd') in 0.002701 seconds 
-  Import took 0.006364 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.246856 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Hammer_yowai 2_00000 1.controller
-  artifactKey: Guid(710fb7a06e608704e9677d33a5a79c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Hammer_yowai 2_00000 1.controller using Guid(710fb7a06e608704e9677d33a5a79c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7d33a60e437e231362b4b05ffc7cf32') in 0.006772 seconds 
-  Import took 0.010502 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.468059 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Hammer_yowai 2_00000.controller
-  artifactKey: Guid(e5b947767719ea840af7f8105f4cb59a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Hammer_yowai 2_00000.controller using Guid(e5b947767719ea840af7f8105f4cb59a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9704d0cfc785b399b1e5098fd0c0b54f') in 0.006797 seconds 
-  Import took 0.078625 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.245046 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/Idle.anim
-  artifactKey: Guid(4471c6de5b4418e4da409b78adac7310) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/Idle.anim using Guid(4471c6de5b4418e4da409b78adac7310) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c4fc4a2119017783412fed700e8918b') in 0.002628 seconds 
-  Import took 0.006643 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.350224 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/idle_yowai 2_00000 1.controller
-  artifactKey: Guid(1de4ae84674e60945922b0536ff121ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/idle_yowai 2_00000 1.controller using Guid(1de4ae84674e60945922b0536ff121ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '861d672211c6287342d6e7fe4cb5d36f') in 0.006216 seconds 
-  Import took 0.038192 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.642103 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/MindGun.anim
-  artifactKey: Guid(2e78bd44b0fbd424fb36667dd6f5e3e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/MindGun.anim using Guid(2e78bd44b0fbd424fb36667dd6f5e3e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'da5a4cc346cc25998bbde6b783cff652') in 0.002540 seconds 
-  Import took 0.052850 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.867872 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/mindGun_yowai 2_00000 1.controller
-  artifactKey: Guid(53b1b877b30c818489752a7211fe6c46) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/mindGun_yowai 2_00000 1.controller using Guid(53b1b877b30c818489752a7211fe6c46) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3c74c8ca1015ccbeca96721e1091699') in 0.008572 seconds 
-  Import took 0.051774 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.431638 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/mindGun_yowai 2_00000.controller
-  artifactKey: Guid(6012dd9a9d518f94ab05b6425726b7b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/mindGun_yowai 2_00000.controller using Guid(6012dd9a9d518f94ab05b6425726b7b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '656e4a3e99e65d0e02621248907131de') in 0.006587 seconds 
-  Import took 0.253665 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.344576 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/PlasmaGun.anim
-  artifactKey: Guid(823887e4a967b04408f367000aaf257c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/PlasmaGun.anim using Guid(823887e4a967b04408f367000aaf257c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f0c5e63627704d521fbc83be1c93c33c') in 0.002925 seconds 
-  Import took 0.006959 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.130236 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/WaterMinigun.anim
-  artifactKey: Guid(2b90bfe91eb2b3947bfd273c4a531b8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/WaterMinigun.anim using Guid(2b90bfe91eb2b3947bfd273c4a531b8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad82098ee235455f02503a7e9bf6a31b') in 0.002230 seconds 
-  Import took 0.006455 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.709800 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/WaterMinigun_yowai 2_00000 1.controller
-  artifactKey: Guid(d4095eb0e8e997e4592484491f23c46b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/WaterMinigun_yowai 2_00000 1.controller using Guid(d4095eb0e8e997e4592484491f23c46b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ca48cb957848376ed1df6808a9d729f') in 0.005847 seconds 
-  Import took 0.029398 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.968761 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/Male/WaterMinigun_yowai 2_00000.controller
-  artifactKey: Guid(ba19f37352e5a9444b321b849c84f9af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/Male/WaterMinigun_yowai 2_00000.controller using Guid(ba19f37352e5a9444b321b849c84f9af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fbf178bff01e15fc21ec7d36fb8edbd4') in 0.005931 seconds 
-  Import took 0.017711 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 68.305774 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/FelsenAnimator 1.controller
-  artifactKey: Guid(5eafc6e3e42d94444bbda205a020745b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/FelsenAnimator 1.controller using Guid(5eafc6e3e42d94444bbda205a020745b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '214d46db95da53d39105fea4a27ab277') in 0.127632 seconds 
-  Import took 0.163817 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 11.390771 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/HumanAnimator.controller
-  artifactKey: Guid(0186256bc53be0742bb25005c81a6404) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/HumanAnimator.controller using Guid(0186256bc53be0742bb25005c81a6404) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1b6ed627f567e6aa288e35a22d2bfc1') in 0.017847 seconds 
-  Import took 0.022033 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.761898 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/SpritesHuman.prefab
-  artifactKey: Guid(aa791005fcd40914a93a047eaad7e932) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/SpritesHuman.prefab using Guid(aa791005fcd40914a93a047eaad7e932) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b944c454a2fddc6b454250f23b68dbe3') in 0.043297 seconds 
-  Import took 0.108196 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.049394 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/HumanAnimator 1.controller
-  artifactKey: Guid(d7378862044465b4aadbe973d8ace087) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/HumanAnimator 1.controller using Guid(d7378862044465b4aadbe973d8ace087) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '984da306af17cb7a169bbc12d779cb42') in 0.016863 seconds 
-  Import took 0.073987 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.153370 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/ReptilianAnimator.controller
-  artifactKey: Guid(7e69ff5085fedf941ad5219d20af1cb3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/ReptilianAnimator.controller using Guid(7e69ff5085fedf941ad5219d20af1cb3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dfa6e0eb77140ef1a4b2b26f8c6befe1') in 0.022911 seconds 
-  Import took 0.036892 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.491887 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/ReptilianAnimator.controller
-  artifactKey: Guid(0186256bc53be0742bb25005c81a6404) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/ReptilianAnimator.controller using Guid(0186256bc53be0742bb25005c81a6404) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c599dbec669f523a50f2d65a8bf614e') in 0.018837 seconds 
-  Import took 0.132802 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.144017 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/SpritesReptilian.prefab
-  artifactKey: Guid(8110428fe147f864193627e266683143) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/SpritesReptilian.prefab using Guid(8110428fe147f864193627e266683143) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50c30c7d759709b47b3b4e73766ce403') in 0.007495 seconds 
-  Import took 0.049045 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.675910 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/ReptilianAnimator 1.controller
-  artifactKey: Guid(7913a38a70084dc41b9eb4b5cd9c0382) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/ReptilianAnimator 1.controller using Guid(7913a38a70084dc41b9eb4b5cd9c0382) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b51c3b829a30b7348ffa0291516fb295') in 0.018714 seconds 
-  Import took 0.022819 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 24.804489 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/HumanAnimator 1.controller
-  artifactKey: Guid(d7378862044465b4aadbe973d8ace087) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/HumanAnimator 1.controller using Guid(d7378862044465b4aadbe973d8ace087) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e21f25b936f7ea415f8ae08b95532669') in 0.082387 seconds 
-  Import took 0.096187 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.520426 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/FelsenAnimator 1.controller
-  artifactKey: Guid(5eafc6e3e42d94444bbda205a020745b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/FelsenAnimator 1.controller using Guid(5eafc6e3e42d94444bbda205a020745b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68cef2b21dc1725470202b09427b7519') in 0.018600 seconds 
-  Import took 0.035234 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.952641 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/ReptilianAnimator 2.controller
-  artifactKey: Guid(052839d37c4c8e74d8a83675fdc7d881) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/ReptilianAnimator 2.controller using Guid(052839d37c4c8e74d8a83675fdc7d881) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17edb47409084874ff7f29e9e60b4a09') in 0.018718 seconds 
-  Import took 0.064725 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.916270 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/ReptilianAnimator 1.controller
-  artifactKey: Guid(7913a38a70084dc41b9eb4b5cd9c0382) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/ReptilianAnimator 1.controller using Guid(7913a38a70084dc41b9eb4b5cd9c0382) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd4d0bbf3affa58ed9dcbdf728d73e697') in 0.012358 seconds 
-  Import took 0.071898 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.734869 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/ReptilianAnimator 2.controller
-  artifactKey: Guid(052839d37c4c8e74d8a83675fdc7d881) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/ReptilianAnimator 2.controller using Guid(052839d37c4c8e74d8a83675fdc7d881) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '958f7650a68222c51481e9e452947183') in 0.015101 seconds 
-  Import took 0.452787 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.595095 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/YowaiAnimator.controller
-  artifactKey: Guid(052839d37c4c8e74d8a83675fdc7d881) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/YowaiAnimator.controller using Guid(052839d37c4c8e74d8a83675fdc7d881) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '24428e93ecee16db15e324a6b6397ac9') in 0.018495 seconds 
-  Import took 0.042515 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.008113 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Yowai/SpritesYowai.prefab
-  artifactKey: Guid(47c8765a65d898c45a5daec6b970cf00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Yowai/SpritesYowai.prefab using Guid(47c8765a65d898c45a5daec6b970cf00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '806124af5cfe57f4ba0b3fa73ad7fc73') in 0.008733 seconds 
-  Import took 0.025567 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.071325 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Reptilian/SpritesReptilian.prefab
-  artifactKey: Guid(8110428fe147f864193627e266683143) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Reptilian/SpritesReptilian.prefab using Guid(8110428fe147f864193627e266683143) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '266e6a72b23caff11ba768245b4deb9a') in 0.004295 seconds 
-  Import took 0.016598 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.324933 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/SpritesHuman.prefab
-  artifactKey: Guid(aa791005fcd40914a93a047eaad7e932) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/SpritesHuman.prefab using Guid(aa791005fcd40914a93a047eaad7e932) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b58629d5912600157a4cc4b0b49aa91') in 0.004189 seconds 
-  Import took 0.042962 seconds .
+Received Prepare
+Refreshing native plugins compatible for Editor in 12.24 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 22 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.5 MB.
+System memory in use after: 83.7 MB.
 
-========================================================================
-Received Import Request.
-  Time since last request: 5.577685 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Felsen/SpritesFelsen.prefab
-  artifactKey: Guid(8fdf86fc88fda904d918a21013db5aab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Felsen/SpritesFelsen.prefab using Guid(8fdf86fc88fda904d918a21013db5aab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3425d60caf985f0eda3254e978205588') in 0.008076 seconds 
-  Import took 0.012293 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 75.440682 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Male/GoldenHammer.anim
-  artifactKey: Guid(5792146640bcca444a5e342493cb5223) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Male/GoldenHammer.anim using Guid(5792146640bcca444a5e342493cb5223) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e356f04dd1a322c825f96ae2ca3ecea2') in 0.003231 seconds 
-  Import took 0.007590 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.309809 seconds.
-  path: Assets/Resources/CharacterAnimations/Players/Human/Male/BeerShotgun.anim
-  artifactKey: Guid(5fb7278f1ee3da74ea535b63158784d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/CharacterAnimations/Players/Human/Male/BeerShotgun.anim using Guid(5fb7278f1ee3da74ea535b63158784d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5114e89160dc3dc4ecfb526bfc8b2ba8') in 0.003413 seconds 
-  Import took 0.007598 seconds .
+Unloading 22 unused Assets to reduce memory usage. Loaded Objects now: 2728.
+Total: 21.543300 ms (FindLiveObjects: 0.200200 ms CreateObjectMapping: 0.091100 ms MarkObjects: 21.231700 ms  DeleteObjects: 0.019200 ms)
 
-AssetImportWorkerClient::OnTransportError - code=2 error=End of file
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 

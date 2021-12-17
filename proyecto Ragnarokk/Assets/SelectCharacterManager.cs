@@ -93,10 +93,12 @@ public class SelectCharacterManager : MonoBehaviour
                 if (isMale) 
                 { 
                     sr.sprite = cf.SpriteMale;
+                    cf.Sprite = cf.SpriteMale;
                     if (cf.animator != null) {cf.animator.SetBool("isMale", true); }
                 }
                 else 
-                { 
+                {
+                    cf.Sprite = cf.SpriteFemale;
                     sr.sprite = cf.SpriteFemale;
                     if (cf.animator != null) { cf.animator.SetBool("isMale", false); }
 
