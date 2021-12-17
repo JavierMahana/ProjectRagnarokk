@@ -7,6 +7,10 @@ public class Fighter : MonoBehaviour
 {
     public SpriteRenderer spRenderer;
     public Animator animator;
+    [HideInInspector]
+    public RuntimeAnimatorController fAnimator;
+    public RuntimeAnimatorController mAnimator;
+
 
     private void Awake()
     {
@@ -30,8 +34,20 @@ public class Fighter : MonoBehaviour
     }
     public void Init(FighterData data)
     {
-        if(data.animatorController != null) { animator.runtimeAnimatorController = data.animatorController; }
         
+        if (data.EnemyController != null) 
+        {
+            animator.runtimeAnimatorController = data.EnemyController;
+        }
+
+        // Para jugadores el animator se asigna en
+        // SelectCharacterManager.FinishSetFighter
+        if (data.FemaleAnimatorController != null && data.MaleAnimatorController != null)
+        {
+            fAnimator = data.FemaleAnimatorController;
+            mAnimator = data.MaleAnimatorController;
+        }
+            
 
         Name = data.Name;
         Atack = data.Atack;

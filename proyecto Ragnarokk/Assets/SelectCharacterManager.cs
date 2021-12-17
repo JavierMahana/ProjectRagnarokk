@@ -88,23 +88,20 @@ public class SelectCharacterManager : MonoBehaviour
                 int pfsCount = pfs.Length;
                 pf.transform.position = new Vector2((-2 + pfsCount), 1);
 
-                var sr = pf.GetComponentInChildren<SpriteRenderer>();
+                var sr = cf.GetComponent<SpriteRenderer>();
                
                 if (isMale) 
-                { 
+                {
+                    cf.animator.runtimeAnimatorController = cf.mAnimator;
                     sr.sprite = cf.SpriteMale;
-                    cf.Sprite = cf.SpriteMale;
-                    if (cf.animator != null) {cf.animator.SetBool("isMale", true); }
+                    cf.Sprite = cf.SpriteMale;  
                 }
                 else 
                 {
+                    cf.animator.runtimeAnimatorController = cf.fAnimator;
                     cf.Sprite = cf.SpriteFemale;
                     sr.sprite = cf.SpriteFemale;
-                    if (cf.animator != null) { cf.animator.SetBool("isMale", false); }
-
                 }
-
-                cf.animator.Play("Sex");
             }
         }
 

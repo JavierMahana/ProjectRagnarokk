@@ -843,7 +843,7 @@ public class CombatManager : MonoBehaviour
         if(PlayerFighters.Contains(ActiveFighter))
         {
             string damageType = AttackWeapon.TipoDeDañoQueAplica.Name;
-            ActiveFighter.animator.SetTrigger(damageType);
+            ActiveFighter.animator.Play(damageType);
             AudioManager.instance.Play(damageType);
         }
 

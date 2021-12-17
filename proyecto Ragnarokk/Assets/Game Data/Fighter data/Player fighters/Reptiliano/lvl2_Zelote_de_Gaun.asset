@@ -21,8 +21,9 @@ MonoBehaviour:
   Name: Gaun's Zealot
   RealName: nameless
   Description: Description
-  animator: {fileID: 7030170515994527814, guid: 8110428fe147f864193627e266683143, type: 3}
-  animatorController: {fileID: 9100000, guid: 7913a38a70084dc41b9eb4b5cd9c0382, type: 2}
+  MaleAnimatorController: {fileID: 9100000, guid: 7913a38a70084dc41b9eb4b5cd9c0382, type: 2}
+  FemaleAnimatorController: {fileID: 9100000, guid: fa8ebc02f3c14af48bd12d39c21e7544, type: 2}
+  EnemyController: {fileID: 0}
   Speed: 16
   Atack: 16
   Defense: 9
