@@ -5,19 +5,18 @@ using Sirenix.OdinInspector;
 
 public class Fighter : MonoBehaviour
 {
-    private SpriteRenderer spRenderer;
-    [HideInInspector]
+    public SpriteRenderer spRenderer;
     public Animator animator;
 
     private void Awake()
     {
-        spRenderer = GetComponentInChildren<SpriteRenderer>();
+        spRenderer = GetComponent<SpriteRenderer>();
         if (spRenderer == null)
         {
             Debug.LogError("Debe tener un hijo con sprite renderer!");
         }
 
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
         if (animator == null)
         {
             Debug.LogError("Debe tener un hijo con animator!");
