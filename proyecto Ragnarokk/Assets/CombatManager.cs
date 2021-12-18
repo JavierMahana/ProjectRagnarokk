@@ -145,8 +145,10 @@ public class CombatManager : MonoBehaviour
     //attack done podría cambiarse a ActionDone
     public bool ActionDone = false;
 
-    //Comparador de rapidez para ordenar la lista de luchadores
-   
+    bool WillApplyRandomState = false;
+
+    
+
     public void ClearPanelDescriptor()
     {
         foreach (GameObject button in AllButtonsInDescriptorPanel)
@@ -220,6 +222,8 @@ public class CombatManager : MonoBehaviour
             SetlDescriptorText(description);
         }
     }
+
+    //Comparador de rapidez para ordenar la lista de luchadores
     public int SpeedComparer(Fighter f1, Fighter f2)
     {
         int speed1 = f1.Speed;
@@ -535,7 +539,7 @@ public class CombatManager : MonoBehaviour
             pf.IsDefending = false;
         }
 
-        string victoryHopeChange = HopeManager.Instance.ChangeHope(2, "Cambio por victoria");
+        string victoryHopeChange = HopeManager.Instance.ChangeHope(1, "Cambio por victoria");
         string victoryDesc = "YOU WIN! ";
         victoryDesc += victoryHopeChange;
         CombatDescriptor.Clear();
@@ -631,8 +635,10 @@ public class CombatManager : MonoBehaviour
         round++;
         RemoveAllCombatStates();
         DiminishWeaponCooldowns();
+        WillApplyRandomState = Random.Range(0, 2) == 0; //50%
     }
-
+    
+    
     private IEnumerator TurnAction()
     {
         //Si el luchador estaba defendiéndose, sale de ese estado
@@ -653,6 +659,14 @@ public class CombatManager : MonoBehaviour
 
         yield return null; //Es posible que la necesidad de esta línea se deba a que se consulta por la variable TextIsEmpty, la cual se actualiza en Update, en vez de consultar directamente el tamaño de la lista de TextLines.
         yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
+
+        if(WillApplyRandomState)
+        {
+            ApplyRandomState();
+            yield return null;
+            yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
+        }
+
         CombatDescriptor.ShowFighterInTurn(ActiveFighter, IsPlayerFighter(ActiveFighter));
 
         
@@ -1089,8 +1103,8 @@ public class CombatManager : MonoBehaviour
         {
             sbyte hopeChangeMagnitude = 0;
 
-            if      (synergyCounter == 1)   { hopeChangeMagnitude = 3; SynergyDeterminant = 1; }
-            else if (synergyCounter >= 2)   { hopeChangeMagnitude = 4; SynergyDeterminant = 1; }
+            if      (synergyCounter == 1)   { hopeChangeMagnitude = 2; SynergyDeterminant = 1; }
+            else if (synergyCounter >= 2)   { hopeChangeMagnitude = 3; SynergyDeterminant = 1; }
             else if (synergyCounter == -1)  { hopeChangeMagnitude = -3; SynergyDeterminant = -1; }
             else if (synergyCounter <= -2)  { hopeChangeMagnitude = -4; SynergyDeterminant = -1; }
 
@@ -1174,7 +1188,7 @@ public class CombatManager : MonoBehaviour
 
         if(HordeIsFine  &&  HordeCurrentHP < HordeMaxHP * 0.5)
         {
-            string hopeChange = HopeManager.Instance.ChangeHope(2, "Cambio por mal estado de la horda enemiga");
+            string hopeChange = HopeManager.Instance.ChangeHope(1, "Cambio por mal estado de la horda enemiga");
 
             string hordeHPDesc = "";
             if(HordeCurrentHP <= 0) { hordeHPDesc = "How powerful!"; }
@@ -1219,15 +1233,6 @@ public class CombatManager : MonoBehaviour
             {
                 fighter.WeaponCooldowns[i] = 0;
             }
-            /*
-            foreach(Weapon weapon in fighter.Weapons)
-            {
-                if(weapon != null)
-                {
-                    weapon.CurrentCooldown = 0;
-                }
-            }
-            */
         }
     }
 
@@ -1242,16 +1247,19 @@ public class CombatManager : MonoBehaviour
                     fighter.WeaponCooldowns[i]--;
                 }
             }
-            /*
-            foreach (Weapon weapon in fighter.Weapons)
-            {
-                if (weapon != null  &&  weapon.CurrentCooldown > 0)
-                {
-                    weapon.CurrentCooldown--;
-                }
-            }
-            */
         }
+    }
+
+    private void ApplyRandomState()
+    {
+        CombatState randomState = GameManager.Instance.AllCombatStates[Random.Range(0, GameManager.Instance.AllCombatStates.Count)];
+        foreach (Fighter enemy in AliveEnemyFighters)
+        {
+            enemy.States.Add(randomState);
+        }
+        IconManager.UpdateStateIcons(AllCombatFighters);
+        WillApplyRandomState = false;
+        CombatDescriptor.AddTextLine($"Enemies are {randomState.Name}", 1.5f);
     }
 
     public void ActionSelection()
