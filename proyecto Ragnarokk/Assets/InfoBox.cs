@@ -37,6 +37,8 @@ public class InfoBox : MonoBehaviour
 
     void Start()
     {
+        Male.preserveAspect = true;
+        Female.preserveAspect = true;
         Clear();
     }
 
@@ -86,6 +88,7 @@ public class InfoBox : MonoBehaviour
         Title.text = weapon.Name;
         WeaponBaseDamageText.text = weapon.BaseDamage.ToString();
         WeaponTypeText.text = weapon.TipoDeDañoQueAplica.Name;
+        WeaponTypeText.color = weapon.TipoDeDañoQueAplica.Color;
 
         string stringAplidedStates = "";
         foreach (var state in weapon.ListaDeEstadosQueAplica)

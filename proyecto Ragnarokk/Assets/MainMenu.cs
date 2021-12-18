@@ -9,24 +9,19 @@ public class MainMenu : MonoBehaviour
     public GameObject PanelExplain;
     public GameObject PanelMenu;
 
-
     public GameObject StartButton;
     public GameObject ControlsButton;
-    public GameObject Options;
     public GameObject CreditsButton;
     public GameObject QuitButton; 
     public GameObject ReturnButton;
 
-    public GameObject PanelText;
-
-    public TextMeshProUGUI ControlsText;
-    public TextMeshProUGUI CreditsText;
-
+    public GameObject PermanentMenu;
     void Start()
     {
         if (PlayerPrefs.GetInt("firstTime") == 0)
         {
             PanelExplain.SetActive(true);
+            PermanentMenu.SetActive(false);
         }
         else
         {
@@ -47,8 +42,6 @@ public class MainMenu : MonoBehaviour
         ControlsButton.SetActive(active);
         CreditsButton.SetActive(active);
         QuitButton.SetActive(active);
-        Options.SetActive(active);
-
         ReturnButton.SetActive(!active);
     }
 

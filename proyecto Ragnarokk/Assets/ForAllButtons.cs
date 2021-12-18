@@ -23,16 +23,19 @@ public class ForAllButtons : MonoBehaviour, IPointerClickHandler
 
         if (button != null) 
         {
-            r = 1f;
-            g = 120/255f;
-            b = 0;
+            /*
+            r = 0f;
+            g = 24/255f;
+            b = 94/255f;
             Normal = new Color(r, g, b, 0.8f);
+            */
+            Normal = Color.white;
 
-            r = 0;
-            g = 200/255f;
-            b = 130/255f;
+            r = 120/255f;
+            g = 190/255f;
+            b = 1f;
             Pressed = new Color(r, g, b, 1);
-
+            
             button.image.color = Normal;
         }       
     }

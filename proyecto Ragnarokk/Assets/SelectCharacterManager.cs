@@ -44,7 +44,7 @@ public class SelectCharacterManager : MonoBehaviour
             if(infoBox != null) 
             {
                 infoBox.GenericFormatObj.SetActive(true);
-                infoBox.GenericDescriptionText.text = "Choose a Sex for your fighter. \n Your fighter's sex has no impact on game mechanics it is purely aesthetic."; 
+                infoBox.GenericDescriptionText.text = "Escoge el sexo de tu aventurero. \nEl sexo no afecta estadísticas de combate, es tan solo un cambio visual."; 
             }
         }
         

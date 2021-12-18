@@ -15,6 +15,9 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public TextMeshProUGUI showText;
     public TextMeshProUGUI synergyText;
 
+    private TextAnimations animator1;
+    private TextAnimations animator2;
+
     public int showTimer;
 
     private string defaultText = "";
@@ -30,6 +33,9 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     void Start()
     {
+        animator1 = animableObject1.GetComponent<TextAnimations>();
+        animator2 = animableObject2.GetComponent<TextAnimations>();
+
         float r = 0;
         float g = 0;
         float b = 0;
@@ -129,20 +135,20 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void BeginTextAnimation()
     {
-        animableObject1.GetComponent<TextAnimations>().AnimationStart();
-        animableObject2.GetComponent<TextAnimations>().AnimationStart();
+        animator1.AnimationStart();
+        animator2.AnimationStart();
     }
 
     private void ResetTextAnimation()
     {
-        animableObject1.GetComponent<TextAnimations>().AnimationReset();
-        animableObject2.GetComponent<TextAnimations>().AnimationReset();
+        animator1.AnimationReset();
+        animator2.AnimationReset();
     }
 
     private void EndTextAnimation()
     {
-        animableObject1.GetComponent<TextAnimations>().AnimationEnd();
-        animableObject2.GetComponent<TextAnimations>().AnimationEnd();
+        animator1.AnimationEnd();
+        animator2.AnimationEnd();
     }
 
     public void OnClick()

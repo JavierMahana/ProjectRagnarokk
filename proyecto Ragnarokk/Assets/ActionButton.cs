@@ -33,7 +33,7 @@ public class ActionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (!ButtonPressed)
         {
             combatManager.Action = initialActionText;
-            actionText.text = "Cancel";
+            actionText.text = "Cancelar";
             ButtonPressed = true;
 
             // activa el ConfirmationClick que usa el else de ActionSelection
@@ -41,19 +41,19 @@ public class ActionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
             switch (thisCase)
             {
-                case "Attack":
+                case "Atacar":
                     Attack();
                     break;
-                case "Consumable":
+                case "Consumible":
                     Consumible();
                     break;
-                case "Defense":
+                case "Defensa":
                     Defense();
                     break;
-                case "Cancel":
+                case "Cancelar":
                     Cancel();
                     break;
-                case "Flee Combat":
+                case "Huir":
                     FleeCombat();
                     break;
                 default:
@@ -129,20 +129,20 @@ public class ActionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         var cm = FindObjectOfType<CombatManager>();
         switch (thisCase)
         {
-            case "Attack":
-                descripcion = "Pick from one of your four weapons slots and then click on an enemy.";
+            case "Atacar":
+                descripcion = "Escoge entre el arsenal de armas del personaje para realizar un ataque.";
                 break;
-            case "Consumable":
-                descripcion = "Pick from one of you consumibles and then select whoever you want to affect with it.";
+            case "Consumible":
+                descripcion = "Escoges de alguno de los consumibles del equipo y puedes utilizarlo.";
                 break;
-            case "Defense":
-                descripcion = "The fighter takes a defensive position, increasing it's defense until his next turn.";
+            case "Defensa":
+                descripcion = "El luchador adquiere un modo defensivo, disminuyendo el daño recibido hasta su próximo turno.";
                 break;
-            case "Cancel":
-                descripcion = "Go back to the standard actions.";
+            case "Cancelar":
+                descripcion = "Volver a las acciones estándar.";
                 break;
-            case "Flee Combat":
-                descripcion = "The team leaves the current combat, without chance to continue and losing a big amount of hope.";
+            case "Huir":
+                descripcion = "El equipo abandona el combate actual. Este acto de cobardía baja enormemente la esperanza del equipo.";
                 break;
             default:
                 Debug.Log("la accion actual no existe");

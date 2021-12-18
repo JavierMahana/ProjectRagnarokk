@@ -10,7 +10,7 @@ public class Button_DamageType : MonoBehaviour
 
     public void SetButton(CombatType type)
     {
-        dmgType.text = type.Name;
+        dmgType.text = type.name;
         GetComponent<Image>().color = type.Color;
     }
 }

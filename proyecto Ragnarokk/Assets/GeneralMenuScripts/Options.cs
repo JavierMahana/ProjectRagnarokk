@@ -16,7 +16,6 @@ public class Options : MonoBehaviour
     public Slider AudioGeneral; // (default 90)
     public Slider AudioSfx; // (default 80)
     public Slider AudioMusic; // (default 60)
-    public Slider AudioAmbient; // (default 70)
 
     // 1- 10 (default 5)
     public Slider CombatSpeed;
@@ -29,7 +28,11 @@ public class Options : MonoBehaviour
 
     public void OnOptions()
     {
-        if (!GameplayPanel.activeSelf) { GameplayPanel.SetActive(true);}
+        if (!GameplayPanel.activeSelf) 
+        {
+            gameplayButton.GetComponent<ForAllButtons>().PressButton(gameplayButton);
+            GameplayPanel.SetActive(true);            
+        }
     }
 
     private void Start()
@@ -41,7 +44,6 @@ public class Options : MonoBehaviour
         AudioGeneral.value = PlayerPrefs.GetFloat("audioGeneral");
         AudioSfx.value = PlayerPrefs.GetFloat("audioSFX");
         AudioMusic.value = PlayerPrefs.GetFloat("audioMusic");
-        AudioAmbient.value = PlayerPrefs.GetFloat("audioAmbient");
 
         Debug.Log(PlayerPrefs.GetFloat("combatDescriptorSpeed"));
         CombatSpeed.value = PlayerPrefs.GetFloat("combatDescriptorSpeed")*5f;
@@ -78,10 +80,9 @@ public class Options : MonoBehaviour
 
         if (AudioPanel.activeSelf)
         {
-            AudioGeneral.value = 90;
-            AudioSfx.value = 80;
-            AudioMusic.value = 70;
-            AudioAmbient.value = 60;
+            AudioGeneral.value = 70;
+            AudioSfx.value = 75;
+            AudioMusic.value = 60;
         }
 
         ApplyChanges();
@@ -123,7 +124,6 @@ public class Options : MonoBehaviour
             PlayerPrefs.SetFloat("audioGeneral", AudioGeneral.value);
             PlayerPrefs.SetFloat("audioSFX", AudioSfx.value);
             PlayerPrefs.SetFloat("audioMusic", AudioMusic.value);
-            PlayerPrefs.SetFloat("audioAmbient", AudioAmbient.value);
         }
 
         GameManager.Instance.SetPlayerConfiguration();

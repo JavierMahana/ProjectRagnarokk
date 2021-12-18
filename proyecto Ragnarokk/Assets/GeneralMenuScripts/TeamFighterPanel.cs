@@ -23,7 +23,7 @@ public class TeamFighterPanel : MonoBehaviour
 
         //añador el level luego del nombre, en el mismo string
         FighterName.text = f.RealName;
-        healthPosition.text = f.CurrentHP.ToString() + " / " + f.MaxHP.ToString();
+        healthPosition.text = "<#00FF00>" + f.CurrentHP.ToString() + "</color>"  + " / " + f.MaxHP.ToString();
         ValueLevel.text = f.Level.ToString();
         ValueType.text = f.Type.Name;
         ValueAttack.text = f.Atack.ToString();
