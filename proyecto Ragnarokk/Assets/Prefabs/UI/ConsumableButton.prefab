@@ -63,7 +63,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2580567600541250629, guid: 3624587157fd91843850c1136720c800, type: 3}
       propertyPath: m_fontSize
-      value: 19.25
+      value: 20.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580567600541250629, guid: 3624587157fd91843850c1136720c800, type: 3}
+      propertyPath: m_margin.w
+      value: -1.4207153
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580567600541250629, guid: 3624587157fd91843850c1136720c800, type: 3}
+      propertyPath: m_margin.x
+      value: -4.0054855
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580567600541250629, guid: 3624587157fd91843850c1136720c800, type: 3}
+      propertyPath: m_margin.y
+      value: 0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580567600541250629, guid: 3624587157fd91843850c1136720c800, type: 3}
+      propertyPath: m_margin.z
+      value: -91.41931
       objectReference: {fileID: 0}
     - target: {fileID: 2580567600541250629, guid: 3624587157fd91843850c1136720c800, type: 3}
       propertyPath: m_fontAsset
@@ -92,6 +108,10 @@ PrefabInstance:
     - target: {fileID: 2580567600541250629, guid: 3624587157fd91843850c1136720c800, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4281479730
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580567600541250629, guid: 3624587157fd91843850c1136720c800, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2770463704595737916, guid: 3624587157fd91843850c1136720c800, type: 3}
       propertyPath: m_Text
@@ -364,6 +384,14 @@ PrefabInstance:
     - target: {fileID: 5709619417618923850, guid: 3624587157fd91843850c1136720c800, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5709619417618923850, guid: 3624587157fd91843850c1136720c800, type: 3}
+      propertyPath: m_PreferredWidth
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 5709619417618923850, guid: 3624587157fd91843850c1136720c800, type: 3}
+      propertyPath: m_PreferredHeight
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 5891888368421190207, guid: 3624587157fd91843850c1136720c800, type: 3}
       propertyPath: m_AnchorMax.y

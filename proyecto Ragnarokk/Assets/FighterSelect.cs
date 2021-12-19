@@ -94,7 +94,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if(isDamage)
         {
-            string predamage = "ACIERTO ";
+            string predamage = "Golpe ";
             string synergyText = "";
             showText.color = normalColor;
 

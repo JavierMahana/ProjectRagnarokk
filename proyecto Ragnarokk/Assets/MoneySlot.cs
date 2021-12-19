@@ -35,7 +35,7 @@ public class MoneySlot : MonoBehaviour
 
     void OnMouseEnter()
     {
-        infoBox.ShowInfo("Money", $"you can grab {moneyAmmount} coins instead of a weapon.");
+        infoBox.ShowInfo("Dinero", $"Puedes tomar {moneyAmmount} de dinero en lugar de un arma.");
     }
     void OnMouseExit()
     {

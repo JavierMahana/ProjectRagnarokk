@@ -185,7 +185,7 @@ public class Consumible : Item
         var combatManager = FindObjectOfType<CombatManager>();
         if(combatManager != null)
         {
-            combatManager.SetlDescriptorText("You can't use that item!");
+            combatManager.SetlDescriptorText("¡No puedes utilizar ese objeto!");
             combatManager.SelectedConsumible = null;
         }
         

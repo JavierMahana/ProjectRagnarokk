@@ -100,7 +100,7 @@ public class ShopItemSlot : MonoBehaviour
 
         if (GameManager.Instance.CurrentMoney < CurrItem.BaseCost)
         {
-            text.text = "Insuficient Founds!";
+            text.text = "¡No tienes dinero suficiente!";
             showingAlternateText = true;
             return;
         }

@@ -11,12 +11,14 @@ public class GeneralMenu : MonoBehaviour
     public Button WeaponButton;
     public Button ConsumibleButton;
     public Button OptionButton;
+    public Button GlosaryButton;
     public Button SaveQuitButton;
+    
 
     private ExplorationManager explorationManager;
     // sirve para el display del piso Actual
+    public GameObject TitlePanel;
     public TextMeshProUGUI MenuTitle;
-
     public TMP_Dropdown MenuDropdown;
 
     public GameObject Background;
@@ -39,6 +41,9 @@ public class GeneralMenu : MonoBehaviour
     //Options
     public GameObject Options;
 
+    //Glosary
+    public GameObject Glosary;
+
     //Quit & Save
     public GameObject SaveQuit;
     public TextMeshProUGUI SnQtext;
@@ -53,7 +58,7 @@ public class GeneralMenu : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
-        floor = "Exploring Floor " + PlayerPrefs.GetInt("currentFloor");
+        floor = "Explorando Piso " + PlayerPrefs.GetInt("currentFloor");
     }
     void Start()
     {
@@ -66,6 +71,7 @@ public class GeneralMenu : MonoBehaviour
         Panels.Add(Consumibles);
         Panels.Add(Options);
         Panels.Add(SaveQuit);
+        Panels.Add(Glosary);
 
         MenuDropdown.value = 0;
         OnClick();
@@ -99,20 +105,23 @@ public class GeneralMenu : MonoBehaviour
         var cm = FindObjectOfType<CombatManager>();
 
         // activacion del titulo del menu
-        if(GameManager.Instance.GameState == GAME_STATE.COMBAT || GameManager.Instance.GameState == GAME_STATE.EXPLORATION)
+        if(GameManager.Instance.GameState == GAME_STATE.PREGAME || GameManager.Instance.GameState == GAME_STATE.CREDITS)
         {
-            MenuTitle.gameObject.SetActive(true);
+            if(MenuDropdown.value == 0)
+            {
+                TitlePanel.gameObject.SetActive(false);
+            }
         }
         else
         {
-            MenuTitle.gameObject.SetActive(false);
+            TitlePanel.gameObject.SetActive(true);
         }
 
         // AL ESTAR en combate
         if (cm != null && GameManager.Instance.GameState == GAME_STATE.COMBAT && MenuTitle.text != "round " + cm.round.ToString())
         {
            
-            MenuTitle.text = "round " + cm.round.ToString();
+            MenuTitle.text = "Ronda " + cm.round.ToString();
         }
     }
 
@@ -140,6 +149,7 @@ public class GeneralMenu : MonoBehaviour
             HideAllPanels();
             explorationManager.gameObject.SetActive(true);
             Background.SetActive(false);
+
             //this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
 
         }
@@ -152,44 +162,49 @@ public class GeneralMenu : MonoBehaviour
             //this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.9f);
         }
 
-            // resto de opciones cuando no se está explorando
-            if (MenuDropdown.value == 1)
+        // resto de opciones cuando no se está explorando
+        if (MenuDropdown.value == 1)
+        {
+            ActivatePanel(TeamCanvas, "Equipo");
+            TeamCanvas.GetComponent<TeamCanvas>().SetUpPanel();
+        }
+        else if (MenuDropdown.value == 2)
+        {
+            ActivatePanel(Weapons, "Arsenal");
+            Weapons.GetComponent<WeaponsPanel>().SetUpPanel();
+        }
+        else if (MenuDropdown.value == 3)
+        {
+            ActivatePanel(Consumibles, "Consumibles");
+            Consumibles.GetComponent<ConsumiblePanel>().SetUpPanel();
+        }
+        else if (MenuDropdown.value == 4)
+        {
+            ActivatePanel(Options, "Opciones");
+            Options.GetComponent<Options>().OnOptions();
+        }
+        else if (MenuDropdown.value == 5)
+        {
+            ActivatePanel(SaveQuit, "Salir y Guardar");
+            if(GameManager.Instance.GameState == GAME_STATE.PREGAME) 
             {
-                ActivatePanel(TeamCanvas, "Team");
-                TeamCanvas.GetComponent<TeamCanvas>().SetUpPanel();
+                SnQtext.text = "¿Quieres salir del juego?";
             }
-            else if (MenuDropdown.value == 2)
+            if (GameManager.Instance.GameState == GAME_STATE.COMBAT)
             {
-                ActivatePanel(Weapons, "Weapons");
-                Weapons.GetComponent<WeaponsPanel>().SetUpPanel();
+                SnQtext.text = "Al estar en combate no se peude guardar. ¿Quieres salir del juego?";
             }
-            else if (MenuDropdown.value == 3)
-            {
-                ActivatePanel(Consumibles, "Consumables");
-                Consumibles.GetComponent<ConsumiblePanel>().SetUpPanel();
-            }
-            else if (MenuDropdown.value == 4)
-            {
-                ActivatePanel(Options, "Options");
-                Options.GetComponent<Options>().OnOptions();
-            }
-            else if (MenuDropdown.value == 5)
-            {
-                ActivatePanel(SaveQuit, "Save and Quit");
-                if(GameManager.Instance.GameState == GAME_STATE.PREGAME) 
-                {
-                    SnQtext.text = "¿Quieres salir del juego?";
-                }
-                if (GameManager.Instance.GameState == GAME_STATE.COMBAT)
-                {
-                    SnQtext.text = "Al estar en combate no se peude guardar. ¿Quieres salir del juego?";
-                }
                 
-            }
-            else
-            {
-                Debug.Log("Error con el valor opcion de Dropdown");
-            }
+        }
+        else if (MenuDropdown.value == 6)
+        {
+            ActivatePanel(Glosary, "Glosario");
+                
+        }
+
+        
+            Debug.Log(MenuDropdown.options.Count);
+        
 
             
             
