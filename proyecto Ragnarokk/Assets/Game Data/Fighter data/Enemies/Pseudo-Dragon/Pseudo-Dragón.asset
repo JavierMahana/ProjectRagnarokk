@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
+  m_Name: "Pseudo-Drag\xF3n"
+  m_EditorClassIdentifier: 
+  ExpNeededToLevelUp: 100
+  Level: 0
+  IsMaxLevel: 0
+  Evolutions:
+  - {fileID: 0}
+  - {fileID: 0}
+  Name: "Pseudo-Drag\xF3n"
+  RealName: nameless
+  Description: Dragon lagarto
+  FemaleController: {fileID: 0}
+  MaleController: {fileID: 0}
+  EnemyController: {fileID: 9100000, guid: ab9f4b9679416b24c9b612595c272c7e, type: 2}
+  Speed: 9
+  Atack: 15
+  Defense: 7
+  Luck: 0
+  MaxHP: 70
+  PowerRating: 1
+  DefaultWeapons:
+  - {fileID: 11400000, guid: 7cacd6cff51877344af5900c53b1fa62, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Sprite: {fileID: 1052507097846874316, guid: be03bd2529596cb4891b1b0972d28ce9, type: 3}
+  SpriteFemale: {fileID: 0}
+  SpriteMale: {fileID: 0}
+  reversedSprite: 0
+  size: {x: 1.2, y: 1.2}
+  healthBarOffset: {x: 1, y: 1.2}
+  Type: {fileID: 11400000, guid: 7fda126cf52d4f9478689f1d6d5477a2, type: 2}
+  WaterDamageBonus: 0
+  EarthDamageBonus: 0
+  FireDamageBonus: 0
+  AirDamageBonus: 0
+  PhysicalDamageBonus: 0
+  PsychicDamageBonus: 0
+  ElectricDamageBonus: 0
+  AlcoholDamageBonus: 0
+  WaterResistanceBonus: 0
+  EarthResistanceBonus: 0
+  FireResistanceBonus: 0
+  AirResistanceBonus: 0
+  PhysicalResistanceBonus: 0
+  PsychicResistanceBonus: 0
+  ElectricResistanceBonus: 0
+  AlcoholResistanceBonus: 0

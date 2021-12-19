@@ -7,15 +7,20 @@ public class Fighter : MonoBehaviour
 {
     private SpriteRenderer spRenderer;
     public Animator animator;
+    public RuntimeAnimatorController FemaleAnimator;
+    public RuntimeAnimatorController MaleAnimator;
 
     private void Awake()
     {
-        spRenderer = GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+
+        spRenderer = GetComponent<SpriteRenderer>();
         if (spRenderer == null)
         {
             Debug.LogError("Debe tener un hijo con sprite renderer!");
         }
-        
+
+            
         foreach(CombatType type in GameManager.Instance.AllCombatTypes)
         {
             TypeDamageBonuses.Add(type, 0);
@@ -24,7 +29,14 @@ public class Fighter : MonoBehaviour
     }
     public void Init(FighterData data)
     {
-        animator = data.animator;
+
+        if(data.EnemyController != null)
+        {
+            animator.runtimeAnimatorController = data.EnemyController;
+        }
+        FemaleAnimator = data.FemaleController;
+        MaleAnimator = data.MaleController;
+
         Name = data.Name;
         Atack = data.Atack;
         Defense = data.Defense;

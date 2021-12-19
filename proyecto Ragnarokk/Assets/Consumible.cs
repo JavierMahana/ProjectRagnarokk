@@ -66,15 +66,15 @@ public class Consumible : Item
 
                     if(combatManager != null)
                     {
-                        button.ShowText(false, recoveryValue, false, 0); 
+                        button.ShowText(false, false, recoveryValue, false, 0); 
                         
                         combatDescriptor.Clear();
 
                         string useLine = "";
-                        if (user.Equals(fighterInTurn)) { useLine = fighterInTurnName + " uses " + Name; }
-                        else { useLine = fighterInTurnName + " uses " + Name + " on " + userName; }
+                        if (user.Equals(fighterInTurn)) { useLine = fighterInTurnName + " usa " + Name; }
+                        else { useLine = fighterInTurnName + " usa " + Name + " en " + userName; }
                         combatDescriptor.AddTextLine(useLine);
-                        combatDescriptor.AddTextLine(userName + " recovers " + recoveryValue + " HP");
+                        combatDescriptor.AddTextLine(userName + " recupera " + recoveryValue + " Salud");
 
                     }
 
@@ -97,13 +97,13 @@ public class Consumible : Item
 
                     if (combatManager != null)
                     {
-                        button.ShowText(false, user.MaxHP, false, 0);
+                        button.ShowText(false, false, user.MaxHP, false, 0);
 
                         combatManager.LiftPlayerFighter(user);
 
                         combatDescriptor.Clear();
-                        combatDescriptor.AddTextLine(fighterInTurnName + " uses " + Name + " on " + userName);
-                        combatDescriptor.AddTextLine(userName + " has risen!");
+                        combatDescriptor.AddTextLine(fighterInTurnName + " usa " + Name + " en " + userName);
+                        combatDescriptor.AddTextLine( "!" + userName + " se ha levantado para luchar!");
                     }
 
                     ItemUsedCorrectly();
@@ -125,14 +125,17 @@ public class Consumible : Item
 
                     if (combatManager != null)
                     {
+
                         combatDescriptor.Clear();
 
                         int recovery = 25;
+
+                        button.ShowText(false, true, recovery, false, 0);
                         string useLine = "";
-                        if (user.Equals(fighterInTurn)) { useLine = fighterInTurnName + " uses " + Name; }
-                        else { useLine = fighterInTurnName + " uses " + Name + " on " + userName; }
+                        if (user.Equals(fighterInTurn)) { useLine = fighterInTurnName + " usa " + Name; }
+                        else { useLine = fighterInTurnName + " usa " + Name + " en " + userName; }
                         combatDescriptor.AddTextLine(useLine);
-                        combatDescriptor.AddTextLine("The party revers "+ recovery + "hope");
+                        combatDescriptor.AddTextLine("¡El equipo recupera "+ recovery + "Esperanza!");
 
                     }
                     ItemUsedCorrectly();

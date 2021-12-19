@@ -84,7 +84,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
 
     
-    public void ShowText(bool isDamage, int value, bool isCrit, int syn)
+    public void ShowText(bool isDamage, bool isHope, int value, bool isCrit, int syn)
     {
         // syn 0 para cuando no hay sinergia alguna
         // syn -1 para cuando hay antisinergia
@@ -123,6 +123,14 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             showText.text = (value > 0) ? predamage + value.ToString() : "FALLO";
             this.synergyText.text = synergyText;
             showTimer = 400;
+        }
+        else if(isHope)
+        {
+            showText.text = "";
+            synergyText.color = Color.white;
+            this.synergyText.text = "+ " + value.ToString() + " Esperanza";
+            showTimer = 400;
+
         }
         else
         {

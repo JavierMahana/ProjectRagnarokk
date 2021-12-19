@@ -157,7 +157,7 @@ public class WeaponsPanel : MonoBehaviour
     {
         thisImage.sprite = null;
         thisImage.color = Color.clear;
-        WeaponName.text = "No Weapon Selected";
+        WeaponName.text = "Ninguna Arma Seleccionada";
         ValueDamage.text = "";
         ValueAccuracy.text = "";
         ValueCriticalChance.text = "";

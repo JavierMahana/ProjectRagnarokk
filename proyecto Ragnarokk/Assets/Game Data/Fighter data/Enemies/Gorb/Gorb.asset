@@ -21,6 +21,9 @@ MonoBehaviour:
   Name: Gorb
   RealName: nameless
   Description: Metal en agua
+  FemaleController: {fileID: 0}
+  MaleController: {fileID: 0}
+  EnemyController: {fileID: 9100000, guid: 1b331afead2cac74eb9b4ba742751f70, type: 2}
   Speed: 3
   Atack: 12
   Defense: 6
@@ -39,3 +42,19 @@ MonoBehaviour:
   size: {x: 1, y: 1}
   healthBarOffset: {x: 1, y: 1.5}
   Type: {fileID: 11400000, guid: 99ddf6cb18f34644c857955877bf77d1, type: 2}
+  WaterDamageBonus: 0
+  EarthDamageBonus: 0
+  FireDamageBonus: 0
+  AirDamageBonus: 0
+  PhysicalDamageBonus: 0
+  PsychicDamageBonus: 0
+  ElectricDamageBonus: 0
+  AlcoholDamageBonus: 0
+  WaterResistanceBonus: 0
+  EarthResistanceBonus: 0
+  FireResistanceBonus: 0
+  AirResistanceBonus: 0
+  PhysicalResistanceBonus: 0
+  PsychicResistanceBonus: 0
+  ElectricResistanceBonus: 0
+  AlcoholResistanceBonus: 0

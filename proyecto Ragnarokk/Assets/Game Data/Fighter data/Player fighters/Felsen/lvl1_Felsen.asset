@@ -23,7 +23,9 @@ MonoBehaviour:
   Description: These strong species live in giant colonies built inside asteroids.
     They travel the galaxy in search of knowledge, new worlds and forms of life,
     t amongst the starts.
-  animator: {fileID: 0}
+  FemaleController: {fileID: 9100000, guid: c11a709ae2f364f4b813ea119296b62a, type: 2}
+  MaleController: {fileID: 9100000, guid: bf22bffe5276e244483951707add3472, type: 2}
+  EnemyController: {fileID: 0}
   Speed: 5
   Atack: 8
   Defense: 10

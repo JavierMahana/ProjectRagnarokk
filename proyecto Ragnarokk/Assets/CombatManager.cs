@@ -9,7 +9,9 @@ using TMPro;
 //ahora elementos de display pueden estar aca pero en el futuro moverlos.
 public class CombatManager : MonoBehaviour
 {
-    public GameObject Background;
+    public Sprite[] Backgrounds;
+    public SpriteRenderer Background;
+
     public GameObject CombatCanvas;
     public GameObject EnemyCombatCanvas;
     public CombatDescriptor CombatDescriptor;
@@ -230,6 +232,9 @@ public class CombatManager : MonoBehaviour
 
     public void InitCombatScene(CombatEncounter encounter)
     {
+        Background.sprite = Backgrounds[Random.Range(0, Backgrounds.Length)];
+        
+
         canFlee = encounter.CanEscape;
         //isFinalRoom
         CombatDescriptor = gameObject.GetComponent<CombatDescriptor>();
@@ -841,8 +846,22 @@ public class CombatManager : MonoBehaviour
         CombatDescriptor.Clear();
         if (PlayerFighters.Contains(ActiveFighter)) { CombatDescriptor.AddTextLine(ActiveFighter.RealName + " usa " + AttackWeapon.Name); }
         else { CombatDescriptor.AddTextLine(ActiveFighter.Name + " usa " + AttackWeapon.Name); }
+        
+        
         //Muestra atacante y arma
-
+        // Animacion si es uno de los personajes jugables
+        if(PlayerFighters.Contains(ActiveFighter))
+        {
+            ActiveFighter.animator.Play(AttackWeapon.TipoDeDañoQueAplica.name);
+            AudioManager.instance.Play(AttackWeapon.TipoDeDañoQueAplica.name);
+        }
+        // en caso de que el atacante es enemigo
+        else
+        {
+            ActiveFighter.animator.Play("Attack");
+            AudioManager.instance.Play(ActiveFighter.Name);
+        }
+        
 
         int damageToShow = -1;
         isCrit = false;
@@ -1049,7 +1068,7 @@ public class CombatManager : MonoBehaviour
         //Debug.Log("Precision: " + AttackWeapon.BaseAccuracy + " | damageToShow: " + damageToShow);
 
         // el botón imprime el daño infligido
-        targetButton.ShowText(true, damageToShow, isCrit, SynergyDeterminant);
+        targetButton.ShowText(true, false, damageToShow, isCrit, SynergyDeterminant);
     }
 
     public void ApplySynergy(out string synerDesc)

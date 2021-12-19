@@ -29,7 +29,7 @@ public class WeaponMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         if (thisWeapon == null)
         {
-            thisWeaponName.text = "Empty";
+            thisWeaponName.text = "Vacío";
             thisImage.color = Color.clear;
             thisImage.sprite = null;
             GetComponent<Image>().color = defaultColor;

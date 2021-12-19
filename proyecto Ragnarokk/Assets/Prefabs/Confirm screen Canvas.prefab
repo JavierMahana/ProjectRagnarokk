@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Pressed: {r: 0, g: 0, b: 0, a: 0}
   Normal: {r: 0, g: 0, b: 0, a: 0}
-  staysPressed: 1
+  staysPressed: 0
 --- !u!1 &8817862487152799361
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Pressed: {r: 0, g: 0, b: 0, a: 0}
   Normal: {r: 0, g: 0, b: 0, a: 0}
-  staysPressed: 1
+  staysPressed: 0
 --- !u!1 &8817862487316751805
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,6 +655,7 @@ GameObject:
   - component: {fileID: 8817862487923670910}
   - component: {fileID: 8817862487923670908}
   - component: {fileID: 8817862487923670911}
+  - component: {fileID: 4833557533698523457}
   m_Layer: 5
   m_Name: Confirm panel text
   m_TagString: Untagged
@@ -778,6 +779,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4833557533698523457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8817862487923670905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pressed: {r: 0, g: 0, b: 0, a: 0}
+  Normal: {r: 0, g: 0, b: 0, a: 0}
+  staysPressed: 1
 --- !u!1 &8817862488334468643
 GameObject:
   m_ObjectHideFlags: 0

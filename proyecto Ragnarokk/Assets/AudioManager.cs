@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
 
 	public Sound[] ButtonSounds;
 	public Sound[] WeaponSounds;
+	public Sound[] EnemySounds;
 	public Sound[] OtherSounds;
 
 	public Sound[] Music;
@@ -106,6 +107,7 @@ public class AudioManager : MonoBehaviour
 		foreach (Sound s in ButtonSounds) { sounds.Add(s); }
 		foreach (Sound s in WeaponSounds) { sounds.Add(s); }
 		foreach (Sound s in OtherSounds) { sounds.Add(s); }
+		//foreach (Sound s in EnemySounds) { sounds.Add(s); }
 		foreach (Sound s in Music) { sounds.Add(s); }
 		foreach (Sound s in Ambience) { sounds.Add(s); }
 

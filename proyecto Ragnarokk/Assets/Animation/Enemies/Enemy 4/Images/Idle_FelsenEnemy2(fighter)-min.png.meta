@@ -1,7 +1,79 @@
 fileFormatVersion: 2
 guid: b8bf52449834d9945b4c5f222876aed6
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 3433084632447433799
+    second: Idle_FelsenEnemy2(fighter)-min_0
+  - first:
+      213: 4275593925540182259
+    second: Idle_FelsenEnemy2(fighter)-min_1
+  - first:
+      213: 7053252119899658023
+    second: Idle_FelsenEnemy2(fighter)-min_2
+  - first:
+      213: 4318096612240355716
+    second: Idle_FelsenEnemy2(fighter)-min_3
+  - first:
+      213: 6658720865555726415
+    second: Idle_FelsenEnemy2(fighter)-min_4
+  - first:
+      213: -340658158874666988
+    second: Idle_FelsenEnemy2(fighter)-min_5
+  - first:
+      213: -8079185239953224210
+    second: Idle_FelsenEnemy2(fighter)-min_6
+  - first:
+      213: -3308793370853402751
+    second: Idle_FelsenEnemy2(fighter)-min_7
+  - first:
+      213: -6799657703974444926
+    second: Idle_FelsenEnemy2(fighter)-min_8
+  - first:
+      213: -3941323557924188728
+    second: Idle_FelsenEnemy2(fighter)-min_9
+  - first:
+      213: 4956914737862548332
+    second: Idle_FelsenEnemy2(fighter)-min_10
+  - first:
+      213: 4138680575701160453
+    second: Idle_FelsenEnemy2(fighter)-min_11
+  - first:
+      213: -3935541464974001488
+    second: Idle_FelsenEnemy2(fighter)-min_12
+  - first:
+      213: -4480096826315840078
+    second: Idle_FelsenEnemy2(fighter)-min_13
+  - first:
+      213: -9199200978643627332
+    second: Idle_FelsenEnemy2(fighter)-min_14
+  - first:
+      213: -6799120264883860360
+    second: Idle_FelsenEnemy2(fighter)-min_15
+  - first:
+      213: -1625442421723649544
+    second: Idle_FelsenEnemy2(fighter)-min_16
+  - first:
+      213: -1997725456800645172
+    second: Idle_FelsenEnemy2(fighter)-min_17
+  - first:
+      213: -4553293822949937341
+    second: Idle_FelsenEnemy2(fighter)-min_18
+  - first:
+      213: -302757530116998989
+    second: Idle_FelsenEnemy2(fighter)-min_19
+  - first:
+      213: 7688992796332643284
+    second: Idle_FelsenEnemy2(fighter)-min_20
+  - first:
+      213: 1540663467936448659
+    second: Idle_FelsenEnemy2(fighter)-min_21
+  - first:
+      213: 6258815133174162316
+    second: Idle_FelsenEnemy2(fighter)-min_22
+  - first:
+      213: 5697103769197172740
+    second: Idle_FelsenEnemy2(fighter)-min_23
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,12 +113,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 150
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,9 +147,525 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 810
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74cb1e0b844c4af20800000000000000
+      internalID: 3433084632447433799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_1
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 810
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f8f3afa506f55b30800000000000000
+      internalID: 4275593925540182259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_2
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 810
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 727d3edee6f22e160800000000000000
+      internalID: 7053252119899658023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_3
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 810
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48177669df5fceb30800000000000000
+      internalID: 4318096612240355716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_4
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 810
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f404ee90957886c50800000000000000
+      internalID: 6658720865555726415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_5
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 810
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 418df6a953db54bf0800000000000000
+      internalID: -340658158874666988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 540
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eed420264d7f0ef80800000000000000
+      internalID: -8079185239953224210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_7
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 540
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1879d1fb5fdc412d0800000000000000
+      internalID: -3308793370853402751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_8
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 540
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 280ea582853c2a1a0800000000000000
+      internalID: -6799657703974444926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_9
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 540
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cdcc092b1b9d49c0800000000000000
+      internalID: -3941323557924188728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_10
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 540
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6b1234f0bf7ac440800000000000000
+      internalID: 4956914737862548332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_11
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 540
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5021a715e0c8f6930800000000000000
+      internalID: 4138680575701160453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 270
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ba776593e52269c0800000000000000
+      internalID: -3935541464974001488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_13
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 270
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b5e61c4caf73d1c0800000000000000
+      internalID: -4480096826315840078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_14
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 270
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb2558a037fd55080800000000000000
+      internalID: -9199200978643627332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_15
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 270
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87c0072742ca4a1a0800000000000000
+      internalID: -6799120264883860360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_16
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 270
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f9af4abab44179e0800000000000000
+      internalID: -1625442421723649544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_17
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 270
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccf74ac0847a644e0800000000000000
+      internalID: -1997725456800645172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34fa61574637fc0c0800000000000000
+      internalID: -4553293822949937341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_19
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b83d4461a36ccbf0800000000000000
+      internalID: -302757530116998989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_20
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d3d1f1d53ac4ba60800000000000000
+      internalID: 7688992796332643284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_21
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39006c4e249816510800000000000000
+      internalID: 1540663467936448659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_22
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c836fa7f337cbd650800000000000000
+      internalID: 6258815133174162316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_FelsenEnemy2(fighter)-min_23
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 0
+        width: 480
+        height: 270
+      alignment: 9
+      pivot: {x: 0.8, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 408598b81bd201f40800000000000000
+      internalID: 5697103769197172740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
