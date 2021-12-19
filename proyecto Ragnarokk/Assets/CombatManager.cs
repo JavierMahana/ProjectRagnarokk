@@ -498,9 +498,7 @@ public class CombatManager : MonoBehaviour
                 FindNextActiveFighter();
                 StartCoroutine(TurnAction());
 
-                if(CurrentPlayerButton != null && ActiveFighter != null && OriginalButtonPos != null 
-                   && CurrentPlayerButton.transform.position.x != OriginalButtonPos.x
-                   && CurrentPlayerButton.transform.position.y != OriginalButtonPos.y)
+                if(CurrentPlayerButton != null && ActiveFighter != null && OriginalButtonPos != null)
                 {
                     MoveActivePlayerButton(false);
                 }
