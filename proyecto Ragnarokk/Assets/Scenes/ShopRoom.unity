@@ -2863,7 +2863,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1332647190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3385,6 +3385,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1332647193}
     m_Modifications:
+    - target: {fileID: 1221957190043376222, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1221957191264728236, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
       propertyPath: m_Name
       value: MenuPanel

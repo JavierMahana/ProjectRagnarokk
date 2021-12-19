@@ -216,7 +216,7 @@ public class CombatManager : MonoBehaviour
         {
             ClearPanelDescriptor();
             AddDamageTypeButton(AttackWeapon.TipoDeDañoQueAplica);
-            string description = $" Acc: {AttackWeapon.BaseAccuracy} \n Dmg: {AttackWeapon.BaseDamage} \n Crit: {AttackWeapon.BaseCriticalRate} \n Cooldown: {AttackWeapon.BaseCooldown}";
+            string description = $" Precisión: {AttackWeapon.BaseAccuracy} \n Daño Base: {AttackWeapon.BaseDamage} \n Crítico: {AttackWeapon.BaseCriticalRate} \n Enfriamiento: {AttackWeapon.BaseCooldown}";
             SetlDescriptorText(description);
         }
     }

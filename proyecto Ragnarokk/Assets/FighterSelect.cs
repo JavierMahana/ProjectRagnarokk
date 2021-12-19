@@ -94,22 +94,22 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if(isDamage)
         {
-            string predamage = "HIT ";
+            string predamage = "ACIERTO ";
             string synergyText = "";
             showText.color = normalColor;
 
-            if (isCrit) { showText.color = critColor; predamage = "CRIT HIT "; }
+            if (isCrit) { showText.color = critColor; predamage = "¡GOLPE CRÍTICO! "; }
 
             switch (syn)
             {
                 case 1:
-                    synergyText = "Synergy!";
+                    synergyText = "!Sinergia!";
                     Debug.Log("hubo sinergia");
                     this.synergyText.color = synergyColor;
                     break;
 
                 case -1:
-                    synergyText = "AntiSynergy";
+                    synergyText = "...Anti-sinergia";
                     Debug.Log("hubo antisinergias");
                     this.synergyText.color = antiSynergyColor;
                     break;
@@ -120,14 +120,14 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             }
 
-            showText.text = (value > 0) ? predamage + value.ToString() : "MISS";
+            showText.text = (value > 0) ? predamage + value.ToString() : "FALLO";
             this.synergyText.text = synergyText;
             showTimer = 400;
         }
         else
         {
             showText.text = "";
-            this.synergyText.text = "+ " + value.ToString() + "!"; ;
+            this.synergyText.text = "+ " + value.ToString();
             showText.color = healColor;
             showTimer = 400;
         }
