@@ -164,9 +164,9 @@ public class GameManager : Singleton<GameManager>
         // se carga la data de Options.
         if (PlayerPrefs.GetInt("firstTime") == 0)
         {
-            PlayerPrefs.SetFloat("audioGeneral", 90f);
+            PlayerPrefs.SetFloat("audioGeneral", 80f);
             PlayerPrefs.SetFloat("audioSFX", 80f);
-            PlayerPrefs.SetFloat("audioMusic", 70f);
+            PlayerPrefs.SetFloat("audioMusic", 60f);
             PlayerPrefs.SetFloat("audioAmbient", 60f);
 
             PlayerPrefs.SetFloat("combatDescriptorSpeed", 5f);

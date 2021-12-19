@@ -242,8 +242,7 @@ public class WeaponsPanel : MonoBehaviour
 
             currentWeaponButton = null;
 
-            var AM = FindObjectOfType<AudioManager>();
-            AM.Play("WeaponExchange");
+            AudioManager.instance.Play("WeaponExchange");
 
 
             EmptyWeaponPanel();
@@ -277,6 +276,7 @@ public class WeaponsPanel : MonoBehaviour
             Debug.Log("no valid weapon selected");
         }
 
+        AudioManager.instance.Play("WeaponDrop");
         currentWeaponButton = null;
         FillWeaponsPanel();
     }

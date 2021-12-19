@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TextAnimations : MonoBehaviour
 {
-
     public Animator animator;
     public void AnimationStart()
     {

@@ -497,6 +497,14 @@ public class CombatManager : MonoBehaviour
 
                 FindNextActiveFighter();
                 StartCoroutine(TurnAction());
+
+                if(CurrentPlayerButton != null && ActiveFighter != null && OriginalButtonPos != null 
+                   && CurrentPlayerButton.transform.position.x != OriginalButtonPos.x
+                   && CurrentPlayerButton.transform.position.y != OriginalButtonPos.y)
+                {
+                    MoveActivePlayerButton(false);
+                }
+                
             }
             else if(CombatState > 0)
             {
@@ -624,6 +632,7 @@ public class CombatManager : MonoBehaviour
                 StartNewTurnCycle();
             }
             ActiveFighter = AllCombatFighters[ActiveFighterIndex];
+
         } while (ActiveFighter.CurrentHP <= 0); //Comprueba que esté vivo.
 
         GameManager.Instance.PlayerOnTurn = ActiveFighter.gameObject; //¿PlayerOnTurn está en desuso?
@@ -687,7 +696,7 @@ public class CombatManager : MonoBehaviour
                 }
             }
 
-            // mueve al mujador y su botón
+            // mueve al jugador y su botón
             ActiveFighter.transform.position += new Vector3((float)2.5, 0, 0);
             MoveActivePlayerButton(true);
 
@@ -770,7 +779,7 @@ public class CombatManager : MonoBehaviour
                 yield break; //Se interrumpe la corrutina. El turno NO se declara como terminado. Esto es para prevenir que se inicie un nuevo turno.
             }
             ActionDone = false;
-            MoveActivePlayerButton(false);
+            
         }
         //TURNO DE UN ENEMIGO
         else
@@ -1408,6 +1417,17 @@ public class CombatManager : MonoBehaviour
             #region Defense
             if (GameManager.Instance.OnDefense)
             {
+                AudioManager.instance.Play("Defensa");
+                FighterSelect[] fightersClickables = FindObjectsOfType<FighterSelect>();
+
+                foreach(FighterSelect fs in fightersClickables)
+                {
+                    if(fs.Fighter == ActiveFighter)
+                    {
+                        fs.OnDefenseMode();
+                    }
+                }
+
                 ShowActionCanvas(false);
                 // aumentar temporalmente la defensa del jugador activo
                 // podría usarse un array de bonuses, útil también para consumibles

@@ -118,10 +118,10 @@ public class GeneralMenu : MonoBehaviour
         }
 
         // AL ESTAR en combate
-        if (cm != null && GameManager.Instance.GameState == GAME_STATE.COMBAT && MenuTitle.text != "Ronda " + cm.round.ToString())
+        if (cm != null && GameManager.Instance.GameState == GAME_STATE.COMBAT && MenuTitle.text != "Ronda " + (cm.round + 1).ToString())
         {
            
-            MenuTitle.text = "Ronda " + cm.round.ToString() + 1;
+            MenuTitle.text = "Ronda " + (cm.round+1).ToString();
         }
     }
 

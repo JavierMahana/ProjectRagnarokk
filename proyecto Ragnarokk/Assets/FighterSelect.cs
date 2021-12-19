@@ -9,6 +9,9 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     public GameObject animableObject1;
     public GameObject animableObject2;
+    public GameObject animableObject3;
+
+    private Animator shieldAnimation;
 
     public Fighter Fighter;
     
@@ -35,6 +38,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         animator1 = animableObject1.GetComponent<TextAnimations>();
         animator2 = animableObject2.GetComponent<TextAnimations>();
+        shieldAnimation = animableObject3.GetComponent<Animator>();
 
         float r = 0;
         float g = 0;
@@ -83,7 +87,11 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
-    
+    public void OnDefenseMode()
+    {
+        shieldAnimation.Play("Defensa");
+    }
+
     public void ShowText(bool isDamage, bool isHope, int value, bool isCrit, int syn)
     {
         // syn 0 para cuando no hay sinergia alguna
@@ -98,20 +106,29 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             string synergyText = "";
             showText.color = normalColor;
 
-            if (isCrit) { showText.color = critColor; predamage = "¡GOLPE CRÍTICO! "; }
-
+            if (isCrit) 
+            { 
+                showText.color = critColor; predamage = "¡GOLPE CRÍTICO! ";
+                AudioManager.instance.Play("Golpe Critico");
+            }
+            else 
+            {
+                AudioManager.instance.Play("Golpe");
+            }
             switch (syn)
             {
                 case 1:
                     synergyText = "!Sinergia!";
                     Debug.Log("hubo sinergia");
                     this.synergyText.color = synergyColor;
+                    AudioManager.instance.Play("Sinergia");
                     break;
 
                 case -1:
                     synergyText = "...Anti-sinergia";
                     Debug.Log("hubo antisinergias");
                     this.synergyText.color = antiSynergyColor;
+                    AudioManager.instance.Play("Anti-Sinergia");
                     break;
 
                 default:
@@ -120,6 +137,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             }
 
+            AudioManager.instance.Play("Fallo");
             showText.text = (value > 0) ? predamage + value.ToString() : "FALLO";
             this.synergyText.text = synergyText;
             showTimer = 400;
@@ -130,10 +148,11 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             synergyText.color = Color.white;
             this.synergyText.text = "+ " + value.ToString() + " Esperanza";
             showTimer = 400;
-
+            AudioManager.instance.Play("Sanar");
         }
         else
         {
+            AudioManager.instance.Play("Sanar");
             showText.text = "";
             this.synergyText.text = "+ " + value.ToString();
             showText.color = healColor;
@@ -178,7 +197,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             else
             {
-                combatManager.SetlDescriptorText("Ivalid Action!");
+                combatManager.SetlDescriptorText("¡Acción Invalida Action!");
                 Debug.Log("Falta escoger el ataque o el arma que se utilizará o bien el enemigo está muerto");
             }
 
@@ -216,13 +235,13 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             if (Fighter.CurrentHP <= 0)
             {
-                descripcion = $" {fighterName} is dead";
+                descripcion = $" {fighterName} está muerto.";
                 cm.SetlDescriptorText(descripcion);
             }
             else
             {
                 cm.AddDamageTypeButton(Fighter.Type);
-                descripcion = $" Name: {fighterName}\n Level: {Fighter.Level} \n Health: {Fighter.CurrentHP} / {Fighter.MaxHP}";
+                descripcion = $"Nombre: {fighterName}\nNivel: {Fighter.Level} \nSalud: {Fighter.CurrentHP} / {Fighter.MaxHP}";
                 cm.SetlDescriptorText(descripcion);
 
                 if(cm.AttackWeapon != null)

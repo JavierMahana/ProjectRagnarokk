@@ -38,7 +38,7 @@ public class TeamFighterPanel : MonoBehaviour
 
        
         ValueLevel.text = f.Level.ToString();
-        ValueType.text = f.Type.Name;
+        ValueType.text = f.Type.name;
         ValueType.color = f.Type.Color;
         ValueAttack.text = f.Atack.ToString();
         ValueDefense.text = f.Defense.ToString();
