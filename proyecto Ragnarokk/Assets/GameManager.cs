@@ -67,7 +67,7 @@ public class GameManager : Singleton<GameManager>
             {
                 return GAME_STATE.COMBAT;
             }
-            else if (FindObjectOfType<ExplorationState>())
+            else if (FindObjectOfType<ExplorationState>() || FindObjectOfType<Derrota>())
             {
                 if (FindObjectOfType<GeneralMenu>(true).MenuDropdown.value > 0)
                 {
@@ -158,6 +158,8 @@ public class GameManager : Singleton<GameManager>
         // se carga la data de Options.
         if (PlayerPrefs.GetInt("firstTime") == 0)
         {
+            PlayerPrefs.SetInt("tutorialComplete", 0);
+
             PlayerPrefs.SetFloat("audioGeneral", 80f);
             PlayerPrefs.SetFloat("audioSFX", 80f);
             PlayerPrefs.SetFloat("audioMusic", 60f);
