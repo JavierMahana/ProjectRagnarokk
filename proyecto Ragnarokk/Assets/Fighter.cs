@@ -39,7 +39,8 @@ public class Fighter : MonoBehaviour
 
         Name = data.Name;
         Atack = data.Atack;
-        Defense = data.Defense;
+        BaseDefense = data.Defense;
+        Defense = BaseDefense;
         Speed = data.Speed;
         Luck = data.Luck;
         MaxHP = data.MaxHP;
@@ -184,6 +185,8 @@ public class Fighter : MonoBehaviour
     public int Atack;
     [ReadOnly]
     public int Defense;
+    [ReadOnly]
+    public int BaseDefense;
     [ReadOnly]
     public int Luck;
     [ReadOnly]

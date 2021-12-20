@@ -364,8 +364,9 @@ public class CombatManager : MonoBehaviour
         AllCombatFighters.AddRange(PlayerFighters);
         AllCombatFighters.AddRange(EnemyFighters);
 
-        foreach(Fighter fighter in AllCombatFighters)
+        foreach (Fighter fighter in AllCombatFighters)
         {
+            fighter.Defense = fighter.BaseDefense;
             fighter.IsDefending = false;
         }
 
@@ -528,6 +529,7 @@ public class CombatManager : MonoBehaviour
 
             foreach (Fighter pf in PlayerFighters)
             {
+                pf.Defense = pf.BaseDefense;
                 pf.IsDefending = false;
             }
 
@@ -547,10 +549,11 @@ public class CombatManager : MonoBehaviour
 
         foreach (Fighter pf in PlayerFighters)
         {
+            pf.Defense = pf.BaseDefense;
             pf.IsDefending = false;
         }
 
-	string victoryHopeChange = HopeManager.Instance.ChangeHope(1, "Cambio por victoria");
+	    string victoryHopeChange = HopeManager.Instance.ChangeHope(1, "Cambio por victoria");
         string victoryDesc = "¡Has ganado! ";
 
         victoryDesc += victoryHopeChange;
@@ -665,14 +668,17 @@ public class CombatManager : MonoBehaviour
         //Si el luchador estaba defendiéndose, sale de ese estado
         if(ActiveFighter.IsDefending)
         {
-            ActiveFighter.Defense -= DefenseValue;
+            ActiveFighter.Defense = ActiveFighter.BaseDefense;
             ActiveFighter.IsDefending = false;
         }
+
+        /*
         Debug.Log("En defensa:");
         foreach (Fighter f in AllCombatFighters)
         {
             if (f.IsDefending) { Debug.Log(f.Name + " (" + f.Defense + ")"); }
         }
+        */
 
         var iniPos = ActiveFighter.transform.position;
 
@@ -1037,6 +1043,8 @@ public class CombatManager : MonoBehaviour
                 Target.CurrentHP = 0;
                 RemoveCombatStates(Target);
                 IconManager.UpdateStateIcons(AllCombatFighters);
+
+                Target.Defense = Target.BaseDefense;
                 Target.IsDefending = false;
 
                 string defeatDesc;
@@ -1455,7 +1463,7 @@ public class CombatManager : MonoBehaviour
                 ShowActionCanvas(false);
                 // aumentar temporalmente la defensa del jugador activo
                 // podría usarse un array de bonuses, útil también para consumibles
-                ActiveFighter.Defense += DefenseValue; //Se aumentará la defensa del luchador hasta que vuelva a ser su turno
+                ActiveFighter.Defense = ActiveFighter.BaseDefense + DefenseValue; //Se aumentará la defensa del luchador hasta que vuelva a ser su turno
                 ActiveFighter.IsDefending = true;
 
                 CombatDescriptor.Clear(); //Si se llega a crear un método para aplicar la defensa, esta línea debe ir ahí
