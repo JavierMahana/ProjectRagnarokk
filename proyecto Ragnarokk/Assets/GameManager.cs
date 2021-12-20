@@ -124,7 +124,7 @@ public class GameManager : Singleton<GameManager>
 
     public List<CombatType> AllCombatTypes = new List<CombatType>();
     //[HideInInspector] public Dictionary<CombatType, int> DefaultFighterTypeBonuses = new Dictionary<CombatType, int>();
-    //public List<CombatState> AllCombatStates = new List<CombatState>();
+    public List<CombatState> AllCombatStates = new List<CombatState>();
 
     //DontDestroyOnLoad
     //objetos de los fighters del player.
