@@ -893,8 +893,10 @@ public class CombatManager : MonoBehaviour
             string critDesc, effectDesc, synerDesc; //Algunos posibles mensajes a mostrar
             critDesc = effectDesc = synerDesc = "";
 
+            float initialHope = HopeManager.Instance.PartyHope;
+
             //PASO 1: SINERGIAS
-            ApplySynergy(out synerDesc);
+            ApplySynergy(initialHope, out synerDesc);
 
             //PASO 2: EFECTIVIDAD
             float effectivenessFact = CalculateEffectivenessFactor(out effectDesc);
@@ -1066,7 +1068,7 @@ public class CombatManager : MonoBehaviour
         targetButton.ShowText(true, damageToShow, isCrit, SynergyDeterminant);
     }
 
-    public void ApplySynergy(out string synerDesc)
+    public void ApplySynergy(float initialHope, out string synerDesc)
     {
         #region SECUENCIA LÓGICA (3 pasos)
         // 1- Conteo de sinergias menos antisinergias
@@ -1102,11 +1104,12 @@ public class CombatManager : MonoBehaviour
         if(IsPlayerFighter(ActiveFighter))
         {
             sbyte hopeChangeMagnitude = 0;
+            sbyte bonus = (sbyte)(initialHope < 50 ? 1 : 0); //mayor buff y menor debuff si la esperanza es baja.
 
-            if      (synergyCounter == 1)   { hopeChangeMagnitude = 2; SynergyDeterminant = 1; }
-            else if (synergyCounter >= 2)   { hopeChangeMagnitude = 3; SynergyDeterminant = 1; }
-            else if (synergyCounter == -1)  { hopeChangeMagnitude = -3; SynergyDeterminant = -1; }
-            else if (synergyCounter <= -2)  { hopeChangeMagnitude = -4; SynergyDeterminant = -1; }
+            if      (synergyCounter == 1)   { hopeChangeMagnitude = (sbyte)(2 + bonus); SynergyDeterminant = 1; }
+            else if (synergyCounter >= 2)   { hopeChangeMagnitude = (sbyte)(3 + bonus); SynergyDeterminant = 1; }
+            else if (synergyCounter == -1)  { hopeChangeMagnitude = (sbyte)(-3 + bonus); SynergyDeterminant = -1; }
+            else if (synergyCounter <= -2)  { hopeChangeMagnitude = (sbyte)(-4 + bonus); SynergyDeterminant = -1; }
 
             //Cambia esperanza, y prepara un mensaje sobre la sinergia generada
             if (hopeChangeMagnitude != 0)
