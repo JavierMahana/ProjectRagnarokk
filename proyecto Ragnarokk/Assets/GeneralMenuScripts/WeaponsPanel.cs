@@ -142,8 +142,8 @@ public class WeaponsPanel : MonoBehaviour
             Description.text = button.thisWeapon.Description;
             WeaponName.text = button.thisWeapon.Name;
             ValueDamage.text = button.thisWeapon.BaseDamage.ToString();
-            ValueAccuracy.text = button.thisWeapon.BaseAccuracy.ToString();
-            ValueCriticalChance.text = button.thisWeapon.BaseCriticalRate.ToString(); 
+            ValueAccuracy.text = button.thisWeapon.BaseAccuracy.ToString() + "%";
+            ValueCriticalChance.text = button.thisWeapon.BaseCriticalRate.ToString() + "%"; 
             ValueCooldown.text = button.thisWeapon.BaseCooldown.ToString();
             ValueType.text = button.thisWeapon.TipoDeDañoQueAplica.Name.ToString();
         }
