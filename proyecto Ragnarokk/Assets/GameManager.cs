@@ -51,27 +51,22 @@ public class GameManager : Singleton<GameManager>
             {
                 return GAME_STATE.CREDITS;
             }
-
-            if (FindObjectOfType<ShopManager>())
+            else if (FindObjectOfType<ShopManager>())
             {
                 return GAME_STATE.SHOP;
             }
-
             else if (FindObjectOfType<TreasureState>())
             {
                 return GAME_STATE.TREASURE;
             }
-
             else if (FindObjectOfType<ShopState>())
             {
                 return GAME_STATE.SHOP;
             }
-
             else if (FindObjectOfType<CombatManager>())
             {
                 return GAME_STATE.COMBAT;
             }
-
             else if (FindObjectOfType<ExplorationState>())
             {
                 if (FindObjectOfType<GeneralMenu>(true).MenuDropdown.value > 0)
@@ -80,7 +75,6 @@ public class GameManager : Singleton<GameManager>
                 }
                 return GAME_STATE.EXPLORATION;
             }
-           
             else
             {
                 return GAME_STATE.PREGAME;

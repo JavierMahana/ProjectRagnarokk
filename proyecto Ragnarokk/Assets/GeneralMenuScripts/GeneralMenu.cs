@@ -105,7 +105,7 @@ public class GeneralMenu : MonoBehaviour
         var cm = FindObjectOfType<CombatManager>();
 
         // activacion del titulo del menu
-        if(GameManager.Instance.GameState == GAME_STATE.PREGAME || GameManager.Instance.GameState == GAME_STATE.CREDITS)
+        if(GameManager.Instance.GameState == GAME_STATE.PREGAME || GameManager.Instance.GameState == GAME_STATE.CREDITS || GameManager.Instance.GameState == GAME_STATE.SHOP || GameManager.Instance.GameState == GAME_STATE.TREASURE)
         {
             if(MenuDropdown.value == 0)
             {

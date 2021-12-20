@@ -33,6 +33,11 @@ public class WeaponsPanel : MonoBehaviour
     public Button cancel;
 
     public GameObject OptionPanel;
+
+    public void Start()
+    {
+        thisImage.color = Color.clear;
+    }
     public void SetUpPanel()
     {
         //fills the weapons
@@ -137,6 +142,7 @@ public class WeaponsPanel : MonoBehaviour
         if (button != null && button.thisWeapon != null)
         {
             thisImage.sprite = button.thisImage.sprite;
+            thisImage.color = Color.white;
             thisImage.preserveAspect = true;
             thisImage.color = button.defaultColor;
             Description.text = button.thisWeapon.Description;

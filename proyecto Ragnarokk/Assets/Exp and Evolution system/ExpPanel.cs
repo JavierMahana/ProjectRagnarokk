@@ -81,6 +81,7 @@ public class ExpPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         this.manager = manager;
 
         Image.sprite = currFighter.Sprite;
+        Image.preserveAspect = true;
         Text.text = currFighter.Name;
 
         ExpBar.Init(currFighter);
