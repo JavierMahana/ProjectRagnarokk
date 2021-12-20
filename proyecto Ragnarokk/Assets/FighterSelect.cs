@@ -21,6 +21,11 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private TextAnimations animator1;
     private TextAnimations animator2;
 
+    public GameObject panelEstados;
+    public GameObject PrefabStateButton;
+
+    private List<GameObject> botonesEstados = new List<GameObject>();
+
     public int showTimer;
 
     private string defaultText = "";
@@ -108,7 +113,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             if (isCrit) 
             { 
-                showText.color = critColor; predamage = "¡GOLPE CRÍTICO! ";
+                showText.color = critColor; predamage = "¡CRÍTICO! ";
                 AudioManager.instance.Play("Golpe Critico");
             }
             else 
@@ -125,7 +130,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     break;
 
                 case -1:
-                    synergyText = "...Anti-sinergia";
+                    synergyText = "Anti-sinergia";
                     Debug.Log("hubo antisinergias");
                     this.synergyText.color = antiSynergyColor;
                     AudioManager.instance.Play("Anti-Sinergia");
@@ -158,6 +163,8 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             showText.color = healColor;
             showTimer = 400;
         }
+
+        AddStates();
     }
 
     private void BeginTextAnimation()
@@ -273,6 +280,28 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             OnClick();
         }
         
+    }
+
+    public void AddStates()
+    {
+        foreach(GameObject go in botonesEstados) { Destroy(go); }
+        botonesEstados.Clear();
+
+        foreach(CombatState cs in Fighter.States)
+        {
+            var button = Instantiate(PrefabStateButton);
+            button.GetComponent<StateButton>().SetButton(cs);
+            button.GetComponent<ForAllButtons>().staysPressed = false;
+            var csfs = button.GetComponentsInChildren<ContentSizeFitter>();
+            
+            foreach(ContentSizeFitter csf in csfs)
+            {
+                csf.verticalFit = ContentSizeFitter.FitMode.MinSize;
+                csf.horizontalFit = ContentSizeFitter.FitMode.MinSize;
+            }
+            button.transform.SetParent(panelEstados.transform, false);
+            botonesEstados.Add(button);
+        }
     }
 
 }

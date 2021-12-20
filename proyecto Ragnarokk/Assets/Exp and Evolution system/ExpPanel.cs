@@ -89,14 +89,14 @@ public class ExpPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (currFighter.CurrentHP <= 0)
         {
             cantGiveExpPanel.SetActive(true);
-            cantGiveEpxText.text = "Fighter is dead";
+            cantGiveEpxText.text = "El aventurero está muerto";
 
             canBeSelected = false;
         }
         else if (currFighter.IsMaxLevel)
         {
             cantGiveExpPanel.SetActive(true);
-            cantGiveEpxText.text = "Fighter is max level";
+            cantGiveEpxText.text = "El aventurero tiene nivel máximo";
 
             canBeSelected = false;
         }

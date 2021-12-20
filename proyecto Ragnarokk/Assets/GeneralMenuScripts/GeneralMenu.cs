@@ -58,11 +58,11 @@ public class GeneralMenu : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
-        floor = "Explorando Piso " + PlayerPrefs.GetInt("currentFloor");
     }
     void Start()
     {
         initialized = true;
+        floor = "Explorando Piso " + PlayerPrefs.GetInt("currentFloor");
         explorationManager = FindObjectOfType<ExplorationManager>();
 
         Panels.Clear();

@@ -645,6 +645,12 @@ public class CombatManager : MonoBehaviour
 
     public void StartNewTurnCycle()
     {
+        var Fss = FindObjectsOfType<FighterSelect>();
+        if (Fss != null)
+        {
+            foreach (FighterSelect Fs in Fss) { Fs.AddStates(); }
+        }
+
         round++;
         RemoveAllCombatStates();
         DiminishWeaponCooldowns();
@@ -654,6 +660,8 @@ public class CombatManager : MonoBehaviour
     
     private IEnumerator TurnAction()
     {
+       
+
         //Si el luchador estaba defendiéndose, sale de ese estado
         if(ActiveFighter.IsDefending)
         {
@@ -681,8 +689,14 @@ public class CombatManager : MonoBehaviour
         }
 
         CombatDescriptor.ShowFighterInTurn(ActiveFighter, IsPlayerFighter(ActiveFighter));
-
         
+        
+        // Se actualizan los botones de estados
+        var Fss = FindObjectsOfType<FighterSelect>();
+        if (Fss != null)
+        {
+            foreach (FighterSelect Fs in Fss) { Fs.AddStates(); }
+        }
 
         //TURNO DE UN ALIADO
         if (IsPlayerFighter(ActiveFighter))
@@ -1008,7 +1022,7 @@ public class CombatManager : MonoBehaviour
             if (false    &&    attackerIsAlly && finalDamage == minDamage) 
             {
                 string minDamageHopeChange = HopeManager.Instance.ChangeHope(-2, "Cambio por daño mínimo");
-                CombatDescriptor.AddTextLine("Que petético... " + minDamageHopeChange); //Mensaje para daño mínimo
+                CombatDescriptor.AddTextLine("Que patético... " + minDamageHopeChange); //Mensaje para daño mínimo
             }
 
             //PASO 8: APLICACIÓN DEL DAÑO
@@ -1028,7 +1042,7 @@ public class CombatManager : MonoBehaviour
                 string defeatDesc;
 
                 if (PlayerFighters.Contains(Target)) { defeatDesc = "¡" + Target.RealName + " ha sido derrotado! "; }
-                else { defeatDesc = "¡" + Target.Name + " has been defeated! "; }
+                else { defeatDesc = "¡" + Target.Name + " ha sido derrotado! "; }
                  
                 string defeatHopeChange = "";
 
@@ -1221,7 +1235,7 @@ public class CombatManager : MonoBehaviour
             string hopeChange = HopeManager.Instance.ChangeHope(1, "Cambio por mal estado de la horda enemiga");
 
             string hordeHPDesc = "";
-            if(HordeCurrentHP <= 0) { hordeHPDesc = "¡Cuánta potencia!"; }
+            if(HordeCurrentHP <= 0) { hordeHPDesc = "¡Cuánto Poder!"; }
             else if(EnemyFighters.Count == 1) { hordeHPDesc = "¡El enemigo se encuentra débil! "; }
             else { hordeHPDesc = "¡Los enemigos se encuentran débiles! "; }
             hordeHPDesc += hopeChange;
@@ -1289,7 +1303,7 @@ public class CombatManager : MonoBehaviour
         }
         IconManager.UpdateStateIcons(AllCombatFighters);
         WillApplyRandomState = false;
-        CombatDescriptor.AddTextLine($"Enemies are {randomState.Name}", 1.5f);
+        CombatDescriptor.AddTextLine($"Los enemigos se ven afectados por {randomState.Name}", 1.5f);
     }
 
     public void ActionSelection()

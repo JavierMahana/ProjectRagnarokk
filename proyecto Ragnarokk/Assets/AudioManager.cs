@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
 				if (music.SoundName == Music[0].SoundName) { SetMusic(music); }
             }
 		}
-		else if (GameManager.Instance.GameState == GAME_STATE.EXPLORATION)
+		else if (GameManager.Instance.GameState == GAME_STATE.EXPLORATION || GameManager.Instance.GameState == GAME_STATE.DEFEAT)
 		{
 			foreach (Sound music in sounds)
 			{			

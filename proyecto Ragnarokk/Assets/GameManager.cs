@@ -20,6 +20,7 @@ public enum GAME_STATE
     MENU,
     SHOP,
     TREASURE,
+    DEFEAT,
     CREDITS
 }
 
@@ -67,13 +68,17 @@ public class GameManager : Singleton<GameManager>
             {
                 return GAME_STATE.COMBAT;
             }
-            else if (FindObjectOfType<ExplorationState>() || FindObjectOfType<Derrota>())
+            else if (FindObjectOfType<ExplorationState>())
             {
                 if (FindObjectOfType<GeneralMenu>(true).MenuDropdown.value > 0)
                 {
                     return GAME_STATE.MENU;
                 }
                 return GAME_STATE.EXPLORATION;
+            }
+            else if(FindObjectOfType<Derrota>())
+            {
+                return GAME_STATE.DEFEAT;
             }
             else
             {
@@ -366,7 +371,10 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame()
     {
+        PlayerPrefs.SetInt("currentFloor", 0);
+        DeletePlayerFighters();
         CurrentMoney = 0;
-        PlayerFighters.Clear();
+        FindObjectOfType<HopeManager>().enabled = true;
+        FindObjectOfType<ExplorationManager>().enabled = true;
     }
 }

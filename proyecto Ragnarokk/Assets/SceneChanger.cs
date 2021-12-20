@@ -31,8 +31,8 @@ public class SceneChanger : Singleton<SceneChanger>
 
 	public void End()
     {
-		ChangeScene("MainMenu");
 		GameManager.Instance.RestartGame();
+		ChangeScene("MainMenu");
     }
 
 	public void ChangeScene(int sceneBuildNumber)
