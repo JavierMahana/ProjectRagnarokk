@@ -28,11 +28,13 @@ public class Room : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool onMouseHover;
 
-    public void Init(RoomData data, List<Room> adyacentRooms, Vector2Int coordenates)
+    public void Init(RoomData data, List<Room> adyacentRooms, Vector2Int coordenates, Vector2 scale)
     {
         this.data = data;
         this.adyacentRooms = adyacentRooms;
         Coordenates = coordenates;
+
+        gameObject.transform.localScale = new Vector3(scale.x, scale.y, 1);
 
         if (data.FloorStart)
         {

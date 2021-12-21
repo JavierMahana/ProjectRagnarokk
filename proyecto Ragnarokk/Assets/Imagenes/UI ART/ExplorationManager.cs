@@ -13,8 +13,8 @@ public class ExplorationManager : Singleton<ExplorationManager>
     private Room currentRoom;
 
 
-    private Vector2 roomOffset = new Vector2(-5,-5);
-    private Vector2 roomSize = new Vector2(1, 1);
+    private Vector2 roomOffset = new Vector2(-4,-4);
+    private Vector2 roomSize = new Vector2(0.8f, 0.8f);
 
     public Floor CurrentFloorData { get; private set; }
     public bool FloorIsLoaded { get; private set; }
@@ -110,7 +110,7 @@ public class ExplorationManager : Singleton<ExplorationManager>
 
 
                     //Ahora inicializo la room.
-                    currRoom.Init(floorToLoad.RoomLayout[x, y], neightbours, new Vector2Int(x,y));
+                    currRoom.Init(floorToLoad.RoomLayout[x, y], neightbours, new Vector2Int(x,y), roomSize);
                     currRoom.transform.position = new Vector3(roomOffset.x + x * roomSize.x, roomOffset.y + y * roomSize.y);
                     LoadedRooms.Add(currRoom);
                 }

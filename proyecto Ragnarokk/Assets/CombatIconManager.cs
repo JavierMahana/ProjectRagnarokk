@@ -9,7 +9,8 @@ public class CombatIconManager : MonoBehaviour
     List<GameObject> CurrentStateIcons = new List<GameObject>();
 
     public void UpdateStateIcons(List<Fighter> fighters)
-    {/*
+    {
+        /*
         //Destruir iconos de estado
         while(CurrentStateIcons.Count != 0)
         {
@@ -30,6 +31,7 @@ public class CombatIconManager : MonoBehaviour
                 stateIcon.GetComponent<SpriteRenderer>().sprite = fighter.States[(int)i].Sprite;
                 CurrentStateIcons.Add(stateIcon);
             }
-        }*/
+        }
+        */
     }
 }
