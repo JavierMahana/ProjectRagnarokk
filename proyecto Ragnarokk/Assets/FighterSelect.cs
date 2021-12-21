@@ -90,6 +90,8 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 EndTextAnimation();
             }
         }
+
+        AddStates();
     }
 
     public void OnDefenseMode()
@@ -163,8 +165,6 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             showText.color = healColor;
             showTimer = 400;
         }
-
-        AddStates();
     }
 
     private void BeginTextAnimation()

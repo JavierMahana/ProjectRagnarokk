@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class StateButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public Color color;
     public CombatState thisState;
     public Image thisImage;
     void Start()
@@ -18,6 +19,7 @@ public class StateButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void SetButton(CombatState cs)
     {
+        //var fab = GetComponent<ForAllButtons>().Normal = color;
         thisState = cs;
         thisImage.sprite = cs.Sprite;
         thisImage.preserveAspect = true;

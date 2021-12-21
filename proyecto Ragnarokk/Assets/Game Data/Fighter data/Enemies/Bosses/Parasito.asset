@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
-  m_Name: Magma Progenitor
+  m_Name: Parasito
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
   Level: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
   Atack: 24
   Defense: 15
   Luck: 0
-  MaxHP: 1
+  MaxHP: 300
   PowerRating: 4
   DefaultWeapons:
   - {fileID: 11400000, guid: 61ad84289cccf074dbad12aa091c8df0, type: 2}
@@ -41,7 +41,7 @@ MonoBehaviour:
   reversedSprite: 1
   size: {x: 2, y: 2}
   healthBarOffset: {x: 1, y: 3}
-  Type: {fileID: 11400000, guid: 7fda126cf52d4f9478689f1d6d5477a2, type: 2}
+  Type: {fileID: 11400000, guid: 99ddf6cb18f34644c857955877bf77d1, type: 2}
   WaterDamageBonus: 0
   EarthDamageBonus: 0
   FireDamageBonus: 0
