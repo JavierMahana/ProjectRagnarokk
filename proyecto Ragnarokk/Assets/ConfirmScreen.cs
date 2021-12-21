@@ -77,9 +77,16 @@ public class ConfirmScreen : MonoBehaviour
             GameManager.Instance.CurrentMoney += currMoneyAmmount;
         }
         else if(evolvingFighter != null && evolvingData != null)
-        {
+        {  
+           var storeSprite = evolvingFighter.Sprite;
+           var storeAnimator = evolvingFighter.animator;
+
             evolvingFighter.Init(evolvingData);
             evolvingFighter.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = evolvingData.Sprite;
+
+            evolvingFighter.Sprite = storeSprite;
+            evolvingFighter.animator = storeAnimator;
+
             evolutionManager.Hide();
         }
         else

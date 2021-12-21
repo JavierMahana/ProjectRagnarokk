@@ -638,7 +638,7 @@ public class CombatManager : MonoBehaviour
                 StartNewTurnCycle();
             }
             ActiveFighter = AllCombatFighters[ActiveFighterIndex];
-
+            //
         } while (ActiveFighter.CurrentHP <= 0); //Comprueba que esté vivo.
 
         GameManager.Instance.PlayerOnTurn = ActiveFighter.gameObject; //¿PlayerOnTurn está en desuso?
@@ -648,13 +648,9 @@ public class CombatManager : MonoBehaviour
 
     public void StartNewTurnCycle()
     {
-        var Fss = FindObjectsOfType<FighterSelect>();
-        if (Fss != null)
-        {
-            foreach (FighterSelect Fs in Fss) { Fs.AddStates(); }
-        }
+        //
 
-        round++;
+         round++;
         RemoveAllCombatStates();
         DiminishWeaponCooldowns();
         WillApplyRandomState = Random.Range(0, 2) == 0; //50%
@@ -695,14 +691,10 @@ public class CombatManager : MonoBehaviour
         }
 
         CombatDescriptor.ShowFighterInTurn(ActiveFighter, IsPlayerFighter(ActiveFighter));
-        
-        
+
+
         // Se actualizan los botones de estados
-        var Fss = FindObjectsOfType<FighterSelect>();
-        if (Fss != null)
-        {
-            foreach (FighterSelect Fs in Fss) { Fs.AddStates(); }
-        }
+        //
 
         //TURNO DE UN ALIADO
         if (IsPlayerFighter(ActiveFighter))
@@ -802,13 +794,17 @@ public class CombatManager : MonoBehaviour
         yield return new WaitForSeconds(pauseTime);
 
         ActiveFighter.transform.position = iniPos;
+        //
         // indica que termina un turno
+
         TurnInProcess = false;
     }
 
     // al hacerle clic se activa Fight y el argumento es el boton cliqueado que contiene al target
     public void Fight(FighterSelect targetButton)
     {
+        
+
         ShowActionCanvas(false);
         //Debug.Log("Desactiva Canvas!!!!!");
         if (targetButton == null || targetButton.Fighter == null)// || targetButton.selfBbutton == null) 
@@ -1049,6 +1045,7 @@ public class CombatManager : MonoBehaviour
 
         // el botón imprime el daño infligido
         targetButton.ShowText(true, false, damageToShow, isCrit, SynergyDeterminant);
+        //
     }
 
     public void ApplySynergy(float initialHope, out string synerDesc)
@@ -1436,6 +1433,15 @@ public class CombatManager : MonoBehaviour
                 
             }
             #endregion
+        }
+    }
+
+    private void UpdateAllStateIcons()
+    {
+        var Fss = FindObjectsOfType<FighterSelect>();
+        if (Fss != null)
+        {
+            foreach (FighterSelect Fs in Fss) { Fs.AddStates(); }
         }
     }
 

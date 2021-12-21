@@ -86,7 +86,7 @@ public class ConsumiblePanel : MonoBehaviour
             Health.text = "<#C0C0C0>" + currentFighter.CurrentHP.ToString() + "</color>" + " / " + currentFighter.MaxHP.ToString();
         }
         
-        Image.sprite = currentFighter.GetComponentInChildren<SpriteRenderer>().sprite;
+        Image.sprite = currentFighter.Sprite;
         Image.preserveAspect = true;
 
         if(SelectedConsumible != null) { Descriptor.text = SelectedConsumible.Description; }

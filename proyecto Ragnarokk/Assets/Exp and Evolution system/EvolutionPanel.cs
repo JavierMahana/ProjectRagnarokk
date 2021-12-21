@@ -84,7 +84,7 @@ public class EvolutionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         this.evolvingFignter = evolvingFighter;
         this.manager = manager;
         NameField.text = data.Name;
-        ImageField.sprite = data.Sprite;
+        ImageField.sprite = evolvingFighter.Sprite;
         ImageField.preserveAspect = true;
         currData = data;
     }
