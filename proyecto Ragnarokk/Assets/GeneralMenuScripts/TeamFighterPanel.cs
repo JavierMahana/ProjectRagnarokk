@@ -19,7 +19,7 @@ public class TeamFighterPanel : MonoBehaviour
 
     public void fillPanel(Fighter f)
     {
-        thisimage.sprite = f.GetComponentInChildren<SpriteRenderer>().sprite;
+        thisimage.sprite = f.Sprite;
         thisimage.preserveAspect = true;
         //añador el level luego del nombre, en el mismo string
         FighterName.text = f.RealName;
