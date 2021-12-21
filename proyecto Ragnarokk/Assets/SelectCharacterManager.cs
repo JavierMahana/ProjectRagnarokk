@@ -26,7 +26,7 @@ public class SelectCharacterManager : MonoBehaviour
     private void Start()
     {
         onNameChange = false;
-        if (GameManager.Instance.CheckTutorialComplete())
+        if (GameManager.Instance.SeDebeMostrarElTutorial())
         {
             PanelExplain.SetActive(true);
         }
