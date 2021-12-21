@@ -50,7 +50,7 @@ public class MainMenu : MonoBehaviour
         SceneChanger.Instance.LoadMenuScene();
 
         //esto debería moverse a donde sea que termine el tutorial del juego.
-        GameManager.Instance.TutorialComplete();
+        //GameManager.Instance.TutorialComplete();
     }
 
     public void ClickQuit()

@@ -159,7 +159,7 @@ public class GameManager : Singleton<GameManager>
     {
         // comentar la linea de abajo para que que se guarden los cambios que el jugador realice
         // El valor de un PlayerPref cuando no se encuentra, es 0, es el valor incial default
-        PlayerPrefs.SetInt("firstTime", 0);
+        //PlayerPrefs.SetInt("firstTime", 0);
         // si es la primera vez que se inicia el juego, la data cargada es ésta, de lo contrario
         // se carga la data de Options.
         if (PlayerPrefs.GetInt("firstTime") == 0)
@@ -175,7 +175,10 @@ public class GameManager : Singleton<GameManager>
             PlayerPrefs.SetInt("width", Screen.currentResolution.width);
             PlayerPrefs.SetInt("height", Screen.currentResolution.height);
 
-            //PlayerPrefs.SetInt("firstTime", 1);
+
+            PlayerPrefs.SetInt("tutorialComplete", 0);
+
+            PlayerPrefs.SetInt("firstTime", 1);
             PlayerPrefs.SetInt("currentFloor", 0);
         }
         
@@ -348,7 +351,7 @@ public class GameManager : Singleton<GameManager>
         Application.Quit();
     }
 
-    public bool CheckTutorialComplete()
+    public bool SeDebeMostrarElTutorial()
     {
         // si es primera vez que se abre el juego
         if (PlayerPrefs.GetInt("tutorialComplete") == 0) { return true; }
@@ -357,7 +360,7 @@ public class GameManager : Singleton<GameManager>
 
     public void TutorialComplete()
     {
-        if (CheckTutorialComplete())
+        if (SeDebeMostrarElTutorial())
         {
             PlayerPrefs.SetInt("tutorialComplete", 1);
         }
