@@ -682,7 +682,7 @@ public class CombatManager : MonoBehaviour
 
         var iniPos = ActiveFighter.transform.position;
 
-        const float pauseTime = 0.8f; //Tiempo estándar usado para pausas breves
+        const float pauseTime = 0.5f; //Tiempo estándar usado para pausas breves
 
         yield return null; //Es posible que la necesidad de esta línea se deba a que se consulta por la variable TextIsEmpty, la cual se actualiza en Update, en vez de consultar directamente el tamaño de la lista de TextLines.
         yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
@@ -733,74 +733,8 @@ public class CombatManager : MonoBehaviour
             ActiveFighter.transform.position += new Vector3((float)2.5, 0, 0);
             MoveActivePlayerButton(true);
 
-            #region obsoleto
-            /*
-               if (false) //Este código quedará obsoleto?
-               {
-                   //SELECCIÓN DE LA ACCIÓN
-                   do
-                   {
-                       Action = null;
-                       //La corrutina se detendrá hasta que se defina una acción en Update.
-                       Debug.Log("Escogiendo Acción...");
-                       yield return new WaitUntil(() => Action != null);
-
-                       switch (Action)
-                       {
-                           case "Attack":
-                               //SELECCIÓN DEL ARMA
-                               do
-                               {
-                                   Debug.Log("ACCIÓN: " + Action);
-                                   AttackWeapon = null;
-                                   //Se esperará a definir un arma, o a cancelar la acción
-                                   Debug.Log("Escogiendo Arma...");
-                                   yield return new WaitUntil(() => AttackWeapon != null || Annulment);
-
-                                   if (Annulment)
-                                   {
-                                       Action = null; //Se cancela la acción
-                                       Annulment = false;
-                                       continue; //NO se llevará a cabo la elección de un objetivo
-                                   }
-
-                                   //SELECCIÓN DEL OBJETIVO
-                                   do
-                                   {
-                                       Debug.Log("ACCIÓN: " + Action + " | ARMA: " + AttackWeapon.Name);
-                                       Annulment = false;
-                                       Target = null;
-                                       Debug.Log("Escogiendo Objetivo...");
-                                       yield return new WaitUntil(() => Target != null || Annulment);
-
-                                       if (Annulment)
-                                       {
-                                           AttackWeapon = null; //Se anula la elección de arma
-                                           Annulment = false;
-                                           continue; //NO se pedirá la confirmación de una acción
-                                       }
-
-                                       Debug.Log("ACCIÓN: " + Action + " | ARMA: " + AttackWeapon.Name + " | OBJETIVO: " + Target.Name);
-                                       //Se solicita confirmación de la acción.
-                                       Debug.Log("Confirmando...");
-                                       Confirm = false;
-                                       yield return new WaitUntil(() => Confirm || Annulment);
-                                   } while ((Target == null && AttackWeapon != null) || Annulment); //Se da cuando el jugador quiere reseleccionar el objetivo (puede que sea suficiente consultar por Annulment)
-                               } while (AttackWeapon == null && Action != null); //Se da cuando el jugador quiere cambiar de arma
-
-                               break;
-                       }
-                   } while (Action == null); //No acaba el turno sin una acción a ejecutar, lo que implica que no hay turnos saltables.
-
-                   if(Action.Equals("Attack")) 
-                   { //Fight();
-                     }
-               }
-               */
-            #endregion
-
-            //No continúa hasta que la acción ha sido descrita por completo
-            yield return new WaitUntil(() => ActionDone && CombatDescriptor.TextIsEmpty);
+            //No continúa hasta que la acción ha sido descrita por completo, y la animación ha terminado
+            yield return new WaitUntil(() => ActionDone && CombatDescriptor.TextIsEmpty && ActiveFighter.animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
 
             //Por seguridad se nulifican variables de ataque
             AttackWeapon = null;
@@ -857,8 +791,8 @@ public class CombatManager : MonoBehaviour
            
             Fight(targetButton);
 
-            //No continúa hasta que la acción ha sido descrita por completo
-            yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
+            //No continúa hasta que la acción ha sido descrita por completo, y la animación ha terminado
+            yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty && !ActiveFighter.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"));
             
             //Por seguridad se nulifican variables de ataque
             AttackWeapon = null;
