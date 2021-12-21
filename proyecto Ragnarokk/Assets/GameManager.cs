@@ -180,9 +180,10 @@ public class GameManager : Singleton<GameManager>
             PlayerPrefs.SetInt("tutorialComplete", 0);
 
             PlayerPrefs.SetInt("firstTime", 1);
-            PlayerPrefs.SetInt("currentFloor", 0);
+            
         }
-        
+        PlayerPrefs.SetInt("currentFloor", 0);
+
         // se aplica la configuración del jugador
         SetPlayerConfiguration();
         FindObjectOfType<AudioManager>().CheckMusic();
