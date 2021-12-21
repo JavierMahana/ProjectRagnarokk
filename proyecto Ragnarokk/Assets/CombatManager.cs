@@ -9,7 +9,9 @@ using TMPro;
 //ahora elementos de display pueden estar aca pero en el futuro moverlos.
 public class CombatManager : MonoBehaviour
 {
-    public GameObject Background;
+    public Sprite[] Backgrounds;
+    public SpriteRenderer Background;
+
     public GameObject CombatCanvas;
     public GameObject EnemyCombatCanvas;
     public CombatDescriptor CombatDescriptor;
@@ -145,8 +147,10 @@ public class CombatManager : MonoBehaviour
     //attack done podría cambiarse a ActionDone
     public bool ActionDone = false;
 
-    //Comparador de rapidez para ordenar la lista de luchadores
-   
+    bool WillApplyRandomState = false;
+
+    
+
     public void ClearPanelDescriptor()
     {
         foreach (GameObject button in AllButtonsInDescriptorPanel)
@@ -216,10 +220,12 @@ public class CombatManager : MonoBehaviour
         {
             ClearPanelDescriptor();
             AddDamageTypeButton(AttackWeapon.TipoDeDañoQueAplica);
-            string description = $" Acc: {AttackWeapon.BaseAccuracy} \n Dmg: {AttackWeapon.BaseDamage} \n Crit: {AttackWeapon.BaseCriticalRate} \n Cooldown: {AttackWeapon.BaseCooldown}";
+            string description = $" Precisión: {AttackWeapon.BaseAccuracy} \n Daño Base: {AttackWeapon.BaseDamage} \n Crítico: {AttackWeapon.BaseCriticalRate} \n Enfriamiento: {AttackWeapon.BaseCooldown}";
             SetlDescriptorText(description);
         }
     }
+
+    //Comparador de rapidez para ordenar la lista de luchadores
     public int SpeedComparer(Fighter f1, Fighter f2)
     {
         int speed1 = f1.Speed;
@@ -230,6 +236,9 @@ public class CombatManager : MonoBehaviour
 
     public void InitCombatScene(CombatEncounter encounter)
     {
+        Background.sprite = Backgrounds[Random.Range(0, Backgrounds.Length)];
+        
+
         canFlee = encounter.CanEscape;
         //isFinalRoom
         CombatDescriptor = gameObject.GetComponent<CombatDescriptor>();
@@ -355,8 +364,9 @@ public class CombatManager : MonoBehaviour
         AllCombatFighters.AddRange(PlayerFighters);
         AllCombatFighters.AddRange(EnemyFighters);
 
-        foreach(Fighter fighter in AllCombatFighters)
+        foreach (Fighter fighter in AllCombatFighters)
         {
+            fighter.Defense = fighter.BaseDefense;
             fighter.IsDefending = false;
         }
 
@@ -492,6 +502,12 @@ public class CombatManager : MonoBehaviour
 
                 FindNextActiveFighter();
                 StartCoroutine(TurnAction());
+
+                if(CurrentPlayerButton != null && ActiveFighter != null && OriginalButtonPos != null)
+                {
+                    MoveActivePlayerButton(false);
+                }
+                
             }
             else if(CombatState > 0)
             {
@@ -513,6 +529,7 @@ public class CombatManager : MonoBehaviour
 
             foreach (Fighter pf in PlayerFighters)
             {
+                pf.Defense = pf.BaseDefense;
                 pf.IsDefending = false;
             }
 
@@ -532,11 +549,13 @@ public class CombatManager : MonoBehaviour
 
         foreach (Fighter pf in PlayerFighters)
         {
+            pf.Defense = pf.BaseDefense;
             pf.IsDefending = false;
         }
 
-        string victoryHopeChange = HopeManager.Instance.ChangeHope(2, "Cambio por victoria");
-        string victoryDesc = "YOU WIN! ";
+	    string victoryHopeChange = HopeManager.Instance.ChangeHope(1, "Cambio por victoria");
+        string victoryDesc = "¡Has ganado! ";
+
         victoryDesc += victoryHopeChange;
         CombatDescriptor.Clear();
         CombatDescriptor.AddTextLine(victoryDesc, 1.5f);
@@ -619,6 +638,7 @@ public class CombatManager : MonoBehaviour
                 StartNewTurnCycle();
             }
             ActiveFighter = AllCombatFighters[ActiveFighterIndex];
+            //
         } while (ActiveFighter.CurrentHP <= 0); //Comprueba que esté vivo.
 
         GameManager.Instance.PlayerOnTurn = ActiveFighter.gameObject; //¿PlayerOnTurn está en desuso?
@@ -628,39 +648,58 @@ public class CombatManager : MonoBehaviour
 
     public void StartNewTurnCycle()
     {
+        //
+
         round++;
         RemoveAllCombatStates();
         DiminishWeaponCooldowns();
+        WillApplyRandomState = Random.Range(0, 2) == 0; //50%
     }
-
+    
+    
     private IEnumerator TurnAction()
     {
+       
+
         //Si el luchador estaba defendiéndose, sale de ese estado
         if(ActiveFighter.IsDefending)
         {
-            ActiveFighter.Defense -= DefenseValue;
+            ActiveFighter.Defense = ActiveFighter.BaseDefense;
             ActiveFighter.IsDefending = false;
         }
+
+        /*
         Debug.Log("En defensa:");
         foreach (Fighter f in AllCombatFighters)
         {
             if (f.IsDefending) { Debug.Log(f.Name + " (" + f.Defense + ")"); }
         }
+        */
 
         var iniPos = ActiveFighter.transform.position;
 
-        const float pauseTime = 0.8f; //Tiempo estándar usado para pausas breves
+        const float pauseTime = 0.5f; //Tiempo estándar usado para pausas breves
 
         yield return null; //Es posible que la necesidad de esta línea se deba a que se consulta por la variable TextIsEmpty, la cual se actualiza en Update, en vez de consultar directamente el tamaño de la lista de TextLines.
         yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
+
+        if(WillApplyRandomState)
+        {
+            ApplyRandomState();
+            yield return null;
+            yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
+        }
+
         CombatDescriptor.ShowFighterInTurn(ActiveFighter, IsPlayerFighter(ActiveFighter));
 
-        
+
+        // Se actualizan los botones de estados
+        UpdateAllStateIcons();
 
         //TURNO DE UN ALIADO
         if (IsPlayerFighter(ActiveFighter))
         {
-            PanelDescriptor.text = "Pick an Action!";
+            PanelDescriptor.text = "Escoge una acción!";
 
             //Debug.Log("Turno Aliado");
             AttackWeapon = null;
@@ -682,78 +721,12 @@ public class CombatManager : MonoBehaviour
                 }
             }
 
-            // mueve al mujador y su botón
+            // mueve al jugador y su botón
             ActiveFighter.transform.position += new Vector3((float)2.5, 0, 0);
             MoveActivePlayerButton(true);
 
-            #region obsoleto
-            /*
-               if (false) //Este código quedará obsoleto?
-               {
-                   //SELECCIÓN DE LA ACCIÓN
-                   do
-                   {
-                       Action = null;
-                       //La corrutina se detendrá hasta que se defina una acción en Update.
-                       Debug.Log("Escogiendo Acción...");
-                       yield return new WaitUntil(() => Action != null);
-
-                       switch (Action)
-                       {
-                           case "Attack":
-                               //SELECCIÓN DEL ARMA
-                               do
-                               {
-                                   Debug.Log("ACCIÓN: " + Action);
-                                   AttackWeapon = null;
-                                   //Se esperará a definir un arma, o a cancelar la acción
-                                   Debug.Log("Escogiendo Arma...");
-                                   yield return new WaitUntil(() => AttackWeapon != null || Annulment);
-
-                                   if (Annulment)
-                                   {
-                                       Action = null; //Se cancela la acción
-                                       Annulment = false;
-                                       continue; //NO se llevará a cabo la elección de un objetivo
-                                   }
-
-                                   //SELECCIÓN DEL OBJETIVO
-                                   do
-                                   {
-                                       Debug.Log("ACCIÓN: " + Action + " | ARMA: " + AttackWeapon.Name);
-                                       Annulment = false;
-                                       Target = null;
-                                       Debug.Log("Escogiendo Objetivo...");
-                                       yield return new WaitUntil(() => Target != null || Annulment);
-
-                                       if (Annulment)
-                                       {
-                                           AttackWeapon = null; //Se anula la elección de arma
-                                           Annulment = false;
-                                           continue; //NO se pedirá la confirmación de una acción
-                                       }
-
-                                       Debug.Log("ACCIÓN: " + Action + " | ARMA: " + AttackWeapon.Name + " | OBJETIVO: " + Target.Name);
-                                       //Se solicita confirmación de la acción.
-                                       Debug.Log("Confirmando...");
-                                       Confirm = false;
-                                       yield return new WaitUntil(() => Confirm || Annulment);
-                                   } while ((Target == null && AttackWeapon != null) || Annulment); //Se da cuando el jugador quiere reseleccionar el objetivo (puede que sea suficiente consultar por Annulment)
-                               } while (AttackWeapon == null && Action != null); //Se da cuando el jugador quiere cambiar de arma
-
-                               break;
-                       }
-                   } while (Action == null); //No acaba el turno sin una acción a ejecutar, lo que implica que no hay turnos saltables.
-
-                   if(Action.Equals("Attack")) 
-                   { //Fight();
-                     }
-               }
-               */
-            #endregion
-
-            //No continúa hasta que la acción ha sido descrita por completo
-            yield return new WaitUntil(() => ActionDone && CombatDescriptor.TextIsEmpty);
+            //No continúa hasta que la acción ha sido descrita por completo, y la animación ha terminado
+            yield return new WaitUntil(() => ActionDone && CombatDescriptor.TextIsEmpty && ActiveFighter.animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
 
             //Por seguridad se nulifican variables de ataque
             AttackWeapon = null;
@@ -765,7 +738,7 @@ public class CombatManager : MonoBehaviour
                 yield break; //Se interrumpe la corrutina. El turno NO se declara como terminado. Esto es para prevenir que se inicie un nuevo turno.
             }
             ActionDone = false;
-            MoveActivePlayerButton(false);
+            
         }
         //TURNO DE UN ENEMIGO
         else
@@ -810,8 +783,8 @@ public class CombatManager : MonoBehaviour
            
             Fight(targetButton);
 
-            //No continúa hasta que la acción ha sido descrita por completo
-            yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty);
+            //No continúa hasta que la acción ha sido descrita por completo, y la animación ha terminado
+            yield return new WaitUntil(() => CombatDescriptor.TextIsEmpty && !ActiveFighter.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"));
             
             //Por seguridad se nulifican variables de ataque
             AttackWeapon = null;
@@ -821,13 +794,17 @@ public class CombatManager : MonoBehaviour
         yield return new WaitForSeconds(pauseTime);
 
         ActiveFighter.transform.position = iniPos;
+        //
         // indica que termina un turno
+
         TurnInProcess = false;
     }
 
     // al hacerle clic se activa Fight y el argumento es el boton cliqueado que contiene al target
     public void Fight(FighterSelect targetButton)
     {
+        UpdateAllStateIcons();
+
         ShowActionCanvas(false);
         //Debug.Log("Desactiva Canvas!!!!!");
         if (targetButton == null || targetButton.Fighter == null)// || targetButton.selfBbutton == null) 
@@ -839,10 +816,24 @@ public class CombatManager : MonoBehaviour
         //Debug.Log("TARGET: " + Target.Name);
 
         CombatDescriptor.Clear();
-        if (PlayerFighters.Contains(ActiveFighter)) { CombatDescriptor.AddTextLine(ActiveFighter.RealName + " uses " + AttackWeapon.Name); }
-        else { CombatDescriptor.AddTextLine(ActiveFighter.Name + " uses " + AttackWeapon.Name); }
+        if (PlayerFighters.Contains(ActiveFighter)) { CombatDescriptor.AddTextLine(ActiveFighter.RealName + " usa " + AttackWeapon.Name); }
+        else { CombatDescriptor.AddTextLine(ActiveFighter.Name + " usa " + AttackWeapon.Name); }
+        
+        
         //Muestra atacante y arma
-
+        // Animacion si es uno de los personajes jugables
+        if(PlayerFighters.Contains(ActiveFighter))
+        {
+            ActiveFighter.animator.Play(AttackWeapon.TipoDeDañoQueAplica.name);
+            AudioManager.instance.Play(AttackWeapon.TipoDeDañoQueAplica.name);
+        }
+        // en caso de que el atacante es enemigo
+        else
+        {
+            ActiveFighter.animator.Play("Attack");
+            AudioManager.instance.Play(ActiveFighter.Name);
+        }
+        
 
         int damageToShow = -1;
         isCrit = false;
@@ -879,8 +870,10 @@ public class CombatManager : MonoBehaviour
             string critDesc, effectDesc, synerDesc; //Algunos posibles mensajes a mostrar
             critDesc = effectDesc = synerDesc = "";
 
+            float initialHope = HopeManager.Instance.PartyHope;
+
             //PASO 1: SINERGIAS
-            ApplySynergy(out synerDesc);
+            ApplySynergy(initialHope, out synerDesc);
 
             //PASO 2: EFECTIVIDAD
             float effectivenessFact = CalculateEffectivenessFactor(out effectDesc);
@@ -903,7 +896,7 @@ public class CombatManager : MonoBehaviour
             {
                 criticalAttack = true;
                 criticalFact = 1;
-                critDesc = "CRITICAL HIT!!!";
+                critDesc = "¡¡¡GOLPE CRÍTICO!!!";
                 isCrit = true;
                 if (attackerIsAlly) 
                 { 
@@ -959,13 +952,13 @@ public class CombatManager : MonoBehaviour
             CombatDescriptor.AddTextLine(synerDesc);
 
             //Indica por texto quién recibió cuánto daño
-            if (PlayerFighters.Contains(Target)) { CombatDescriptor.AddTextLine(Target.RealName + " loses " + finalDamage + " HP"); }
-            else { CombatDescriptor.AddTextLine(Target.Name + " loses " + finalDamage + " HP"); }
+            if (PlayerFighters.Contains(Target)) { CombatDescriptor.AddTextLine(Target.RealName + " pierde " + finalDamage + " de Salud"); }
+            else { CombatDescriptor.AddTextLine(Target.Name + " pierde " + finalDamage + " de Salud"); }
 
             if (false    &&    attackerIsAlly && finalDamage == minDamage) 
             {
                 string minDamageHopeChange = HopeManager.Instance.ChangeHope(-2, "Cambio por daño mínimo");
-                CombatDescriptor.AddTextLine("How pathetic... " + minDamageHopeChange); //Mensaje para daño mínimo
+                CombatDescriptor.AddTextLine("Que patético... " + minDamageHopeChange); //Mensaje para daño mínimo
             }
 
             //PASO 8: APLICACIÓN DEL DAÑO
@@ -980,12 +973,14 @@ public class CombatManager : MonoBehaviour
                 Target.CurrentHP = 0;
                 RemoveCombatStates(Target);
                 IconManager.UpdateStateIcons(AllCombatFighters);
+
+                Target.Defense = Target.BaseDefense;
                 Target.IsDefending = false;
 
                 string defeatDesc;
 
-                if (PlayerFighters.Contains(Target)) { defeatDesc = Target.RealName + " has been defeated! "; }
-                else { defeatDesc = Target.Name + " has been defeated! "; }
+                if (PlayerFighters.Contains(Target)) { defeatDesc = "¡" + Target.RealName + " ha sido derrotado! "; }
+                else { defeatDesc = "¡" + Target.Name + " ha sido derrotado! "; }
                  
                 string defeatHopeChange = "";
 
@@ -1001,7 +996,8 @@ public class CombatManager : MonoBehaviour
                     //defeatHopeChange = HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
                 }
 
-                Target.transform.rotation = new Quaternion(0, 0, 90, 0);
+                //Target.transform.rotation = new Quaternion(1, 0, 0, 90);
+                
 
                 defeatDesc += defeatHopeChange;
                 CombatDescriptor.AddTextLine(defeatDesc);
@@ -1017,8 +1013,8 @@ public class CombatManager : MonoBehaviour
                         Target.States.Add(weaponState);
 
                         //Muestra por texto el estado adquirido
-                        if (PlayerFighters.Contains(Target)) { CombatDescriptor.AddTextLine(Target.RealName + " is " + weaponState.Name); }
-                        else { CombatDescriptor.AddTextLine(Target.Name + " is " + weaponState.Name); }
+                        if (PlayerFighters.Contains(Target)) { CombatDescriptor.AddTextLine(Target.RealName + " está " + weaponState.Name); }
+                        else { CombatDescriptor.AddTextLine(Target.Name + " está " + weaponState.Name); }
                     }
                 }
                 IconManager.UpdateStateIcons(AllCombatFighters);
@@ -1035,7 +1031,7 @@ public class CombatManager : MonoBehaviour
         //FALLO
         else
         {
-            string failDesc = "But it failed!";
+            string failDesc = "¡Pero falló!";
 
             if(attackerIsAlly) 
             {
@@ -1049,10 +1045,12 @@ public class CombatManager : MonoBehaviour
         //Debug.Log("Precision: " + AttackWeapon.BaseAccuracy + " | damageToShow: " + damageToShow);
 
         // el botón imprime el daño infligido
-        targetButton.ShowText(true, damageToShow, isCrit, SynergyDeterminant);
+        targetButton.ShowText(true, false, damageToShow, isCrit, SynergyDeterminant);
+        //
+        UpdateAllStateIcons();
     }
 
-    public void ApplySynergy(out string synerDesc)
+    public void ApplySynergy(float initialHope, out string synerDesc)
     {
         #region SECUENCIA LÓGICA (3 pasos)
         // 1- Conteo de sinergias menos antisinergias
@@ -1088,17 +1086,18 @@ public class CombatManager : MonoBehaviour
         if(IsPlayerFighter(ActiveFighter))
         {
             sbyte hopeChangeMagnitude = 0;
+            sbyte bonus = (sbyte)(initialHope < 50 ? 1 : 0); //mayor buff y menor debuff si la esperanza es baja.
 
-            if      (synergyCounter == 1)   { hopeChangeMagnitude = 3; SynergyDeterminant = 1; }
-            else if (synergyCounter >= 2)   { hopeChangeMagnitude = 4; SynergyDeterminant = 1; }
-            else if (synergyCounter == -1)  { hopeChangeMagnitude = -3; SynergyDeterminant = -1; }
-            else if (synergyCounter <= -2)  { hopeChangeMagnitude = -4; SynergyDeterminant = -1; }
+            if      (synergyCounter == 1)   { hopeChangeMagnitude = (sbyte)(2 + bonus); SynergyDeterminant = 1; }
+            else if (synergyCounter >= 2)   { hopeChangeMagnitude = (sbyte)(3 + bonus); SynergyDeterminant = 1; }
+            else if (synergyCounter == -1)  { hopeChangeMagnitude = (sbyte)(-3 + bonus); SynergyDeterminant = -1; }
+            else if (synergyCounter <= -2)  { hopeChangeMagnitude = (sbyte)(-4 + bonus); SynergyDeterminant = -1; }
 
             //Cambia esperanza, y prepara un mensaje sobre la sinergia generada
             if (hopeChangeMagnitude != 0)
             {
-                if(hopeChangeMagnitude > 0) { synerDesc = "Synergy generated! "; }
-                else { synerDesc = "Anti-synergy generated... ";  }
+                if(hopeChangeMagnitude > 0) { synerDesc = "¡Sinergia generada! "; }
+                else { synerDesc = "¡Anti-sinergia generada... ";  }
                 string hopeChange = HopeManager.Instance.ChangeHope(hopeChangeMagnitude, "Cambio por sinergia");
                 synerDesc += hopeChange;
             }
@@ -1116,7 +1115,7 @@ public class CombatManager : MonoBehaviour
         CombatType targetType = Target.Type;
         if(targetType.Resistencias.Contains(weaponType)) 
         {
-            effectDesc = "Non-effective type... ";
+            effectDesc = "Tipo No-efectivo... ";
             string hopeChange = "";
             if (attackerIsAlly) { hopeChange = HopeManager.Instance.ChangeHope(-1, "Cambio por inefectividad"); }
             effectDesc += hopeChange;
@@ -1124,7 +1123,7 @@ public class CombatManager : MonoBehaviour
         }
         if(targetType.Debilidades.Contains(weaponType)) 
         {
-            effectDesc = "Effective type! ";
+            effectDesc = "¡Tipo Efectivo! ";
             string hopeChange = "";
             if (attackerIsAlly) { hopeChange = HopeManager.Instance.ChangeHope(1, "Cambio por efectividad"); }
             effectDesc += hopeChange;
@@ -1150,7 +1149,7 @@ public class CombatManager : MonoBehaviour
         if(PartyIsFine  &&  PartyCurrentHP < PartyMaxHP * 0.5)
         {
             string hopeChange = HopeManager.Instance.ChangeHope(-3, "Cambio por mal estado del grupo");
-            CombatDescriptor.AddTextLine("Party is not fine... " + hopeChange);
+            CombatDescriptor.AddTextLine("El equipo no se encuentra bien... " + hopeChange);
             PartyIsFine = false;
         }
         else if(!PartyIsFine  &&  PartyCurrentHP >= PartyMaxHP * 0.75)
@@ -1174,12 +1173,12 @@ public class CombatManager : MonoBehaviour
 
         if(HordeIsFine  &&  HordeCurrentHP < HordeMaxHP * 0.5)
         {
-            string hopeChange = HopeManager.Instance.ChangeHope(2, "Cambio por mal estado de la horda enemiga");
+            string hopeChange = HopeManager.Instance.ChangeHope(1, "Cambio por mal estado de la horda enemiga");
 
             string hordeHPDesc = "";
-            if(HordeCurrentHP <= 0) { hordeHPDesc = "How powerful!"; }
-            else if(EnemyFighters.Count == 1) { hordeHPDesc = "The enemy is weak! "; }
-            else { hordeHPDesc = "Enemies are weak! "; }
+            if(HordeCurrentHP <= 0) { hordeHPDesc = "¡Cuánto Poder!"; }
+            else if(EnemyFighters.Count == 1) { hordeHPDesc = "¡El enemigo se encuentra débil! "; }
+            else { hordeHPDesc = "¡Los enemigos se encuentran débiles! "; }
             hordeHPDesc += hopeChange;
             CombatDescriptor.AddTextLine(hordeHPDesc);
 
@@ -1198,7 +1197,7 @@ public class CombatManager : MonoBehaviour
 
         if(thereAreStates) 
         {
-            CombatDescriptor.AddTextLine("Everyone's states are gone", 1.5f);
+            CombatDescriptor.AddTextLine("Todos los estados se han disipado", 1.5f);
             IconManager.UpdateStateIcons(AllCombatFighters);
             Debug.Log("HAY ESTADOS");
         }
@@ -1219,15 +1218,6 @@ public class CombatManager : MonoBehaviour
             {
                 fighter.WeaponCooldowns[i] = 0;
             }
-            /*
-            foreach(Weapon weapon in fighter.Weapons)
-            {
-                if(weapon != null)
-                {
-                    weapon.CurrentCooldown = 0;
-                }
-            }
-            */
         }
     }
 
@@ -1242,16 +1232,19 @@ public class CombatManager : MonoBehaviour
                     fighter.WeaponCooldowns[i]--;
                 }
             }
-            /*
-            foreach (Weapon weapon in fighter.Weapons)
-            {
-                if (weapon != null  &&  weapon.CurrentCooldown > 0)
-                {
-                    weapon.CurrentCooldown--;
-                }
-            }
-            */
         }
+    }
+
+    private void ApplyRandomState()
+    {
+        CombatState randomState = GameManager.Instance.AllCombatStates[Random.Range(0, GameManager.Instance.AllCombatStates.Count)];
+        foreach (Fighter enemy in AliveEnemyFighters)
+        {
+            enemy.States.Add(randomState);
+        }
+        IconManager.UpdateStateIcons(AllCombatFighters);
+        WillApplyRandomState = false;
+        CombatDescriptor.AddTextLine($"Los enemigos se ven afectados por {randomState.Name}", 1.5f);
     }
 
     public void ActionSelection()
@@ -1265,25 +1258,25 @@ public class CombatManager : MonoBehaviour
         {
             GameObject actionButton = Instantiate(PrefabActionButton);
 
-            actionButton.GetComponent<ActionButton>().initialActionText = "Attack";
+            actionButton.GetComponent<ActionButton>().initialActionText = "Atacar";
             actionButton.transform.SetParent(PanelForActions.transform, false);
             AllButtonsInPanel.Add(actionButton);
 
             GameObject consumibles = Instantiate(PrefabActionButton);
 
-            consumibles.GetComponent<ActionButton>().initialActionText = "Consumable";
+            consumibles.GetComponent<ActionButton>().initialActionText = "Consumible";
             consumibles.transform.SetParent(PanelForActions.transform, false);
             AllButtonsInPanel.Add(consumibles);
 
             GameObject defensa = Instantiate(PrefabActionButton);
 
-            defensa.GetComponent<ActionButton>().initialActionText = "Defense";
+            defensa.GetComponent<ActionButton>().initialActionText = "Defensa";
             defensa.transform.SetParent(PanelForActions.transform, false);
             AllButtonsInPanel.Add(defensa);
 
             GameObject huir = Instantiate(PrefabActionButton);
 
-            huir.GetComponent<ActionButton>().initialActionText = "Flee Combat";
+            huir.GetComponent<ActionButton>().initialActionText = "Huir";
             huir.transform.SetParent(PanelForActions.transform, false);
             AllButtonsInPanel.Add(huir);
         }
@@ -1293,7 +1286,7 @@ public class CombatManager : MonoBehaviour
         else
         {
             GameObject cancel = Instantiate(PrefabActionButton);
-            cancel.GetComponent<ActionButton>().initialActionText = "Cancel";
+            cancel.GetComponent<ActionButton>().initialActionText = "Cancelar";
             cancel.transform.SetParent(PanelForActions.transform, false);
             AllButtonsInPanel.Add(cancel);
 
@@ -1389,14 +1382,25 @@ public class CombatManager : MonoBehaviour
             #region Defense
             if (GameManager.Instance.OnDefense)
             {
+                AudioManager.instance.Play("Defensa");
+                FighterSelect[] fightersClickables = FindObjectsOfType<FighterSelect>();
+
+                foreach(FighterSelect fs in fightersClickables)
+                {
+                    if(fs.Fighter == ActiveFighter)
+                    {
+                        fs.OnDefenseMode();
+                    }
+                }
+
                 ShowActionCanvas(false);
                 // aumentar temporalmente la defensa del jugador activo
                 // podría usarse un array de bonuses, útil también para consumibles
-                ActiveFighter.Defense += DefenseValue; //Se aumentará la defensa del luchador hasta que vuelva a ser su turno
+                ActiveFighter.Defense = ActiveFighter.BaseDefense + DefenseValue; //Se aumentará la defensa del luchador hasta que vuelva a ser su turno
                 ActiveFighter.IsDefending = true;
 
                 CombatDescriptor.Clear(); //Si se llega a crear un método para aplicar la defensa, esta línea debe ir ahí
-                CombatDescriptor.AddTextLine(ActiveFighter.RealName + " is defending");
+                CombatDescriptor.AddTextLine(ActiveFighter.RealName + " está defendiendose");
 
                 // terminar turno
                 GameManager.Instance.ConfirmationClick = false;
@@ -1417,7 +1421,7 @@ public class CombatManager : MonoBehaviour
                     CleanPanelSelecion();
                     ActionDone = true;
 
-                    string fleeDesc = "Party flees... ";
+                    string fleeDesc = "El equipo huye del combate... ";
                     string fleeHopeChange = HopeManager.Instance.ChangeHope(-4, "Cambio por huida");
                     fleeDesc += fleeHopeChange;
                     CombatDescriptor.Clear();
@@ -1426,11 +1430,20 @@ public class CombatManager : MonoBehaviour
                 else
                 {
                     CombatDescriptor.Clear();
-                    CombatDescriptor.AddTextLine("Can't escape this encounter!", 1.5f);
+                    CombatDescriptor.AddTextLine("¡No puedes huir de este combate!", 1.5f);
                 }
                 
             }
             #endregion
+        }
+    }
+
+    private void UpdateAllStateIcons()
+    {
+        var Fss = FindObjectsOfType<FighterSelect>();
+        if (Fss != null)
+        {
+            foreach (FighterSelect Fs in Fss) { Fs.AddStates(); }
         }
     }
 

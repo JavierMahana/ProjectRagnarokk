@@ -10,8 +10,8 @@ public class WeaponSwapManager : MonoBehaviour
     public WeaponPanel NewWeaponPanel;
 
     
-    public string defaultInfoBoxTitle = "Pick a weapon to interchange";
-    public string defaultInfoBoxDescription = "The weapon you choose will be droped forever!\nPick carefully...";
+    public string defaultInfoBoxTitle = "Selecciona el arma que quieres intercambiar";
+    public string defaultInfoBoxDescription = "¡El arma que escogas se perderá por siempre!\nEscoge con cuidado...";
 
     public List<GameObject> ObjectsToHideWhenShow = new List<GameObject>();
 

@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
   m_Name: TeslasMachine
   m_EditorClassIdentifier: 
-  Name: Tesla's Machine
+  Name: Maquina de Tesla
   SubName: 
-  Description: arma de Tesla
-  BaseCost: 100
-  IconSprite: {fileID: 21300000, guid: 3e8ef7416aafb7340a9175b1ff636bdc, type: 3}
+  Description: "Los rebeldes humanos hacen armas de electricidad caseras para luchar
+    contra el imperio, \xE9stas estan cubiertas de madera y su plasma es azul."
+  BaseCost: 150
+  IconSprite: {fileID: 21300000, guid: 1158c9cc614264d4eb2df5d204bf1789, type: 3}
   BaseDamage: 50
   BaseAccuracy: 85
   BaseCriticalRate: 15
-  BaseCooldown: 2
+  BaseCooldown: 3
   ListaDeEstadosQueAplica:
   - {fileID: 11400000, guid: 0786287dc73faa94bb20a5c15739beb4, type: 2}
   WeaponSprite: {fileID: 3297315051641822935, guid: 43229deef077fc94488d42e18b93a5d7, type: 3}

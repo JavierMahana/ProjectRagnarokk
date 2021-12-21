@@ -9,11 +9,22 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     public GameObject animableObject1;
     public GameObject animableObject2;
+    public GameObject animableObject3;
+
+    private Animator shieldAnimation;
 
     public Fighter Fighter;
     
     public TextMeshProUGUI showText;
     public TextMeshProUGUI synergyText;
+
+    private TextAnimations animator1;
+    private TextAnimations animator2;
+
+    public GameObject panelEstados;
+    public GameObject PrefabStateButton;
+
+    private List<GameObject> botonesEstados = new List<GameObject>();
 
     public int showTimer;
 
@@ -25,11 +36,14 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private Color synergyColor;
     private Color antiSynergyColor;
 
-
     //agregar despues una lista de imagenes (estados) dentro de un canvas (atributo) que se activa si hay efectos en Fighter
 
     void Start()
     {
+        animator1 = animableObject1.GetComponent<TextAnimations>();
+        animator2 = animableObject2.GetComponent<TextAnimations>();
+        shieldAnimation = animableObject3.GetComponent<Animator>();
+
         float r = 0;
         float g = 0;
         float b = 0;
@@ -74,38 +88,53 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
                 EndTextAnimation();
             }
-        }
+        } 
     }
 
-    
-    public void ShowText(bool isDamage, int value, bool isCrit, int syn)
+
+    public void OnDefenseMode()
+    {
+        shieldAnimation.Play("Defensa");
+    }
+
+    public void ShowText(bool isDamage, bool isHope, int value, bool isCrit, int syn)
     {
         // syn 0 para cuando no hay sinergia alguna
         // syn -1 para cuando hay antisinergia
         // syn 1 para cuando hay sinergia
+        AddStates();
 
         BeginTextAnimation();
 
         if(isDamage)
         {
-            string predamage = "HIT ";
+            string predamage = "Golpe ";
             string synergyText = "";
             showText.color = normalColor;
 
-            if (isCrit) { showText.color = critColor; predamage = "CRIT HIT "; }
-
+            if (isCrit) 
+            { 
+                showText.color = critColor; predamage = "¡CRÍTICO! ";
+                AudioManager.instance.Play("Golpe Critico");
+            }
+            else 
+            {
+                AudioManager.instance.Play("Golpe");
+            }
             switch (syn)
             {
                 case 1:
-                    synergyText = "Synergy!";
+                    synergyText = "!Sinergia!";
                     Debug.Log("hubo sinergia");
                     this.synergyText.color = synergyColor;
+                    AudioManager.instance.Play("Sinergia");
                     break;
 
                 case -1:
-                    synergyText = "AntiSynergy";
+                    synergyText = "Anti-sinergia";
                     Debug.Log("hubo antisinergias");
                     this.synergyText.color = antiSynergyColor;
+                    AudioManager.instance.Play("Anti-Sinergia");
                     break;
 
                 default:
@@ -114,14 +143,24 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             }
 
-            showText.text = (value > 0) ? predamage + value.ToString() : "MISS";
+            AudioManager.instance.Play("Fallo");
+            showText.text = (value > 0) ? predamage + value.ToString() : "FALLO";
             this.synergyText.text = synergyText;
             showTimer = 400;
         }
-        else
+        else if(isHope)
         {
             showText.text = "";
-            this.synergyText.text = "+ " + value.ToString() + "!"; ;
+            synergyText.color = Color.white;
+            this.synergyText.text = "+ " + value.ToString() + " Esperanza";
+            showTimer = 400;
+            AudioManager.instance.Play("Sanar");
+        }
+        else
+        {
+            AudioManager.instance.Play("Sanar");
+            showText.text = "";
+            this.synergyText.text = "+ " + value.ToString();
             showText.color = healColor;
             showTimer = 400;
         }
@@ -129,20 +168,20 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void BeginTextAnimation()
     {
-        animableObject1.GetComponent<TextAnimations>().AnimationStart();
-        animableObject2.GetComponent<TextAnimations>().AnimationStart();
+        animator1.AnimationStart();
+        animator2.AnimationStart();
     }
 
     private void ResetTextAnimation()
     {
-        animableObject1.GetComponent<TextAnimations>().AnimationReset();
-        animableObject2.GetComponent<TextAnimations>().AnimationReset();
+        animator1.AnimationReset();
+        animator2.AnimationReset();
     }
 
     private void EndTextAnimation()
     {
-        animableObject1.GetComponent<TextAnimations>().AnimationEnd();
-        animableObject2.GetComponent<TextAnimations>().AnimationEnd();
+        animator1.AnimationEnd();
+        animator2.AnimationEnd();
     }
 
     public void OnClick()
@@ -164,7 +203,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             else
             {
-                combatManager.SetlDescriptorText("Ivalid Action!");
+                combatManager.SetlDescriptorText("¡Acción Invalida Action!");
                 Debug.Log("Falta escoger el ataque o el arma que se utilizará o bien el enemigo está muerto");
             }
 
@@ -202,13 +241,13 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             if (Fighter.CurrentHP <= 0)
             {
-                descripcion = $" {fighterName} is dead";
+                descripcion = $" {fighterName} está muerto.";
                 cm.SetlDescriptorText(descripcion);
             }
             else
             {
                 cm.AddDamageTypeButton(Fighter.Type);
-                descripcion = $" Name: {fighterName}\n Level: {Fighter.Level} \n Health: {Fighter.CurrentHP} / {Fighter.MaxHP}";
+                descripcion = $"Nombre: {fighterName}\nNivel: {Fighter.Level} \nSalud: {Fighter.CurrentHP} / {Fighter.MaxHP}";
                 cm.SetlDescriptorText(descripcion);
 
                 if(cm.AttackWeapon != null)
@@ -240,6 +279,28 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             OnClick();
         }
         
+    }
+
+    public void AddStates()
+    {
+        foreach(GameObject go in botonesEstados) { Destroy(go); }
+        botonesEstados.Clear();
+
+        foreach(CombatState cs in Fighter.States)
+        {
+            var button = Instantiate(PrefabStateButton);
+            button.GetComponent<StateButton>().SetButton(cs);
+            button.GetComponent<ForAllButtons>().staysPressed = false;
+            var csfs = button.GetComponentsInChildren<ContentSizeFitter>();
+            
+            foreach(ContentSizeFitter csf in csfs)
+            {
+                csf.verticalFit = ContentSizeFitter.FitMode.MinSize;
+                csf.horizontalFit = ContentSizeFitter.FitMode.MinSize;
+            }
+            button.transform.SetParent(panelEstados.transform, false);
+            botonesEstados.Add(button);
+        }
     }
 
 }

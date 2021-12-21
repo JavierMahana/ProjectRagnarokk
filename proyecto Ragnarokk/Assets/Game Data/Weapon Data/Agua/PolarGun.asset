@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
   m_Name: PolarGun
   m_EditorClassIdentifier: 
-  Name: Polar Gun
+  Name: Arma Polar
   SubName: 
-  Description: arma de hielo
+  Description: "\xBFQu\xE9 es peor que chorros de agua a altas velocidades?... chorros
+    de agua FR\xCDA a altas velocidades.  "
   BaseCost: 100
-  IconSprite: {fileID: 21300000, guid: 2da53946287d5e24698624a108014096, type: 3}
+  IconSprite: {fileID: 21300000, guid: 4511f63beba47e24c9ec88f42bfca442, type: 3}
   BaseDamage: 30
-  BaseAccuracy: 85
+  BaseAccuracy: 90
   BaseCriticalRate: 10
-  BaseCooldown: 1
+  BaseCooldown: 2
   ListaDeEstadosQueAplica:
   - {fileID: 11400000, guid: f075e7e4326f99f4d9e7d5dae8eaa7d2, type: 2}
   - {fileID: 11400000, guid: 8c308d1056e0bd043931bce23c8b896e, type: 2}

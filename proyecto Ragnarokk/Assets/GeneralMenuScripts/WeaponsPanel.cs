@@ -33,6 +33,11 @@ public class WeaponsPanel : MonoBehaviour
     public Button cancel;
 
     public GameObject OptionPanel;
+
+    public void Start()
+    {
+        thisImage.color = Color.clear;
+    }
     public void SetUpPanel()
     {
         //fills the weapons
@@ -137,15 +142,17 @@ public class WeaponsPanel : MonoBehaviour
         if (button != null && button.thisWeapon != null)
         {
             thisImage.sprite = button.thisImage.sprite;
+            thisImage.color = Color.white;
             thisImage.preserveAspect = true;
             thisImage.color = button.defaultColor;
             Description.text = button.thisWeapon.Description;
             WeaponName.text = button.thisWeapon.Name;
             ValueDamage.text = button.thisWeapon.BaseDamage.ToString();
-            ValueAccuracy.text = button.thisWeapon.BaseAccuracy.ToString();
-            ValueCriticalChance.text = button.thisWeapon.BaseCriticalRate.ToString(); 
+            ValueAccuracy.text = button.thisWeapon.BaseAccuracy.ToString() + "%";
+            ValueCriticalChance.text = button.thisWeapon.BaseCriticalRate.ToString() + "%"; 
             ValueCooldown.text = button.thisWeapon.BaseCooldown.ToString();
-            ValueType.text = button.thisWeapon.TipoDeDañoQueAplica.Name.ToString();
+            ValueType.text = button.thisWeapon.TipoDeDañoQueAplica.name.ToString();
+            ValueType.color = button.thisWeapon.TipoDeDañoQueAplica.Color;
         }
         else
         {
@@ -157,7 +164,7 @@ public class WeaponsPanel : MonoBehaviour
     {
         thisImage.sprite = null;
         thisImage.color = Color.clear;
-        WeaponName.text = "No Weapon Selected";
+        WeaponName.text = "Ninguna Arma Seleccionada";
         ValueDamage.text = "";
         ValueAccuracy.text = "";
         ValueCriticalChance.text = "";
@@ -242,8 +249,7 @@ public class WeaponsPanel : MonoBehaviour
 
             currentWeaponButton = null;
 
-            var AM = FindObjectOfType<AudioManager>();
-            AM.Play("WeaponExchange");
+            AudioManager.instance.Play("WeaponExchange");
 
 
             EmptyWeaponPanel();
@@ -277,6 +283,7 @@ public class WeaponsPanel : MonoBehaviour
             Debug.Log("no valid weapon selected");
         }
 
+        AudioManager.instance.Play("WeaponDrop");
         currentWeaponButton = null;
         FillWeaponsPanel();
     }

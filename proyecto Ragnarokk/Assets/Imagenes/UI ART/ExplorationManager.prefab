@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9159574348551333473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 408829274314781472}
+  - component: {fileID: 7334008280690161}
+  - component: {fileID: 6122508494458024882}
+  m_Layer: 0
+  m_Name: ExplorationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &408829274314781472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9159574348551333473}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7334008280690161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9159574348551333473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c196cd923c761243bf1d62c8c9fd7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persistent: 1
+  testFloor: {fileID: 0}
+  RoomPrefab: {fileID: 3615692151566787109, guid: 8dde0d389839f1d488d37d22efb69740, type: 3}
+  LoreManager: {fileID: 0}
+--- !u!114 &6122508494458024882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9159574348551333473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a445dc8e9d7044a814e50d089767d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Lore:
+  - "Encuentran unos escritos humanos:\r\nD\xEDa 59 del proyecto Tesla:\r\nDespu\xE9s
+    de casi 2 meses de incansable trabajo, el proyecto est\xE1 casi terminado.\r\nHa
+    sido un infierno extraer en estado puro el oro de los espec\xEDmenes.\r\nHan
+    muerto cerca de 40 en el intento. Es una verdadera l\xE1stima que al morir, m\xE1s
+    del 80% de sus cuerpos se vuelva polvo.\r\nSin embargo, obtuvimos el suficiente
+    oro para hacer las pruebas de la M\xE1quina de Tesla.\r\nEs la tecnolog\xEDa
+    en electricidad m\xE1s avanzada hasta ahora. Con esto ser\xE1 mucho m\xE1s f\xE1cil
+    someter a los reptilianos."
+  - "Ard les da una visi\xF3n al grupo:\r\nSe ve la rocosa y seca tierra de Grandd.
+    El horizonte se desfigura por el calor.\r\nUn grupo de Felsen Guerreros vuelve
+    de la caza de algunos Bombo Bombo.\r\nSe re\xFAnen con otros Felsen Trabajadores
+    y echan la caza al medio.\r\nLos Felsen Obreros se dedican a extraer los diamantes
+    de los Bombo Bombo, pues \xE9sa es la parte m\xE1s sabrosa.\r\nEl ambiente se
+    alborota de pronto. Un Bombo Bombo sigue vivo, y est\xE1 hecho una fiera.\r\nLos
+    Obreros tratan de contenerlo. Son buenos resistiendo sus estampidas.\r\nUna vez
+    acorralado, un Guerrero alza su Martillo Dorado.\r\nLo aplasta con tal fuerza
+    que los diamantes salen por los aires.\r\nAhora pueden iniciar el fest\xEDn."
+  - "Notas de un Ac\xF3lito de Gaun:\r\nHace poco nos asalt\xF3 un grupo de humanos
+    con armas de aquella sustancia venenosa.\r\nEstuvimos a punto de retirarnos,
+    pero a un joven se le ocurri\xF3 tomar un Soplete y apuntarlo a un humano.\r\n\"\xA1Insensato!\",
+    le grit\xE9. \"\xA1Eso es sagrado! \xA1Gaun te castigar\xE1!\".\r\nPero el Soplete
+    ya estaba incinerando a aquel humano, hasta dejarlo del color de la tierra.\r\nReplanteamos
+    nuestra estrategia, y decidimos usar el armamento de Gaun para salvarnos.\r\nUna
+    vez m\xE1s, Gaun nos ha bendecido con su poder.\r\nRequisamos algunas de las
+    armas de los humanos.\r\nAlcohol. As\xED se llama la sustancia venenosa de la
+    que est\xE1n hechos esos tipos.\r\nAunque parece ser que no es tan venenosa despu\xE9s
+    de todo.\r"
+  - "Restos de psique entran en las mentes del grupo:\r\nReddel fue herido por un
+    grupo de Gorbs.\r\nEst\xE1 grave, pero puedo sentir que no pretende morir.\r\nLlevamos
+    d\xE9cadas limpiando La Unidad de estas criaturas acu\xE1ticas.\r\nMe sorprende
+    c\xF3mo nos mantenemos firmes sabiendo que cualquier d\xEDa podemos caer en batalla.\r\nCreo
+    que podemos mantener la Esperanza porque sinergizamos entre nosotros.\r\nNuestras
+    armas ps\xEDquicas vulneran la mente del objetivo, y eso hace m\xE1s f\xE1cil
+    seguir da\xF1\xE1ndolo.\r\nUna mente Somnolienta o Acelerada es una presa f\xE1cil
+    para los ps\xEDquicos.\r\nAunque a veces nos equivocamos y atacamos con Agua
+    a un enemigo Somnoliento. Eso nos desalienta."

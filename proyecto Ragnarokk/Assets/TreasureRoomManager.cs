@@ -9,8 +9,8 @@ public class TreasureRoomManager : MonoBehaviour
     public MoneySlot moneySlot;
     public InfoBox InfoBox;
 
-    public string defaultInfoBoxTitle = "Treasure Room";
-    public string defaultInfoBoxDescription = "You can only pick one treasure!\nPick carefully...";
+    public string defaultInfoBoxTitle = "Sala del Tesoro";
+    public string defaultInfoBoxDescription = "¡Solo puedes escoger 1 tesoro!\nEscoge cuidadosamente...";
 
     void Start()
     {

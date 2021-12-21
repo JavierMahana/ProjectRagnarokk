@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
+  m_Name: Parasito
+  m_EditorClassIdentifier: 
+  ExpNeededToLevelUp: 100
+  Level: 0
+  IsMaxLevel: 0
+  Evolutions:
+  - {fileID: 0}
+  - {fileID: 0}
+  Name: Parasito
+  RealName: Parasito
+  Description: Grandd first being
+  FemaleController: {fileID: 0}
+  MaleController: {fileID: 0}
+  EnemyController: {fileID: 9100000, guid: 203598c68b37a3d4b9f799bfa4aecf3f, type: 2}
+  Speed: 1
+  Atack: 24
+  Defense: 15
+  Luck: 0
+  MaxHP: 300
+  PowerRating: 4
+  DefaultWeapons:
+  - {fileID: 11400000, guid: 61ad84289cccf074dbad12aa091c8df0, type: 2}
+  - {fileID: 11400000, guid: a49b7a1397c063e4db1b21f6037429e8, type: 2}
+  - {fileID: 11400000, guid: a847a206b1dca2f479c64bea6dad0e8d, type: 2}
+  - {fileID: 11400000, guid: 6b7782c2da9bb9d47bb7787d79126356, type: 2}
+  Sprite: {fileID: -6248741079362886434, guid: 89b00aadba434e74ebd920505f6bb056, type: 3}
+  SpriteFemale: {fileID: 0}
+  SpriteMale: {fileID: 0}
+  reversedSprite: 1
+  size: {x: 2, y: 2}
+  healthBarOffset: {x: 1, y: 3}
+  Type: {fileID: 11400000, guid: 99ddf6cb18f34644c857955877bf77d1, type: 2}
+  WaterDamageBonus: 0
+  EarthDamageBonus: 0
+  FireDamageBonus: 0
+  AirDamageBonus: 0
+  PhysicalDamageBonus: 0
+  PsychicDamageBonus: 0
+  ElectricDamageBonus: 0
+  AlcoholDamageBonus: 0
+  WaterResistanceBonus: 0
+  EarthResistanceBonus: 0
+  FireResistanceBonus: 0
+  AirResistanceBonus: 0
+  PhysicalResistanceBonus: 0
+  PsychicResistanceBonus: 0
+  ElectricResistanceBonus: 0
+  AlcoholResistanceBonus: 0

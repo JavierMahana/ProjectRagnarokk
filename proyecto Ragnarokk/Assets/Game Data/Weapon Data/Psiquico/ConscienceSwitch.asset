@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
   m_Name: ConscienceSwitch
   m_EditorClassIdentifier: 
-  Name: Conscience Switch
+  Name: Concientizador
   SubName: 
-  Description: arma de zzz
-  BaseCost: 100
-  IconSprite: {fileID: 21300000, guid: 872fab22fd5f8d449b1abf74e5899b16, type: 3}
+  Description: "\xC9sta arma Yowai afecta la consciencia del objetivo para que haga
+    cosas buenas. Esa es la idea pero, por ahora el arma solo elimina grandes cantidades
+    de neuronas."
+  BaseCost: 50
+  IconSprite: {fileID: 21300000, guid: f3b17663b835b21458d7044819c83cee, type: 3}
   BaseDamage: 10
-  BaseAccuracy: 85
+  BaseAccuracy: 90
   BaseCriticalRate: 5
   BaseCooldown: 1
   ListaDeEstadosQueAplica:

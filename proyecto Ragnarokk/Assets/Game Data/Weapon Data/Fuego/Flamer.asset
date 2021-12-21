@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
   m_Name: Flamer
   m_EditorClassIdentifier: 
-  Name: Flamer
+  Name: "Flam\xEDjero Black"
   SubName: 
-  Description: arma de flama
+  Description: "Este lanzallamas lo utilizan los ni\xF1os estudiantes del imperio
+    en la Academia de soldados. Tan solo provoca quemaduras de segundo grado."
   BaseCost: 100
-  IconSprite: {fileID: 21300000, guid: 128c606be2b062149a441074823923d8, type: 3}
+  IconSprite: {fileID: 21300000, guid: 8dbc0f3d138b6a841b580bab395cdab5, type: 3}
   BaseDamage: 5
   BaseAccuracy: 100
   BaseCriticalRate: 0
-  BaseCooldown: 0
+  BaseCooldown: 1
   ListaDeEstadosQueAplica: []
   WeaponSprite: {fileID: -7639875328558060560, guid: 4fffbb0a3cdc6804b8548e8483a61e43, type: 3}
   "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 7fda126cf52d4f9478689f1d6d5477a2, type: 2}

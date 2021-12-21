@@ -37,6 +37,8 @@ public class InfoBox : MonoBehaviour
 
     void Start()
     {
+        Male.preserveAspect = true;
+        Female.preserveAspect = true;
         Clear();
     }
 
@@ -85,7 +87,8 @@ public class InfoBox : MonoBehaviour
 
         Title.text = weapon.Name;
         WeaponBaseDamageText.text = weapon.BaseDamage.ToString();
-        WeaponTypeText.text = weapon.TipoDeDañoQueAplica.Name;
+        WeaponTypeText.text = weapon.TipoDeDañoQueAplica.name;
+        WeaponTypeText.color = weapon.TipoDeDañoQueAplica.Color;
 
         string stringAplidedStates = "";
         foreach (var state in weapon.ListaDeEstadosQueAplica)
@@ -109,7 +112,8 @@ public class InfoBox : MonoBehaviour
         DefenceText.text = fighterData.Defense.ToString();
         SpeedText.text = fighterData.Speed.ToString();
         HPText.text = fighterData.MaxHP.ToString();
-        TypeText.text = fighterData.Type.Name;
+        TypeText.text = fighterData.Type.name;
+        TypeText.color = fighterData.Type.Color;
         LuckText.text = fighterData.Luck.ToString();
 
         //FighterImage.sprite = fighterData.Sprite;

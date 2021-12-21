@@ -10,6 +10,7 @@ public class CombatIconManager : MonoBehaviour
 
     public void UpdateStateIcons(List<Fighter> fighters)
     {
+        /*
         //Destruir iconos de estado
         while(CurrentStateIcons.Count != 0)
         {
@@ -31,5 +32,6 @@ public class CombatIconManager : MonoBehaviour
                 CurrentStateIcons.Add(stateIcon);
             }
         }
+        */
     }
 }

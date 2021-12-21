@@ -24,6 +24,9 @@ MonoBehaviour:
     and hunters. Their civilization was pre-technological until humanity tried to
     conquer Faralas. In the present, the Reptilian Resistance possesses new human
     technology to protect their homeland.
+  FemaleController: {fileID: 9100000, guid: 430d812d61e8f4e40917f449161d439f, type: 2}
+  MaleController: {fileID: 9100000, guid: da28a2215af1c4c41869897cd0f3b34e, type: 2}
+  EnemyController: {fileID: 0}
   Speed: 15
   Atack: 14
   Defense: 6
@@ -31,8 +34,8 @@ MonoBehaviour:
   MaxHP: 90
   PowerRating: 1
   DefaultWeapons:
-  - {fileID: 11400000, guid: c3612c52e49b6024d8d628796893e2a8, type: 2}
-  - {fileID: 11400000, guid: 7c1a30211d1b05c438a78473f7f94c54, type: 2}
+  - {fileID: 11400000, guid: baba1df3cc8bed14896db36e7bfc3225, type: 2}
+  - {fileID: 11400000, guid: dad9fecc5c75bbd40a579298894a5536, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 0}

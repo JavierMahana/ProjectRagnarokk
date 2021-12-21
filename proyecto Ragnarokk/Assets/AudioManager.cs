@@ -7,9 +7,11 @@ public class AudioManager : MonoBehaviour
 
 	public Sound[] ButtonSounds;
 	public Sound[] WeaponSounds;
+	public Sound[] EnemySounds;
 	public Sound[] OtherSounds;
 
 	public Sound[] Music;
+
 	public Sound[] Ambience;
 
 	private string CurrentMusic;
@@ -25,7 +27,7 @@ public class AudioManager : MonoBehaviour
 				if (music.SoundName == Music[0].SoundName) { SetMusic(music); }
             }
 		}
-		else if (GameManager.Instance.GameState == GAME_STATE.EXPLORATION)
+		else if (GameManager.Instance.GameState == GAME_STATE.EXPLORATION || GameManager.Instance.GameState == GAME_STATE.DEFEAT)
 		{
 			foreach (Sound music in sounds)
 			{			
@@ -36,7 +38,7 @@ public class AudioManager : MonoBehaviour
         {
 			int i = 2;
 			var cb = FindObjectOfType<CombatManager>();
-			if(cb.EnemyFighters[0].Name == "Progenitor") {i++; }
+			if(cb.EnemyFighters[0].Name == "Progenitor" || cb.EnemyFighters[0].Name == "Parasito") {i++; }
 			foreach (Sound music in sounds)
 			{
 				if (music.SoundName == Music[i].SoundName) { SetMusic(music); }
@@ -106,6 +108,7 @@ public class AudioManager : MonoBehaviour
 		foreach (Sound s in ButtonSounds) { sounds.Add(s); }
 		foreach (Sound s in WeaponSounds) { sounds.Add(s); }
 		foreach (Sound s in OtherSounds) { sounds.Add(s); }
+		foreach (Sound s in EnemySounds) { sounds.Add(s); }
 		foreach (Sound s in Music) { sounds.Add(s); }
 		foreach (Sound s in Ambience) { sounds.Add(s); }
 
@@ -153,10 +156,20 @@ public class AudioManager : MonoBehaviour
 			s.source.loop = s.loop;
 		}
 
-        #endregion
+		foreach (Sound s in EnemySounds)
+		{
+			if (s.source == null) { s.source = gameObject.AddComponent<AudioSource>(); }
+			s.source.clip = s.clip;
+			s.source.outputAudioMixerGroup = s.mixer;
+			s.source.volume = sfxFactor * generalFactor;
+			s.source.pitch = s.pitch;
+			s.source.loop = s.loop;
+		}
+
+		#endregion
 
 
-        #region music
+		#region music
 
 		foreach (Sound s in Music)
 		{

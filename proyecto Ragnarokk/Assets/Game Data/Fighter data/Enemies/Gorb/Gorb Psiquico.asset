@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57e7d1c956971048859788ccbea88d0, type: 3}
+  m_Name: Gorb Psiquico
+  m_EditorClassIdentifier: 
+  ExpNeededToLevelUp: 100
+  Level: 0
+  IsMaxLevel: 0
+  Evolutions:
+  - {fileID: 0}
+  - {fileID: 0}
+  Name: Gorb Psiquico
+  RealName: nameless
+  Description: metal in conciusness
+  FemaleController: {fileID: 0}
+  MaleController: {fileID: 0}
+  EnemyController: {fileID: 9100000, guid: a6f0b49589f94744ea10967f0ff61a35, type: 2}
+  Speed: 3
+  Atack: 15
+  Defense: 8
+  Luck: 0
+  MaxHP: 85
+  PowerRating: 2
+  DefaultWeapons:
+  - {fileID: 11400000, guid: 430b04e70cf211547b2526cceddf4b86, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Sprite: {fileID: 7923608585065091488, guid: 6388677ed6cfa7840b26c5370cda0991, type: 3}
+  SpriteFemale: {fileID: 0}
+  SpriteMale: {fileID: 0}
+  reversedSprite: 1
+  size: {x: 1, y: 1}
+  healthBarOffset: {x: 1, y: 1}
+  Type: {fileID: 11400000, guid: d9c98abbe4ca19c44b5bee3a65c524c5, type: 2}
+  WaterDamageBonus: 0
+  EarthDamageBonus: 0
+  FireDamageBonus: 0
+  AirDamageBonus: 0
+  PhysicalDamageBonus: 0
+  PsychicDamageBonus: 0
+  ElectricDamageBonus: 0
+  AlcoholDamageBonus: 0
+  WaterResistanceBonus: 0
+  EarthResistanceBonus: 0
+  FireResistanceBonus: 0
+  AirResistanceBonus: 0
+  PhysicalResistanceBonus: 0
+  PsychicResistanceBonus: 0
+  ElectricResistanceBonus: 0
+  AlcoholResistanceBonus: 0

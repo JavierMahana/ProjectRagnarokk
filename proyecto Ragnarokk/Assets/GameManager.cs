@@ -20,6 +20,7 @@ public enum GAME_STATE
     MENU,
     SHOP,
     TREASURE,
+    DEFEAT,
     CREDITS
 }
 
@@ -51,27 +52,22 @@ public class GameManager : Singleton<GameManager>
             {
                 return GAME_STATE.CREDITS;
             }
-
-            if (FindObjectOfType<ShopManager>())
+            else if (FindObjectOfType<ShopManager>())
             {
                 return GAME_STATE.SHOP;
             }
-
             else if (FindObjectOfType<TreasureState>())
             {
                 return GAME_STATE.TREASURE;
             }
-
             else if (FindObjectOfType<ShopState>())
             {
                 return GAME_STATE.SHOP;
             }
-
             else if (FindObjectOfType<CombatManager>())
             {
                 return GAME_STATE.COMBAT;
             }
-
             else if (FindObjectOfType<ExplorationState>())
             {
                 if (FindObjectOfType<GeneralMenu>(true).MenuDropdown.value > 0)
@@ -80,7 +76,10 @@ public class GameManager : Singleton<GameManager>
                 }
                 return GAME_STATE.EXPLORATION;
             }
-           
+            else if(FindObjectOfType<Derrota>())
+            {
+                return GAME_STATE.DEFEAT;
+            }
             else
             {
                 return GAME_STATE.PREGAME;
@@ -130,7 +129,7 @@ public class GameManager : Singleton<GameManager>
 
     public List<CombatType> AllCombatTypes = new List<CombatType>();
     //[HideInInspector] public Dictionary<CombatType, int> DefaultFighterTypeBonuses = new Dictionary<CombatType, int>();
-    //public List<CombatState> AllCombatStates = new List<CombatState>();
+    public List<CombatState> AllCombatStates = new List<CombatState>();
 
     //DontDestroyOnLoad
     //objetos de los fighters del player.
@@ -159,14 +158,16 @@ public class GameManager : Singleton<GameManager>
     {
         // comentar la linea de abajo para que que se guarden los cambios que el jugador realice
         // El valor de un PlayerPref cuando no se encuentra, es 0, es el valor incial default
-        PlayerPrefs.SetInt("firstTime", 0);
+        //PlayerPrefs.SetInt("firstTime", 0);
         // si es la primera vez que se inicia el juego, la data cargada es ésta, de lo contrario
         // se carga la data de Options.
         if (PlayerPrefs.GetInt("firstTime") == 0)
         {
-            PlayerPrefs.SetFloat("audioGeneral", 90f);
+            PlayerPrefs.SetInt("tutorialComplete", 0);
+
+            PlayerPrefs.SetFloat("audioGeneral", 80f);
             PlayerPrefs.SetFloat("audioSFX", 80f);
-            PlayerPrefs.SetFloat("audioMusic", 70f);
+            PlayerPrefs.SetFloat("audioMusic", 60f);
             PlayerPrefs.SetFloat("audioAmbient", 60f);
 
             PlayerPrefs.SetFloat("combatDescriptorSpeed", 5f);
@@ -175,10 +176,14 @@ public class GameManager : Singleton<GameManager>
             PlayerPrefs.SetInt("width", Screen.currentResolution.width);
             PlayerPrefs.SetInt("height", Screen.currentResolution.height);
 
-            //PlayerPrefs.SetInt("firstTime", 1);
-            PlayerPrefs.SetInt("currentFloor", 0);
+
+            PlayerPrefs.SetInt("tutorialComplete", 0);
+
+            PlayerPrefs.SetInt("firstTime", 1);
+            
         }
-        
+        PlayerPrefs.SetInt("currentFloor", 0);
+
         // se aplica la configuración del jugador
         SetPlayerConfiguration();
         FindObjectOfType<AudioManager>().CheckMusic();
@@ -348,7 +353,7 @@ public class GameManager : Singleton<GameManager>
         Application.Quit();
     }
 
-    public bool CheckTutorialComplete()
+    public bool SeDebeMostrarElTutorial()
     {
         // si es primera vez que se abre el juego
         if (PlayerPrefs.GetInt("tutorialComplete") == 0) { return true; }
@@ -357,7 +362,7 @@ public class GameManager : Singleton<GameManager>
 
     public void TutorialComplete()
     {
-        if (CheckTutorialComplete())
+        if (SeDebeMostrarElTutorial())
         {
             PlayerPrefs.SetInt("tutorialComplete", 1);
         }
@@ -370,7 +375,10 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame()
     {
+        PlayerPrefs.SetInt("currentFloor", 0);
+        DeletePlayerFighters();
         CurrentMoney = 0;
-        PlayerFighters.Clear();
+        FindObjectOfType<HopeManager>().enabled = true;
+        FindObjectOfType<ExplorationManager>().enabled = true;
     }
 }

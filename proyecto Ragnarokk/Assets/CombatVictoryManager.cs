@@ -37,7 +37,7 @@ public class CombatVictoryManager : MonoBehaviour
 
     IEnumerator ShowScene()
     {
-        infoBox.ShowInfo("Victory!", $"You eraned {encounter.MoneyReward}$ and {encounter.ExpReward} EXP!");
+        infoBox.ShowInfo("¡Victoria!", $"¡Has ganado {encounter.MoneyReward}$ y {encounter.ExpReward} puntos de Experiencia!");
 
         GameManager.Instance.CurrentMoney += encounter.MoneyReward;
 

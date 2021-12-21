@@ -96,7 +96,7 @@ public class WeaponPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
         else
         {
-            infoBox.ShowInfo("Empty slot", "This slot doesn't have a weapon so it's safe to select!");
+            infoBox.ShowInfo("Espacio Vacío", "!Este espacio está vacío puedes utilizarlo sin problemas!");
         }
     }
 

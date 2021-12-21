@@ -26,7 +26,7 @@ public class SelectCharacterManager : MonoBehaviour
     private void Start()
     {
         onNameChange = false;
-        if (GameManager.Instance.CheckTutorialComplete())
+        if (GameManager.Instance.SeDebeMostrarElTutorial())
         {
             PanelExplain.SetActive(true);
         }
@@ -44,7 +44,7 @@ public class SelectCharacterManager : MonoBehaviour
             if(infoBox != null) 
             {
                 infoBox.GenericFormatObj.SetActive(true);
-                infoBox.GenericDescriptionText.text = "Choose a Sex for your fighter. \n Your fighter's sex has no impact on game mechanics it is purely aesthetic."; 
+                infoBox.GenericDescriptionText.text = "Escoge el sexo de tu aventurero. \nEl sexo no afecta estadísticas de combate, es tan solo un cambio visual."; 
             }
         }
         
@@ -80,7 +80,8 @@ public class SelectCharacterManager : MonoBehaviour
         {
             if (pf == currentFighter.GetComponent<PlayerFighter>())
             {
-                pf.GetComponent<Fighter>().isMale = isMale;
+                var f = pf.GetComponent<Fighter>();
+                f.isMale = isMale;
                 pf.GetComponent<Fighter>().RealName = FighterName.text;
 
                 var pfs = FindObjectsOfType<PlayerFighter>();
@@ -88,8 +89,18 @@ public class SelectCharacterManager : MonoBehaviour
                 pf.transform.position = new Vector2((-2 + pfsCount), 1);
 
 
-                if(isMale) { pf.GetComponentInChildren<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteMale; }
-                else { pf.GetComponentInChildren<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteFemale; }
+                if(isMale) 
+                { 
+                    pf.GetComponent<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteMale;
+                    f.animator.runtimeAnimatorController = f.MaleAnimator;
+                    f.Sprite = f.SpriteMale;
+                }
+                else 
+                { 
+                    pf.GetComponent<SpriteRenderer>().sprite = pf.GetComponent<Fighter>().SpriteFemale;
+                    f.animator.runtimeAnimatorController = f.FemaleAnimator;
+                    f.Sprite = f.SpriteFemale;
+                }
             }
         }
 

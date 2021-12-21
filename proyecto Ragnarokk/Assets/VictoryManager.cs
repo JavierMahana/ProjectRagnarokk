@@ -20,7 +20,9 @@ public class VictoryManager : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.instance.CheckMusic();
         StartCoroutine(Ending());
+        GameManager.Instance.RestartGame();
     }
 
     public IEnumerator Ending()
@@ -45,7 +47,7 @@ public class VictoryManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(3);
 
         FourthText.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(7);
+        yield return new WaitForSecondsRealtime(6);
 
         FourthText.gameObject.SetActive(false);
         Credits.gameObject.SetActive(true);

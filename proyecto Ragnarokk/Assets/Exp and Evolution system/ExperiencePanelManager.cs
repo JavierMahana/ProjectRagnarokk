@@ -80,7 +80,7 @@ public class ExperiencePanelManager : MonoBehaviour
         var fightersThatWillGainExp = GetFightersThatWillGainExp();
         if (fightersThatWillGainExp.Count == 0)
         {
-            infoBox.ShowInfo("No fighter can recieve XP", "All your fighters are max level");
+            infoBox.ShowInfo("Ningun luchador puede obtener experiencia.", "Todos tus luchadores tienen el nivel máximo.");
             yield return new WaitForSeconds(2);
             SceneChanger.Instance.LoadExplorationScene();
         }
@@ -112,7 +112,7 @@ public class ExperiencePanelManager : MonoBehaviour
 
         showingExtraEX = true;
 
-        infoBox.ShowInfo("Give extra XP", $"Select a fighter to give {expDivided} extra XP");
+        infoBox.ShowInfo("Otorgar Experiencia Extra", $"Escoge el aventurero al que quieres darle {expDivided} Experiencia Extra.");
 
     }
 

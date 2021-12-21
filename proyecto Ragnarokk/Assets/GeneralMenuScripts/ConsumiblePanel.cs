@@ -73,8 +73,21 @@ public class ConsumiblePanel : MonoBehaviour
     public void UpdatePanel()
     {
         Name.text = currentFighter.RealName;
-        Health.text = currentFighter.CurrentHP.ToString() + " / " + currentFighter.MaxHP.ToString();
-        Image.sprite = currentFighter.GetComponentInChildren<SpriteRenderer>().sprite;
+        if (currentFighter.CurrentHP == 0)
+        {
+            Health.text = "<#3e3e3e>" + currentFighter.CurrentHP.ToString() + "</color>" + " / " + currentFighter.MaxHP.ToString();
+        }
+        else if (currentFighter.CurrentHP == currentFighter.MaxHP)
+        {
+            Health.text = "<#00FF00>" + currentFighter.CurrentHP.ToString() + "</color>" + " / " + currentFighter.MaxHP.ToString();
+        }
+        else
+        {
+            Health.text = "<#C0C0C0>" + currentFighter.CurrentHP.ToString() + "</color>" + " / " + currentFighter.MaxHP.ToString();
+        }
+        
+        Image.sprite = currentFighter.Sprite;
+        Image.preserveAspect = true;
 
         if(SelectedConsumible != null) { Descriptor.text = SelectedConsumible.Description; }
     }

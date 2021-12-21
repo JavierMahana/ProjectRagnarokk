@@ -77,7 +77,7 @@ public class CombatDescriptor : MonoBehaviour
         //Clear();
 
         string fName = isPlayerFighter? activeFighter.RealName : activeFighter.Name;
-        string line = fName + "'s turn";
+        string line = $"Es el turno de {fName}";
         TextLines.Add(new TextLine(line, 0));
     }
 

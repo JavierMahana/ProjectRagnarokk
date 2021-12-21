@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
   m_Name: SandHammer
   m_EditorClassIdentifier: 
-  Name: Sand Hammer
+  Name: El Martillo de Arena
   SubName: 
-  Description: arma de arena
+  Description: "Muy similar al martillo dorado, sin embargo, \xE9ste se rompe con
+    facilidad, pues esta hecho de arena, \xA1\xBFC\xF3mo no se va a desarmar?!"
   BaseCost: 100
-  IconSprite: {fileID: 21300000, guid: c6c52db91d1043b4db515c3aad49498c, type: 3}
+  IconSprite: {fileID: 21300000, guid: 9beb186c94c0f764cb0640974f6817ba, type: 3}
   BaseDamage: 5
   BaseAccuracy: 100
   BaseCriticalRate: 0
-  BaseCooldown: 0
+  BaseCooldown: 1
   ListaDeEstadosQueAplica: []
   WeaponSprite: {fileID: 2031736154224517468, guid: d1c69f4583f30584eb4ab4eb2224605d, type: 3}
   "TipoDeDa\xF1oQueAplica": {fileID: 11400000, guid: 7a85a4f3edc5b8d48a6c9671218529d7, type: 2}

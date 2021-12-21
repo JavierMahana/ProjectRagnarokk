@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f703f0c51836504c830d5c15c9f3f1e, type: 3}
   m_Name: AirKnife
   m_EditorClassIdentifier: 
-  Name: Air Knife
+  Name: Cuchillo de Viento
   SubName: 
-  Description: arma de viento
-  BaseCost: 100
-  IconSprite: {fileID: -8803686413640206328, guid: 044b3bc48754f234a94b275ef5e3b4c8, type: 3}
+  Description: "Este cuchillo se consiste de un mango que genera ondas con forma
+    de cuchillo. Es incre\xEDblemente peligroso, creado por los Felsen para convatir
+    Wikisaurios."
+  BaseCost: 50
+  IconSprite: {fileID: 21300000, guid: 93ae660d61692a343b5da7de3dfb72cf, type: 3}
   BaseDamage: 20
-  BaseAccuracy: 85
+  BaseAccuracy: 90
   BaseCriticalRate: 10
   BaseCooldown: 1
   ListaDeEstadosQueAplica:

@@ -61,7 +61,7 @@ public class EvolutionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
         else
         {
-            infoBox.ShowInfo("Empty slot", "This slot doesn't have a weapon so it's safe to select!");
+            infoBox.ShowInfo("Espacio Vacío", "¡Este espacio no tiene un arma, es seguro utilizarla!");
         }
     }
 
@@ -70,7 +70,7 @@ public class EvolutionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         mouse_over = false;
         if (manager != null && evolvingFignter != null)
         {
-            infoBox.ShowInfo($"{evolvingFignter.Name} is evolving!", $"You can only choose one evolution. Choose carefully...");
+            infoBox.ShowInfo($"¡{evolvingFignter.Name} está evolucionando!", $"Solo puedes escoger una evolución. Escoge con cuidado...");
         }
         else
         {
@@ -84,7 +84,8 @@ public class EvolutionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         this.evolvingFignter = evolvingFighter;
         this.manager = manager;
         NameField.text = data.Name;
-        ImageField.sprite = data.Sprite;
+        ImageField.sprite = evolvingFighter.Sprite;
+        ImageField.preserveAspect = true;
         currData = data;
     }
 

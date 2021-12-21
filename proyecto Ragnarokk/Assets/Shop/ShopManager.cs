@@ -6,8 +6,8 @@ public class ShopManager : MonoBehaviour
 {
     public Sprite ItemSoldSprite;
 
-    public string defaultInfoBoxTitle = "Shop";
-    public string defaultInfoBoxDescription = "You can buy any item.\nIf you have the money...";
+    public string defaultInfoBoxTitle = "Tienda";
+    public string defaultInfoBoxDescription = "Puedes comprar cualquier item.\nSi tienes suficiente dinero, claro...";
 
 
     public ShopItemSlot[] ShopSlots = new ShopItemSlot[6]; 

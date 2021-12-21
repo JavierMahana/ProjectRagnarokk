@@ -19,13 +19,27 @@ public class TeamFighterPanel : MonoBehaviour
 
     public void fillPanel(Fighter f)
     {
-        thisimage.sprite = f.GetComponentInChildren<SpriteRenderer>().sprite;
-
+        thisimage.sprite = f.Sprite;
+        thisimage.preserveAspect = true;
         //añador el level luego del nombre, en el mismo string
         FighterName.text = f.RealName;
-        healthPosition.text = f.CurrentHP.ToString() + " / " + f.MaxHP.ToString();
+        if (f.CurrentHP == 0)
+        {
+            healthPosition.text = "<#3e3e3e>" + f.CurrentHP.ToString() + "</color>" + " / " + f.MaxHP.ToString();
+        }
+        else if (f.CurrentHP == f.MaxHP)
+        {
+            healthPosition.text = "<#00FF00>" + f.CurrentHP.ToString() + "</color>" + " / " + f.MaxHP.ToString();
+        }
+        else
+        {
+            healthPosition.text = "<#C0C0C0>" + f.CurrentHP.ToString() + "</color>" + " / " + f.MaxHP.ToString();
+        }
+
+       
         ValueLevel.text = f.Level.ToString();
-        ValueType.text = f.Type.Name;
+        ValueType.text = f.Type.name;
+        ValueType.color = f.Type.Color;
         ValueAttack.text = f.Atack.ToString();
         ValueDefense.text = f.Defense.ToString();
         ValueSpeed.text = f.Speed.ToString();

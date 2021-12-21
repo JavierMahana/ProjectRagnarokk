@@ -21,6 +21,9 @@ MonoBehaviour:
   Name: Wikisaurio
   RealName: nameless
   Description: Pulga de piedra
+  FemaleController: {fileID: 0}
+  MaleController: {fileID: 0}
+  EnemyController: {fileID: 9100000, guid: 037b6da351a372d4faed683f8c8eb99b, type: 2}
   Speed: 16
   Atack: 8
   Defense: 4
@@ -37,7 +40,7 @@ MonoBehaviour:
   SpriteMale: {fileID: 0}
   reversedSprite: 1
   size: {x: 1, y: 1}
-  healthBarOffset: {x: 1, y: 0.5}
+  healthBarOffset: {x: 1, y: 0.6}
   Type: {fileID: 11400000, guid: e108f6fb37683784283e9b7209a9c32d, type: 2}
   WaterDamageBonus: 0
   EarthDamageBonus: 0

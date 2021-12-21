@@ -24,6 +24,9 @@ MonoBehaviour:
     capabilities. They live in The Unity, a massive space station where their society
     lives in Utopia. Their one enemy are the wraiths, terrible beings made from psychic
     energies.
+  FemaleController: {fileID: 9100000, guid: 22bbfc07ed4300c4583e4cc721dab796, type: 2}
+  MaleController: {fileID: 9100000, guid: 7a5a94a50acde7541bbfc07d2623c3fc, type: 2}
+  EnemyController: {fileID: 0}
   Speed: 12
   Atack: 10
   Defense: 4
@@ -31,8 +34,8 @@ MonoBehaviour:
   MaxHP: 80
   PowerRating: 1
   DefaultWeapons:
-  - {fileID: 11400000, guid: 1d70bab6a09162848b220774f9d9310b, type: 2}
-  - {fileID: 11400000, guid: 51dd5ff077ab1504eb5dd8148c7cb849, type: 2}
+  - {fileID: 11400000, guid: f92fc6a6fdca1e541accdf3a8b79d601, type: 2}
+  - {fileID: 11400000, guid: 66486fdcaa0b8b14aa590d87d28046df, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 0}

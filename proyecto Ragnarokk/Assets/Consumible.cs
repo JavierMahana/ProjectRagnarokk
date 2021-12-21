@@ -14,6 +14,8 @@ public enum ConsumibleType
 public class Consumible : Item
 {
     public ConsumibleType type;
+    [Range(1, 3)]
+    public byte Power;
 
     // Aqui se añade especifica la funcion del consumible, al terminar de usarse debería destruirse
     // su destruiccion y eliminación de la lista de consumibles debería estar en el gameManager.
@@ -57,29 +59,39 @@ public class Consumible : Item
             case ConsumibleType.HEALTH_REGEN_1:
                 if (user.CurrentHP != user.MaxHP && user.CurrentHP > 0)
                 {
-                    const int recoveryValue = 30;
-                    user.CurrentHP += recoveryValue;
-                    if (user.CurrentHP > user.MaxHP)
+                    int recoveryValue, realRecoveryValue;
+                    switch(Power)
                     {
-                        user.CurrentHP = user.MaxHP;
+                        case 1: recoveryValue = 30; break;
+                        case 2: recoveryValue = 70; break;
+                        case 3: recoveryValue = 150; break;
+
+                        default: recoveryValue = 30; break;
                     }
 
-                    if(combatManager != null)
+                    realRecoveryValue = recoveryValue;
+                    
+                    if (user.CurrentHP + recoveryValue > user.MaxHP)
                     {
-                        button.ShowText(false, recoveryValue, false, 0); 
+                        realRecoveryValue = user.MaxHP - user.CurrentHP;
+                    }
+                    user.CurrentHP += realRecoveryValue;
+
+                    if (combatManager != null)
+                    {
+                        button.ShowText(false, false, realRecoveryValue, false, 0); 
                         
                         combatDescriptor.Clear();
 
                         string useLine = "";
-                        if (user.Equals(fighterInTurn)) { useLine = fighterInTurnName + " uses " + Name; }
-                        else { useLine = fighterInTurnName + " uses " + Name + " on " + userName; }
+                        if (user.Equals(fighterInTurn)) { useLine = fighterInTurnName + " usa " + Name; }
+                        else { useLine = fighterInTurnName + " usa " + Name + " en " + userName; }
                         combatDescriptor.AddTextLine(useLine);
-                        combatDescriptor.AddTextLine(userName + " recovers " + recoveryValue + " HP");
+                        combatDescriptor.AddTextLine(userName + " recupera " + realRecoveryValue + " Salud");
 
                     }
 
-
-                ItemUsedCorrectly();
+                    ItemUsedCorrectly();
                 }
                 else
                 {
@@ -93,17 +105,27 @@ public class Consumible : Item
                 
                 if (user.CurrentHP <= 0)
                 {
-                    user.CurrentHP = user.MaxHP;
+                    int recoveryValue;
+                    switch (Power)
+                    {
+                        case 1: recoveryValue = Mathf.CeilToInt(user.MaxHP / 3f); break;
+                        case 2: recoveryValue = Mathf.CeilToInt(user.MaxHP / 2f); break;
+                        case 3: recoveryValue = user.MaxHP; break;
+
+                        default: recoveryValue = Mathf.CeilToInt(user.MaxHP / 3f); break;
+                    }
+
+                    user.CurrentHP = recoveryValue;
 
                     if (combatManager != null)
                     {
-                        button.ShowText(false, user.MaxHP, false, 0);
+                        button.ShowText(false, false, recoveryValue, false, 0);
 
                         combatManager.LiftPlayerFighter(user);
 
                         combatDescriptor.Clear();
-                        combatDescriptor.AddTextLine(fighterInTurnName + " uses " + Name + " on " + userName);
-                        combatDescriptor.AddTextLine(userName + " has risen!");
+                        combatDescriptor.AddTextLine(fighterInTurnName + " usa " + Name + " en " + userName);
+                        combatDescriptor.AddTextLine( "!" + userName + " se ha levantado para luchar!");
                     }
 
                     ItemUsedCorrectly();
@@ -120,19 +142,36 @@ public class Consumible : Item
                 var hope = HopeManager.Instance;
                 if ( hope.PartyHope < hope.Limit)
                 {
-                    hope.PartyHope += 25f;
-                    if(hope.PartyHope > 100) { hope.PartyHope = hope.Limit; }
+                    int recoveryValue, realRecoveryValue;
+                    switch (Power)
+                    {
+                        case 1: recoveryValue = 5; break;
+                        case 2: recoveryValue = 10; break;
+                        case 3: recoveryValue = 25; break;
+
+                        default: recoveryValue = 5; break;
+                    }
+
+                    realRecoveryValue = recoveryValue;
+                    if(hope.PartyHope + recoveryValue > hope.Limit)
+                    {
+                        realRecoveryValue = (int)(hope.Limit - hope.PartyHope);
+                    }
+
+                    hope.PartyHope += realRecoveryValue;
 
                     if (combatManager != null)
                     {
+
                         combatDescriptor.Clear();
 
-                        int recovery = 25;
+                        button.ShowText(false, true, realRecoveryValue, false, 0);
+
                         string useLine = "";
-                        if (user.Equals(fighterInTurn)) { useLine = fighterInTurnName + " uses " + Name; }
-                        else { useLine = fighterInTurnName + " uses " + Name + " on " + userName; }
+                        if (user.Equals(fighterInTurn)) { useLine = fighterInTurnName + " usa " + Name; }
+                        else { useLine = fighterInTurnName + " usa " + Name + " en " + userName; }
                         combatDescriptor.AddTextLine(useLine);
-                        combatDescriptor.AddTextLine("The party revers "+ recovery + "hope");
+                        combatDescriptor.AddTextLine("¡El equipo recupera "+ realRecoveryValue + "Esperanza!");
 
                     }
                     ItemUsedCorrectly();
@@ -185,7 +224,7 @@ public class Consumible : Item
         var combatManager = FindObjectOfType<CombatManager>();
         if(combatManager != null)
         {
-            combatManager.SetlDescriptorText("You can't use that item!");
+            combatManager.SetlDescriptorText("¡No puedes utilizar ese objeto!");
             combatManager.SelectedConsumible = null;
         }
         

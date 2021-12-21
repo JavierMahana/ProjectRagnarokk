@@ -7,10 +7,18 @@ using UnityEngine.UI;
 
 public class GeneralMenu : MonoBehaviour
 {
+    public Button TeamButton;
+    public Button WeaponButton;
+    public Button ConsumibleButton;
+    public Button OptionButton;
+    public Button GlosaryButton;
+    public Button SaveQuitButton;
+    
+
     private ExplorationManager explorationManager;
     // sirve para el display del piso Actual
+    public GameObject TitlePanel;
     public TextMeshProUGUI MenuTitle;
-
     public TMP_Dropdown MenuDropdown;
 
     public GameObject Background;
@@ -33,6 +41,9 @@ public class GeneralMenu : MonoBehaviour
     //Options
     public GameObject Options;
 
+    //Glosary
+    public GameObject Glosary;
+
     //Quit & Save
     public GameObject SaveQuit;
     public TextMeshProUGUI SnQtext;
@@ -46,13 +57,12 @@ public class GeneralMenu : MonoBehaviour
     private string floor;
     private void Awake()
     {
-        floor = "Exploring Floor " + PlayerPrefs.GetInt("currentFloor");
-        //DontDestroyOnLoad(this);
-
+        DontDestroyOnLoad(this);
     }
     void Start()
     {
         initialized = true;
+        floor = "Explorando Piso " + PlayerPrefs.GetInt("currentFloor");
         explorationManager = FindObjectOfType<ExplorationManager>();
 
         Panels.Clear();
@@ -61,20 +71,71 @@ public class GeneralMenu : MonoBehaviour
         Panels.Add(Consumibles);
         Panels.Add(Options);
         Panels.Add(SaveQuit);
+        Panels.Add(Glosary);
 
-        if (GameManager.Instance.GameState == GAME_STATE.COMBAT)
-        {
-            MenuDropdown.options.Remove(MenuDropdown.options[2]);
-            MenuDropdown.options.Remove(MenuDropdown.options[3]);
-            MenuDropdown.options[2].text = "Options";
-        }
-
+        MenuDropdown.value = 0;
         OnClick();
     }
+    public void Update()
+    {
+        #region RevisarQueBotones se pueden usar
+        if(GameManager.Instance.GameState == GAME_STATE.PREGAME)
+        {
+            TeamButton.interactable = false;
+            ConsumibleButton.interactable = false;
+            WeaponButton.interactable = false;
+        }
+
+        if(GameManager.Instance.GameState == GAME_STATE.EXPLORATION)
+        {
+            TeamButton.interactable = true;
+            ConsumibleButton.interactable = true;
+            WeaponButton.interactable = true;
+        }
+
+        if(GameManager.Instance.GameState == GAME_STATE.COMBAT)
+        {
+            ConsumibleButton.interactable = false;
+            WeaponButton.interactable = false;
+        }
+
+        #endregion
+
+
+        var cm = FindObjectOfType<CombatManager>();
+
+        // activacion del titulo del menu
+        if(GameManager.Instance.GameState == GAME_STATE.PREGAME || GameManager.Instance.GameState == GAME_STATE.CREDITS || GameManager.Instance.GameState == GAME_STATE.SHOP || GameManager.Instance.GameState == GAME_STATE.TREASURE)
+        {
+            if(MenuDropdown.value == 0)
+            {
+                TitlePanel.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            TitlePanel.gameObject.SetActive(true);
+        }
+
+        // AL ESTAR en combate
+        if (cm != null && GameManager.Instance.GameState == GAME_STATE.COMBAT && MenuTitle.text != "Ronda " + (cm.round + 1).ToString())
+        {
+           
+            MenuTitle.text = "Ronda " + (cm.round+1).ToString();
+        }
+    }
+
 
     public void ChangeDropdownValue(int value)
     {
-        MenuDropdown.value = value;
+        if(MenuDropdown.value == value)
+        {
+            MenuDropdown.value = 0;
+        }
+        else
+        {
+            MenuDropdown.value = value;
+        }
     }
 
     /// <param name="value">valor es un atributo pensado por si quieres sobreescribir el menu-dropdown</param>
@@ -88,6 +149,7 @@ public class GeneralMenu : MonoBehaviour
             HideAllPanels();
             explorationManager.gameObject.SetActive(true);
             Background.SetActive(false);
+
             //this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
 
         }
@@ -100,58 +162,53 @@ public class GeneralMenu : MonoBehaviour
             //this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.9f);
         }
 
-
-        // revisa si esta en comabte
-        if (GameManager.Instance.GameState == GAME_STATE.COMBAT)
+        // resto de opciones cuando no se está explorando
+        if (MenuDropdown.value == 1)
         {
-
-            if (MenuDropdown.value == 1)
-            {
-                ActivatePanel(TeamCanvas, "Team");
-                TeamCanvas.GetComponent<TeamCanvas>().SetUpPanel();
-            }
-            if (MenuDropdown.value == 2)
-            {
-                ActivatePanel(Options, "Options");
-                Options.GetComponent<Options>().OnOptions();
-            }
-            if (MenuDropdown.value == 3)
-            {
-                ActivatePanel(SaveQuit, "Save and Quit");
-            }
-
-            SnQtext.text = "Exit the game, while in combat you can't save.";
+            ActivatePanel(TeamCanvas, "Equipo");
+            TeamCanvas.GetComponent<TeamCanvas>().SetUpPanel();
         }
-        else
+        else if (MenuDropdown.value == 2)
         {
-            // resto de opciones cuando no se está explorando
-            if (MenuDropdown.value == 1)
-            {
-                ActivatePanel(TeamCanvas, "Team");
-                TeamCanvas.GetComponent<TeamCanvas>().SetUpPanel();
-            }
-            if (MenuDropdown.value == 2)
-            {
-                ActivatePanel(Weapons, "Weapons");
-                Weapons.GetComponent<WeaponsPanel>().SetUpPanel();
-            }
-            if (MenuDropdown.value == 3)
-            {
-                ActivatePanel(Consumibles, "Consumables");
-                Consumibles.GetComponent<ConsumiblePanel>().SetUpPanel();
-            }
-            if (MenuDropdown.value == 4)
-            {
-                ActivatePanel(Options, "Options");
-                Options.GetComponent<Options>().OnOptions();
-            }
-            if (MenuDropdown.value == 5)
-            {
-                ActivatePanel(SaveQuit, "Save and Quit");
-            }
-
-            SnQtext.text = "Save the current progress and exit the game.";
+            ActivatePanel(Weapons, "Arsenal");
+            Weapons.GetComponent<WeaponsPanel>().SetUpPanel();
         }
+        else if (MenuDropdown.value == 3)
+        {
+            ActivatePanel(Consumibles, "Consumibles");
+            Consumibles.GetComponent<ConsumiblePanel>().SetUpPanel();
+        }
+        else if (MenuDropdown.value == 4)
+        {
+            ActivatePanel(Options, "Opciones");
+            Options.GetComponent<Options>().OnOptions();
+        }
+        else if (MenuDropdown.value == 5)
+        {
+            ActivatePanel(SaveQuit, "Salir y Guardar");
+            if(GameManager.Instance.GameState == GAME_STATE.PREGAME) 
+            {
+                SnQtext.text = "¿Quieres salir del juego?";
+            }
+            if (GameManager.Instance.GameState == GAME_STATE.COMBAT)
+            {
+                SnQtext.text = "Al estar en combate no se peude guardar. ¿Quieres salir del juego?";
+            }
+                
+        }
+        else if (MenuDropdown.value == 6)
+        {
+            ActivatePanel(Glosary, "Glosario");
+                
+        }
+
+        
+            Debug.Log(MenuDropdown.options.Count);
+        
+
+            
+            
+        
              
     }
    
@@ -198,12 +255,5 @@ public class GeneralMenu : MonoBehaviour
         }
     }
 
-    public void Update()
-    {
-        var cm = FindObjectOfType<CombatManager>();
-        if (cm != null && GameManager.Instance.GameState == GAME_STATE.COMBAT && MenuTitle.text != "round " + cm.round.ToString())
-        {
-             MenuTitle.text = "round " + cm.round.ToString(); 
-        }
-    }
+
 }

@@ -21,6 +21,9 @@ MonoBehaviour:
   Name: Xixi
   RealName: nameless
   Description: Description
+  FemaleController: {fileID: 0}
+  MaleController: {fileID: 0}
+  EnemyController: {fileID: 9100000, guid: a1d058b975c8d6c49924975852e9d897, type: 2}
   Speed: 10
   Atack: 12
   Defense: 6
@@ -37,7 +40,7 @@ MonoBehaviour:
   SpriteMale: {fileID: 0}
   reversedSprite: 1
   size: {x: 1.5, y: 1.5}
-  healthBarOffset: {x: 1, y: 1}
+  healthBarOffset: {x: 1, y: 1.2}
   Type: {fileID: 11400000, guid: c8332d004a10a164486b93f259a6df2b, type: 2}
   WaterDamageBonus: 0
   EarthDamageBonus: 0
