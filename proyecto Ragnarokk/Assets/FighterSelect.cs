@@ -36,7 +36,6 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private Color synergyColor;
     private Color antiSynergyColor;
 
-
     //agregar despues una lista de imagenes (estados) dentro de un canvas (atributo) que se activa si hay efectos en Fighter
 
     void Start()
@@ -89,10 +88,9 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
                 EndTextAnimation();
             }
-        }
-
-        AddStates();
+        } 
     }
+
 
     public void OnDefenseMode()
     {
@@ -104,6 +102,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         // syn 0 para cuando no hay sinergia alguna
         // syn -1 para cuando hay antisinergia
         // syn 1 para cuando hay sinergia
+        AddStates();
 
         BeginTextAnimation();
 

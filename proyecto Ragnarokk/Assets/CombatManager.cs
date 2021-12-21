@@ -650,7 +650,7 @@ public class CombatManager : MonoBehaviour
     {
         //
 
-         round++;
+        round++;
         RemoveAllCombatStates();
         DiminishWeaponCooldowns();
         WillApplyRandomState = Random.Range(0, 2) == 0; //50%
@@ -694,7 +694,7 @@ public class CombatManager : MonoBehaviour
 
 
         // Se actualizan los botones de estados
-        //
+        UpdateAllStateIcons();
 
         //TURNO DE UN ALIADO
         if (IsPlayerFighter(ActiveFighter))
@@ -869,7 +869,7 @@ public class CombatManager : MonoBehaviour
     // al hacerle clic se activa Fight y el argumento es el boton cliqueado que contiene al target
     public void Fight(FighterSelect targetButton)
     {
-        
+        UpdateAllStateIcons();
 
         ShowActionCanvas(false);
         //Debug.Log("Desactiva Canvas!!!!!");
@@ -1062,7 +1062,8 @@ public class CombatManager : MonoBehaviour
                     //defeatHopeChange = HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
                 }
 
-                Target.transform.rotation = new Quaternion(0, 0, 90, 0);
+                //Target.transform.rotation = new Quaternion(1, 0, 0, 90);
+                
 
                 defeatDesc += defeatHopeChange;
                 CombatDescriptor.AddTextLine(defeatDesc);
@@ -1112,6 +1113,7 @@ public class CombatManager : MonoBehaviour
         // el botón imprime el daño infligido
         targetButton.ShowText(true, false, damageToShow, isCrit, SynergyDeterminant);
         //
+        UpdateAllStateIcons();
     }
 
     public void ApplySynergy(float initialHope, out string synerDesc)
