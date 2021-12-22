@@ -355,6 +355,7 @@ MonoBehaviour:
   Pressed: {r: 0, g: 0, b: 0, a: 0}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
+  overrideColors: 0
 --- !u!1 &174162790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1044,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7118101498860295703, guid: 63163a050f9ca384baf8a8a741f4189b, type: 3}
+      propertyPath: mousePick
+      value: 
+      objectReference: {fileID: 2800000, guid: 641faf553a4847444ada7ddfc622a371, type: 3}
+    - target: {fileID: 7118101498860295703, guid: 63163a050f9ca384baf8a8a741f4189b, type: 3}
+      propertyPath: mouseNormal
+      value: 
+      objectReference: {fileID: 2800000, guid: c36baac0d28bf734b9558b18af61a2a2, type: 3}
+    - target: {fileID: 7118101498860295703, guid: 63163a050f9ca384baf8a8a741f4189b, type: 3}
+      propertyPath: mouseMouseBlock
+      value: 
+      objectReference: {fileID: 2800000, guid: 46e72d1055e2b86418edaed197e426e3, type: 3}
+    - target: {fileID: 7118101498860295703, guid: 63163a050f9ca384baf8a8a741f4189b, type: 3}
       propertyPath: Enemies.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1234,7 +1247,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.9
+  m_fontSize: 35.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3458,6 +3471,7 @@ MonoBehaviour:
   Pressed: {r: 0, g: 0, b: 1, a: 1}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
+  overrideColors: 0
 --- !u!114 &1308860369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3711,6 +3725,7 @@ MonoBehaviour:
   Pressed: {r: 0, g: 0, b: 1, a: 1}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 0
+  overrideColors: 0
 --- !u!1 &1461033890
 GameObject:
   m_ObjectHideFlags: 0
@@ -4375,6 +4390,7 @@ MonoBehaviour:
   Pressed: {r: 0, g: 0, b: 1, a: 1}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
+  overrideColors: 0
 --- !u!114 &1579925249 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8623942581915974735, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
@@ -4571,6 +4587,7 @@ MonoBehaviour:
   Pressed: {r: 0, g: 0, b: 1, a: 1}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
+  overrideColors: 0
 --- !u!1 &1694767472
 GameObject:
   m_ObjectHideFlags: 0
@@ -4768,6 +4785,7 @@ MonoBehaviour:
   Pressed: {r: 0, g: 0, b: 1, a: 1}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 0
+  overrideColors: 0
 --- !u!1 &1718228654
 GameObject:
   m_ObjectHideFlags: 0
@@ -4957,6 +4975,7 @@ MonoBehaviour:
   Pressed: {r: 0, g: 0, b: 1, a: 1}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
+  overrideColors: 0
 --- !u!1 &2020508208 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1081554539821461573, guid: 1379dafc3099df940a540c0020c7af25, type: 3}

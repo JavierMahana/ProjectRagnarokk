@@ -26,7 +26,9 @@ public enum GAME_STATE
 
 public class GameManager : Singleton<GameManager>
 {
-
+    public Texture2D mouseNormal;
+    public Texture2D mousePick;
+    public Texture2D mouseMouseBlock;
 
     public Floor TutorialFloor;
     public List<Floor> Floor1Variants = new List<Floor>();
@@ -188,6 +190,8 @@ public class GameManager : Singleton<GameManager>
         SetPlayerConfiguration();
         FindObjectOfType<AudioManager>().CheckMusic();
 
+        Cursor.SetCursor(mouseNormal, Vector2.zero, CursorMode.ForceSoftware);
+
     }
 
     public void SetPlayerConfiguration()
@@ -199,8 +203,6 @@ public class GameManager : Singleton<GameManager>
         Screen.SetResolution(width, height, fullscreen);
 
         FindObjectOfType<AudioManager>().UpdateAudioParameters();
-
-
     }
 
     private void Update()

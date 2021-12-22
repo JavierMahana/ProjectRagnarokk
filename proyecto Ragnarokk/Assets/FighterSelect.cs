@@ -229,6 +229,15 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if(GameManager.Instance.ConfirmationClick)
+        {
+            Cursor.SetCursor(GameManager.Instance.mousePick, Vector2.zero, CursorMode.ForceSoftware);
+        }
+        else
+        {
+            Cursor.SetCursor(GameManager.Instance.mouseMouseBlock, Vector2.zero, CursorMode.ForceSoftware);
+        }
+
         string descripcion = "";
         string fighterName = "";
         var cm = FindObjectOfType<CombatManager>();
@@ -260,6 +269,8 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        Cursor.SetCursor(GameManager.Instance.mouseNormal, Vector2.zero, CursorMode.ForceSoftware);
+
         var cm = FindObjectOfType<CombatManager>();
         if(cm!=null)
         {

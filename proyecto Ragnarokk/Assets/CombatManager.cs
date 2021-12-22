@@ -471,6 +471,14 @@ public class CombatManager : MonoBehaviour
         ResetWeaponCooldowns();
         //ShowFighterCanvas(false);
         GameManager.Instance.CheckOnLoadScene();
+
+        foreach(Fighter pf in PlayerFighters)
+        {
+            if(pf.CurrentHP <= 0)
+            {
+                pf.animator.Play("Muerte");
+            }
+        }
     }
     
     private void Update()
@@ -511,10 +519,12 @@ public class CombatManager : MonoBehaviour
             }
             else if(CombatState > 0)
             {
+                Cursor.SetCursor(GameManager.Instance.mouseNormal, Vector2.zero, CursorMode.ForceSoftware);
                 StartCoroutine(Victory());
             }
             else
             {
+                Cursor.SetCursor(GameManager.Instance.mouseNormal, Vector2.zero, CursorMode.ForceSoftware);
                 var sceneChanger = FindObjectOfType<SceneChanger>();
                 sceneChanger.ChangeScene("Defeat");
                 Debug.Log("DERROTA");
@@ -524,6 +534,7 @@ public class CombatManager : MonoBehaviour
         //Finaliza el combate por huida
         if(OnFlee)
         {
+            Cursor.SetCursor(GameManager.Instance.mouseNormal, Vector2.zero, CursorMode.ForceSoftware);
             RemoveAllCombatStates();
             ResetWeaponCooldowns();
 
@@ -996,7 +1007,10 @@ public class CombatManager : MonoBehaviour
                     //defeatHopeChange = HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
                 }
 
-                //Target.transform.rotation = new Quaternion(1, 0, 0, 90);
+                if (PlayerFighters.Contains(Target))
+                {
+                    Target.animator.Play("Muerte");
+                }
                 
 
                 defeatDesc += defeatHopeChange;
@@ -1470,7 +1484,7 @@ public class CombatManager : MonoBehaviour
         if(IsPlayerFighter(pf))
         {
             AlivePlayerFighters.Add(pf);
-            pf.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+            pf.animator.Play("Idle");
         }
         else { Debug.Log("No se puede añadir un enemigo a la lista de aliados vivos"); }
     }
@@ -1478,6 +1492,7 @@ public class CombatManager : MonoBehaviour
     //Verifica antes de cada turno si hay un bando ganador
     private sbyte CheckCombatState()
     {
+        Cursor.SetCursor(GameManager.Instance.mouseNormal, Vector2.zero, CursorMode.ForceSoftware);
         //Primero debe comprobarse el grupo del jugador. En un caso hipotético en que ambos bandos sean derrotados a la vez, sigue siendo una
         //derrota para el jugador.
 
