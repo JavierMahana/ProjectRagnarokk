@@ -1102,6 +1102,7 @@ public class CombatManager : MonoBehaviour
                 synerDesc += hopeChange;
             }
         }
+        UpdateAllStateIcons();
     }
 
     public float CalculateEffectivenessFactor(out string effectDesc)
@@ -1201,6 +1202,7 @@ public class CombatManager : MonoBehaviour
             IconManager.UpdateStateIcons(AllCombatFighters);
             Debug.Log("HAY ESTADOS");
         }
+        UpdateAllStateIcons();
     }
 
     public bool RemoveCombatStates(Fighter fighter)
@@ -1245,6 +1247,7 @@ public class CombatManager : MonoBehaviour
         IconManager.UpdateStateIcons(AllCombatFighters);
         WillApplyRandomState = false;
         CombatDescriptor.AddTextLine($"Los enemigos se ven afectados por {randomState.Name}", 1.5f);
+        UpdateAllStateIcons();
     }
 
     public void ActionSelection()
