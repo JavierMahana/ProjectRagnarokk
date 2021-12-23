@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ForAllButtons : MonoBehaviour, IPointerClickHandler
 {
-    private bool IsButtonPressed;
+    public bool IsButtonPressed;
     public Color Pressed;
     public Color Normal;
 

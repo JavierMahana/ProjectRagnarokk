@@ -122,6 +122,21 @@ public class GeneralMenu : MonoBehaviour
         {
            
             MenuTitle.text = "Ronda " + (cm.round+1).ToString();
+            if(MenuDropdown.value == 0 && cm.AttackWeapon != null)
+            {
+                var weaponsButtons = FindObjectsOfType<WeaponSpecs>();
+                foreach(WeaponSpecs ws in weaponsButtons)
+                {
+                    if(ws.thisWeapon == cm.AttackWeapon)
+                    {
+                        var fa = ws.GetComponent<ForAllButtons>();
+                        if(!fa.IsButtonPressed)
+                        {
+                            fa.PressButton(fa.GetComponent<Button>());
+                        }
+                    }
+                }
+            }
         }
     }
 

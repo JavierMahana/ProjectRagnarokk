@@ -229,18 +229,39 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(GameManager.Instance.ConfirmationClick)
-        {
-            Cursor.SetCursor(GameManager.Instance.mousePick, Vector2.zero, CursorMode.ForceSoftware);
-        }
-        else
+        var cm = FindObjectOfType<CombatManager>();
+
+        // si el mouse se pone sobre cualquier fighter y no hay un arma escogida
+        if (cm != null && cm.AttackWeapon == null)
         {
             Cursor.SetCursor(GameManager.Instance.mouseMouseBlock, Vector2.zero, CursorMode.ForceSoftware);
         }
 
+        // si el mouse se pone sobre un enemigo, para esto debe haber un arma escogida
+        if (cm != null && cm.AttackWeapon != null)
+        {
+            if (cm.PlayerFighters.Contains(Fighter))
+            {
+                Cursor.SetCursor(GameManager.Instance.mouseMouseBlock, Vector2.zero, CursorMode.ForceSoftware);
+            }
+            else
+            {
+                Cursor.SetCursor(GameManager.Instance.mousePick, Vector2.zero, CursorMode.ForceSoftware);
+            }
+
+        }
+
+        // si es que se va a utilizar un consumible, debe haber uno seleccionado y el mouse debe estar sobre un aliado
+        if (cm != null && cm.SelectedConsumible != null && cm.PlayerFighters.Contains(Fighter))
+        {
+            Cursor.SetCursor(GameManager.Instance.mousePick, Vector2.zero, CursorMode.ForceSoftware);
+        }
+
+      
+
         string descripcion = "";
         string fighterName = "";
-        var cm = FindObjectOfType<CombatManager>();
+        
         cm.ClearPanelDescriptor();
 
         if (Fighter != null)

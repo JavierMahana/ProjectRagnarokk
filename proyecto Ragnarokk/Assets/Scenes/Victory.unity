@@ -295,7 +295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &91679380
 RectTransform:
   m_ObjectHideFlags: 0
@@ -920,6 +920,7 @@ MonoBehaviour:
   Pressed: {r: 0, g: 0, b: 0, a: 0}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
+  overrideColors: 0
 --- !u!1 &815497490
 GameObject:
   m_ObjectHideFlags: 0
