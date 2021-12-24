@@ -26,10 +26,10 @@ public class SelectCharacterManager : MonoBehaviour
     private void Start()
     {
         onNameChange = false;
-        if (GameManager.Instance.SeDebeMostrarElTutorial())
-        {
-            PanelExplain.SetActive(true);
-        }
+        //if (GameManager.Instance.SeDebeMostrarElTutorial())
+        //{
+        //    PanelExplain.SetActive(true);
+        //}
     }
 
     // Update is called once per frame

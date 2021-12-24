@@ -42,6 +42,7 @@ public class TutorialPanel_Manager : MonoBehaviour
 
     public void Hide()
     {
+        GameManager.Instance.TutorialComplete();
         estadoActual = ESTADO_TUTORIAL.HIDEN;
         indicePanelActual = 0;
 

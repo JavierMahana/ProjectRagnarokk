@@ -16,6 +16,7 @@ public class InfoBox : MonoBehaviour
     public TextMeshProUGUI WeaponTypeText;
     public TextMeshProUGUI WeaponStatusEffectsText;
     public TextMeshProUGUI WeaponDescriptionText;
+    public TextMeshProUGUI WeaponPresitionText;
 
     public GameObject FighterFormatObj;
 
@@ -98,6 +99,8 @@ public class InfoBox : MonoBehaviour
         WeaponStatusEffectsText.text = stringAplidedStates;
 
         WeaponDescriptionText.text = weapon.Description;
+
+        WeaponPresitionText.text = weapon.BaseAccuracy.ToString() + "%";
     }
 
     public void ShowInfo(FighterData fighterData)
