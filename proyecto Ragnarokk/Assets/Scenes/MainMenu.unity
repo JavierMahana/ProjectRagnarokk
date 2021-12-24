@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.9
+  m_fontSize: 45.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1569,6 +1569,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2020508212}
     m_Modifications:
+    - target: {fileID: 140913974558954059, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: Saltar Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 140913974558954059, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_fontSize
+      value: 23.75
+      objectReference: {fileID: 0}
     - target: {fileID: 618644123551223360, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
       propertyPath: m_text
       value: "Generar <#BDFBFF>sinergias</color> es importante, ya que es la principal
@@ -1714,6 +1722,14 @@ PrefabInstance:
       value: "Se puede consultar los <#BDFBFF>estados</color> y qu\xE9 tipos les
         genera una <#BDFBFF>sinergia</color> o una <#BDFBFF>anti-sinergia</color>
         en el glosario."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332767005109167037, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -33.7424
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332767005109167037, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.93530273
       objectReference: {fileID: 0}
     - target: {fileID: 5344355187093595433, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
       propertyPath: m_text
