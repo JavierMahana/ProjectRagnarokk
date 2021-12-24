@@ -31,6 +31,7 @@ public class FighterData : ScriptableObject
 
     public string RealName = "nameless";
 
+    [Multiline]
     public string Description = "Description";
 
     public RuntimeAnimatorController FemaleController;

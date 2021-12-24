@@ -352,6 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsButtonPressed: 0
   Pressed: {r: 0, g: 0, b: 0, a: 0}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
@@ -768,7 +769,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'volver
+  m_text: 'Volver
 
 '
   m_isRightToLeft: 0
@@ -904,14 +905,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "En <#D90048>Trials of Hope Revival</color>, realizas todas tus acciones
+  m_text: "En <#D90048>Trials of Hope: Revival</color>, realizas todas tus acciones
     mediante <#D90048>clics</color>, escogiendo botones.\n\nCrea un grupo de <#D90048>3
-    luchadores </color>con los que deberas explorar el planeta  <#D90048>Ard</color>,
-    hasta llegar a su n\xFAcleo.\n\nPara explorar haz clic en los <#D90048>espacios</color>
+    luchadores </color>con los que deber\xE1s explorar el planeta <#D90048>Ard</color>,
+    hasta llegar a su n\xFAcleo.\n\nPara explorar, haz clic en los <#D90048>espacios</color>
     del <#D90048>tablero de exploraci\xF3n</color>. En estos podr\xE1s encontrar
-    combates, tesoros, lore, salas de curaci\xF3n o tiendas.\n\n<#D90048>Encuentra
-    y derrota</color> al <#D90048>Jefe</color> de cada piso para avanzar al siguiente.
-    Hasta llegar al coraz\xF3n del planeta."
+    combates, tesoros, historia, salas de curaci\xF3n o tiendas.\n\n<#D90048>Encuentra
+    y derrota</color> al <#D90048>Jefe</color> de cada piso para avanzar al siguiente,
+    hasta llegar al coraz\xF3n del planeta."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -1247,7 +1248,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.85
+  m_fontSize: 45.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1568,6 +1569,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2020508212}
     m_Modifications:
+    - target: {fileID: 618644123551223360, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: "Generar <#BDFBFF>sinergias</color> es importante, ya que es la principal
+        manera de aumentar la <#BDFBFF>esperanza</color>, un recurso que puede aumentar
+        o disminuir significativamente el <#BDFBFF>da\xF1o</color> que realizas."
+      objectReference: {fileID: 0}
+    - target: {fileID: 618644123551223360, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_fontSize
+      value: 23.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904551933872138775, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: "Para determinar qu\xE9 enemigo es el que genera la <#BDFBFF>sinergia</color>,
+        se puede pasar el mouse encima de los enemigos al tener un arma seleccionada.
+        Si aparece una <#BDFBFF>estrella</color>, simboliza que puede generar una
+        <#BDFBFF>sinergia</color>."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904551933872138775, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_fontSize
+      value: 20.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1995385220504143992, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: "Arriba est\xE1 la barra descriptora. Esta narra los acontecimientos
+        dentro la batalla."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2947040584917452711, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: "Bienvenido. En este juego guiar\xE1s a un grupo de luchadores muertos
+        en combate a trav\xE9s del planeta <#BDFBFF>Ard</color> con el objetivo de
+        llegar a su n\xFAcleo, donde la resurrecci\xF3n espera como recompensa. Es
+        probable que tu equipo sea <#BDFBFF>derrotado</color>, lo cual est\xE1 bien,
+        siempre y cuando...\nNo pierdas la <#BDFBFF>Esperanza<b>.\n\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3504639375368232123, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: "El panel superior contiene diversos men\xFAs. Ah\xED se puede administrar
+        a los aventureros, sus armas, sus consumibles y las opciones de la partida."
+      objectReference: {fileID: 0}
+    - target: {fileID: 3504639375368232123, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_fontSize
+      value: 32.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573706556238813264, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: "Las estad\xEDsticas y el tipo del arma se especifican al poner el mouse
+        arriba de su nombre."
+      objectReference: {fileID: 0}
     - target: {fileID: 3862699086062316495, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1652,9 +1701,85 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3978192909709495427, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: "Este es el \xE1rea donde se encuentran las salas."
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978192909709495427, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_fontSize
+      value: 25.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008600611534653305, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: "Se puede consultar los <#BDFBFF>estados</color> y qu\xE9 tipos les
+        genera una <#BDFBFF>sinergia</color> o una <#BDFBFF>anti-sinergia</color>
+        en el glosario."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344355187093595433, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: "Las armas pueden generar ataques <#BDFBFF>superefectivos</color> si
+        atacan a un enemigo del tipo correcto. Aqu\xED un arma de tipo el\xE9ctrico
+        hace un ataque <#BDFBFF>superefectivo</color> a un enemigo de tipo agua."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344355187093595433, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_fontSize
+      value: 27.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5414956676419913463, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: 'Al ir explorando el mapa, pueden encontrarse las siguientes salas:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6289817290544732227, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: "El n\xFAmero que sale a la derecha del nombre del arma simboliza cu\xE1ntas
+        <#BDFBFF>sinergias</color> tienes disponible con ese arma."
+      objectReference: {fileID: 0}
+    - target: {fileID: 6289817290544732227, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_fontSize
+      value: 22.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6477267021949987563, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: 'Se utilizan <#BDFBFF>"clics"</color> para poder interactuar con este.
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6477267021949987563, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_fontSize
+      value: 30.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558679243622367795, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: Las armas tienen un tiempo de enfriamiento, por lo que luego de usarlas,
+        se debe esperar para poder volver a utilizarlas.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494701323976258991, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: Al explorar una sala, se descubren las salas adyacentes a esta.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494701323976258991, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_fontSize
+      value: 23.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8025580553419780863, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: El dinero es un recurso que se obtiene al salir victorioso en los combates,
+        y en las salas de tesoro. Este se utiliza dentro de las tiendas.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181870592145882043, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: Si atacas a un enemigo que tiene un <#BDFBFF>estado</color> con un arma
+        del tipo correcto, puedes generar una <#BDFBFF>sinergia</color>. Pero si
+        lo haces con el tipo incorrecto se genera una <#BDFBFF>anti-sinergia</color>.
+      objectReference: {fileID: 0}
     - target: {fileID: 8662153953413946785, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
       propertyPath: m_Name
       value: PanelTutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797385985222529182, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
+      propertyPath: m_text
+      value: En las opciones se puede especificar la velocidad con que el texto de
+        la barra descriptora avanza.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ad9ad6a4c8d7c3449fd7fca5a1ebbac, type: 3}
@@ -2078,6 +2203,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1221957190949948011, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
+      propertyPath: m_text
+      value: "<#BDFBFF>\xA1Cuidado!</color> Est\xE1s a punto de salir del juego.
+        <#BDFBFF>Perder\xE1s todo tu progreso</color>."
+      objectReference: {fileID: 0}
     - target: {fileID: 1221957190949948013, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -2109,6 +2239,14 @@ PrefabInstance:
     - target: {fileID: 1221957191149476260, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221957191149476261, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
+      propertyPath: m_text
+      value: "T\xEDtulo"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221957191149476261, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
+      propertyPath: m_fontSize
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 1221957191170992825, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2502,6 +2640,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 3544282890512476960, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
+      propertyPath: m_text
+      value: <#00FF00>Salud</color> / Max
+      objectReference: {fileID: 0}
     - target: {fileID: 3621263699860384548, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -2693,6 +2835,10 @@ PrefabInstance:
     - target: {fileID: 5445626516777022846, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493484589671237893, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
+      propertyPath: m_text
+      value: Nombre
       objectReference: {fileID: 0}
     - target: {fileID: 5535040370050398129, guid: 10001aad8f9620349a9c13dd0e02e10d, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3337,9 +3483,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Creditos
-
-'
+  m_text: "Cr\xE9ditos\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3468,6 +3612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsButtonPressed: 0
   Pressed: {r: 0, g: 0, b: 1, a: 1}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
@@ -3722,6 +3867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsButtonPressed: 0
   Pressed: {r: 0, g: 0, b: 1, a: 1}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 0
@@ -4387,6 +4533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsButtonPressed: 0
   Pressed: {r: 0, g: 0, b: 1, a: 1}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
@@ -4584,6 +4731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsButtonPressed: 0
   Pressed: {r: 0, g: 0, b: 1, a: 1}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
@@ -4782,6 +4930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsButtonPressed: 0
   Pressed: {r: 0, g: 0, b: 1, a: 1}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 0
@@ -4972,6 +5121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsButtonPressed: 0
   Pressed: {r: 0, g: 0, b: 1, a: 1}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
@@ -7373,12 +7523,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5417655672657216496, guid: f88b9ced201c07f4c8884672ca9b9dec, type: 3}
       propertyPath: m_text
-      value: "Bienvenido a <#D90048>Trials of Hope revival</color>, en este juego
+      value: "Bienvenido a <#D90048>Trials of Hope: Revival</color>. En este juego
         guiar\xE1s un equipo de 3 aventureros ca\xEDdos por el planeta <#D90048>Ard</color>
         hasta llegar a su n\xFAcleo, donde la <#D90048>resurreci\xF3n</color> espera.
-        Es muy probable que muchos de tus equipos  <#D90048>mueran</color> y eso
-        est\xE1 bien, pues significa una nueva oportunidad, nueva partida con nuevos
-        conocimientos adqueridos.\n\nSin importar las adversidades, jam\xE1s pierdas
+        Es muy probable que muchos de tus equipos  <#D90048>mueran</color>, y eso
+        est\xE1 bien, pues significa una nueva oportunidad, y una nueva partida con
+        conocimientos adquiridos.\n\nSin importar las adversidades, jam\xE1s pierdas
         la <#D90048>Esperanza<b>.</color>"
       objectReference: {fileID: 0}
     - target: {fileID: 5417655672657216496, guid: f88b9ced201c07f4c8884672ca9b9dec, type: 3}

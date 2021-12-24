@@ -200,14 +200,15 @@ public class GeneralMenu : MonoBehaviour
         }
         else if (MenuDropdown.value == 5)
         {
-            ActivatePanel(SaveQuit, "Salir y Guardar");
+            ActivatePanel(SaveQuit, "Salir");
             if(GameManager.Instance.GameState == GAME_STATE.PREGAME) 
             {
                 SnQtext.text = "¿Quieres salir del juego?";
             }
             if (GameManager.Instance.GameState == GAME_STATE.COMBAT)
             {
-                SnQtext.text = "Al estar en combate no se peude guardar. ¿Quieres salir del juego?";
+                //SnQtext.text = "Al estar en combate no se puede guardar. ¿Quieres salir del juego?";
+                SnQtext.text = "<#BDFBFF>¡Cuidado!</color> Estás a punto de salir del juego. <#BDFBFF>Perderás todo tu progreso</color>.";
             }
                 
         }

@@ -471,9 +471,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsButtonPressed: 0
   Pressed: {r: 0, g: 0, b: 0, a: 0}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
+  overrideColors: 0
 --- !u!1001 &208841307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -970,6 +972,11 @@ PrefabInstance:
     - target: {fileID: 8466271406176395643, guid: b571345dcda3e3049ae5ca285b641334, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.27599525
+      objectReference: {fileID: 0}
+    - target: {fileID: 8466271406474006179, guid: b571345dcda3e3049ae5ca285b641334, type: 3}
+      propertyPath: m_text
+      value: "<#BDFBFF>\xA1Cuidado!</color> Est\xE1s a punto de salir del juego.
+        <#BDFBFF>Perder\xE1s todo tu progreso</color>."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b571345dcda3e3049ae5ca285b641334, type: 3}
@@ -1915,7 +1922,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.083000004, y: 0.90300006}
   m_AnchorMax: {x: 0.93274105, y: 1}
-  m_AnchoredPosition: {x: -0.5999756, y: 0.4300537}
+  m_AnchoredPosition: {x: -0.5999756, y: 0.43005753}
   m_SizeDelta: {x: 1.2, y: -1.5080996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1449428951
