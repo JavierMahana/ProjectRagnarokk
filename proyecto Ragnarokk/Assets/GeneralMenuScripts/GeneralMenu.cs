@@ -122,6 +122,8 @@ public class GeneralMenu : MonoBehaviour
         {
            
             MenuTitle.text = "Ronda " + (cm.round+1).ToString();
+
+            // si el arma de ataque no es null
             if(MenuDropdown.value == 0 && cm.AttackWeapon != null)
             {
                 var weaponsButtons = FindObjectsOfType<WeaponSpecs>();
@@ -131,6 +133,22 @@ public class GeneralMenu : MonoBehaviour
                     {
                         var fa = ws.GetComponent<ForAllButtons>();
                         if(!fa.IsButtonPressed)
+                        {
+                            fa.PressButton(fa.GetComponent<Button>());
+                        }
+                    }
+                }
+            }
+            // si el consumible no es null
+            if (MenuDropdown.value == 0 && cm.SelectedConsumible != null)
+            {
+                var consumibleButtons = FindObjectsOfType<Button_Consumible>();
+                foreach (Button_Consumible bc in consumibleButtons)
+                {
+                    if (bc.thisItem == cm.SelectedConsumible)
+                    {
+                        var fa = bc.GetComponent<ForAllButtons>();
+                        if (!fa.IsButtonPressed)
                         {
                             fa.PressButton(fa.GetComponent<Button>());
                         }
