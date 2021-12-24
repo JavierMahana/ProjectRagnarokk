@@ -1045,6 +1045,7 @@ public class CombatManager : MonoBehaviour
         //FALLO
         else
         {
+            AudioManager.instance.Play("Fallo");
             string failDesc = "¡Pero falló!";
 
             if(attackerIsAlly) 

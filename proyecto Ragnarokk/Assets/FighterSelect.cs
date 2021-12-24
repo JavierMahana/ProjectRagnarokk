@@ -114,7 +114,8 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             if (isCrit) 
             { 
-                showText.color = critColor; predamage = "¡CRÍTICO! ";
+                showText.color = critColor; 
+                predamage = "¡CRÍTICO! ";
                 AudioManager.instance.Play("Golpe Critico");
             }
             else 
@@ -143,7 +144,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             }
 
-            AudioManager.instance.Play("Fallo");
+           
             showText.text = (value > 0) ? predamage + value.ToString() : "FALLO";
             this.synergyText.text = synergyText;
             showTimer = 400;
