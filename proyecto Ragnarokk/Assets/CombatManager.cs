@@ -1484,7 +1484,7 @@ public class CombatManager : MonoBehaviour
         if(IsPlayerFighter(pf))
         {
             AlivePlayerFighters.Add(pf);
-            pf.animator.Play("Idle");
+            pf.animator.Play("Resurreccion");
         }
         else { Debug.Log("No se puede añadir un enemigo a la lista de aliados vivos"); }
     }

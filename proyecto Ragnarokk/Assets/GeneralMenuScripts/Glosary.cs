@@ -17,7 +17,7 @@ public class Glosary : MonoBehaviour
     public GameObject PanelPositive;
     public GameObject PanelNegative;
 
-    private string defaultText = "Haz clic en los botones para ver los estados o los tipos de daño y sus respectivas fortaliezas y debilidades.";
+    private string defaultText = "Haz clic en los botones para ver los estados o los tipos de daño y sus respectivas fortalezas y debilidades.";
     public TextMeshProUGUI nombre;
     public TextMeshProUGUI positive;
     public TextMeshProUGUI negative;
