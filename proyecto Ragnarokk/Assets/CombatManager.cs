@@ -710,7 +710,7 @@ public class CombatManager : MonoBehaviour
         //TURNO DE UN ALIADO
         if (IsPlayerFighter(ActiveFighter))
         {
-            PanelDescriptor.text = "Escoge una acción!";
+            PanelDescriptor.text = "¡Escoge una acción!";
 
             //Debug.Log("Turno Aliado");
             AttackWeapon = null;
@@ -1418,7 +1418,7 @@ public class CombatManager : MonoBehaviour
                 ActiveFighter.IsDefending = true;
 
                 CombatDescriptor.Clear(); //Si se llega a crear un método para aplicar la defensa, esta línea debe ir ahí
-                CombatDescriptor.AddTextLine(ActiveFighter.RealName + " está defendiendose");
+                CombatDescriptor.AddTextLine(ActiveFighter.RealName + " está defendiéndose");
 
                 // terminar turno
                 GameManager.Instance.ConfirmationClick = false;

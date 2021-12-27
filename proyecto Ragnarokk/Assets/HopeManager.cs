@@ -117,7 +117,7 @@ public class HopeManager : Singleton<HopeManager>
 
         //Debug.Log(changeReason + " (" + value + ") | Esperanza del grupo: " + PartyHope);
 
-        string hopeChange = "(" + value + "% Hope)";
+        string hopeChange = "(" + value + "% Esp)";
         if(value > 0) { hopeChange.Insert(1, "+"); }
         
         return hopeChange;

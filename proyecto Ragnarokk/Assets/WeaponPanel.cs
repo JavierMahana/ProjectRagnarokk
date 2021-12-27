@@ -96,7 +96,7 @@ public class WeaponPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
         else
         {
-            infoBox.ShowInfo("Espacio Vacío", "!Este espacio está vacío puedes utilizarlo sin problemas!");
+            infoBox.ShowInfo("Espacio Vacío", "¡Este espacio está vacío, puedes utilizarlo sin problemas!");
         }
     }
 

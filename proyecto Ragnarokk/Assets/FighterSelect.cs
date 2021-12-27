@@ -125,7 +125,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             switch (syn)
             {
                 case 1:
-                    synergyText = "!Sinergia!";
+                    synergyText = "¡Sinergia!";
                     Debug.Log("hubo sinergia");
                     this.synergyText.color = synergyColor;
                     AudioManager.instance.Play("Sinergia");

@@ -70,7 +70,7 @@ public class EvolutionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         mouse_over = false;
         if (manager != null && evolvingFignter != null)
         {
-            infoBox.ShowInfo($"¡{evolvingFignter.Name} está evolucionando!", $"Solo puedes escoger una evolución. Escoge con cuidado...");
+            infoBox.ShowInfo($"¡{evolvingFignter.RealName} está evolucionando!", $"Solo puedes escoger una evolución. Escoge con cuidado...");
         }
         else
         {
