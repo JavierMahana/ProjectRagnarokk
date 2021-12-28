@@ -22,20 +22,31 @@ public class Glosary : MonoBehaviour
     public TextMeshProUGUI positive;
     public TextMeshProUGUI negative;
 
+    private bool thereIsSelected; 
+
     void Start()
+    {
+        Reset();        
+    }
+
+    public void Reset()
     {
         StateButtons.SetActive(false);
         DamageTypeButtons.SetActive(false);
         CleanButtons();
-        
     }
 
     public void CleanButtons()
     {
-        foreach(GameObject o in PositiveButtons) { Destroy(o); }
+        
+        thereIsSelected = false;
+
+        foreach (GameObject o in PositiveButtons) { Destroy(o); }
         foreach (GameObject o in NegativeButtons) { Destroy(o); }
+
         PositiveButtons.Clear();
         NegativeButtons.Clear();
+
         nombre.text = "Escoge un elemento";
         positive.text = "";
         negative.text = "";
@@ -47,11 +58,11 @@ public class Glosary : MonoBehaviour
         {
             nombre.text = defaultText;
         }
-        else if(StateButtons.gameObject.activeInHierarchy)
+        else if(StateButtons.gameObject.activeInHierarchy && !thereIsSelected)
         {
             nombre.text = "Estados";
         }
-        else if(DamageTypeButtons.gameObject.activeInHierarchy)
+        else if(DamageTypeButtons.gameObject.activeInHierarchy && !thereIsSelected)
         {
             nombre.text = "Tipos de Daño";
         }
@@ -66,6 +77,7 @@ public class Glosary : MonoBehaviour
         //Estados
         if(StateButtons.gameObject.activeInHierarchy)
         {
+            thereIsSelected = true;
             positive.text = "Sinergias";
             negative.text = "Anti-Sinergias";
 
@@ -104,6 +116,7 @@ public class Glosary : MonoBehaviour
         //tipos de daño
         else if (DamageTypeButtons.gameObject.activeInHierarchy)
         {
+            thereIsSelected = true;
             positive.text = "Fuerte contra";
             negative.text = "Débil contra   ";
 
@@ -136,6 +149,7 @@ public class Glosary : MonoBehaviour
             else
             {
                 nombre.text = "Ningún tipo de daño seleccionado";
+                thereIsSelected = false;
             }
         }
     }

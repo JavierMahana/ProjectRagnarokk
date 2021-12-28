@@ -78,6 +78,9 @@ public class GeneralMenu : MonoBehaviour
     }
     public void Update()
     {
+        if(MenuDropdown.value == 0) { Background.SetActive(false); }
+
+
         #region RevisarQueBotones se pueden usar
         if(GameManager.Instance.GameState == GAME_STATE.PREGAME)
         {
@@ -191,7 +194,7 @@ public class GeneralMenu : MonoBehaviour
             Debug.Log("No toy explorando.");
             ReturnButton.SetActive(true);
             Background.SetActive(true);
-            explorationManager.gameObject.SetActive(false);
+            //explorationManager.gameObject.SetActive(false);
             //this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.9f);
         }
 

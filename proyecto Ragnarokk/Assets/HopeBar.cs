@@ -93,7 +93,7 @@ public class HopeBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         hMult = (float)Math.Round(hMult, 1);
         Debug.Log("multiplicado: " + hMult);
         HopeAmmount.text = hAmmount.ToString();
-        HopeMultiplier.text = hMult.ToString();
+        HopeMultiplier.text = "x" + hMult.ToString();
 
         HopePanel.SetActive(true);
     }
