@@ -546,9 +546,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccd28be6cb249a4c8a3bea8e24e510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsButtonPressed: 0
   Pressed: {r: 0, g: 0, b: 0, a: 0}
   Normal: {r: 0, g: 0, b: 0, a: 0}
   staysPressed: 1
+  overrideColors: 0
 --- !u!1 &1005626177
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,7 +891,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Tus aventureros han ca\xEDdo en combate. Sus cuerpos ser\xE1n devorados
-    por el <#78C1FF>Parasito</color> que habita el planeta <#BDFBFF>Ard</color>.\n\nEste
+    por el <#78C1FF>Par\xE1sito</color> que habita el planeta <#BDFBFF>Ard</color>.\n\nEste
     no es el fin, pues miles de almas esperan ansiosas a tener una oportunidad para
     comenzar una <#78C1FF>nueva aventura</color>."
   m_isRightToLeft: 0

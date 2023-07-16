@@ -144,10 +144,8 @@ public class ExplorationManager : Singleton<ExplorationManager>
     // Update is called once per frame
     void Update()
     {
-
         if (GameManager.Instance.GameState == GAME_STATE.EXPLORATION)
         {
-
             int childCount = transform.childCount;
             for (int i = 0; i < childCount; i++)
             {
@@ -163,9 +161,18 @@ public class ExplorationManager : Singleton<ExplorationManager>
             }
         }
 
+        var LorePanel = FindObjectOfType<LorePanel>();
+        if (LorePanel != null && LorePanel.gameObject.activeSelf)
+        {
+            int childCount = transform.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
         //if (GameManager.Instance.CurrentFloor != null && !FloorIsLoaded)
         //{
-            
+
         //    InitFloor(GameManager.Instance.CurrentFloor);
         //    //GameManager.Instance.FloorNeedToBeLoaded = false;
         //}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Espectro de las Tinieblas
   m_EditorClassIdentifier: 
   ExpNeededToLevelUp: 100
-  Level: 0
+  Level: 2
   IsMaxLevel: 0
   Evolutions:
   - {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
   SpriteMale: {fileID: 0}
   reversedSprite: 1
   size: {x: 1, y: 1}
-  healthBarOffset: {x: 1, y: 1}
+  healthBarOffset: {x: 1, y: 1.2}
   Type: {fileID: 11400000, guid: 7fda126cf52d4f9478689f1d6d5477a2, type: 2}
   WaterDamageBonus: 0
   EarthDamageBonus: 0

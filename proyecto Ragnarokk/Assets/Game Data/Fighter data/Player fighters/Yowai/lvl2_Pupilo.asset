@@ -18,16 +18,17 @@ MonoBehaviour:
   Evolutions:
   - {fileID: 0}
   - {fileID: 0}
-  Name: Pupil
+  Name: Pupilo
   RealName: nameless
-  Description: Description
+  Description: "Especializado en el manejo de Agua, ha transformado su propio sistema.\nSu
+    resistencia y da\xF1o utilizando al Agua es superior a lo esperable."
   FemaleController: {fileID: 9100000, guid: 22bbfc07ed4300c4583e4cc721dab796, type: 2}
   MaleController: {fileID: 9100000, guid: 7a5a94a50acde7541bbfc07d2623c3fc, type: 2}
   EnemyController: {fileID: 0}
   Speed: 15
-  Atack: 12
+  Atack: 13
   Defense: 7
-  Luck: 8
+  Luck: 10
   MaxHP: 110
   PowerRating: 1
   DefaultWeapons:
@@ -36,13 +37,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 1798614187947317398, guid: 173659c0f0c6464459fe061bb5bc9898, type: 3}
-  SpriteFemale: {fileID: 0}
-  SpriteMale: {fileID: 0}
+  SpriteFemale: {fileID: 1798614187947317398, guid: 173659c0f0c6464459fe061bb5bc9898, type: 3}
+  SpriteMale: {fileID: -7065537096610566419, guid: 55aad7fd9fe6d6a4694086089702f3bb, type: 3}
   reversedSprite: 0
   size: {x: 1, y: 1}
   healthBarOffset: {x: 1, y: 1.6}
   Type: {fileID: 11400000, guid: 99ddf6cb18f34644c857955877bf77d1, type: 2}
-  WaterDamageBonus: 0
+  WaterDamageBonus: 1
   EarthDamageBonus: 0
   FireDamageBonus: 0
   AirDamageBonus: 0

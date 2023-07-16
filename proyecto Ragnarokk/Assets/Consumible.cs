@@ -209,7 +209,9 @@ public class Consumible : Item
         // elimina el objeto del panel en el menu
         else if (GameManager.Instance.GameState == GAME_STATE.MENU)
         {
+            AudioManager.instance.Play("Sanar");
             consumiblePanel.SelectedConsumible = null;
+            consumiblePanel.Descriptor.text = "¡Consumible utilizado correctamente!";
             consumiblePanel.SetUpPanel();
         }
 

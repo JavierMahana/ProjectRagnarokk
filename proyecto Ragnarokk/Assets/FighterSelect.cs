@@ -114,7 +114,8 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             if (isCrit) 
             { 
-                showText.color = critColor; predamage = "¡CRÍTICO! ";
+                showText.color = critColor; 
+                predamage = "¡CRÍTICO! ";
                 AudioManager.instance.Play("Golpe Critico");
             }
             else 
@@ -124,7 +125,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             switch (syn)
             {
                 case 1:
-                    synergyText = "!Sinergia!";
+                    synergyText = "¡Sinergia!";
                     Debug.Log("hubo sinergia");
                     this.synergyText.color = synergyColor;
                     AudioManager.instance.Play("Sinergia");
@@ -143,7 +144,7 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             }
 
-            AudioManager.instance.Play("Fallo");
+           
             showText.text = (value > 0) ? predamage + value.ToString() : "FALLO";
             this.synergyText.text = synergyText;
             showTimer = 400;
@@ -229,9 +230,39 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        var cm = FindObjectOfType<CombatManager>();
+
+        // si el mouse se pone sobre cualquier fighter y no hay un arma escogida
+        if (cm != null && cm.AttackWeapon == null)
+        {
+            Cursor.SetCursor(GameManager.Instance.mouseMouseBlock, Vector2.zero, CursorMode.ForceSoftware);
+        }
+
+        // si el mouse se pone sobre un enemigo, para esto debe haber un arma escogida
+        if (cm != null && cm.AttackWeapon != null)
+        {
+            if (cm.PlayerFighters.Contains(Fighter))
+            {
+                Cursor.SetCursor(GameManager.Instance.mouseMouseBlock, Vector2.zero, CursorMode.ForceSoftware);
+            }
+            else
+            {
+                Cursor.SetCursor(GameManager.Instance.mousePick, Vector2.zero, CursorMode.ForceSoftware);
+            }
+
+        }
+
+        // si es que se va a utilizar un consumible, debe haber uno seleccionado y el mouse debe estar sobre un aliado
+        if (cm != null && cm.SelectedConsumible != null && cm.PlayerFighters.Contains(Fighter))
+        {
+            Cursor.SetCursor(GameManager.Instance.mousePick, Vector2.zero, CursorMode.ForceSoftware);
+        }
+
+      
+
         string descripcion = "";
         string fighterName = "";
-        var cm = FindObjectOfType<CombatManager>();
+        
         cm.ClearPanelDescriptor();
 
         if (Fighter != null)
@@ -260,6 +291,8 @@ public class FighterSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        Cursor.SetCursor(GameManager.Instance.mouseNormal, Vector2.zero, CursorMode.ForceSoftware);
+
         var cm = FindObjectOfType<CombatManager>();
         if(cm!=null)
         {

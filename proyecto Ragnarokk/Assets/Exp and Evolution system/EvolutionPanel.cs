@@ -33,12 +33,13 @@ public class EvolutionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     }
 
 
-
+    
     void Update()
     {
+
         if (mouse_over && Input.GetMouseButtonDown(0) && !frameShown && currData != null)
         {
-            confirmScreen.Show(evolvingFignter, currData, manager);
+           confirmScreen.Show(evolvingFignter, currData, manager);
         }
         frameShown = false;
     }
@@ -51,6 +52,8 @@ public class EvolutionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         mouse_over = false;
     }
+
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -70,7 +73,7 @@ public class EvolutionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         mouse_over = false;
         if (manager != null && evolvingFignter != null)
         {
-            infoBox.ShowInfo($"¡{evolvingFignter.Name} está evolucionando!", $"Solo puedes escoger una evolución. Escoge con cuidado...");
+            infoBox.ShowInfo($"¡{evolvingFignter.RealName} está evolucionando!", $"Solo puedes escoger una evolución. Escoge con cuidado...");
         }
         else
         {

@@ -18,14 +18,16 @@ MonoBehaviour:
   Evolutions:
   - {fileID: 0}
   - {fileID: 0}
-  Name: Worker
+  Name: Trabajador
   RealName: nameless
-  Description: Description
+  Description: "Especialista en dureza y fuerza f\xEDsica. Destaca por su Salud y
+    Defensa.\nProvoca m\xE1s da\xF1o con armas de Tierra, pero es a\xFAn m\xE1s vulnerable
+    al Agua."
   FemaleController: {fileID: 9100000, guid: c11a709ae2f364f4b813ea119296b62a, type: 2}
   MaleController: {fileID: 9100000, guid: bf22bffe5276e244483951707add3472, type: 2}
   EnemyController: {fileID: 0}
   Speed: 8
-  Atack: 11
+  Atack: 13
   Defense: 13
   Luck: 5
   MaxHP: 180
@@ -36,8 +38,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: -8684406738462456065, guid: c0ec7a0688a911e40b52425573447df4, type: 3}
-  SpriteFemale: {fileID: 0}
-  SpriteMale: {fileID: 0}
+  SpriteFemale: {fileID: 7406501890428492521, guid: dbab33379d04c9d4482c6db10c6e326d, type: 3}
+  SpriteMale: {fileID: -8684406738462456065, guid: c0ec7a0688a911e40b52425573447df4, type: 3}
   reversedSprite: 0
   size: {x: 1, y: 1}
   healthBarOffset: {x: 1, y: 1.6}

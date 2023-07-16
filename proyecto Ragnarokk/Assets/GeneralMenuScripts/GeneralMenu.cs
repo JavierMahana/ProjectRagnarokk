@@ -78,6 +78,9 @@ public class GeneralMenu : MonoBehaviour
     }
     public void Update()
     {
+        if(MenuDropdown.value == 0) { Background.SetActive(false); }
+
+
         #region RevisarQueBotones se pueden usar
         if(GameManager.Instance.GameState == GAME_STATE.PREGAME)
         {
@@ -122,6 +125,39 @@ public class GeneralMenu : MonoBehaviour
         {
            
             MenuTitle.text = "Ronda " + (cm.round+1).ToString();
+
+            // si el arma de ataque no es null
+            if(MenuDropdown.value == 0 && cm.AttackWeapon != null)
+            {
+                var weaponsButtons = FindObjectsOfType<WeaponSpecs>();
+                foreach(WeaponSpecs ws in weaponsButtons)
+                {
+                    if(ws.thisWeapon == cm.AttackWeapon)
+                    {
+                        var fa = ws.GetComponent<ForAllButtons>();
+                        if(!fa.IsButtonPressed)
+                        {
+                            fa.PressButton(fa.GetComponent<Button>());
+                        }
+                    }
+                }
+            }
+            // si el consumible no es null
+            if (MenuDropdown.value == 0 && cm.SelectedConsumible != null)
+            {
+                var consumibleButtons = FindObjectsOfType<Button_Consumible>();
+                foreach (Button_Consumible bc in consumibleButtons)
+                {
+                    if (bc.thisItem == cm.SelectedConsumible)
+                    {
+                        var fa = bc.GetComponent<ForAllButtons>();
+                        if (!fa.IsButtonPressed)
+                        {
+                            fa.PressButton(fa.GetComponent<Button>());
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -158,7 +194,7 @@ public class GeneralMenu : MonoBehaviour
             Debug.Log("No toy explorando.");
             ReturnButton.SetActive(true);
             Background.SetActive(true);
-            explorationManager.gameObject.SetActive(false);
+            //explorationManager.gameObject.SetActive(false);
             //this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.9f);
         }
 
@@ -185,14 +221,15 @@ public class GeneralMenu : MonoBehaviour
         }
         else if (MenuDropdown.value == 5)
         {
-            ActivatePanel(SaveQuit, "Salir y Guardar");
+            ActivatePanel(SaveQuit, "Salir");
             if(GameManager.Instance.GameState == GAME_STATE.PREGAME) 
             {
                 SnQtext.text = "¿Quieres salir del juego?";
             }
             if (GameManager.Instance.GameState == GAME_STATE.COMBAT)
             {
-                SnQtext.text = "Al estar en combate no se peude guardar. ¿Quieres salir del juego?";
+                //SnQtext.text = "Al estar en combate no se puede guardar. ¿Quieres salir del juego?";
+                SnQtext.text = "<#BDFBFF>¡Cuidado!</color> Estás a punto de salir del juego. <#BDFBFF>Perderás todo tu progreso</color>.";
             }
                 
         }

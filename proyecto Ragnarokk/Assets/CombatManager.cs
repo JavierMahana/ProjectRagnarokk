@@ -471,6 +471,14 @@ public class CombatManager : MonoBehaviour
         ResetWeaponCooldowns();
         //ShowFighterCanvas(false);
         GameManager.Instance.CheckOnLoadScene();
+
+        foreach(Fighter pf in PlayerFighters)
+        {
+            if(pf.CurrentHP <= 0)
+            {
+                pf.animator.Play("Muerte");
+            }
+        }
     }
     
     private void Update()
@@ -511,10 +519,12 @@ public class CombatManager : MonoBehaviour
             }
             else if(CombatState > 0)
             {
+                Cursor.SetCursor(GameManager.Instance.mouseNormal, Vector2.zero, CursorMode.ForceSoftware);
                 StartCoroutine(Victory());
             }
             else
             {
+                Cursor.SetCursor(GameManager.Instance.mouseNormal, Vector2.zero, CursorMode.ForceSoftware);
                 var sceneChanger = FindObjectOfType<SceneChanger>();
                 sceneChanger.ChangeScene("Defeat");
                 Debug.Log("DERROTA");
@@ -524,6 +534,7 @@ public class CombatManager : MonoBehaviour
         //Finaliza el combate por huida
         if(OnFlee)
         {
+            Cursor.SetCursor(GameManager.Instance.mouseNormal, Vector2.zero, CursorMode.ForceSoftware);
             RemoveAllCombatStates();
             ResetWeaponCooldowns();
 
@@ -699,7 +710,7 @@ public class CombatManager : MonoBehaviour
         //TURNO DE UN ALIADO
         if (IsPlayerFighter(ActiveFighter))
         {
-            PanelDescriptor.text = "Escoge una acción!";
+            PanelDescriptor.text = "¡Escoge una acción!";
 
             //Debug.Log("Turno Aliado");
             AttackWeapon = null;
@@ -996,7 +1007,10 @@ public class CombatManager : MonoBehaviour
                     //defeatHopeChange = HopeManager.Instance.ChangeHope((sbyte)(Target.PowerRating + 1), "Cambio por vencer enemigo de poder " + Target.PowerRating);
                 }
 
-                //Target.transform.rotation = new Quaternion(1, 0, 0, 90);
+                if (PlayerFighters.Contains(Target))
+                {
+                    Target.animator.Play("Muerte");
+                }
                 
 
                 defeatDesc += defeatHopeChange;
@@ -1031,6 +1045,7 @@ public class CombatManager : MonoBehaviour
         //FALLO
         else
         {
+            AudioManager.instance.Play("Fallo");
             string failDesc = "¡Pero falló!";
 
             if(attackerIsAlly) 
@@ -1102,6 +1117,7 @@ public class CombatManager : MonoBehaviour
                 synerDesc += hopeChange;
             }
         }
+        UpdateAllStateIcons();
     }
 
     public float CalculateEffectivenessFactor(out string effectDesc)
@@ -1201,6 +1217,7 @@ public class CombatManager : MonoBehaviour
             IconManager.UpdateStateIcons(AllCombatFighters);
             Debug.Log("HAY ESTADOS");
         }
+        UpdateAllStateIcons();
     }
 
     public bool RemoveCombatStates(Fighter fighter)
@@ -1245,6 +1262,7 @@ public class CombatManager : MonoBehaviour
         IconManager.UpdateStateIcons(AllCombatFighters);
         WillApplyRandomState = false;
         CombatDescriptor.AddTextLine($"Los enemigos se ven afectados por {randomState.Name}", 1.5f);
+        UpdateAllStateIcons();
     }
 
     public void ActionSelection()
@@ -1400,7 +1418,7 @@ public class CombatManager : MonoBehaviour
                 ActiveFighter.IsDefending = true;
 
                 CombatDescriptor.Clear(); //Si se llega a crear un método para aplicar la defensa, esta línea debe ir ahí
-                CombatDescriptor.AddTextLine(ActiveFighter.RealName + " está defendiendose");
+                CombatDescriptor.AddTextLine(ActiveFighter.RealName + " está defendiéndose");
 
                 // terminar turno
                 GameManager.Instance.ConfirmationClick = false;
@@ -1467,7 +1485,7 @@ public class CombatManager : MonoBehaviour
         if(IsPlayerFighter(pf))
         {
             AlivePlayerFighters.Add(pf);
-            pf.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+            pf.animator.Play("Resurreccion");
         }
         else { Debug.Log("No se puede añadir un enemigo a la lista de aliados vivos"); }
     }
@@ -1475,6 +1493,7 @@ public class CombatManager : MonoBehaviour
     //Verifica antes de cada turno si hay un bando ganador
     private sbyte CheckCombatState()
     {
+        Cursor.SetCursor(GameManager.Instance.mouseNormal, Vector2.zero, CursorMode.ForceSoftware);
         //Primero debe comprobarse el grupo del jugador. En un caso hipotético en que ambos bandos sean derrotados a la vez, sigue siendo una
         //derrota para el jugador.
 

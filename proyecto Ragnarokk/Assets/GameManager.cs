@@ -26,7 +26,9 @@ public enum GAME_STATE
 
 public class GameManager : Singleton<GameManager>
 {
-
+    public Texture2D mouseNormal;
+    public Texture2D mousePick;
+    public Texture2D mouseMouseBlock;
 
     public Floor TutorialFloor;
     public List<Floor> Floor1Variants = new List<Floor>();
@@ -158,7 +160,7 @@ public class GameManager : Singleton<GameManager>
     {
         // comentar la linea de abajo para que que se guarden los cambios que el jugador realice
         // El valor de un PlayerPref cuando no se encuentra, es 0, es el valor incial default
-        //PlayerPrefs.SetInt("firstTime", 0);
+       // PlayerPrefs.SetInt("firstTime", 0);
         // si es la primera vez que se inicia el juego, la data cargada es ésta, de lo contrario
         // se carga la data de Options.
         if (PlayerPrefs.GetInt("firstTime") == 0)
@@ -188,19 +190,20 @@ public class GameManager : Singleton<GameManager>
         SetPlayerConfiguration();
         FindObjectOfType<AudioManager>().CheckMusic();
 
+        Cursor.SetCursor(mouseNormal, Vector2.zero, CursorMode.ForceSoftware);
+
     }
 
     public void SetPlayerConfiguration()
     {
         var fullscreen = PlayerPrefs.GetInt("Fullscreen") == 0 ? true : false;
+
         var width = PlayerPrefs.GetInt("width");
         var height = PlayerPrefs.GetInt("height");
 
         Screen.SetResolution(width, height, fullscreen);
 
         FindObjectOfType<AudioManager>().UpdateAudioParameters();
-
-
     }
 
     private void Update()

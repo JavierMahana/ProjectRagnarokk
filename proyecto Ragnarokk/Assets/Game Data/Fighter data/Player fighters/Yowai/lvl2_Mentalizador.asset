@@ -18,16 +18,18 @@ MonoBehaviour:
   Evolutions:
   - {fileID: 0}
   - {fileID: 0}
-  Name: Mentalizer
+  Name: Mentalizador
   RealName: nameless
-  Description: Description
+  Description: "Poderoso asceta, se dedica a perfeccionar sus capacidades mentales.
+    Posee un potente Ataque, pero pierde en Velocidad.\nAumenta su da\xF1o con armas
+    Ps\xEDquicas."
   FemaleController: {fileID: 9100000, guid: 22bbfc07ed4300c4583e4cc721dab796, type: 2}
   MaleController: {fileID: 9100000, guid: 7a5a94a50acde7541bbfc07d2623c3fc, type: 2}
   EnemyController: {fileID: 0}
   Speed: 10
-  Atack: 14
+  Atack: 15
   Defense: 6
-  Luck: 10
+  Luck: 14
   MaxHP: 95
   PowerRating: 1
   DefaultWeapons:
@@ -36,8 +38,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Sprite: {fileID: 1798614187947317398, guid: 173659c0f0c6464459fe061bb5bc9898, type: 3}
-  SpriteFemale: {fileID: 0}
-  SpriteMale: {fileID: 0}
+  SpriteFemale: {fileID: 1798614187947317398, guid: 173659c0f0c6464459fe061bb5bc9898, type: 3}
+  SpriteMale: {fileID: -7065537096610566419, guid: 55aad7fd9fe6d6a4694086089702f3bb, type: 3}
   reversedSprite: 0
   size: {x: 1, y: 1}
   healthBarOffset: {x: 1, y: 1.6}

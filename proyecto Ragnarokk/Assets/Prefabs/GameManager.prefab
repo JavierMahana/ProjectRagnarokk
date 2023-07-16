@@ -44,11 +44,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _persistent: 1
+  mouseNormal: {fileID: 0}
+  mousePick: {fileID: 0}
+  mouseMouseBlock: {fileID: 0}
   TutorialFloor: {fileID: 0}
   Floor1Variants:
   - {fileID: 11400000, guid: e64aad7b205989b4590d6d7eedbcd1e2, type: 2}
+  - {fileID: 11400000, guid: 10b4638ea54feff428ab0fdf10fb75dc, type: 2}
+  - {fileID: 11400000, guid: f501fbfe977fcc54c987a3c37f67e269, type: 2}
   Floor2Variants:
   - {fileID: 11400000, guid: cc87b2364cdb1614b887c0769283c3d1, type: 2}
+  - {fileID: 11400000, guid: 404d5669058c15041b72d64706602197, type: 2}
+  - {fileID: 11400000, guid: d258dd533bc99644db127b9571cb29f7, type: 2}
   CurrentMoney: 0
   InFloorEnd: 0
   FloorToLoadInFloorEnd: 0

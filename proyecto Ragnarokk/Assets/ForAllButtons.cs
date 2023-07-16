@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class ForAllButtons : MonoBehaviour, IPointerClickHandler
 {
-    private bool IsButtonPressed;
+    public bool IsButtonPressed;
     public Color Pressed;
     public Color Normal;
 
     public bool staysPressed = true;
+    public bool overrideColors = false;
     public void Start()
     {
         float r= 0;
@@ -21,7 +22,7 @@ public class ForAllButtons : MonoBehaviour, IPointerClickHandler
 
         var button = GetComponent<Button>();
 
-        if (button != null) 
+        if (button != null && !overrideColors) 
         {
             /*
             r = 0f;

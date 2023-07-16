@@ -219,7 +219,7 @@ public class AudioManager : MonoBehaviour
 
 	public void PlayButtonSound()
     {
-		var size = ButtonSounds.Length - 1;
+		var size = ButtonSounds.Length-1;
 		int i = Random.Range(0, size);
 		Play(ButtonSounds[i].SoundName);
     }

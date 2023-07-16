@@ -24,6 +24,7 @@ public class LoreManager : MonoBehaviour
         return text.Split('\n')[0];
     }
 
+
     public string GetNewLore()
     {
         /*

@@ -74,7 +74,7 @@ public class ExpPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void UpdatePanel()
     {
         Image.sprite = currFighter.Sprite;
-        Text.text = currFighter.Name;
+        Text.text = currFighter.RealName;
     }
     public void Show(Fighter currFighter, int extraXPAmmount, ExperiencePanelManager manager)
     {
@@ -82,7 +82,7 @@ public class ExpPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         Image.sprite = currFighter.Sprite;
         Image.preserveAspect = true;
-        Text.text = currFighter.Name;
+        Text.text = currFighter.RealName;
 
         ExpBar.Init(currFighter);
 

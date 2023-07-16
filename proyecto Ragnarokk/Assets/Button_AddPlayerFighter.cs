@@ -29,7 +29,7 @@ public class Button_AddPlayerFighter : MonoBehaviour, IPointerEnterHandler, IPoi
         if (infoBox == null)
             Debug.LogError("You need a info box!");
         else
-            infoBox.ShowInfo("Choose your team", "");
+            infoBox.ShowInfo("Crea tu equipo", "");
     }
 
 
@@ -68,6 +68,6 @@ public class Button_AddPlayerFighter : MonoBehaviour, IPointerEnterHandler, IPoi
     {
         mouse_over = false;
         //infoBox.gameObject.SetActive(false);
-        infoBox.ShowInfo("Choose your team", "");
+        infoBox.ShowInfo("Crea tu equipo", "");
     }
 }
